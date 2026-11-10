@@ -227,7 +227,38 @@ table.fin input{accent-color:var(--c);width:16px;height:16px}
 .cal{display:flex;flex-wrap:wrap;gap:8px}
 .cal span{font-size:.8rem;border-radius:8px;padding:6px 10px;background:var(--raise);border:1px dashed var(--line);color:var(--muted);white-space:nowrap}
 .cal b{color:var(--fg)}
-.sair{text-decoration:underline;cursor:pointer;color:var(--navy);font-weight:600}
+.hdr-r{display:flex;gap:10px;align-items:center;position:relative}
+.conta{width:42px;height:42px;border-radius:50%;border:2px solid var(--line);background:var(--surface);padding:2px;cursor:pointer;display:grid;place-items:center;overflow:hidden}
+.conta:hover,.conta[aria-expanded="true"]{border-color:var(--navy)}
+.conta img,.painel img{border-radius:50%;display:block;object-fit:cover}
+.ini{display:grid;place-items:center;border-radius:50%;background:var(--navy);color:var(--bg);font-family:var(--display);font-weight:700;font-size:.9rem}
+.painel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(10,25,50,.18);padding:16px;display:grid;gap:12px}
+.pc-top{display:flex;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line);min-width:0}
+.pc-top > div{display:grid;min-width:0}
+.pc-top b{font-size:1rem}
+.pc-top span,.pc-row span{font-size:.8rem;color:var(--muted)}
+.pc-row{display:flex;gap:10px;align-items:flex-start}
+.pc-row > div{display:grid;gap:2px;min-width:0}
+.pc-row b{font-size:.88rem}
+.pc-ico{width:22px;text-align:center;color:var(--navy);font-weight:700;flex:none}
+.dot{width:10px;height:10px;border-radius:50%;margin:5px 6px 0;flex:none}
+.dot.on{background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.dot.off{background:var(--late)}
+.sairbtn{width:100%;text-align:center;color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}
+.sairbtn:hover{background:color-mix(in srgb,var(--warn) 8%,var(--surface));border-color:var(--warn)}
+.login{position:fixed;inset:0;z-index:60;background:var(--bg);display:grid;place-items:center;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lg-card{width:min(400px,100%);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px 24px;display:grid;gap:16px;justify-items:center;text-align:center;box-shadow:0 12px 40px rgba(10,25,50,.12)}
+.lg-card h1{font-family:var(--display);color:var(--navy);font-size:1.6rem;margin:0}
+.lg-card p{margin:0;color:var(--muted);font-size:.92rem}
+.lg-cursos{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.lg-cursos span{font-size:.75rem;font-weight:700;color:#fff;border-radius:999px;padding:3px 10px;background:var(--c)}
+.gbtn{display:flex;gap:10px;align-items:center;justify-content:center;width:100%;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:12px 16px;font-weight:600;font-size:.95rem;cursor:pointer}
+.gbtn:hover{border-color:var(--navy);background:var(--raise)}
+.lg-erro{color:var(--warn);font-size:.85rem}
+.spin{width:28px;height:28px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--navy);animation:gira 0.9s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.pc-top .ini{color:var(--bg);font-size:1.1rem}
 </style>
 
 </head>
@@ -236,12 +267,25 @@ table.fin input{accent-color:var(--c);width:16px;height:16px}
   <header class="top">
     <button class="brand" id="home" aria-label="Ir para o menu principal">
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="var(--navy)"/><path d="M8 22 17 11l9 11" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="11" r="2.6" fill="var(--bg)"/></svg>
-      <div><h1>Central de Estudos</h1><div class="sync" id="sync"></div></div>
+      <h1>Central de Estudos</h1>
     </button>
+    <div class="hdr-r">
     <button class="menu" id="menu" hidden><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Menu principal</button>
+    <button class="conta" id="conta" hidden aria-label="Minha conta" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="painel" id="painel" hidden role="dialog" aria-label="Minha conta"></div>
+    </div>
   </header>
   <main id="view"></main>
 </div>
+<div class="login" id="login" hidden><div class="lg-card">
+  <svg width="56" height="56" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="var(--navy)"/><path d="M8 22 17 11l9 11" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="11" r="2.6" fill="var(--bg)"/></svg>
+  <h1>Central de Estudos</h1>
+  <p>Entre com sua conta Google para acessar seus cursos. O progresso fica salvo na sua conta e aparece igual em qualquer aparelho.</p>
+  <div class="lg-cursos"><span class="c-qual">Qualidade</span><span class="c-ia">IA</span><span class="c-aud">Auditor</span><span class="c-ing">Inglês</span></div>
+  <div id="lgCarregando" style="display:grid;gap:8px;justify-items:center"><div class="spin"></div><p>Carregando…</p></div>
+  <div id="lgEntrar" hidden style="width:100%;display:grid;gap:10px"><button class="gbtn" id="lgBtn"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.5 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 2.9-2.2 5.4-4.7 7.1l7.6 5.9c4.4-4.1 6.9-10.1 6.9-17.5z"/><path fill="#FBBC05" d="M10.6 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l8-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.2 0-11.5-4-13.4-9.9l-8 6.1C6.6 42.6 14.6 48 24 48z"/></svg>Entrar com Google</button>
+  <p class="lg-erro" id="lgErro" hidden></p></div>
+</div></div>
 <div class="reader" id="reader" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="lTitle"></div></div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -1900,26 +1944,56 @@ const passou=c=>c.L.filter(x=>x.aula<=HOJE).length;
 /* estado */
 let st={feito:{},pagas:{},nome:"",conc:{}};
 try{const s=JSON.parse(localStorage.getItem("centralEstudos4")||"null");if(s)st=Object.assign(st,s);}catch(e){}
-let docRef=null,dbTimer=null,fbTimer=null,fbRef=null,fbUser=null;
-function syncMsg(h){const e=document.getElementById("sync");if(e)e.innerHTML=h;}
+let docRef=null,dbTimer=null,fbTimer=null,fbRef=null,fbUser=null,fbUnsub=null,fbStatus="",fbUltima=null;
+const hhmm=d=>String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+function setStatus(t,ok){fbStatus=t;if(ok)fbUltima=new Date();painelConta();}
 function save(){st.ts=Date.now();try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}
  if(docRef){clearTimeout(dbTimer);dbTimer=setTimeout(()=>docRef.set(JSON.parse(JSON.stringify(st))).catch(()=>{}),1200);}
- if(fbRef){clearTimeout(fbTimer);syncMsg("Salvando…");fbTimer=setTimeout(fbPush,800);}}
-function fbPush(){fbRef.set({ts:st.ts,st:JSON.parse(JSON.stringify(st))}).then(()=>syncMsg(fbOk())).catch(()=>syncMsg("Sem conexão: salvo só neste aparelho"));}
-const fbOk=()=>`☁ Salvo na nuvem · <span class="sair" id="fbSair">sair</span>`;
-function fbLogin(){const p=new firebase.auth.GoogleAuthProvider();firebase.auth().signInWithPopup(p).catch(()=>firebase.auth().signInWithRedirect(p));}
+ if(fbRef){clearTimeout(fbTimer);setStatus("Salvando…");fbTimer=setTimeout(fbPush,800);}}
+function fbPush(){if(!fbRef)return;fbRef.set({ts:st.ts,st:JSON.parse(JSON.stringify(st))}).then(()=>setStatus("Progresso salvo",true)).catch(()=>setStatus("Sem conexão: guardado neste aparelho e enviado ao reconectar"));}
+const elConta=document.getElementById("conta"),elPainel=document.getElementById("painel"),elLogin=document.getElementById("login");
+function iniciais(u){const n=(u.displayName||u.email||"?").trim();return n.split(/\s+/).slice(0,2).map(p=>p[0]).join("").toUpperCase();}
+function avatar(u,s){return u.photoURL?`<img src="${esc(u.photoURL)}" alt="" width="${s}" height="${s}" referrerpolicy="no-referrer">`:`<span class="ini" style="width:${s}px;height:${s}px">${esc(iniciais(u))}</span>`;}
+function painelConta(){if(!fbUser||elPainel.hidden)return;const u=fbUser;
+ elPainel.innerHTML=`<div class="pc-top">${avatar(u,52)}<div class="nowrap"><b class="nowrap">${esc(u.displayName||"Sua conta")}</b><span class="nowrap">${esc(u.email||"")}</span></div></div>
+  <div class="pc-row"><span class="dot ${/Sem conexão/.test(fbStatus)?"off":"on"}"></span><div><b>${/Sem conexão/.test(fbStatus)?"Offline":"Conectado"}</b><span>${esc(fbStatus||"Progresso salvo")}${fbUltima?" às "+hhmm(fbUltima):""}</span></div></div>
+  <div class="pc-row"><span class="pc-ico">↻</span><div><b>Sincronização automática</b><span>Tudo que você marca aparece igual em qualquer aparelho com esta conta.</span></div></div>
+  <div class="pc-row"><span class="pc-ico">✓</span><div><b>${C.reduce((s,c)=>s+doneCount(c),0)} de ${C.reduce((s,c)=>s+c.L.length,0)} aulas concluídas</b><span>${C.map(c=>c.curto+" "+pct(c)+"%").join(" · ")}</span></div></div>
+  <button class="btn sairbtn" id="btnSair">Sair da conta</button>`;
+ document.getElementById("btnSair").onclick=()=>{fecharPainel();firebase.auth().signOut();};}
+function abrirPainel(){elPainel.hidden=false;elConta.setAttribute("aria-expanded","true");painelConta();}
+function fecharPainel(){elPainel.hidden=true;elConta.setAttribute("aria-expanded","false");}
+elConta.onclick=e=>{e.stopPropagation();elPainel.hidden?abrirPainel():fecharPainel();};
+document.addEventListener("click",e=>{if(!elPainel.hidden&&!elPainel.contains(e.target))fecharPainel();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!elPainel.hidden)fecharPainel();});
+function telaLogin(modo,erro){elLogin.hidden=false;document.body.style.overflow="hidden";
+ elLogin.querySelector("#lgCarregando").hidden=modo!=="carregando";elLogin.querySelector("#lgEntrar").hidden=modo==="carregando";
+ const er=elLogin.querySelector("#lgErro");er.hidden=!erro;er.textContent=erro||"";}
+function fecharLogin(){elLogin.hidden=true;if(reader.hidden)document.body.style.overflow="";}
 (function(){const cfg=window.FIREBASE_CONFIG;if(!cfg||!cfg.apiKey||!window.firebase)return;
  try{firebase.initializeApp(cfg);}catch(e){return;}
  const fs=firebase.firestore();
- document.addEventListener("click",e=>{if(e.target.id==="fbEntrar"){e.stopPropagation();fbLogin();}if(e.target.id==="fbSair"){e.stopPropagation();firebase.auth().signOut();}},true);
- syncMsg("Conectando…");
- firebase.auth().onAuthStateChanged(u=>{fbUser=u;
-  if(!u){fbRef=null;syncMsg(`<span class="sair" id="fbEntrar">Entrar com Google</span> para salvar em qualquer aparelho`);return;}
+ try{fs.enablePersistence({synchronizeTabs:true}).catch(()=>{});}catch(e){}
+ telaLogin("carregando");
+ elLogin.querySelector("#lgBtn").onclick=()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:"select_account"});
+  telaLogin("carregando");
+  firebase.auth().signInWithPopup(p).catch(err=>{
+   if(err&&(err.code==="auth/popup-blocked"||err.code==="auth/operation-not-supported-in-this-environment"))return firebase.auth().signInWithRedirect(p);
+   const msg={"auth/unauthorized-domain":"Este endereço não está autorizado no Firebase. Adicione o domínio em Authentication → Configurações → Domínios autorizados.","auth/popup-closed-by-user":"Login cancelado. Tente de novo.","auth/network-request-failed":"Sem internet. Verifique a conexão e tente de novo.","auth/operation-not-allowed":"O login com Google não está ativado no Firebase (Authentication → Método de login)."}[err&&err.code]||"Não foi possível entrar. Tente de novo.";
+   telaLogin("entrar",msg);});};
+ firebase.auth().getRedirectResult().catch(()=>{});
+ firebase.auth().onAuthStateChanged(u=>{fbUser=u;if(fbUnsub){fbUnsub();fbUnsub=null;}
+  if(!u){fbRef=null;elConta.hidden=true;fecharPainel();
+   st={feito:{},pagas:{},nome:"",conc:{}};try{localStorage.removeItem("centralEstudos4");}catch(e){}render();
+   telaLogin("entrar");return;}
+  elConta.hidden=false;elConta.innerHTML=avatar(u,34);elConta.title=u.email||"Conta";
+  fecharLogin();setStatus("Carregando seu progresso…");
   fbRef=fs.collection("centralEstudos").doc(u.uid);
-  fbRef.onSnapshot(snap=>{const r=snap.exists?snap.data():null;
-   if(r&&r.st&&(r.ts||0)>(st.ts||0)){st=Object.assign({feito:{},pagas:{},nome:"",conc:{}},r.st);st.ts=r.ts;try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}if(reader.hidden)render();}
-   else if(!r||(st.ts||0)>(r.ts||0)){if(st.ts)fbPush();}
-   syncMsg(fbOk());},()=>syncMsg("Sem permissão no Firestore: confira as regras"));
+  fbUnsub=fbRef.onSnapshot(snap=>{const r=snap.exists?snap.data():null;
+   if(r&&r.st&&(r.ts||0)>=(st.ts||0)){st=Object.assign({feito:{},pagas:{},nome:"",conc:{}},r.st);st.ts=r.ts;try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}if(reader.hidden)render();}
+   else if(st.ts&&(!r||(st.ts||0)>(r.ts||0)))fbPush();
+   setStatus(snap.metadata.hasPendingWrites?"Salvando…":"Progresso salvo",!snap.metadata.hasPendingWrites);},
+   err=>setStatus(err&&err.code==="permission-denied"?"Sem permissão: confira as regras do Firestore":"Sem conexão: guardado neste aparelho"));
  });
 })();
 (async()=>{try{if(!window.claude||!claude.use)return;const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d||!u)return;
@@ -1964,7 +2038,7 @@ function renderHome(v){
  <section class="cards">${C.map(c=>{const n=nextW(c),p=pct(c);return `<article class="ccard c-${c.id}">
   <div class="band">${icon(c.id,36)}<div class="nowrap"><h3 class="nowrap">${c.curto}</h3><small class="nowrap" style="display:block">${c.mods.length} módulos · até ${mesData(c.fimData)}</small></div></div>
   <div class="body"><div class="row"><div class="ring" style="--p:${p}"><span class="num">${p}%</span></div>
-   <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">Aulas às ${DSEM[c.dia]}s · ${brl(c.parcela)}/mês</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
+   <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">${DABR[c.dia]} · ${brl(c.parcela)}/mês</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
    <div class="note nowrap">Próxima: <b style="color:var(--fg)">${esc(n.t)}</b></div>
    <div class="nav"><button class="btn" data-open-c="${c.id}">Ver curso</button><button class="btn main" data-cont="${c.id}">Continuar →</button></div></div></article>`}).join("")}</section>
 </div>`;
