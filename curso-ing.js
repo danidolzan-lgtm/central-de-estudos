@@ -1,0 +1,155 @@
+window.CURSOS=window.CURSOS||[];
+window.CURSOS.push({
+id:"ing",nome:"Curso de Inglês",curto:"Inglês",nivel:"Do básico (A1) ao avançado (B2) · até dez/2028",
+sobre:"Inglês do zero à fluência profissional em 4 níveis: base, intermediário, técnico e negócios, com rotina diária curta e prova de proficiência no fim.",
+horas:3,parcela:250,parcelas:26,
+rotina:"Rotina diária de 25 minutos: 10 min de Anki (vocabulário), 10 min de áudio (podcast ou série) e 5 min falando em voz alta.",
+mods:[
+{n:"Nível 1 · Primeiros passos",o:"Apresentar-se e entender frases básicas.",w:[
+["Verb to be","O verbo to be (ser/estar) é a base de tudo: <i>I am, you are, he/she/it is, we/they are</i>. Pergunta: inverta (<i>Are you ready?</i>). Negativa: acrescente not (<i>She isn't here</i>).\n\n<i>I am a quality analyst. The truck is late. Are they at the dock?</i>","Escreva 10 frases sobre você e seu trabalho usando to be."],
+["Pronomes e possessivos","Sujeito: <i>I, you, he, she, it, we, they</i>. Possessivos: <i>my, your, his, her, its, our, their</i>. O 's indica posse: <i>the driver's phone</i> (o telefone do motorista).","Descreva sua família ou equipe usando possessivos."],
+["There is / there are e artigos","<i>There is</i> (singular) e <i>there are</i> (plural) significam 'há/tem'. <b>A/an</b> = um/uma (an antes de som de vogal: <i>an invoice</i>). <b>The</b> = o/a/os/as, algo específico.\n\n<i>There are three trucks at the dock. There is an error in the invoice.</i>","Descreva sua unidade de trabalho com 8 frases usando there is/are."],
+["Números, datas e horas","Números 1-100, ordinais (<i>first, second, third</i>), datas (<i>November 10th</i>), horas (<i>It's half past nine</i> = 9h30; <i>quarter to five</i> = 16h45). Em inglês americano a data é mês/dia: 11/10 = 10 de novembro.","Diga em voz alta 10 horários e 10 datas do seu calendário."]],
+q:[["Qual frase está correta?",["She are here.","She is here.","She am here.","She be here."],1,"He/she/it usa is."],["Como se diz 'Há dois caminhões'?",["There is two trucks.","There are two trucks.","It has two trucks.","Have two trucks."],1,"Plural usa there are."]]},
+{n:"Nível 1 · Presente",o:"Falar de rotinas e do que está acontecendo agora.",w:[
+["Simple present","Usado para rotinas e fatos. Com he/she/it acrescente -s: <i>He works at night. The office opens at 8.</i> Verbos terminados em -o, -sh, -ch ganham -es: <i>goes, finishes, watches</i>.","Escreva sua rotina de um dia de trabalho em 8 frases."],
+["Perguntas e negativas com do/does","Pergunta: <i>Do you work on Saturdays? Does she speak English?</i> Negativa: <i>I don't drive. He doesn't work here.</i> Com does o verbo perde o -s.","Faça 5 perguntas a um colega imaginário sobre a rotina dele."],
+["Advérbios de frequência","<i>always</i> (sempre), <i>usually</i> (geralmente), <i>often</i> (frequentemente), <i>sometimes</i> (às vezes), <i>rarely</i> (raramente), <i>never</i> (nunca). Ficam antes do verbo principal e depois do to be: <i>I usually check the reports. He is always on time.</i>","Diga com que frequência você faz 8 atividades."],
+["Present continuous","Para ações acontecendo agora ou planos próximos: to be + verbo com -ing. <i>I am working now. The driver is loading the truck. We are meeting tomorrow.</i>","Descreva o que 6 pessoas estão fazendo agora na sua empresa."]],
+q:[["Complete: She ___ in the warehouse.",["work","works","working","is work"],1,"He/she/it no presente simples recebe -s."],["Complete: ___ he speak English?",["Do","Does","Is","Are"],1,"Pergunta com he usa does."]]},
+{n:"Nível 1 · Passado e futuro",o:"Contar o que aconteceu e falar de planos.",w:[
+["Simple past: regulares","Verbos regulares ganham -ed: <i>work → worked, deliver → delivered, stop → stopped</i>. A pronúncia do -ed tem 3 sons: /t/ (worked), /d/ (delivered), /id/ (started, só depois de t ou d).","Escreva 8 coisas que você fez ontem com verbos regulares."],
+["Simple past: irregulares","Os mais usados: <i>go/went, have/had, get/got, make/made, take/took, send/sent, come/came, see/saw, say/said, buy/bought, think/thought, leave/left</i>. Pergunta e negativa usam did: <i>Did you send it? I didn't see it.</i>","Coloque os 12 verbos no Anki e escreva uma frase com cada um."],
+["Futuro: will e going to","<b>Will</b>: decisões na hora, promessas e previsões (<i>I'll call you back</i>). <b>Going to</b>: planos já decididos e previsões com evidência (<i>We're going to open a new unit</i>).","Escreva 5 planos para 2027 com going to."],
+["Os três tempos lado a lado","","Conte uma história curta usando presente, passado e futuro.","ing-0-0"]],
+q:[["Qual é o passado de 'send'?",["sended","sent","send","sant"],1,"Send é irregular: sent."],["Decisão tomada na hora: 'The phone is ringing. I ___ answer it.'",["am going to","will","did","am"],1,"Decisão espontânea usa will."]]},
+{n:"Nível 1 · Vocabulário de trabalho",o:"Dominar as palavras do seu dia a dia profissional.",w:[
+["Logística e transporte","","Cadastre 30 palavras de logística no Anki.","ing-0-1"],
+["Profissões e setores","<i>manager</i> (gerente), <i>supervisor</i>, <i>analyst</i>, <i>driver</i> (motorista), <i>clerk</i> (auxiliar administrativo), <i>sales representative</i>, <i>IT department</i>, <i>HR</i> (RH), <i>finance</i>, <i>customer service</i> (SAC), <i>operations</i>.","Descreva o organograma da sua empresa em inglês."],
+["Descrevendo sua empresa","<i>We are a freight company based in Santa Catarina. We have X branches. We provide LTL (less than truckload) services. Our main customers are…</i> LTL é a carga fracionada.","Escreva um parágrafo apresentando a empresa."],
+["Sua rotina de trabalho","Use verbos de trabalho: <i>check, update, send, review, schedule, solve, report, attend (a meeting), deal with</i>.\n\n<i>Every morning I check the reports and update the dashboards.</i>","Grave um áudio de 1 minuto contando sua rotina."]],
+q:[["Carga fracionada em inglês é:",["Full truckload","LTL (less than truckload)","Bulk cargo","Container"],1,"LTL = less than truckload."],["'Customer service' corresponde a:",["Financeiro","SAC/atendimento","Logística","RH"],1,"Atendimento ao cliente."]]},
+{n:"Nível 1 · Listening e pronúncia",o:"Treinar o ouvido e a fala.",w:[
+["Como treinar o listening","","Faça a técnica das 3 escutas com um episódio de 6 Minute English.","ing-0-2"],
+["Sons difíceis para brasileiros","<b>TH</b>: ponta da língua entre os dentes (<i>think, three, the</i>). Não acrescente 'i' no fim (<i>stop</i>, não 'stópi'). Diferencie <i>ship/sheep</i> e <i>live/leave</i>. H aspirado: <i>house, hotel</i>.","Grave-se lendo 10 palavras com TH e compare com o Cambridge Dictionary."],
+["Soletrar e números ao telefone","Alfabeto com atenção a <i>A (ei), E (í), I (ai), G (dji), J (djei), R (ar), W (dâbliu), Y (uai)</i>. Diferencie <i>thirteen</i> (13) e <i>thirty</i> (30): a sílaba forte muda.","Soletre seu nome, e-mail e o nome da empresa em voz alta."],
+["Telefonemas simples","<i>Hello, this is ___ from ___. Could I speak to ___? Could you hold on a second? I'll put you through. Can I take a message?</i>","Simule uma ligação de confirmação de coleta."]],
+q:[["Qual par se distingue pela sílaba tônica?",["Thirteen / thirty","Ship / sheep","Think / sink","Live / leave"],0,"thirTEEN tem tônica no fim; THIRty no começo."],["'I'll put you through' em uma ligação significa:",["Vou desligar","Vou transferir a ligação","Vou anotar","Vou repetir"],1,"Transferir para a pessoa desejada."]]},
+{n:"Nível 1 · Estruturas básicas",o:"Completar a base gramatical do nível A2.",w:[
+["Can e could","<i>Can</i> = poder/conseguir (<i>I can drive</i>). <i>Could</i> = passado de can ou pedido educado (<i>Could you help me?</i>). Negativa: <i>can't, couldn't</i>.","Escreva 5 coisas que você sabe fazer e 5 pedidos com could."],
+["Comparativos e superlativos","Palavras curtas: <i>-er / the -est</i> (<i>faster, the fastest</i>). Longas: <i>more / the most</i> (<i>more efficient, the most efficient</i>). Irregulares: <i>good/better/best, bad/worse/worst</i>.","Compare 3 rotas da empresa (distância, tempo, custo)."],
+["Preposições de tempo e lugar","Tempo: <i>at</i> (horas: at 9), <i>on</i> (dias: on Monday), <i>in</i> (meses, anos: in November). Lugar: <i>at</i> (ponto: at the dock), <i>on</i> (superfície), <i>in</i> (dentro: in the warehouse).","Escreva 10 frases sobre a agenda da semana com as preposições certas."],
+["Contáveis e incontáveis","Contáveis: <i>boxes, trucks</i> (many, a few). Incontáveis: <i>information, equipment, freight, advice</i> (much, a little) e nunca levam -s. <i>Some</i> em afirmativas, <i>any</i> em perguntas e negativas.","Faça 8 frases com much, many, some e any."]],
+q:[["Complete: The meeting is ___ Monday.",["in","on","at","to"],1,"Dias da semana usam on."],["Qual palavra é incontável?",["truck","information","box","driver"],1,"Information não tem plural em inglês."]]},
+{n:"Nível 2 · Present perfect",o:"Falar de experiências e de ações com ligação ao presente.",w:[
+["Forma e uso","have/has + particípio: <i>I have worked here for five years. She has sent the report.</i> Usado para experiências, ações recentes com efeito agora e situações que continuam.","Escreva 6 frases sobre sua experiência profissional."],
+["For, since, already, yet, just","<i>for</i> + período (for 3 years), <i>since</i> + ponto inicial (since 2020). <i>already</i> (já), <i>yet</i> (ainda/já, em perguntas e negativas), <i>just</i> (acabou de).\n\n<i>Have you sent it yet? I've just finished.</i>","Responda 6 perguntas sobre tarefas da semana com already, yet e just."],
+["Present perfect x simple past","Simple past = momento definido (<i>I sent it yesterday</i>). Present perfect = sem momento definido ou ainda em aberto (<i>I have sent it</i>). Com yesterday, last week, in 2020 use sempre o simple past.","Corrija 10 frases misturando os dois tempos."],
+["Contando sua experiência","Estrutura: <i>I have been working in ___ for ___. I have worked on projects such as ___. Last year I ___.</i>","Escreva seu perfil profissional em 6 linhas para o LinkedIn."]],
+q:[["Complete: I have lived here ___ 2019.",["for","since","ago","yet"],1,"Since + ponto inicial."],["Qual frase está correta?",["I have sent it yesterday.","I sent it yesterday.","I have send it yesterday.","I did sent it yesterday."],1,"Com yesterday usa-se o simple past."]]},
+{n:"Nível 2 · Conversação",o:"Manter uma conversa com naturalidade.",w:[
+["Frases prontas para conversar","","Grave 2 minutos falando sobre seu fim de semana.","ing-1-0"],
+["Small talk","Conversa leve antes de reuniões: <i>How was your weekend? How's the weather there? Busy week?</i> Responda e devolva a pergunta: <i>Pretty good, thanks. And you?</i> Evite temas polêmicos.","Prepare 5 perguntas de small talk e suas respostas."],
+["Pedir e dar opinião","<i>What do you think about…? How do you feel about…? In my view… From my point of view… I'm not sure about that.</i>","Dê sua opinião sobre trabalho remoto em 5 frases."],
+["Contando histórias (past continuous)","Past continuous (was/were + -ing) descreve a ação em andamento quando outra aconteceu: <i>I was driving when the customer called.</i> Use <i>first, then, after that, finally</i>.","Conte um problema que aconteceu no trabalho e como foi resolvido."]],
+q:[["Complete: I ___ working when he called.",["am","was","were","did"],1,"I com past continuous usa was."],["Resposta natural para 'How was your weekend?':",["Yes.","Pretty good, thanks. And you?","I am weekend.","No problem."],1,"Responda e devolva a pergunta."]]},
+{n:"Nível 2 · Modais e instruções",o:"Dar conselhos, expressar obrigação e possibilidade.",w:[
+["Should, must e have to","<i>should</i> = conselho (<i>You should check the invoice</i>). <i>must</i> = obrigação forte, muitas vezes interna ou regra escrita. <i>have to</i> = obrigação externa. <i>don't have to</i> = não precisa; <i>mustn't</i> = é proibido.","Escreva 5 regras de segurança do armazém com must e mustn't."],
+["May e might","Possibilidade: <i>The truck might be late. It may rain tomorrow.</i> May também é usado para pedir permissão de forma formal: <i>May I come in?</i>","Escreva 5 riscos para a próxima semana com might."],
+["Pedidos educados","Do mais direto ao mais educado: <i>Can you…? Could you…? Would you mind + -ing…? I was wondering if you could…</i>","Reescreva 5 pedidos diretos de forma educada."],
+["Instruções e sequências","Imperativo: <i>Check the seal. Sign the form.</i> Sequência: <i>First, … Next, … Then, … Finally, …</i> Negativa: <i>Don't stack the boxes.</i>","Escreva em inglês o passo a passo de um processo da empresa."]],
+q:[["'You mustn't smoke here' significa:",["Não precisa fumar","É proibido fumar aqui","Você deveria fumar","Talvez fume"],1,"Mustn't indica proibição."],["O pedido mais educado é:",["Give me the file.","Can you give me the file?","Would you mind sending me the file?","File, please."],2,"Would you mind + -ing é o mais polido."]]},
+{n:"Nível 2 · Phrasal verbs e expressões",o:"Soar natural com as combinações mais usadas.",w:[
+["Phrasal verbs de trabalho","","Use 8 phrasal verbs em frases sobre sua semana.","ing-1-1"],
+["Mais phrasal verbs","<i>get back to</i> (retornar), <i>put off</i> (adiar), <i>call off</i> (cancelar), <i>come up with</i> (criar ideia), <i>deal with</i> (lidar), <i>sort out</i> (resolver), <i>fill in</i> (preencher), <i>check in/out</i>.","Escreva um e-mail curto usando 4 deles."],
+["Collocations: make e do","<b>Make</b>: a decision, a mistake, a call, progress, an effort. <b>Do</b>: business, a job, research, homework, your best. Não traduza do português: é <i>make a decision</i>, não 'take a decision' no inglês americano.","Faça 10 frases com make e do."],
+["Expressões comuns","<i>It's up to you</i> (você decide), <i>on the same page</i> (alinhados), <i>keep me posted</i> (me mantenha informado), <i>ASAP</i>, <i>by the way</i>, <i>no worries</i>.","Use 4 expressões numa conversa simulada."]],
+q:[["'Call off the meeting' significa:",["Ligar para a reunião","Cancelar a reunião","Adiar a reunião","Começar a reunião"],1,"Call off = cancelar."],["Complete: I ___ a mistake.",["did","made","took","got"],1,"Make a mistake."]]},
+{n:"Nível 2 · Escrita profissional",o:"Escrever e-mails e mensagens claras.",w:[
+["E-mails de trabalho","","Escreva um e-mail confirmando uma coleta.","ing-1-2"],
+["Conectivos","Adição: <i>also, in addition, moreover</i>. Contraste: <i>but, however, although</i>. Causa: <i>because, since, due to</i>. Consequência: <i>so, therefore, as a result</i>.","Reescreva um parágrafo seu usando 5 conectivos."],
+["Mensagens rápidas","Em chats o tom é curto: <i>Quick question: … / Any update on…? / Thanks, will do. / On it.</i> Ainda assim, cumprimente e seja claro.","Escreva 5 mensagens de chat para situações do trabalho."],
+["Reclamações e respostas","Responder reclamação: agradecer o contato, pedir desculpas pelo problema, explicar o que aconteceu, dizer o que será feito e quando. <i>We apologize for the delay. We are looking into it and will update you by 3 p.m.</i>","Responda em inglês a uma reclamação de atraso."]],
+q:[["Qual conectivo expressa contraste?",["Therefore","However","Moreover","Because"],1,"However indica contraste."],["Ao responder uma reclamação deve-se:",["Culpar o cliente","Explicar e dizer o que será feito","Ignorar","Responder só sim"],1,"Mostre a solução e o prazo."]]},
+{n:"Nível 2 · Condicionais e passiva",o:"Construir frases mais complexas.",w:[
+["Zero e first conditional","Zero: verdades gerais (<i>If you heat ice, it melts</i>). First: situação real futura (<i>If the truck arrives late, we will reschedule</i>).","Escreva 6 frases sobre consequências de atrasos."],
+["Second conditional","Situação hipotética no presente: <i>If I had more time, I would study more. If we had another truck, we could deliver today.</i>","Escreva 6 frases sobre o que você faria se mudasse algo na empresa."],
+["Voz passiva","to be + particípio. Foco no que aconteceu, não em quem fez: <i>The cargo was delivered. Invoices are issued daily. The report will be sent tomorrow.</i>","Reescreva 8 frases na passiva."],
+["Orações relativas","<i>who</i> para pessoas, <i>which</i> para coisas, <i>that</i> para ambos, <i>where</i> para lugares: <i>The driver who delivered it… The unit where I work…</i>","Una 6 pares de frases com who, which ou where."]],
+q:[["Complete: If I ___ more time, I would study more.",["have","had","will have","has"],1,"Second conditional usa passado na condição."],["Voz passiva de 'They deliver the cargo':",["The cargo delivers","The cargo is delivered","The cargo delivered","The cargo was deliver"],1,"Presente passivo: is + particípio."]]},
+{n:"Nível 3 · Inglês técnico: Qualidade",o:"Ler e falar sobre normas e qualidade em inglês.",w:[
+["Normas ISO em inglês","","Leia a cláusula 7.2 em inglês e monte o glossário.","ing-2-0"],
+["Vocabulário de qualidade","<i>requirement, compliance, nonconformity, root cause analysis, corrective action, preventive measure, audit trail, internal audit, management review, objective evidence, continual improvement</i>.","Cadastre 25 termos no Anki com frase de exemplo."],
+["Lendo procedimentos","Procedimentos usam imperativo e passiva: <i>Records shall be retained for two years. The supervisor approves the plan.</i> Identifique quem faz, o que, quando e qual registro.","Traduza um procedimento curto da empresa para o inglês."],
+["Descrevendo processos","Use passiva e sequências: <i>First, the order is received. Then, the pickup is scheduled. After that, the cargo is loaded and transferred.</i>","Descreva em inglês o processo de entrega com 8 etapas."]],
+q:[["'Corrective action' significa:",["Ação preventiva","Ação corretiva","Correção imediata","Auditoria"],1,"Ação para eliminar a causa."],["'Objective evidence' é:",["Opinião","Evidência objetiva","Objetivo","Meta"],1,"Fato verificável usado na auditoria."]]},
+{n:"Nível 3 · Inglês técnico: Logística e dados",o:"Falar de logística, tecnologia e números.",w:[
+["Vocabulário técnico das suas áreas","","Explique em inglês o que você faz no trabalho em 5 frases.","ing-2-1"],
+["Supply chain","<i>supply chain, inbound/outbound, carrier, shipper, consignee, freight forwarder, proof of delivery (POD), tracking number, transit time, backhaul</i>.","Descreva a cadeia de uma carga do embarcador ao destinatário."],
+["Dados e tecnologia","<i>dashboard, database, query, spreadsheet, automation, machine learning model, accuracy, deploy, bug, update, feature</i>.","Explique em inglês um painel que você criou."],
+["Descrevendo números e gráficos","<i>increase, rise, go up / decrease, fall, drop / remain stable / peak / a slight/sharp increase / by 10% / from X to Y</i>.\n\n<i>On-time deliveries rose from 88% to 94% in Q3.</i>","Descreva um gráfico de indicadores da empresa em 6 frases."]],
+q:[["'Consignee' é:",["Remetente","Destinatário","Transportador","Seguradora"],1,"Consignee é quem recebe a carga."],["'A sharp increase' significa:",["Queda leve","Aumento forte","Estabilidade","Pico"],1,"Sharp = acentuado."]]},
+{n:"Nível 3 · Apresentações",o:"Apresentar resultados e projetos em inglês.",w:[
+["Estrutura de apresentação","","Monte 5 slides de um indicador da empresa.","ing-2-2"],
+["Transições","<i>Let's move on to… / This brings me to… / Going back to… / Let me give you an example… / To put it simply…</i>","Pratique as transições numa apresentação de 3 minutos."],
+["Perguntas da plateia","<i>That's a good question. / Let me get back to you on that. / If I understood correctly, you're asking… / As I mentioned…</i>","Prepare respostas para 5 perguntas difíceis."],
+["Apresentando um projeto","Estrutura: problema, solução, resultado, próximos passos. Fale devagar, use números e uma história real.","Grave a apresentação de um projeto seu de 5 minutos."]],
+q:[["'Let me get back to you on that' significa:",["Repita a pergunta","Vou te responder depois","Não sei e não vou saber","Próxima pergunta"],1,"Promessa de retornar com a resposta."],["Para mudar de tópico usa-se:",["Let's move on to…","Thank you.","Any questions?","Good morning."],0,"Move on = passar para o próximo."]]},
+{n:"Nível 3 · Gramática intermediária+",o:"Refinar a gramática para textos mais longos.",w:[
+["Past perfect","had + particípio: ação anterior a outra no passado. <i>When we arrived, the truck had already left.</i>","Conte uma situação usando past perfect."],
+["Reported speech","Relatar o que alguém disse: <i>He said (that) the cargo was ready. She asked if we had the invoice.</i> Os tempos recuam um passo.","Relate uma reunião recente em 6 frases."],
+["Gerúndio x infinitivo","Depois de <i>enjoy, avoid, finish, consider</i> use -ing. Depois de <i>want, need, decide, plan, agree</i> use to + verbo. <i>We avoid working late. We decided to hire.</i>","Faça 10 frases com cada grupo de verbos."],
+["Used to e be used to","<i>used to</i> = hábito no passado (<i>I used to work at night</i>). <i>be used to + -ing</i> = estar acostumado (<i>I'm used to working with data</i>).","Escreva 4 frases com cada estrutura."]],
+q:[["Complete: We decided ___ a new truck.",["buying","to buy","buy","bought"],1,"Decide + to + verbo."],["'I'm used to working at night' significa:",["Eu trabalhava à noite","Estou acostumado a trabalhar à noite","Vou trabalhar à noite","Uso a noite"],1,"Be used to + -ing = estar acostumado."]]},
+{n:"Nível 3 · Compreensão",o:"Entender textos e áudios autênticos.",w:[
+["Skimming e scanning","<b>Skimming</b>: ler rápido para pegar a ideia geral (título, primeiras frases). <b>Scanning</b>: procurar uma informação específica (número, nome). Não traduza palavra por palavra.","Leia 2 artigos da BBC em 10 minutos e resuma cada um em 2 frases."],
+["Podcasts e TED","Escolha falas de 10 a 15 minutos sobre seus temas. Primeiro ouça inteiro, depois com transcrição, anote 5 expressões e repita trechos (shadowing).","Assista a uma TED talk sobre IA ou liderança e anote 5 expressões."],
+["Vídeos técnicos","Tutoriais em inglês sobre Python, Excel ou ISO ensinam o idioma e o conteúdo ao mesmo tempo. Use legenda em inglês e velocidade 0,75x no começo.","Siga um tutorial técnico em inglês do começo ao fim."],
+["Resumir em inglês","Resumo: ideia principal em 1 frase, 2 a 3 pontos de apoio, conclusão. Use suas palavras.","Escreva um resumo em inglês de 100 palavras de um artigo."]],
+q:[["Procurar uma data específica num texto é:",["Skimming","Scanning","Shadowing","Speaking"],1,"Scanning busca informação pontual."],["Ao ler em inglês, o ideal é:",["Traduzir palavra por palavra","Buscar o sentido geral pelo contexto","Ler só o título","Usar só tradutor"],1,"Contexto antes de tradução."]]},
+{n:"Nível 4 · Reuniões",o:"Participar e conduzir reuniões e calls.",w:[
+["Frases de reunião","","Participe de uma conversa em inglês usando 5 frases da tabela.","ing-3-0"],
+["Conduzindo uma reunião","<i>The purpose of today's meeting is… / Let's look at the first item. / What are your thoughts? / Let's keep to the agenda. / We're running out of time.</i>","Conduza uma reunião simulada de 10 minutos."],
+["Videochamadas","<i>You're on mute. / Can you share your screen? / I'll drop the link in the chat. / Sorry, my connection is unstable.</i>","Faça uma chamada de 15 minutos em inglês (Cambly ou colega)."],
+["Atas e follow-up","Ata em inglês: <i>Attendees, Agenda, Decisions, Action items (owner, due date)</i>. Follow-up: <i>As discussed in today's meeting, here are the next steps…</i>","Escreva a ata de uma reunião real em inglês."]],
+q:[["'You're on mute' significa:",["Você está atrasado","Seu microfone está desligado","Você saiu","Fale mais alto"],1,"Microfone mudo."],["'Action items' numa ata são:",["Os participantes","As tarefas com dono e prazo","A pauta","Os anexos"],1,"Tarefas definidas na reunião."]]},
+{n:"Nível 4 · Negociação",o:"Negociar com clareza e diplomacia.",w:[
+["Negociação e relatórios","","Escreva 5 propostas condicionais para um cliente.","ing-3-1"],
+["Linguagem diplomática","Suavize com <i>I'm afraid…, It seems that…, Perhaps we could…, I'd suggest…, It might be better to…</i> em vez de afirmações duras.","Reescreva 6 frases diretas de forma diplomática."],
+["Lidando com objeções","Reconheça, pergunte, responda: <i>I understand your concern. Could you tell me more about…? What if we…?</i>","Responda a 4 objeções de preço."],
+["Fechando acordos","<i>So we agree on… / Let me summarize the terms. / I'll send you the proposal in writing. / Shall we move forward?</i>","Simule uma negociação completa de tabela de frete."]],
+q:[["Forma diplomática de dizer 'Your price is too high':",["Your price is bad.","I'm afraid the price is a bit higher than we expected.","No.","Change it."],1,"I'm afraid suaviza a mensagem."],["'Shall we move forward?' significa:",["Vamos voltar?","Vamos seguir em frente com o acordo?","Vamos cancelar?","Vamos almoçar?"],1,"Convite para avançar."]]},
+{n:"Nível 4 · Escrita avançada",o:"Escrever relatórios e textos sem erros comuns.",w:[
+["Estrutura de relatório","<i>Executive summary</i> (resumo para quem não vai ler tudo), <i>Background</i>, <i>Findings</i>, <i>Recommendations</i>, <i>Next steps</i>. Frases curtas e números.","Escreva um relatório de 1 página sobre um indicador."],
+["Third e mixed conditional","Third: passado hipotético (<i>If we had checked, we wouldn't have lost the cargo</i>). Mixed: passado com efeito presente (<i>If we had hired earlier, we would be ready now</i>).","Escreva 5 lições aprendidas usando third conditional."],
+["Conectivos avançados","<i>Nevertheless, whereas, provided that, in spite of, as long as, on the other hand, consequently</i>.","Reescreva seu relatório com 5 conectivos avançados."],
+["Erros comuns de brasileiros","Evite: <i>'I have 30 years'</i> (é <i>I'm 30</i>), <i>'make a question'</i> (é <i>ask</i>), <i>'explain me'</i> (é <i>explain to me</i>), <i>'informations'</i>, <i>'actually'</i> como 'atualmente' (é <i>currently</i>).","Revise 3 textos seus procurando esses erros."]],
+q:[["'Atualmente' em inglês é:",["Actually","Currently","Actual","Now actually"],1,"Actually significa 'na verdade'."],["Correto:",["Explain me the process.","Explain the process to me.","Explain to me me.","Me explain."],1,"Explain + algo + to + pessoa."]]},
+{n:"Nível 4 · Fluência B2",o:"Argumentar e se posicionar com confiança.",w:[
+["Debates e argumentação","Estrutura: posição, argumento, exemplo, conclusão. <i>I strongly believe that… For instance… That's why…</i> Concordar em parte: <i>I agree up to a point, but…</i>","Defenda uma opinião sobre IA no trabalho por 3 minutos."],
+["Entrevista de emprego","Perguntas comuns: <i>Tell me about yourself. What are your strengths? Tell me about a challenge you faced.</i> Use o método STAR: Situação, Tarefa, Ação, Resultado.","Responda 5 perguntas com o método STAR e grave."],
+["Networking e LinkedIn","Perfil em inglês: headline com área e especialidade, resumo em 4 linhas, experiências com resultados em números. Ao conectar: <i>Hi, I enjoyed your post on… I'd like to connect.</i>","Escreva seu perfil do LinkedIn em inglês."],
+["Cultura de negócios","Pontualidade, e-mails diretos, small talk curto, uso de primeiro nome, cuidado com humor. Em reuniões internacionais, confirme entendimentos por escrito.","Pesquise e anote 5 diferenças culturais com americanos e europeus."]],
+q:[["O método STAR serve para:",["Avaliar fornecedores","Estruturar respostas em entrevistas","Calcular frete","Escrever atas"],1,"Situação, Tarefa, Ação, Resultado."],["'I agree up to a point' significa:",["Concordo totalmente","Concordo em parte","Discordo totalmente","Não sei"],1,"Concordância parcial."]]},
+{n:"Nível 4 · Prova de proficiência",o:"Comprovar o nível B2 e manter o inglês vivo.",w:[
+["Conhecendo as provas","","Faça o EF SET e registre o resultado.","ing-3-2"],
+["TOEIC Listening","4 partes: fotos, pergunta e resposta, conversas e palestras curtas. Leia as perguntas antes do áudio e preste atenção em palavras-chave. Não fique preso numa questão.","Faça um simulado de listening e analise os erros."],
+["TOEIC Reading","3 partes: completar frases, completar textos e leitura de textos simples e múltiplos. Gerencie o tempo: cerca de 75 minutos para 100 questões.","Faça um simulado de reading cronometrado."],
+["Simulado completo","Faça a prova inteira em condições reais: sem pausa, sem dicionário. Compare com o EF SET anterior e revise os pontos fracos.","Faça o simulado completo e calcule sua pontuação."],
+["Plano de continuidade","Depois da prova, mantenha: 1 série ou podcast por semana, leitura técnica em inglês, 1 conversa por semana e uso real no trabalho. Idioma parado volta a cair.","Escreva seu plano de manutenção do inglês para 2029."]],
+q:[["No TOEIC Listening é recomendado:",["Ler as perguntas antes do áudio","Fechar os olhos","Ignorar as opções","Escrever tudo"],0,"Ler antes direciona a atenção."],["Para manter o inglês depois da prova:",["Parar de estudar","Manter contato semanal com o idioma","Estudar só gramática","Esquecer"],1,"Prática contínua mantém o nível."]]}
+],
+livros:[
+["English Grammar in Use","Raymond Murphy (Cambridge)","A melhor gramática para estudar sozinho. Edição azul até B1+."],
+["Business Vocabulary in Use","Bill Mascull (Cambridge)","Vocabulário de negócios com exercícios."],
+["English Collocations in Use","McCarthy e O'Dell","Combinações naturais de palavras."],
+["Official TOEIC Prep","ETS","Material oficial de preparação para o TOEIC."],
+["Graded readers Oxford ou Penguin","Vários","Livros adaptados por nível, ótimos para leitura."]],
+sites:[
+["BBC Learning English","https://www.bbc.co.uk/learningenglish","6 Minute English e cursos gratuitos por nível."],
+["EF SET","https://www.efset.org","Teste gratuito de nível alinhado ao CEFR."],
+["Anki","https://apps.ankiweb.net","Flashcards com repetição espaçada."],
+["Cambridge Dictionary","https://dictionary.cambridge.org","Significado e pronúncia com áudio."],
+["YouGlish","https://youglish.com","Ouça qualquer palavra em vídeos reais."],
+["TED","https://www.ted.com","Palestras com transcrição e legenda."]]
+});

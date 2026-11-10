@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Central de Estudos</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+/* Layout: início (4 cursos + financeiro geral) → página de cada curso com abas Curso, Trilha, Financeiro, Leituras, Certificado; leitor de aula em painel lateral */
+:root{
+  --bg:#f2f5fa; --surface:#fff; --raise:#f7f9fc; --line:#dbe2ee; --fg:#101c33; --muted:#5b6a83; --navy:#0b3a75;
+  --qual:#1559b8; --ia:#0e8a78; --aud:#6b3fc0; --ing:#cf6a0c;
+  --qual-s:#e5eefb; --ia-s:#e0f4f0; --aud-s:#eee8fa; --ing-s:#fcefe2;
+  --ok:#2e7d32; --warn:#c0392b; --late:#b26a00;
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --cert:"Cormorant Garamond",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a1220; --surface:#111b2e; --raise:#16233a; --line:#26344d; --fg:#e8eefa; --muted:#9caccb; --navy:#9cc3f7;
+  --qual:#6aa5f0; --ia:#4fd1bd; --aud:#b49af0; --ing:#f5a54a;
+  --qual-s:#152a4a; --ia-s:#0f2f2b; --aud-s:#251c42; --ing-s:#33230f; --ok:#6cc070; --warn:#ef7a6b; --late:#f0b252; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a1220; --surface:#111b2e; --raise:#16233a; --line:#26344d; --fg:#e8eefa; --muted:#9caccb; --navy:#9cc3f7;
+  --qual:#6aa5f0; --ia:#4fd1bd; --aud:#b49af0; --ing:#f5a54a;
+  --qual-s:#152a4a; --ia-s:#0f2f2b; --aud-s:#251c42; --ing-s:#33230f; --ok:#6cc070; --warn:#ef7a6b; --late:#f0b252; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-block:20px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.note{color:var(--muted);font-size:.84rem;margin:0}
+.nowrap{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--c,var(--navy));outline-offset:2px}
+.c-qual{--c:var(--qual);--cs:var(--qual-s)} .c-ia{--c:var(--ia);--cs:var(--ia-s)} .c-aud{--c:var(--aud);--cs:var(--aud-s)} .c-ing{--c:var(--ing);--cs:var(--ing-s)}
+
+/* topo */
+.top{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;cursor:pointer;background:none;border:0;padding:0;text-align:left}
+.brand h1{font-size:1.35rem;color:var(--navy)}
+.crumbs{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
+.chip[aria-current="page"]{background:var(--c,var(--navy));border-color:var(--c,var(--navy));color:#fff}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.chip[aria-current="page"] i{background:#fff}
+.sync{font-size:.75rem;color:var(--muted)}
+
+/* início */
+.hero{display:grid;gap:6px}
+.hero h2{font-size:clamp(1.5rem,3.6vw,2.1rem);color:var(--navy)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.kpi b{display:block;font-family:var(--display);font-size:1.5rem;color:var(--navy);white-space:nowrap}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;min-width:0}
+.ccard .band{background:var(--c);color:#fff;padding:14px 16px;display:flex;gap:12px;align-items:center;min-width:0}
+.band svg{flex:none}
+.ccard .band h3{font-size:1.05rem}
+.ccard .band small{opacity:.85;font-size:.78rem}
+.ccard .body{padding:14px 16px;display:grid;gap:10px}
+.ring{--p:0;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--cs) 0);display:grid;place-items:center;flex:none}
+.ring span{background:var(--surface);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.85rem}
+.row{display:flex;gap:12px;align-items:center;min-width:0}
+.row > div{min-width:0}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.pill.late{background:color-mix(in srgb,var(--late) 18%,transparent);color:var(--late)}
+.pill.wait{background:var(--cs);color:var(--c)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 14px;font-weight:600;font-size:.88rem;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--c)}
+.btn.main{background:var(--c);border-color:var(--c);color:#fff}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:10px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.8rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.chart{overflow-x:auto}.chart svg{display:block;min-width:700px;width:100%;height:auto}
+
+/* curso */
+.chero{background:var(--c);color:#fff;border-radius:16px;padding:20px;display:grid;gap:14px;position:relative;overflow:hidden}
+.chero .motif{position:absolute;right:-30px;top:-30px;opacity:.14;pointer-events:none}
+.chero h2{font-size:clamp(1.3rem,3.4vw,1.9rem)}
+.chero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;opacity:.95}
+.chero .bar{height:10px;background:rgba(255,255,255,.25);border-radius:99px;overflow:hidden}
+.chero .bar i{display:block;height:100%;background:#fff;border-radius:99px}
+.chero .btn{background:#fff;color:var(--c);border-color:#fff}
+.chero .acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line)}
+.tab{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font-weight:600;cursor:pointer;white-space:nowrap;color:var(--muted)}
+.tab[aria-selected="true"]{color:var(--c);border-bottom-color:var(--c)}
+details.about{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+details > summary{cursor:pointer;padding:10px 14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+details > summary::-webkit-details-marker{display:none}
+details > summary::after{content:"+";color:var(--c);font-weight:700;font-size:1.1rem}
+details[open] > summary::after{content:"–"}
+.about p{margin:0;padding:0 14px 12px;color:var(--muted)}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mod > summary{padding:12px 14px}
+.mod .mh{display:flex;gap:12px;align-items:center;min-width:0;flex:1}
+.mnum{width:34px;height:34px;border-radius:9px;background:var(--cs);color:var(--c);display:grid;place-items:center;font-family:var(--display);font-weight:700;flex:none}
+.mod.done .mnum{background:var(--c);color:#fff}
+.mod h4{font-size:.98rem}
+.mod .sub{font-size:.78rem;color:var(--muted);font-weight:500}
+.mod .minibar{width:70px;height:6px;background:var(--cs);border-radius:99px;overflow:hidden;flex:none}
+.mod .minibar i{display:block;height:100%;background:var(--c)}
+.mobj{padding:0 14px 8px;color:var(--muted);font-size:.86rem;margin:0}
+.weeks{list-style:none;margin:0;padding:0 8px 10px;display:grid;gap:2px}
+.wk{display:flex;gap:10px;align-items:center;padding:7px 8px;border-radius:8px;min-width:0}
+.wk:hover{background:var(--raise)}
+.wk input{accent-color:var(--c);width:17px;height:17px;flex:none}
+.wk .open{flex:1;min-width:0;background:none;border:0;padding:0;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:baseline}
+.wk .d{font-size:.75rem;color:var(--muted);width:98px;flex:none;white-space:nowrap}
+.wk .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.wk.done .t{color:var(--muted);text-decoration:line-through}
+.wk.now{background:var(--cs)}
+.wk .tag{font-size:.68rem;font-weight:700;color:var(--c);border:1px solid var(--c);border-radius:5px;padding:0 5px;flex:none}
+
+/* trilha */
+.trail{list-style:none;margin:0;padding:8px 0;display:grid}
+.stop{display:grid;grid-template-columns:72px 1fr;gap:12px;min-height:84px}
+.road{position:relative;display:flex;justify-content:center}
+.road::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:10px;margin-left:-5px;background:var(--line);border-radius:6px}
+.road .fill{position:absolute;top:0;left:50%;width:10px;margin-left:-5px;background:var(--c);border-radius:6px}
+.road::after{content:"";position:absolute;top:0;bottom:0;left:50%;margin-left:-1px;border-left:2px dashed color-mix(in srgb,var(--surface) 80%,transparent)}
+.stop:first-child .road::before,.stop:first-child .road::after{top:20px}
+.stop:last-child .road::before,.stop:last-child .road::after{bottom:auto;height:22px}
+.node{position:relative;z-index:1;margin-top:6px;width:44px;height:44px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--cs) 0);display:grid;place-items:center;box-shadow:0 0 0 4px var(--bg)}
+.node span{width:34px;height:34px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--c)}
+.stop.done .node span{background:var(--c);color:#fff}
+.stop.cur .node{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 4px var(--bg),0 0 0 9px color-mix(in srgb,var(--c) 30%,transparent)}}
+.sinfo{padding-top:8px;min-width:0}
+.sinfo h4{font-size:.95rem}
+.sinfo .note{font-size:.78rem}
+.truck{display:inline-flex;gap:6px;align-items:center;font-size:.74rem;font-weight:700;color:var(--c);margin-top:4px}
+.goal .node span{background:var(--c);color:#fff}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.8rem;background:var(--raise);color:var(--muted);border:1px dashed var(--line)}
+.badge.on{background:var(--c);color:#fff;border:0}
+
+/* financeiro e leituras */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+table.fin{width:100%;border-collapse:collapse;font-size:.88rem}
+table.fin th,table.fin td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+table.fin th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+table.fin input{accent-color:var(--c);width:16px;height:16px}
+.tw{overflow-x:auto}
+.book{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.book:last-child{border:0}
+.spine{width:44px;height:58px;border-radius:3px 6px 6px 3px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 70%,#000) 0 6px,var(--c) 6px);box-shadow:inset -4px 0 0 rgba(255,255,255,.18)}
+.book b{display:block;font-size:.92rem}
+.book small{color:var(--muted);display:block}
+.site{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.site:last-child{border:0}
+.site b{color:var(--c)}
+.site span{font-size:.82rem;color:var(--muted)}
+.site em{font-style:normal;color:var(--c);font-weight:700;flex:none}
+
+/* certificado */
+.certwrap{overflow-x:auto}
+.cert{min-width:640px;aspect-ratio:1.414;background:#fffdf8;color:#1c2333;border-radius:6px;position:relative;padding:5%;display:grid;align-content:center;justify-items:center;text-align:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.cert::before{content:"";position:absolute;inset:14px;border:3px solid var(--cc);border-radius:4px}
+.cert::after{content:"";position:absolute;inset:22px;border:1px solid var(--cc);border-radius:2px;opacity:.5}
+.cert .k{font-family:var(--display);letter-spacing:.3em;font-size:.8rem;color:var(--cc);font-weight:700}
+.cert h3{font-family:var(--cert);font-size:2.4rem;font-weight:600;letter-spacing:.04em}
+.cert .nm{font-family:var(--cert);font-style:italic;font-size:2.6rem;border-bottom:1px solid #c9ccd6;padding:0 40px 4px;min-width:60%}
+.cert p{margin:0;max-width:62ch;font-size:.95rem;color:#3b4459}
+.cert .cn{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--cc)}
+.cert .foot{display:flex;justify-content:space-between;width:80%;margin-top:18px;font-size:.78rem;color:#5b6478}
+.cert .seal{position:absolute;right:9%;bottom:12%;width:88px;height:88px;border-radius:50%;background:var(--cc);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.72rem;line-height:1.1;box-shadow:0 0 0 5px #fffdf8,0 0 0 7px var(--cc)}
+.locked .cert{filter:grayscale(1) blur(1.5px);opacity:.45}
+.lockmsg{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.field{display:grid;gap:4px;font-size:.84rem;font-weight:600}
+.field input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg);width:min(360px,100%)}
+
+/* leitor */
+[hidden]{display:none!important}
+.reader{position:fixed;inset:0;z-index:50;background:rgba(5,12,26,.55);display:flex;justify-content:flex-end}
+.sheet{background:var(--surface);width:min(760px,100%);height:100%;overflow-y:auto;border-left:5px solid var(--c);
+  padding-block:calc(18px + env(safe-area-inset-top,0px)) calc(28px + env(safe-area-inset-bottom,0px));
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:grid;gap:16px;align-content:start}
+.sheet-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.sheet-top .k{font-size:.75rem;color:var(--c);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.x{background:none;border:0;font-size:1.5rem;line-height:1;padding:4px 10px;border-radius:6px;color:var(--muted);cursor:pointer}
+.x:hover{background:var(--raise)}
+.sheet h2{font-size:1.45rem;color:var(--fg)}
+.when{font-size:.84rem;color:var(--muted)}
+.lesson{font-size:.98rem;line-height:1.7;max-width:70ch}
+.lesson p{margin:0 0 .8em}
+.lesson table{border-collapse:collapse;width:100%;font-size:.88rem;margin:.2em 0 .8em}
+.lesson th,.lesson td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.lesson th{background:var(--cs)}
+.tbl{overflow-x:auto}
+.lesson pre{background:var(--raise);border-radius:8px;padding:10px;overflow-x:auto;font-size:.84rem}
+.lesson code{background:var(--raise);padding:1px 5px;border-radius:4px;font-size:.88em}
+.box{border-radius:10px;padding:12px 14px;background:var(--cs)}
+.box h4{margin:0 0 6px;font-size:.9rem;color:var(--c)}
+.box ul{margin:0;padding-left:18px;display:grid;gap:3px}
+.box.task{background:var(--raise);border-left:4px solid var(--c)}
+.quiz{border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px}
+.quiz h4{font-size:.95rem}
+.opt{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;cursor:pointer}
+.opt:hover{border-color:var(--c)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.opt.wrong{border-color:var(--warn);background:color-mix(in srgb,var(--warn) 12%,var(--surface))}
+.fb{font-size:.88rem;margin:0}
+.nav{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.donechk{display:flex;gap:8px;align-items:center;font-weight:600}
+.donechk input{width:18px;height:18px;accent-color:var(--c)}
+@media (max-width:520px){.wk .d{width:88px;font-size:.7rem}.cert{min-width:560px}}
+@media (prefers-reduced-motion:reduce){.stop.cur .node{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <button class="brand" id="home" aria-label="Ir para o início">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="var(--navy)"/><path d="M8 22 17 11l9 11" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="11" r="2.6" fill="var(--bg)"/></svg>
+      <div><h1>Central de Estudos</h1><div class="sync" id="sync">Progresso salvo neste navegador</div></div>
+    </button>
+    <nav class="crumbs" id="crumbs"></nav>
+  </header>
+  <main id="view"></main>
+</div>
+<div class="reader" id="reader" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="lTitle"></div></div>
+
+<script src="js/aulas-qual.js"></script><script src="js/aulas-ia.js"></script><script src="js/aulas-aud.js"></script><script src="js/aulas-ing.js"></script>
+<script src="js/curso-qual.js"></script><script src="js/curso-ia.js"></script><script src="js/curso-aud.js"></script><script src="js/curso-ing.js"></script>
+<script>
+const C=window.CURSOS, A=window.AULAS||{};
+const INICIO=new Date(2026,10,16), DIA=864e5, HOJE=new Date(); HOJE.setHours(0,0,0,0);
+const MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+const ICON={
+ qual:'<path d="M20 6a14 14 0 1 1-13.3 9.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M4 11l2.8 4.8 4.6-2.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 20.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
+ ia:'<circle cx="8" cy="10" r="3" fill="currentColor"/><circle cx="8" cy="30" r="3" fill="currentColor"/><circle cx="20" cy="20" r="3.5" fill="currentColor"/><circle cx="32" cy="10" r="3" fill="currentColor"/><circle cx="32" cy="30" r="3" fill="currentColor"/><path d="M8 10 20 20 32 10M8 30 20 20 32 30M8 10v20M32 10v20" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+ aud:'<rect x="6" y="5" width="20" height="27" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M11 13h10M11 19h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="26" cy="25" r="6" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="m30.5 29.5 4.5 4.5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+ ing:'<path d="M5 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M31 15h3a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-2v4l-5-4h-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><text x="15" y="19.5" font-size="9" font-weight="700" text-anchor="middle" fill="currentColor" font-family="Inter,sans-serif">EN</text>'};
+const icon=(id,s=40)=>`<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-hidden="true">${ICON[id]}</svg>`;
+const truckSvg='<svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><path d="M1 2h11v8H1zM12 5h5l3 3v2h-8z" fill="currentColor"/><circle cx="5" cy="11.5" r="2" fill="currentColor" stroke="var(--surface)" stroke-width="1"/><circle cx="16" cy="11.5" r="2" fill="currentColor" stroke="var(--surface)" stroke-width="1"/></svg>';
+const brl=v=>"R$ "+v.toLocaleString("pt-BR");
+const ddmm=d=>String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0");
+const dmy=d=>ddmm(d)+"/"+d.getFullYear();
+const wDate=i=>new Date(INICIO.getTime()+i*7*DIA);
+const mesLbl=i=>{const m=(10+i)%12,y=26+Math.floor((10+i)/12);return MES[m]+"/"+y;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* semanas achatadas por curso */
+C.forEach(c=>{c.L=[];c.mods.forEach((m,mi)=>{m.w.forEach((w,wi)=>c.L.push({mi,wi,k:`${c.id}-${mi}-${wi}`,t:w[0],w}));c.L.push({mi,wi:m.w.length,k:`${c.id}-${mi}-r`,t:"Revisão e avaliação: "+m.n,rev:true});});
+ c.L.forEach((x,i)=>{x.i=i;x.ini=wDate(i);x.fim=new Date(x.ini.getTime()+6*DIA);});
+ {const l=c.L[c.L.length-1],em=new Date(l.ini.getFullYear(),l.ini.getMonth()+1,0);c.fimData=l.fim<em?l.fim:em;l.fim=c.fimData;} c.carga=c.L.length*c.horas;});
+const curWeek=Math.floor((HOJE-INICIO)/(7*DIA));
+
+/* estado: navegador + sincronização na conta */
+let st={feito:{},pagas:{},nome:"",conc:{},quiz:{}};
+try{const s=JSON.parse(localStorage.getItem("planoEstudos3")||"null");if(s)st=Object.assign(st,s);}catch(e){}
+let db=null,docRef=null,dbTimer=null;
+function save(){try{localStorage.setItem("planoEstudos3",JSON.stringify(st));}catch(e){}
+ if(docRef){clearTimeout(dbTimer);dbTimer=setTimeout(()=>docRef.set(JSON.parse(JSON.stringify(st))).then(()=>syncMsg("Progresso sincronizado na sua conta")).catch(()=>syncMsg("Progresso salvo neste navegador")),1200);}}
+function syncMsg(t){const e=document.getElementById("sync");if(e)e.textContent=t;}
+(async()=>{try{if(!window.claude||!claude.use)return;const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d||!u)return;
+ const id=await u.id();if(!id)return;db=d;docRef=d.doc("data/users/"+id+"/progresso");
+ const snap=await docRef.get();if(snap.exists){const r=snap.data()||{};
+  ["feito","pagas","conc","quiz"].forEach(k=>st[k]=Object.assign({},r[k]||{},st[k]));if(!st.nome&&r.nome)st.nome=r.nome;}
+ syncMsg("Progresso sincronizado na sua conta");save();render();}catch(e){}})();
+
+const doneCount=c=>c.L.filter(x=>st.feito[x.k]).length;
+const pct=c=>Math.round(doneCount(c)/c.L.length*100);
+const nextW=c=>c.L.find(x=>!st.feito[x.k])||c.L[c.L.length-1];
+function ritmo(c){if(curWeek<0)return `<span class="pill wait">Começa ${ddmm(INICIO)}</span>`;
+ const esperado=Math.min(c.L.length,curWeek+1),d=doneCount(c);
+ if(d>=c.L.length)return '<span class="pill ok">Concluído</span>';
+ if(d>=esperado)return `<span class="pill ok">${d>esperado?"Adiantado "+(d-esperado)+" sem.":"No ritmo"}</span>`;
+ return `<span class="pill late">${esperado-d} sem. atrasado</span>`;}
+function setDone(k,v){st.feito[k]=v;const c=C.find(x=>k.startsWith(x.id+"-"));
+ if(c&&doneCount(c)===c.L.length&&!st.conc[c.id])st.conc[c.id]=dmy(HOJE);
+ if(c&&doneCount(c)<c.L.length)delete st.conc[c.id];save();}
+
+/* rotas */
+let route="inicio",tab="curso";
+function go(r,t){route=r;if(t)tab=t;if(location.hash!=="#"+r)location.hash=r;render();window.scrollTo(0,0);}
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);const r=C.some(c=>c.id===h)?h:"inicio";if(r!==route){route=r;tab="curso";render();}});
+document.getElementById("home").onclick=()=>go("inicio");
+
+function render(){
+ const h=location.hash.slice(1);if(C.some(c=>c.id===h))route=h;
+ document.getElementById("crumbs").innerHTML=C.map(c=>`<button class="chip c-${c.id}" data-go="${c.id}" ${route===c.id?'aria-current="page"':""}><i></i>${c.curto}</button>`).join("");
+ document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go,"curso"));
+ const v=document.getElementById("view");v.className="";
+ if(route==="inicio")return renderHome(v);
+ renderCourse(v,C.find(c=>c.id===route));
+}
+
+/* início */
+function renderHome(v){
+ const total=C.reduce((s,c)=>s+c.parcela*c.parcelas,0), carga=C.reduce((s,c)=>s+c.carga,0);
+ const feitos=C.reduce((s,c)=>s+doneCount(c),0), tot=C.reduce((s,c)=>s+c.L.length,0);
+ const mensal=[...Array(26)].map((_,m)=>C.reduce((s,c)=>s+(m<c.parcelas?c.parcela:0),0));
+ v.innerHTML=`<div style="display:grid;gap:20px">
+ <section class="hero"><div class="eyebrow">nov/2026 → dez/2028 · 4 formações</div><h2>Sua trilha do básico ao avançado</h2>
+  <p class="note">Uma aula por semana em cada curso, com exercício, revisão a cada módulo e certificado no final.</p></section>
+ <section class="kpis">
+  <div class="kpi"><span>Mensal até jun/27</span><b class="num">${brl(mensal[0])}</b><span>meta de R$ 810 cumprida</span></div>
+  <div class="kpi"><span>Investimento total</span><b class="num">${brl(total)}</b><span>todas as parcelas</span></div>
+  <div class="kpi"><span>Carga de estudo</span><b class="num">${carga.toLocaleString("pt-BR")} h</b><span>${tot} semanas de aula no total</span></div>
+  <div class="kpi"><span>Progresso geral</span><b class="num">${Math.round(feitos/tot*100)}%</b><span>${feitos} de ${tot} aulas concluídas</span></div>
+ </section>
+ <section class="cards">${C.map(c=>{const n=nextW(c),p=pct(c);return `<article class="ccard c-${c.id}">
+  <div class="band">${icon(c.id,36)}<div class="nowrap"><h3 class="nowrap">${c.curto}</h3><small class="nowrap" style="display:block">${c.mods.length} módulos · até ${MES[c.fimData.getMonth()]}/${c.fimData.getFullYear()}</small></div></div>
+  <div class="body"><div class="row"><div class="ring" style="--p:${p}"><span class="num">${p}%</span></div>
+   <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">${c.horas} h/semana · ${brl(c.parcela)}/mês</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
+   <div class="note nowrap">Próxima: <b style="color:var(--fg)">${esc(n.t)}</b></div>
+   <div class="nav"><button class="btn" data-open-c="${c.id}">Ver curso</button><button class="btn main" data-cont="${c.id}">Continuar →</button></div></div></article>`}).join("")}</section>
+ <section class="panel"><div class="panel-head"><h3>Parcelas por mês</h3><div class="legend">${C.map(c=>`<span class="c-${c.id}"><i></i>${c.curto}</span>`).join("")}</div></div>
+  <div class="chart"><svg id="chart" viewBox="0 0 820 270" role="img" aria-label="Parcelas mensais por curso"></svg></div>
+  <p class="note">Depois de jun/27 sobram R$ 200/mês (fim do auditor) e, de jan/28 a dez/28, só o inglês segue, sobrando R$ 560/mês.</p></section>
+ <section class="panel c-ing"><div class="panel-head"><h3>Semana tipo</h3><span class="note">cerca de 18 h por semana até jun/27</span></div>
+  <p class="note">Seg: Qualidade 1h30 · Ter: IA 1h30 · Qua: Auditor 1h30 · Qui: Inglês 1h · Sáb: Qualidade 2h30 e IA 2h30 · Dom: Auditor 2h30 · Todo dia: inglês 25 min (Anki, áudio e fala).</p></section></div>`;
+ v.querySelectorAll("[data-open-c]").forEach(b=>b.onclick=()=>go(b.dataset.openC,"curso"));
+ v.querySelectorAll("[data-cont]").forEach(b=>b.onclick=()=>{const c=C.find(x=>x.id===b.dataset.cont);openW(c,nextW(c).i);});
+ drawChart(mensal);
+}
+function drawChart(mensal){
+ const svg=document.getElementById("chart");if(!svg)return;const W=820,H=270,L=46,R=8,T=16,B=44,max=900,cs=getComputedStyle(document.documentElement);
+ const pw=W-L-R,ph=H-T-B,bw=pw/26,y=v=>T+ph-v/max*ph,mu=cs.getPropertyValue("--muted").trim(),ln=cs.getPropertyValue("--line").trim(),fg=cs.getPropertyValue("--fg").trim();
+ let s="";[0,200,400,600,810].forEach(v=>{s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="${ln}" ${v===810?'stroke-dasharray="4 4"':""}/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="${mu}" font-family="Inter,sans-serif">${v}</text>`;});
+ mensal.forEach((tot,i)=>{let acc=0;const x=L+i*bw+bw*.16,w=bw*.68;
+  [...C].reverse().forEach(c=>{if(i<c.parcelas){s+=`<rect x="${x}" y="${y(acc+c.parcela)}" width="${w}" height="${c.parcela/max*ph}" fill="${cs.getPropertyValue("--"+c.id).trim()}"><title>${c.curto} · ${mesLbl(i)}: ${brl(c.parcela)}</title></rect>`;acc+=c.parcela;}});
+  if(i%2===0)s+=`<text x="${x+w/2}" y="${H-B+16}" text-anchor="middle" font-size="10.5" fill="${mu}" font-family="Inter,sans-serif">${mesLbl(i)}</text>`;
+  if(i===0||i===8||i===14)s+=`<text x="${x+w/2}" y="${y(acc)-5}" text-anchor="middle" font-size="11" font-weight="600" fill="${fg}" font-family="Inter,sans-serif">${acc}</text>`;});
+ s+=`<text x="${L}" y="${H-6}" font-size="11" fill="${mu}" font-family="Inter,sans-serif">R$ por mês · linha tracejada = meta de 810</text>`;svg.innerHTML=s;
+}
+
+/* curso */
+function renderCourse(v,c){
+ v.className="c-"+c.id;const p=pct(c),n=nextW(c);
+ v.innerHTML=`<div style="display:grid;gap:16px">
+ <section class="chero"><div class="motif">${icon(c.id,220)}</div>
+  <div class="row">${icon(c.id,44)}<div class="nowrap"><div class="eyebrow" style="color:#fff;opacity:.85">${c.nivel}</div><h2 class="nowrap">${c.nome}</h2></div></div>
+  <div class="meta num"><span>${dmy(c.L[0].ini)} → ${dmy(c.fimData)}</span><span>${c.mods.length} módulos · ${c.L.length} semanas</span><span>${c.horas} h por semana · ${c.carga} h</span><span>${brl(c.parcela)}/mês</span></div>
+  <div><div class="nav" style="font-size:.82rem;margin-bottom:6px"><span>${doneCount(c)} de ${c.L.length} aulas</span><span class="num">${p}%</span></div><div class="bar"><i style="width:${p}%"></i></div></div>
+  <div class="acts"><button class="btn" id="cont">${doneCount(c)?"Continuar":"Começar"}: semana ${n.i+1} →</button>${ritmo(c).replace('class="pill','style="background:rgba(255,255,255,.2);color:#fff" class="pill')}</div></section>
+ <div class="tabs" role="tablist">${[["curso","Curso"],["trilha","Trilha"],["fin","Financeiro"],["leituras","Leituras"],["cert","Certificado"]].map(([k,l])=>`<button class="tab" role="tab" data-tab="${k}" aria-selected="${tab===k}">${l}</button>`).join("")}</div>
+ <section id="tabview"></section></div>`;
+ v.querySelector("#cont").onclick=()=>openW(c,n.i);
+ v.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render();});
+ const tv=v.querySelector("#tabview");
+ ({curso:tabCurso,trilha:tabTrilha,fin:tabFin,leituras:tabLeit,cert:tabCert})[tab](tv,c);
+}
+function modStats(c,mi){const ws=c.L.filter(x=>x.mi===mi),d=ws.filter(x=>st.feito[x.k]).length;return {ws,d,n:ws.length,p:Math.round(d/ws.length*100)};}
+function tabCurso(tv,c){
+ const n=nextW(c);
+ tv.innerHTML=`<div style="display:grid;gap:10px">
+ <details class="about"><summary>Sobre o curso</summary><p>${c.sobre}${c.rotina?"<br><br>"+c.rotina:""}</p></details>
+ ${c.mods.map((m,mi)=>{const s=modStats(c,mi),ini=s.ws[0].ini,fim=s.ws[s.n-1].fim;return `<details class="mod ${s.d===s.n?"done":""}" ${n.mi===mi?"open":""}>
+  <summary><div class="mh"><span class="mnum">${mi+1}</span><div class="nowrap"><h4 class="nowrap">${m.n}</h4><div class="sub num">${ddmm(ini)}/${String(ini.getFullYear()).slice(2)} a ${ddmm(fim)}/${String(fim.getFullYear()).slice(2)} · ${s.d}/${s.n} semanas</div></div></div><span class="minibar"><i style="width:${s.p}%"></i></span></summary>
+  <p class="mobj">${m.o}</p>
+  <ul class="weeks">${s.ws.map(x=>`<li class="wk ${st.feito[x.k]?"done":""} ${x.i===curWeek?"now":""}"><input type="checkbox" data-k="${x.k}" aria-label="Concluída" ${st.feito[x.k]?"checked":""}>
+   <button class="open" data-w="${x.i}"><span class="d num">Sem ${x.i+1} · ${ddmm(x.ini)}</span><span class="t">${esc(x.t)}</span></button>${x.rev?'<span class="tag">Avaliação</span>':x.w[3]?'<span class="tag">Aula completa</span>':""}</li>`).join("")}</ul></details>`}).join("")}</div>`;
+ tv.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>openW(c,+b.dataset.w));
+ tv.querySelectorAll("input[data-k]").forEach(i=>i.onchange=()=>{setDone(i.dataset.k,i.checked);render();});
+}
+function tabTrilha(tv,c){
+ const n=nextW(c),allDone=doneCount(c)===c.L.length;
+ tv.innerHTML=`<div class="grid2" style="align-items:start">
+ <section class="panel"><div class="panel-head"><h3>Trilha do curso</h3><span class="note num">${pct(c)}% percorrido</span></div>
+ <ol class="trail">${c.mods.map((m,mi)=>{const s=modStats(c,mi),cur=!allDone&&n.mi===mi;
+  return `<li class="stop ${s.d===s.n?"done":""} ${cur?"cur":""}"><div class="road"><span class="fill" style="height:${s.d===s.n?100:s.p}%"></span><div class="node" style="--p:${s.p}"><span>${s.d===s.n?"✓":mi+1}</span></div></div>
+   <div class="sinfo"><h4 class="nowrap">${m.n}</h4><div class="note num">${s.d}/${s.n} semanas · ${mesLbl(Math.max(0,Math.round((s.ws[0].ini-INICIO)/(30.44*DIA))))}</div>${cur?`<div class="truck">${truckSvg} Você está aqui: ${esc(n.t)}</div>`:""}</div></li>`}).join("")}
+  <li class="stop goal ${allDone?"done":""}"><div class="road"><span class="fill" style="height:${allDone?100:0}%"></span><div class="node" style="--p:${allDone?100:0}"><span>★</span></div></div>
+   <div class="sinfo"><h4>Certificado de conclusão</h4><div class="note">${allDone?"Liberado em "+st.conc[c.id]:"Libera ao concluir as "+c.L.length+" semanas"}</div></div></li></ol></section>
+ <section class="panel"><div class="panel-head"><h3>Selos de módulo</h3><span class="note">${c.mods.filter((_,mi)=>{const s=modStats(c,mi);return s.d===s.n}).length} de ${c.mods.length}</span></div>
+  <div class="badges">${c.mods.map((m,mi)=>{const s=modStats(c,mi);return `<span class="badge ${s.d===s.n?"on":""}" title="${esc(m.n)}">${mi+1}</span>`}).join("")}</div>
+  <p class="note" style="margin-top:12px">Cada módulo termina com uma semana de revisão e avaliação. Concluindo todas as semanas do módulo, o selo acende.</p></section></div>`;
+}
+function tabFin(tv,c){
+ const total=c.parcela*c.parcelas,pagas=[...Array(c.parcelas)].filter((_,i)=>st.pagas[c.id+"-"+i]).length;
+ tv.innerHTML=`<div class="grid2" style="align-items:start">
+ <section class="panel"><div class="panel-head"><h3>Parcelas</h3><span class="note num">${pagas} de ${c.parcelas} pagas</span></div>
+  <div class="tw"><table class="fin num"><thead><tr><th>Nº</th><th>Mês</th><th>Valor</th><th>Paga</th></tr></thead><tbody>
+  ${[...Array(c.parcelas)].map((_,i)=>`<tr><td>${i+1}</td><td>${mesLbl(i)}</td><td>${brl(c.parcela)}</td><td><input type="checkbox" data-p="${c.id}-${i}" aria-label="Parcela ${i+1} paga" ${st.pagas[c.id+"-"+i]?"checked":""}></td></tr>`).join("")}
+  </tbody></table></div></section>
+ <section class="panel" style="display:grid;gap:12px"><h3>Resumo</h3>
+  <div class="kpis" style="grid-template-columns:1fr 1fr"><div class="kpi"><span>Total do curso</span><b class="num">${brl(total)}</b></div><div class="kpi"><span>Já pago</span><b class="num">${brl(pagas*c.parcela)}</b></div>
+  <div class="kpi"><span>Falta pagar</span><b class="num">${brl(total-pagas*c.parcela)}</b></div><div class="kpi"><span>Custo por hora</span><b class="num">${brl(Math.round(total/c.carga))}</b></div></div>
+  <p class="note">${{qual:"Mercado: pós EAD em Gestão da Qualidade vai de R$ 50 a R$ 560 por mês, com média perto de R$ 120. R$ 160 cobre uma instituição de boa reputação.",ia:"Mercado: pós EAD em IA vai de R$ 40 a R$ 1.180 por mês, com média perto de R$ 110. R$ 200 permite curso com aulas ao vivo e projetos.",aud:"Estimativa: formação de auditor líder SGI costuma custar entre R$ 1.500 e R$ 4.000 no total. R$ 1.600 em 8x cobre um preparatório EAD com certificado.",ing:"Estimativa: escolas online cobram de R$ 150 a R$ 450 por mês. R$ 250 cobre aulas ao vivo em grupo. Plano estendido até dez/2028 (26 parcelas)."}[c.id]}</p></section></div>`;
+ tv.querySelectorAll("[data-p]").forEach(i=>i.onchange=()=>{st.pagas[i.dataset.p]=i.checked;save();tabFin(tv,c);});
+}
+function tabLeit(tv,c){
+ tv.innerHTML=`<div class="grid2" style="align-items:start">
+ <section class="panel"><div class="panel-head"><h3>Livros recomendados</h3></div>${c.livros.map(b=>`<div class="book"><span class="spine"></span><div><b>${b[0]}</b><small>${b[1]}</small><small>${b[2]}</small></div></div>`).join("")}</section>
+ <section class="panel"><div class="panel-head"><h3>Sites e cursos gratuitos</h3></div>${c.sites.map(s=>`<a class="site" href="${s[1]}" target="_blank" rel="noopener"><div><b>${s[0]}</b><br><span>${s[2]}</span></div><em>↗</em></a>`).join("")}</section></div>`;
+}
+function tabCert(tv,c){
+ const ok=doneCount(c)===c.L.length,cod=(c.id+"-"+(st.conc[c.id]||"")+"-"+(st.nome||"")).split("").reduce((h,ch)=>(h*31+ch.charCodeAt(0))>>>0,7).toString(36).toUpperCase().slice(0,8);
+ const quizTot=c.mods.length;
+ tv.innerHTML=`<div style="display:grid;gap:14px" class="${ok?"":"locked"}">
+ ${ok?"":`<div class="panel lockmsg"><span class="pill late">Bloqueado</span><span>Conclua as ${c.L.length-doneCount(c)} semanas restantes para liberar o certificado.</span></div>`}
+ <label class="field" for="certNome">Nome no certificado<input id="certNome" value="${esc(st.nome)}" placeholder="Seu nome completo" maxlength="60"></label>
+ <div class="certwrap"><div class="cert" id="cert" style="--cc:var(--${c.id})">
+  <div class="k">CERTIFICADO DE CONCLUSÃO</div><h3>Plano de Estudos</h3><p>Certificamos que</p>
+  <div class="nm" id="certNm">${esc(st.nome||"Seu nome")}</div>
+  <p>concluiu a trilha de estudos</p><div class="cn">${c.nome}</div>
+  <p>com ${c.L.length} semanas de estudo, ${c.mods.length} módulos e ${quizTot} avaliações, carga horária de ${c.carga} horas, no período de ${dmy(c.L[0].ini)} a ${ok?st.conc[c.id]:dmy(c.fimData)}.</p>
+  <div class="foot"><span>Concluído em ${ok?st.conc[c.id]:"—"}</span><span>Código ${ok?cod:"—"}</span></div>
+  <div class="seal">${c.carga} h<br>${c.curto}</div></div></div>
+ <div class="nav"><p class="note">Certificado do seu plano pessoal de estudos. O diploma oficial vem da instituição em que você se matricular.</p>
+  <button class="btn main" id="dl" ${ok?"":"disabled"} hidden>Baixar certificado (PNG)</button></div></div>`;
+ const inp=tv.querySelector("#certNome");inp.oninput=()=>{st.nome=inp.value.trim();save();tv.querySelector("#certNm").textContent=st.nome||"Seu nome";};
+ inp.onchange=()=>tabCert(tv,c);
+ const dl=tv.querySelector("#dl");
+ dl.hidden=false;
+ dl.onclick=async()=>{dl.disabled=true;dl.textContent="Gerando…";try{const blob=await certPng(c,cod),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=`certificado-${c.id}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);dl.textContent="Certificado baixado";}catch(e){dl.textContent="Não foi possível baixar";}setTimeout(()=>{dl.disabled=false;dl.textContent="Baixar certificado (PNG)";},2500);};
+}
+async function certPng(c,cod){
+ try{await document.fonts.ready;}catch(e){}
+ const W=2000,H=1414,cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");
+ const cc=getComputedStyle(document.documentElement).getPropertyValue("--"+c.id).trim();
+ g.fillStyle="#fffdf8";g.fillRect(0,0,W,H);g.strokeStyle=cc;g.lineWidth=8;g.strokeRect(40,40,W-80,H-80);g.lineWidth=2;g.globalAlpha=.5;g.strokeRect(62,62,W-124,H-124);g.globalAlpha=1;
+ g.textAlign="center";const t=(s,f,col,y)=>{g.font=f;g.fillStyle=col;g.fillText(s,W/2,y);};
+ g.letterSpacing="12px";t("CERTIFICADO DE CONCLUSÃO","700 34px 'Space Grotesk',sans-serif",cc,260);g.letterSpacing="0px";
+ t("Plano de Estudos","600 84px 'Cormorant Garamond',Georgia,serif","#1c2333",370);
+ t("Certificamos que","400 32px Inter,sans-serif","#3b4459",460);
+ t(st.nome||"Seu nome","italic 500 96px 'Cormorant Garamond',Georgia,serif","#1c2333",580);
+ g.strokeStyle="#c9ccd6";g.lineWidth=2;g.beginPath();g.moveTo(560,610);g.lineTo(1440,610);g.stroke();
+ t("concluiu a trilha de estudos","400 32px Inter,sans-serif","#3b4459",690);
+ t(c.nome,"700 50px 'Space Grotesk',sans-serif",cc,770);
+ t(`com ${c.L.length} semanas de estudo, ${c.mods.length} módulos e ${c.mods.length} avaliações,`,"400 30px Inter,sans-serif","#3b4459",860);
+ t(`carga horária de ${c.carga} horas, de ${dmy(c.L[0].ini)} a ${st.conc[c.id]}.`,"400 30px Inter,sans-serif","#3b4459",905);
+ g.font="400 26px Inter,sans-serif";g.fillStyle="#5b6478";g.textAlign="left";g.fillText("Concluído em "+st.conc[c.id],200,1180);g.fillText("Código "+cod,200,1220);
+ g.beginPath();g.arc(1700,1130,105,0,7);g.fillStyle=cc;g.fill();g.lineWidth=6;g.strokeStyle="#fffdf8";g.beginPath();g.arc(1700,1130,92,0,7);g.stroke();
+ g.fillStyle="#fff";g.textAlign="center";g.font="700 40px 'Space Grotesk',sans-serif";g.fillText(c.carga+" h",1700,1125);g.font="600 24px 'Space Grotesk',sans-serif";g.fillText(c.curto,1700,1162);
+ return await new Promise(r=>cv.toBlob(r,"image/png"));
+}
+
+/* leitor de aula */
+const reader=document.getElementById("reader"),sheet=document.getElementById("sheet");let lastFocus=null;
+function fmt(t){return t.split(/\n\n+/).map(b=>/^\s*<(table|pre)/.test(b)?`<div class="tbl">${b}</div>`:`<p>${b.replace(/\n/g," ")}</p>`).join("");}
+function openW(c,i){
+ const x=c.L[i],m=c.mods[x.mi];sheet.className="sheet c-"+c.id;
+ let body="";
+ if(x.rev){const qs=m.q;body=`<div class="lesson"><p>Semana de revisão do módulo <b>${m.n}</b>. Releia os pontos-chave das aulas, refaça as atividades que ficaram pendentes e responda a avaliação.</p></div>
+  <div class="box"><h4>O que revisar</h4><ul>${m.w.map(w=>`<li>${esc(w[0])}</li>`).join("")}</ul></div>
+  ${qs.map((q,qi)=>quizHtml(q[0],q[1],qi,true)).join("")}`;}
+ else{const w=x.w,a=w[3]?A[w[3]]:null;
+  body=a?`<div class="lesson">${fmt(a.r)}</div><div class="box"><h4>Pontos-chave</h4><ul>${a.p.map(p=>`<li>${p}</li>`).join("")}</ul></div><div class="box"><h4>Na prática</h4><div class="lesson">${fmt(a.ex)}</div></div>${quizHtml(a.q.p,a.q.o,0)}`
+   :`<div class="lesson">${fmt(w[1])}</div>`;
+  body+=`<div class="box task"><h4>Atividade da semana</h4><div class="lesson"><p>${w[2]}</p></div></div>`;}
+ sheet.innerHTML=`<div class="sheet-top"><span class="k nowrap">${c.curto} · Módulo ${x.mi+1} · Semana ${x.i+1} de ${c.L.length}</span><button class="x" id="lClose" aria-label="Fechar aula">×</button></div>
+  <div><h2 id="lTitle">${esc(x.t)}</h2><div class="when num">${dmy(x.ini)} a ${dmy(x.fim)} · ${c.horas} h de estudo</div></div>${body}
+  <label class="donechk"><input type="checkbox" id="lDone" ${st.feito[x.k]?"checked":""}> Semana concluída</label>
+  <div class="nav"><button class="btn" id="lPrev" ${i===0?"disabled":""}>← Anterior</button><button class="btn main" id="lNext">${i===c.L.length-1?"Concluir curso":"Concluir e avançar →"}</button></div>`;
+ const answers=x.rev?m.q.map(q=>[q[2],q[3]]):(x.w[3]&&A[x.w[3]]?[[A[x.w[3]].q.c,A[x.w[3]].q.e]]:[]);
+ sheet.querySelectorAll(".quiz").forEach((qz,qi)=>qz.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const [ci,ex]=answers[qi],ok=+b.dataset.i===ci;
+  qz.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));b.classList.add(ok?"right":"wrong");
+  const fb=qz.querySelector(".fb");fb.hidden=false;fb.innerHTML=ok?"<b>Certo.</b> "+ex:"<b>Ainda não.</b> Releia a aula e tente outra opção.";}));
+ sheet.querySelector("#lClose").onclick=closeW;
+ sheet.querySelector("#lDone").onchange=e=>{setDone(x.k,e.target.checked);render();};
+ sheet.querySelector("#lPrev").onclick=()=>openW(c,i-1);
+ sheet.querySelector("#lNext").onclick=()=>{setDone(x.k,true);render();if(i<c.L.length-1)openW(c,i+1);else{closeW();if(route===c.id){tab="cert";render();}}};
+ if(reader.hidden){lastFocus=document.activeElement;reader.hidden=false;document.body.style.overflow="hidden";}
+ sheet.scrollTop=0;sheet.querySelector("#lClose").focus();
+}
+function quizHtml(p,o,qi,rev){return `<div class="quiz"><h4>${rev?"Questão "+(qi+1):"Exercício"}: ${p}</h4>${o.map((t,i)=>`<button class="opt" data-i="${i}">${t}</button>`).join("")}<p class="fb" hidden></p></div>`;}
+function closeW(){reader.hidden=true;document.body.style.overflow="";if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
+reader.addEventListener("click",e=>{if(e.target===reader)closeW();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!reader.hidden)closeW();});
+try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",render);new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});}catch(e){}
+render();
+</script>
+
+</body>
+</html>
