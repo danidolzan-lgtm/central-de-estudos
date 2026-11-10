@@ -1938,12 +1938,9 @@ function renderHome(v){
    <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">${brl(c.parcela)}/mês · ${c.parcelas}x</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
    <div class="note nowrap">Próxima: <b style="color:var(--fg)">${esc(n.t)}</b></div>
    <div class="nav"><button class="btn" data-open-c="${c.id}">Ver curso</button><button class="btn main" data-cont="${c.id}">Continuar →</button></div></div></article>`}).join("")}</section>
- <section class="panel"><div class="panel-head"><h3>Parcelas por mês</h3><div class="legend">${C.map(c=>`<span class="c-${c.id}"><i></i>${c.curto}</span>`).join("")}</div></div>
-  <div class="chart"><svg id="chart" viewBox="0 0 820 270" role="img" aria-label="Parcelas mensais por curso"></svg></div>
-  <p class="note">R$ 810 por mês até jun/27. Depois sobram R$ 200 (fim do auditor) e, de jan/28 a dez/28, só o inglês segue. Total: ${brl(C.reduce((s,c)=>s+c.parcela*c.parcelas,0))}.</p></section></div>`;
+</div>`;
  v.querySelectorAll("[data-open-c]").forEach(b=>b.onclick=()=>go(b.dataset.openC,"curso"));
  v.querySelectorAll("[data-cont]").forEach(b=>b.onclick=()=>{const c=C.find(x=>x.id===b.dataset.cont);openW(c,nextW(c).i);});
- drawChart(mensal);
 }
 function drawChart(mensal){
  const svg=document.getElementById("chart");if(!svg)return;const W=820,H=270,L=46,R=8,T=16,B=44,max=900,cs=getComputedStyle(document.documentElement);
