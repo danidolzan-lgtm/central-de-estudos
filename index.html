@@ -113,7 +113,7 @@ details[open] > summary::after{content:"–"}
 .wk:hover{background:var(--raise)}
 .wk input{accent-color:var(--c);width:17px;height:17px;flex:none}
 .wk .open{flex:1;min-width:0;background:none;border:0;padding:0;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:baseline}
-.wk .d{font-size:.75rem;color:var(--muted);width:98px;flex:none;white-space:nowrap}
+.wk .d{font-size:.75rem;color:var(--muted);width:78px;flex:none;white-space:nowrap}
 .wk .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .wk.done .t{color:var(--muted);text-decoration:line-through}
 .wk.now{background:var(--cs)}
@@ -1860,6 +1860,7 @@ sites:[["BBC Learning English","https://www.bbc.co.uk/learningenglish","6 Minute
 const C=window.CURSOS,DIA=864e5,HOJE=new Date();HOJE.setHours(0,0,0,0);
 const INICIO=new Date(2026,10,16);
 const FERIAS=[["2026-12-07","2027-01-31","Férias de fim de ano"],["2027-07-05","2027-07-25","Recesso de julho"],["2027-12-06","2028-01-30","Férias de fim de ano"],["2028-07-03","2028-07-23","Recesso de julho"]].map(([a,b,n])=>({a:new Date(a+"T00:00"),b:new Date(b+"T00:00"),n}));
+const DIA_AULA={ing:0,qual:1,aud:2,ia:3},DSEM=["segunda","terça","quarta","quinta"],DABR=["Seg","Ter","Qua","Qui"];
 const MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const ICON={
  qual:'<path d="M20 6a14 14 0 1 1-13.3 9.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M4 11l2.8 4.8 4.6-2.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 20.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -1881,11 +1882,12 @@ C.forEach(c=>{
  const fim=new Date(c.fim+"T00:00"),sem=[];
  for(let d=new Date(INICIO);d<=fim;d=new Date(d.getTime()+7*DIA))if(!emFerias(d))sem.push(d);
  c.L=[];c.mods.forEach((m,mi)=>{m.a.forEach((a,ai)=>c.L.push({mi,k:`${c.id}-${mi}-${ai}`,t:a.t,a}));c.L.push({mi,k:`${c.id}-${mi}-r`,t:"Revisão e avaliação: "+m.n,rev:true});});
- c.L.forEach((x,i)=>{x.i=i;x.ini=sem[i]||new Date(sem[sem.length-1].getTime()+(i-sem.length+1)*7*DIA);x.fim=new Date(x.ini.getTime()+6*DIA);});
+ c.L.forEach((x,i)=>{x.i=i;x.ini=sem[i]||new Date(sem[sem.length-1].getTime()+(i-sem.length+1)*7*DIA);x.fim=new Date(x.ini.getTime()+6*DIA);x.aula=new Date(x.ini.getTime()+DIA_AULA[c.id]*DIA);});
+ c.dia=DIA_AULA[c.id];
  c.fimData=c.L[c.L.length-1].fim;c.carga=c.L.length*c.horas;
  c.ferias=FERIAS.filter(f=>f.a>c.L[0].ini&&f.a<c.fimData);
 });
-const passou=c=>c.L.filter(x=>x.ini<=HOJE).length;
+const passou=c=>c.L.filter(x=>x.aula<=HOJE).length;
 
 /* estado */
 let st={feito:{},pagas:{},nome:"",conc:{}};
@@ -1902,7 +1904,7 @@ const doneCount=c=>c.L.filter(x=>st.feito[x.k]).length;
 const pct=c=>Math.round(doneCount(c)/c.L.length*100);
 const nextW=c=>c.L.find(x=>!st.feito[x.k])||c.L[c.L.length-1];
 function ritmo(c){const esp=passou(c),d=doneCount(c);
- if(esp===0)return `<span class="pill wait">Começa ${ddmm(c.L[0].ini)}</span>`;
+ if(esp===0)return `<span class="pill wait">Começa ${DABR[c.dia].toLowerCase()} ${ddmm(c.L[0].aula)}</span>`;
  if(d>=c.L.length)return '<span class="pill ok">Concluído</span>';
  const f=emFerias(HOJE);
  if(d>=esp)return `<span class="pill ok">${f?"Férias · ":""}${d>esp?"Adiantado "+(d-esp)+" sem.":"No ritmo"}</span>`;
@@ -1931,11 +1933,11 @@ function renderHome(v){
  const mensal=[...Array(26)].map((_,m)=>C.reduce((s,c)=>s+(m<c.parcelas?c.parcela:0),0));
  v.innerHTML=`<div style="display:grid;gap:20px">
  <section class="hero"><div class="eyebrow">nov/2026 → dez/2028 · 4 formações</div><h2>Sua trilha do básico ao avançado</h2>
-  <p class="note">Uma aula por semana em cada curso, com revisão a cada módulo e certificado no final. Aulas até o começo de dezembro, férias em dezembro e janeiro e recesso em julho.</p></section>
+  <p class="note">Segunda: Inglês · Terça: Qualidade · Quarta: Auditor · Quinta: IA. Uma aula por semana em cada curso, com revisão a cada módulo e certificado no final. Aulas até o começo de dezembro, férias em dezembro e janeiro e recesso em julho.</p></section>
  <section class="cards">${C.map(c=>{const n=nextW(c),p=pct(c);return `<article class="ccard c-${c.id}">
   <div class="band">${icon(c.id,36)}<div class="nowrap"><h3 class="nowrap">${c.curto}</h3><small class="nowrap" style="display:block">${c.mods.length} módulos · até ${mesData(c.fimData)}</small></div></div>
   <div class="body"><div class="row"><div class="ring" style="--p:${p}"><span class="num">${p}%</span></div>
-   <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">${brl(c.parcela)}/mês · ${c.parcelas}x</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
+   <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">Aulas às ${DSEM[c.dia]}s · ${brl(c.parcela)}/mês</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
    <div class="note nowrap">Próxima: <b style="color:var(--fg)">${esc(n.t)}</b></div>
    <div class="nav"><button class="btn" data-open-c="${c.id}">Ver curso</button><button class="btn main" data-cont="${c.id}">Continuar →</button></div></div></article>`}).join("")}</section>
 </div>`;
@@ -1959,7 +1961,7 @@ function renderCourse(v,c){
  v.innerHTML=`<div style="display:grid;gap:16px">
  <section class="chero"><div class="motif">${icon(c.id,220)}</div>
   <div class="row">${icon(c.id,44)}<div class="nowrap"><div class="eyebrow" style="color:#fff;opacity:.85">${c.nivel}</div><h2 class="nowrap">${c.nome}</h2></div></div>
-  <div class="meta num"><span>${dmy(c.L[0].ini)} → ${dmy(c.fimData)}</span><span>${c.mods.length} módulos · ${c.L.length} semanas de aula</span><span>Carga horária: ${c.carga} h (${c.horas} h/semana)</span><span>${brl(c.parcela)}/mês</span></div>
+  <div class="meta num"><span>Aulas às ${DSEM[c.dia]}s</span><span>${dmy(c.L[0].aula)} → ${dmy(c.L[c.L.length-1].aula)}</span><span>${c.mods.length} módulos · ${c.L.length} semanas de aula</span><span>Carga horária: ${c.carga} h (${c.horas} h/semana)</span><span>${brl(c.parcela)}/mês</span></div>
   <div><div class="nav" style="font-size:.82rem;margin-bottom:6px"><span>${doneCount(c)} de ${c.L.length} aulas</span><span class="num">${p}%</span></div><div class="bar"><i style="width:${p}%"></i></div></div>
   <div class="acts"><button class="btn" id="cont">${doneCount(c)?"Continuar":"Começar"}: semana ${n.i+1} →</button>${ritmo(c).replace('class="pill','style="background:rgba(255,255,255,.2);color:#fff" class="pill')}</div></section>
  <div class="tabs" role="tablist">${[["curso","Curso"],["trilha","Trilha"],["fin","Financeiro"],["leituras","Leituras"],["cert","Certificado"]].map(([k,l])=>`<button class="tab" role="tab" data-tab="${k}" aria-selected="${tab===k}">${l}</button>`).join("")}</div>
@@ -1977,7 +1979,7 @@ function tabCurso(tv,c){
  <details class="about"><summary>Sobre o curso</summary><p>${c.sobre}</p><p><b>Calendário:</b> ${c.ferias.map(f=>`${f.n.toLowerCase()} de ${dmy(f.a)} a ${dmy(f.b)}`).join("; ")||"sem pausas no período"}.</p></details>
  ${c.mods.map((m,mi)=>{const s=modStats(c,mi),ini=s.ws[0].ini,fim=s.ws[s.n-1].fim;
   let li="";s.ws.forEach((x,j)=>{if(j>0)feriasEntre(c,s.ws[j-1].ini,x.ini).forEach(f=>li+=ferHtml(f));
-   li+=`<li class="wk ${st.feito[x.k]?"done":""} ${x.i===cw?"now":""}"><input type="checkbox" data-k="${x.k}" aria-label="Concluída" ${st.feito[x.k]?"checked":""}><button class="open" data-w="${x.i}"><span class="d num">Sem ${x.i+1} · ${ddmm(x.ini)}</span><span class="t">${esc(x.t)}</span></button>${x.rev?'<span class="tag">Avaliação</span>':""}</li>`;});
+   li+=`<li class="wk ${st.feito[x.k]?"done":""} ${x.i===cw?"now":""}"><input type="checkbox" data-k="${x.k}" aria-label="Concluída" ${st.feito[x.k]?"checked":""}><button class="open" data-w="${x.i}"><span class="d num">${DABR[c.dia]} ${ddmm(x.aula)}</span><span class="t">${esc(x.t)}</span></button>${x.rev?'<span class="tag">Avaliação</span>':""}</li>`;});
   const antes=mi>0?feriasEntre(c,c.L.filter(x=>x.mi===mi-1).slice(-1)[0].ini,ini).map(f=>`<div class="ferias">☀ <b>${f.n}</b> · ${dmy(f.a)} a ${dmy(f.b)} · sem aulas</div>`).join(""):"";
   return `${antes}<details class="mod ${s.d===s.n?"done":""}" ${n.mi===mi?"open":""}>
   <summary><div class="mh"><span class="mnum">${mi+1}</span><div class="nowrap"><h4 class="nowrap">${m.n}</h4><div class="sub num">${ddmm(ini)}/${String(ini.getFullYear()).slice(2)} a ${ddmm(fim)}/${String(fim.getFullYear()).slice(2)} · ${s.d}/${s.n} semanas · ${s.n*c.horas} h</div></div></div><span class="minibar"><i style="width:${s.p}%"></i></span></summary>
@@ -2081,7 +2083,7 @@ function openW(c,i){
   <div class="box task"><h4>Atividade da semana</h4><div class="lesson"><p>${a.at}</p></div></div>
   ${qs.map((q,qi)=>quizHtml(q,qi,false)).join("")}`;}
  sheet.innerHTML=`<div class="sheet-top"><span class="k nowrap">${c.curto} · Módulo ${x.mi+1} · Semana ${x.i+1} de ${c.L.length}</span><button class="x" id="lClose" aria-label="Fechar aula">×</button></div>
-  <div><h2 id="lTitle">${esc(x.t)}</h2><div class="when num">${dmy(x.ini)} a ${dmy(x.fim)} · ${c.horas} h de estudo</div></div>${body}
+  <div><h2 id="lTitle">${esc(x.t)}</h2><div class="when num">Aula de ${DSEM[c.dia]}, ${dmy(x.aula)} · semana ${x.i+1} · ${c.horas} h de estudo</div></div>${body}
   <label class="donechk"><input type="checkbox" id="lDone" ${st.feito[x.k]?"checked":""}> Semana concluída</label>
   <div class="nav"><button class="btn" id="lPrev" ${i===0?"disabled":""}>← Anterior</button><button class="btn main" id="lNext">${i===c.L.length-1?"Concluir curso":"Concluir e avançar →"}</button></div>`;
  sheet.querySelectorAll(".quiz").forEach((qz,qi)=>qz.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const q=qs[qi],ok=+b.dataset.i===q[2];
