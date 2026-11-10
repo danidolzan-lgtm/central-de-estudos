@@ -228,8 +228,913 @@ table.fin input{accent-color:var(--c);width:16px;height:16px}
 </div>
 <div class="reader" id="reader" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="lTitle"></div></div>
 
-<script src="js/aulas-qual.js"></script><script src="js/aulas-ia.js"></script><script src="js/aulas-aud.js"></script><script src="js/aulas-ing.js"></script>
-<script src="js/curso-qual.js"></script><script src="js/curso-ia.js"></script><script src="js/curso-aud.js"></script><script src="js/curso-ing.js"></script>
+<script>
+window.AULAS=window.AULAS||{};
+Object.assign(window.AULAS,{
+"qual-0-0":{r:`Qualidade é o grau em que um conjunto de características atende aos requisitos, ou seja, entregar o que o cliente espera, do jeito combinado, sempre. A família ISO 9000 organiza esse pensamento: a ISO 9000 traz os fundamentos e o vocabulário, a ISO 9001 traz os requisitos certificáveis e a ISO 9004 orienta o sucesso sustentado.
+
+A base de tudo são os 7 princípios da gestão da qualidade. Eles não são requisitos auditáveis, mas explicam o porquê de cada requisito da ISO 9001. Quem entende os princípios consegue interpretar qualquer cláusula sem decorar.`,
+p:["Foco no cliente: atender e superar expectativas","Liderança: direção clara e ambiente para engajar","Engajamento das pessoas: competência e autonomia em todos os níveis","Abordagem de processo: atividades gerenciadas como processos interligados","Melhoria: foco contínuo em melhorar","Tomada de decisão baseada em evidência: dados antes de opinião","Gestão de relacionamento: fornecedores e parceiros também fazem a qualidade"],
+ex:`Na transportadora, 'decisão baseada em evidência' é olhar o índice de entregas no prazo por unidade antes de decidir onde reforçar a frota, em vez de seguir a reclamação mais barulhenta da semana.`,
+q:{p:"Qual norma da família ISO 9000 contém os requisitos usados na certificação?",o:["ISO 9000","ISO 9001","ISO 9004","ISO 19011"],c:1,e:"A ISO 9001 é a única da família com requisitos certificáveis. A 9000 traz vocabulário e a 9004 é orientativa."}},
+
+"qual-0-1":{r:`A ISO 9001 segue a Estrutura Harmonizada (HS) da ISO, a mesma da 14001 e da 45001. As cláusulas 1 a 3 são introdutórias (escopo, referências, termos). Os requisitos de verdade estão nas cláusulas 4 a 10, que seguem o ciclo PDCA: 4 Contexto, 5 Liderança, 6 Planejamento, 7 Apoio, 8 Operação, 9 Avaliação de desempenho e 10 Melhoria.
+
+A revisão de 2026 mantém essa estrutura. Pelo que foi divulgado nos rascunhos, os pontos de atenção são a cultura da qualidade e o comportamento ético da liderança, a separação mais clara entre riscos e oportunidades, a consideração das mudanças climáticas no contexto (que veio na emenda de 2024) e anexos explicativos mais completos. Confira sempre no texto publicado da norma antes de ajustar documentos.`,
+p:["Cláusulas 4 a 10 contêm os requisitos auditáveis","4 e 5 = Plan (contexto e liderança); 6 = planejamento","7 e 8 = Do (apoio e operação)","9 = Check (monitoramento, auditoria interna, análise crítica)","10 = Act (não conformidade, ação corretiva, melhoria)"],
+ex:`Ao revisar uma IT da MIR para a 2026, pergunte: a liderança demonstra a cultura da qualidade? O processo trata riscos e oportunidades separadamente? Isso vira evidência para o auditor.`,
+q:{p:"Em qual cláusula da ISO 9001 estão a auditoria interna e a análise crítica pela direção?",o:["Cláusula 7","Cláusula 8","Cláusula 9","Cláusula 10"],c:2,e:"A cláusula 9 (Avaliação de desempenho) reúne monitoramento, satisfação do cliente, auditoria interna e análise crítica."}},
+
+"qual-0-2":{r:`Processo é um conjunto de atividades que transforma entradas em saídas, agregando valor. Mapear processos mostra quem faz o quê, em que ordem, com quais entradas e saídas, e onde estão os gargalos.
+
+O BPMN (Business Process Model and Notation) é a notação padrão para desenhar processos. Os elementos básicos são poucos: eventos (círculos de início e fim), atividades (retângulos arredondados), gateways (losangos de decisão), fluxos (setas) e raias (pools e lanes, que mostram o responsável). Comece sempre pelo processo 'como é' (AS-IS) antes de desenhar o 'como deveria ser' (TO-BE).`,
+p:["Entrada → atividades → saída, com dono e indicador","Evento de início e fim sempre presentes","Gateway exclusivo (X) = apenas um caminho segue","Raias deixam claro o responsável de cada etapa","Ferramentas: Bizagi Modeler e draw.io são gratuitas"],
+ex:`Processo de coleta: Início (cliente solicita) → SAC registra no SSW → Gateway 'Tem veículo?' → Sim: programa coleta / Não: negocia nova data → Motorista coleta → Fim (mercadoria na unidade). Cada raia é um setor.`,
+q:{p:"No BPMN, qual elemento representa uma decisão com caminhos alternativos?",o:["Evento","Gateway","Raia","Artefato"],c:1,e:"O gateway (losango) divide ou junta fluxos conforme uma condição."}},
+
+"qual-0-3":{r:`A cláusula 4 pede que a organização entenda seu contexto antes de montar o sistema. Isso significa identificar questões externas (mercado, legislação, concorrência, clima, economia) e internas (cultura, recursos, conhecimento, sistemas) que afetam a capacidade de entregar resultados.
+
+Depois, identifique as partes interessadas pertinentes (clientes, colaboradores, motoristas agregados, fornecedores, órgãos reguladores, comunidade) e quais requisitos de cada uma são relevantes. Ferramentas comuns são a análise SWOT para o contexto e uma matriz de partes interessadas com necessidades, expectativas e forma de monitorar.`,
+p:["Questões internas e externas: use SWOT ou PESTEL","Partes interessadas: só as pertinentes ao SGQ","Registre requisitos e como serão monitorados","Revise na análise crítica pela direção","Escopo do SGQ (4.3) nasce dessa análise"],
+ex:`Questão externa para a MIR: aumento do preço do diesel. Parte interessada: motoristas agregados, que esperam pagamento em dia e programação previsível de cargas.`,
+q:{p:"Qual ferramenta é mais usada para analisar questões internas e externas?",o:["FMEA","SWOT","Pareto","5S"],c:1,e:"A SWOT cruza forças e fraquezas (internas) com oportunidades e ameaças (externas)."}},
+
+"qual-1-0":{r:`As 7 ferramentas da qualidade foram popularizadas por Kaoru Ishikawa e resolvem a maioria dos problemas do dia a dia com dados simples. São elas: folha de verificação, estratificação, diagrama de Pareto, diagrama de causa e efeito (Ishikawa), histograma, diagrama de dispersão e gráfico de controle.
+
+O segredo é a sequência: a folha de verificação coleta os dados, a estratificação separa por categoria, o Pareto mostra os poucos itens que causam a maior parte do problema (regra 80/20) e o Ishikawa investiga as causas do item principal usando os 6M: método, máquina, mão de obra, material, medida e meio ambiente.`,
+p:["Folha de verificação: coleta organizada","Pareto: priorizar os poucos vitais","Ishikawa (6M): levantar causas possíveis","Histograma: ver a distribuição dos dados","Dispersão: relação entre duas variáveis"],
+ex:`Pareto das avarias do mês: 62% vêm de amarração mal feita. O Ishikawa desse item aponta Método (sem padrão de amarração) e Mão de obra (conferentes novos sem treino).`,
+q:{p:"Qual ferramenta aplica a regra 80/20 para priorizar problemas?",o:["Histograma","Pareto","Dispersão","Folha de verificação"],c:1,e:"O Pareto ordena as categorias por frequência e mostra quais concentram a maior parte das ocorrências."}},
+
+"qual-1-1":{r:`O PDCA é o ciclo da melhoria: Plan (planejar), Do (executar), Check (verificar) e Act (agir, padronizar ou corrigir). O MASP (Método de Análise e Solução de Problemas) é o PDCA detalhado em 8 etapas: identificar o problema, observar, analisar causas, plano de ação, ação, verificação, padronização e conclusão.
+
+O 5W2H transforma a análise em plano de ação concreto: What (o quê), Why (por quê), Where (onde), When (quando), Who (quem), How (como) e How much (quanto custa). Uma ação sem responsável e prazo não é ação, é intenção.`,
+p:["PDCA gira continuamente, cada volta sobe o padrão","MASP: 8 etapas, ótimo para ação corretiva","Use os 5 porquês para chegar à causa raiz","5W2H: toda ação com dono, prazo e custo","Padronize (IT, treinamento) para não voltar o problema"],
+ex:`What: criar padrão de amarração. Why: 62% das avarias. Where: expedição RSL. When: até 30/12. Who: líder da expedição. How: IT com fotos e treino de 1h. How much: R$ 0 (interno).`,
+q:{p:"Em qual etapa do PDCA se compara o resultado com a meta?",o:["Plan","Do","Check","Act"],c:2,e:"No Check se verifica se o executado atingiu o planejado. No Act se padroniza ou corrige."}},
+
+"qual-1-2":{r:`Risco é o efeito da incerteza sobre os objetivos. A ISO 31000 dá as diretrizes: identificar, analisar, avaliar e tratar riscos, sempre com comunicação e monitoramento. Na prática, se monta uma matriz de probabilidade x impacto e se prioriza o que fica no vermelho.
+
+O FMEA (Análise de Modos e Efeitos de Falha) é uma ferramenta preventiva. Para cada etapa do processo, liste como pode falhar, o efeito, a causa e os controles atuais. Dê notas de 1 a 10 para Severidade (S), Ocorrência (O) e Detecção (D). O RPN = S x O x D prioriza onde agir primeiro.`,
+p:["Risco = probabilidade x impacto","Tratamentos: evitar, reduzir, transferir, aceitar","FMEA é preventivo, age antes da falha","RPN = Severidade x Ocorrência x Detecção","Reavalie o RPN depois das ações"],
+ex:`Etapa: emissão do CT-e. Falha: peso digitado errado. Efeito: frete cobrado a menor. S=7, O=5, D=6 → RPN 210. Ação: validação automática contra a nota fiscal. Novo D=2 → RPN 70.`,
+q:{p:"Como se calcula o RPN no FMEA?",o:["S + O + D","S x O x D","(S x O) / D","S x O"],c:1,e:"RPN (Risk Priority Number) é o produto de Severidade, Ocorrência e Detecção."}},
+
+"qual-1-3":{r:`O Lean nasceu no Sistema Toyota e busca eliminar desperdícios, tudo que o cliente não pagaria. Os 8 desperdícios são: superprodução, espera, transporte desnecessário, excesso de processamento, estoque, movimentação, defeitos e talento não aproveitado.
+
+O Six Sigma reduz a variação dos processos usando estatística e o roteiro DMAIC: Define (definir), Measure (medir), Analyze (analisar), Improve (melhorar) e Control (controlar). O Green Belt conduz projetos na sua área com as ferramentas básicas. Juntos, Lean Six Sigma ataca desperdício e variação ao mesmo tempo.`,
+p:["Valor é definido pelo cliente","8 desperdícios (sigla TIMWOODS em inglês)","DMAIC é o roteiro dos projetos Six Sigma","Seis sigma = 3,4 defeitos por milhão","Ferramentas: VSM, 5S, kanban, SMED"],
+ex:`Desperdício de espera: caminhão parado 2h na doca aguardando conferência. Um projeto DMAIC mede o tempo de doca por turno e testa agendamento de chegadas.`,
+q:{p:"Qual é a sequência correta do DMAIC?",o:["Definir, Medir, Analisar, Melhorar, Controlar","Desenhar, Medir, Agir, Implantar, Checar","Definir, Mapear, Ajustar, Implantar, Controlar","Diagnosticar, Medir, Analisar, Inovar, Concluir"],c:0,e:"DMAIC = Define, Measure, Analyze, Improve, Control."}},
+
+"qual-1-4":{r:`Estatística é a linguagem da qualidade. Medidas de tendência central (média, mediana, moda) dizem onde os dados se concentram. Medidas de dispersão (amplitude, desvio padrão) dizem o quanto eles variam. Um processo com boa média mas grande variação ainda gera clientes insatisfeitos.
+
+O CEP (Controle Estatístico de Processo) usa gráficos de controle com linha média e limites superior e inferior (normalmente média ± 3 desvios). Pontos dentro dos limites e sem padrão indicam causas comuns (variação natural). Pontos fora ou sequências estranhas indicam causas especiais, que devem ser investigadas.`,
+p:["Média é sensível a extremos; mediana não","Desvio padrão mede a variação","Limites de controle = média ± 3σ","Causa especial: investigar e eliminar","7 pontos seguidos do mesmo lado da média = sinal"],
+ex:`Tempo médio de descarga: 42 min, σ = 6 min. Limites: 24 a 60 min. Uma descarga de 75 min é causa especial (ex.: empilhadeira quebrada) e precisa de registro.`,
+q:{p:"No CEP, um ponto fora dos limites de controle indica:",o:["Causa comum","Causa especial","Processo capaz","Erro do gráfico"],c:1,e:"Pontos fora dos limites sinalizam causa especial, algo diferente do comportamento normal do processo."}},
+
+"qual-2-0":{r:`Indicador (KPI) é a forma de medir se um objetivo está sendo alcançado. Um bom indicador tem nome, fórmula, meta, frequência, fonte do dado e responsável. A ISO 9001 pede objetivos da qualidade mensuráveis e monitorados (6.2 e 9.1).
+
+O Balanced Scorecard (BSC), de Kaplan e Norton, equilibra os indicadores em 4 perspectivas: financeira, clientes, processos internos e aprendizado e crescimento. O mapa estratégico liga essas perspectivas em relação de causa e efeito: pessoas capacitadas melhoram processos, que satisfazem clientes, que geram resultado financeiro.`,
+p:["Indicador sem meta não orienta decisão","Use metas SMART","Misture indicadores de resultado e de tendência","BSC: financeiro, cliente, processos, aprendizado","Poucos indicadores bem acompanhados valem mais"],
+ex:`Cliente: % entregas no prazo (meta 95%). Processos: % CT-e emitidos sem erro (meta 99%). Aprendizado: horas de treinamento por colaborador. Financeiro: margem por rota.`,
+q:{p:"Quais são as 4 perspectivas do Balanced Scorecard?",o:["Financeira, clientes, processos internos, aprendizado e crescimento","Qualidade, custo, prazo, segurança","Pessoas, máquinas, métodos, materiais","Estratégica, tática, operacional, individual"],c:0,e:"O BSC equilibra financeiro, clientes, processos internos e aprendizado e crescimento."}},
+
+"qual-2-1":{r:`Custos da qualidade mostram em reais quanto a falta de qualidade custa. O modelo PAF divide em quatro grupos. Prevenção: treinamento, planejamento, manutenção preventiva. Avaliação: inspeção, conferência, auditorias. Falhas internas: retrabalho, refugo, correções antes de chegar ao cliente. Falhas externas: indenizações, devoluções, reentregas, perda de cliente.
+
+A lógica é que investir em prevenção reduz as falhas, que são as mais caras. Falha externa ainda carrega custos ocultos, como dano à imagem, difíceis de medir mas reais.`,
+p:["Prevenção e avaliação = custo de conformidade","Falhas internas e externas = custo da não conformidade","Falha externa é a mais cara","Mostre os números para a direção em reais","Meta: deslocar gasto de falhas para prevenção"],
+ex:`Indenizações de avaria em um ano: R$ 85 mil (falha externa). Treinar conferentes e padronizar amarração custa R$ 6 mil (prevenção). O argumento financeiro convence a direção.`,
+q:{p:"Uma reentrega por erro de endereço é qual tipo de custo da qualidade?",o:["Prevenção","Avaliação","Falha interna","Falha externa"],c:3,e:"O erro chegou ao cliente, então é falha externa."}},
+
+"qual-2-2":{r:`Serviço é intangível, produzido e consumido ao mesmo tempo, e depende muito das pessoas. O modelo SERVQUAL mede a qualidade percebida em 5 dimensões: confiabilidade, presteza (responsividade), segurança, empatia e tangíveis. A satisfação é a diferença entre o que o cliente esperava e o que percebeu.
+
+Na logística, a qualidade aparece em indicadores como OTIF (On Time In Full: no prazo e completo), índice de avarias, tempo de resposta do SAC, acuracidade de documentos e rastreabilidade. Para uma transportadora, cumprir o prazo prometido costuma ser a dimensão mais importante.`,
+p:["5 dimensões: confiabilidade, presteza, segurança, empatia, tangíveis","OTIF une prazo e integridade","Rastreio em tempo real reduz ansiedade do cliente","SAC é ponto crítico de percepção","Pesquisa de satisfação atende 9.1.2 da ISO 9001"],
+ex:`OTIF da filial no mês: 1.000 entregas, 940 no prazo, 925 no prazo e sem avaria → OTIF = 92,5%.`,
+q:{p:"O que mede o indicador OTIF?",o:["Custo por entrega","Entregas no prazo e completas","Ocupação do veículo","Tempo de carregamento"],c:1,e:"On Time In Full: entregue no prazo e completo, sem falta ou avaria."}},
+
+"qual-2-3":{r:`A auditoria interna (ISO 9001, 9.2) verifica se o SGQ atende aos requisitos da norma e aos da própria organização, e se está implementado de forma eficaz. A ISO 19011 dá as diretrizes para auditar qualquer sistema de gestão.
+
+Etapas principais: programa anual de auditorias baseado em riscos, plano de cada auditoria, reunião de abertura, coleta de evidências (entrevistas, registros, observação), constatações, reunião de encerramento e relatório. O auditor deve ser imparcial e não auditar o próprio trabalho. Esse tema é aprofundado no curso de auditor.`,
+p:["Auditoria = processo sistemático, independente e documentado","Evidência objetiva sustenta toda constatação","Auditor não audita o próprio trabalho","Programa considera riscos e resultados anteriores","Constatações: conformidade, NC, oportunidade de melhoria"],
+ex:`Na auditoria da expedição, o auditor pede os checklists da semana, conversa com o conferente e observa uma carga. Achou 3 checklists sem assinatura: evidência objetiva de NC.`,
+q:{p:"Qual norma fornece diretrizes para auditorias de sistemas de gestão?",o:["ISO 9004","ISO 19011","ISO 31000","ISO 17025"],c:1,e:"A ISO 19011 orienta auditorias de qualquer sistema de gestão."}},
+
+"qual-3-0":{r:`O TCC de uma especialização normalmente é um artigo científico ou um estudo de caso. A melhor escolha é um problema real do seu trabalho: você tem acesso aos dados, aplica o conteúdo e gera resultado para a empresa.
+
+Estrutura sugerida: introdução (problema, objetivo, justificativa), referencial teórico (as ferramentas usadas), metodologia (como coletou e analisou), resultados e discussão (dados antes e depois), conclusão e referências no padrão ABNT. Delimite bem: um processo, um indicador, um período.`,
+p:["Escolha um problema real e mensurável","Objetivo começa com verbo: analisar, propor, reduzir","Metodologia: estudo de caso com MASP ou DMAIC","Mostre antes e depois em números","Peça autorização da empresa para usar dados"],
+ex:`Tema sugerido: 'Aplicação do MASP para redução de avarias na expedição de uma transportadora de carga fracionada'. Indicador: avarias por mil volumes.`,
+q:{p:"Qual é a principal vantagem de usar um problema do seu trabalho no TCC?",o:["É mais curto","Acesso a dados reais e resultado aplicável","Dispensa referencial teórico","Não precisa de orientador"],c:1,e:"Dados reais tornam o estudo consistente e o resultado vira ganho para a empresa."}},
+
+"qual-3-1":{r:`Para concluir a especialização normalmente é preciso ter aprovação em todas as disciplinas, cumprir a carga horária mínima (360 horas para lato sensu) e, quando exigido, entregar e apresentar o TCC. Confira no regulamento da instituição os prazos de entrega e a nota mínima.
+
+Depois, solicite o certificado e guarde o histórico. Atualize o currículo, o LinkedIn e, na empresa, a planilha de competências (RG 22), pois a formação comprova competência para funções do SGQ conforme a cláusula 7.2 da ISO 9001.`,
+p:["Lato sensu: mínimo de 360 horas","Confira o reconhecimento da instituição no MEC","Peça certificado e histórico","Atualize currículo e LinkedIn","Registre na matriz de competências da empresa"],
+ex:`Ao receber o certificado, envie cópia ao RH e atualize sua linha no controle de competências como evidência de formação.`,
+q:{p:"Qual a carga horária mínima de uma pós lato sensu no Brasil?",o:["180 horas","240 horas","360 horas","420 horas"],c:2,e:"A especialização lato sensu exige no mínimo 360 horas."}}
+});
+
+</script>
+<script>
+window.AULAS=window.AULAS||{};
+Object.assign(window.AULAS,{
+"ia-0-0":{r:`Inteligência Artificial é o campo que cria sistemas capazes de realizar tarefas que exigiriam inteligência humana: reconhecer padrões, prever, decidir, entender linguagem. Machine Learning (ML) é a parte da IA em que o sistema aprende com dados em vez de seguir regras escritas à mão. Deep Learning é o ML com redes neurais de muitas camadas.
+
+Marcos históricos: o teste de Turing (1950), o termo IA em Dartmouth (1956), os 'invernos da IA' por falta de dados e computação, a virada do deep learning em 2012 (ImageNet), a arquitetura Transformer em 2017 e a explosão dos modelos de linguagem (LLMs) a partir de 2022.`,
+p:["IA ⊃ Machine Learning ⊃ Deep Learning","ML aprende padrões a partir de exemplos","Dados de qualidade valem mais que algoritmo sofisticado","Transformer (2017) é a base dos LLMs atuais","IA estreita resolve tarefas específicas; IA geral ainda é debate"],
+ex:`Regra fixa: 'se peso > 500 kg, cobrar tabela X'. ML: o modelo olha milhares de CT-es passados e aprende a prever o prazo real de entrega por rota, dia da semana e tipo de carga.`,
+q:{p:"Qual afirmação descreve melhor o Machine Learning?",o:["Regras escritas manualmente por especialistas","Sistemas que aprendem padrões a partir de dados","Robôs físicos","Apenas redes neurais"],c:1,e:"ML aprende com exemplos. Deep Learning é só um tipo de ML."}},
+
+"ia-0-1":{r:`Python é a linguagem padrão da IA pela simplicidade e pelas bibliotecas. O numpy faz cálculo com vetores e matrizes. O pandas trabalha com tabelas (DataFrames), parecido com uma planilha programável: ler CSV e Excel, filtrar, agrupar, juntar tabelas e calcular.
+
+Comandos essenciais: <code>pd.read_csv()</code> e <code>pd.read_excel()</code> para ler, <code>df.head()</code> para ver o início, <code>df[df['col']&gt;x]</code> para filtrar, <code>df.groupby('col').agg()</code> para agrupar, <code>df.merge()</code> para juntar e <code>df.to_excel()</code> para salvar. Use o Google Colab ou o Jupyter para praticar sem instalar nada.`,
+p:["DataFrame = tabela com linhas e colunas","groupby equivale à tabela dinâmica","merge equivale ao PROCV","Trate valores vazios com fillna ou dropna","Colab é gratuito e roda no navegador"],
+ex:`<pre>import pandas as pd
+df = pd.read_excel('ctes.xlsx')
+atraso = df[df['dias_atraso'] &gt; 0]
+print(atraso.groupby('unidade')['cte'].count())</pre>Conta CT-es atrasados por unidade em 4 linhas.`,
+q:{p:"Qual comando do pandas equivale a uma tabela dinâmica do Excel?",o:["merge","groupby","head","read_csv"],c:1,e:"groupby agrupa por uma coluna e permite somar, contar e calcular médias."}},
+
+"ia-0-2":{r:`Todo modelo de ML é estatística aplicada. Você precisa dominar: média, mediana e desvio padrão; distribuições (a normal é a mais comum); correlação (como duas variáveis andam juntas, de -1 a +1); e probabilidade condicional, base do teorema de Bayes.
+
+Cuidado com dois erros clássicos. Correlação não é causalidade: duas variáveis podem subir juntas por causa de uma terceira. E amostras pequenas ou enviesadas geram conclusões falsas. Antes de treinar qualquer modelo, faça a análise exploratória: histogramas, boxplots e gráficos de dispersão.`,
+p:["Correlação vai de -1 a +1","Correlação ≠ causalidade","Distribuição normal: 68% dos dados em ±1σ","Probabilidade condicional: P(A|B)","Análise exploratória antes de modelar"],
+ex:`Correlação de 0,8 entre distância e prazo de entrega é esperada. Correlação entre vendas de sorvete e atrasos pode ser só o verão (mais volume), não causa direta.`,
+q:{p:"Uma correlação de -0,9 indica:",o:["Nenhuma relação","Relação forte e inversa","Relação fraca","Causalidade comprovada"],c:1,e:"Valor próximo de -1 indica relação forte em que uma variável sobe quando a outra desce."}},
+
+"ia-0-3":{r:`SQL é a linguagem para consultar bancos de dados, de onde vêm quase todos os dados de um projeto de IA. A estrutura básica é: <code>SELECT</code> colunas <code>FROM</code> tabela <code>WHERE</code> condição <code>GROUP BY</code> agrupamento <code>ORDER BY</code> ordenação. O <code>JOIN</code> junta tabelas por uma chave em comum.
+
+Preparar dados toma de 60% a 80% do tempo de um projeto. As tarefas típicas são remover duplicados, tratar valores faltantes, padronizar formatos (datas, siglas de unidades), criar variáveis novas (dia da semana, distância) e separar dados de treino e de teste.`,
+p:["SELECT … FROM … WHERE … GROUP BY … ORDER BY","INNER JOIN traz só o que existe nas duas tabelas","LEFT JOIN mantém tudo da tabela da esquerda","Padronize siglas e datas antes de analisar","Engenharia de variáveis melhora muito o modelo"],
+ex:`<pre>SELECT unidade, COUNT(*) AS atrasados
+FROM ctes
+WHERE data_entrega &gt; data_prevista
+GROUP BY unidade
+ORDER BY atrasados DESC;</pre>`,
+q:{p:"Qual cláusula SQL filtra linhas antes do agrupamento?",o:["ORDER BY","WHERE","GROUP BY","SELECT"],c:1,e:"WHERE filtra as linhas. Para filtrar depois de agrupar usa-se HAVING."}},
+
+"ia-1-0":{r:`No aprendizado supervisionado o modelo aprende com exemplos que já têm a resposta (rótulo). Existem dois tipos de problema. Regressão prevê um número (prazo em dias, valor do frete). Classificação prevê uma categoria (vai atrasar ou não, tipo de ocorrência).
+
+Algoritmos clássicos: regressão linear, regressão logística, árvore de decisão, random forest e gradient boosting (XGBoost, LightGBM). Para dados em tabela, florestas e boosting costumam ganhar. O fluxo no scikit-learn é sempre o mesmo: separar treino e teste, <code>modelo.fit(X_treino, y_treino)</code>, <code>modelo.predict(X_teste)</code> e avaliar.`,
+p:["Supervisionado = dados com resposta conhecida","Regressão prevê número; classificação prevê classe","Árvores são fáceis de explicar","Random forest e boosting são fortes em tabelas","Separe sempre treino (70-80%) e teste (20-30%)"],
+ex:`Classificação: prever se um CT-e vai atrasar usando rota, peso, dia da semana e unidade de origem. O SAC avisa o cliente antes do atraso acontecer.`,
+q:{p:"Prever o valor do frete em reais é um problema de:",o:["Classificação","Regressão","Clusterização","Redução de dimensão"],c:1,e:"A saída é um número contínuo, então é regressão."}},
+
+"ia-1-1":{r:`No aprendizado não supervisionado os dados não têm resposta. O modelo procura estrutura sozinho. A tarefa mais comum é a clusterização: agrupar itens parecidos. O K-means é o algoritmo mais usado; você escolhe o número de grupos (k) e ele separa os dados. O método do cotovelo ajuda a escolher o k.
+
+Outras tarefas: redução de dimensão (PCA), que resume muitas variáveis em poucas, e detecção de anomalias, que encontra registros fora do padrão, como fraudes ou erros de digitação.`,
+p:["Sem rótulo, o modelo descobre padrões","K-means agrupa por proximidade","Normalize as variáveis antes do K-means","PCA reduz variáveis mantendo informação","Anomalias: Isolation Forest é uma boa opção"],
+ex:`Clusterizar clientes por volume, frequência e ticket médio gera grupos como 'grandes recorrentes', 'pequenos frequentes' e 'esporádicos', e cada grupo recebe uma política comercial.`,
+q:{p:"Qual algoritmo é o mais conhecido para clusterização?",o:["Regressão linear","K-means","Árvore de decisão","Regressão logística"],c:1,e:"K-means agrupa dados em k grupos sem precisar de rótulos."}},
+
+"ia-1-2":{r:`Um modelo bom no treino e ruim em dados novos sofre de overfitting: decorou em vez de aprender. O oposto é underfitting: simples demais para capturar o padrão. Validação cruzada (k-fold) testa o modelo em várias divisões dos dados e dá uma nota mais confiável.
+
+Métricas de regressão: MAE (erro médio absoluto) e RMSE. Métricas de classificação: acurácia, precisão (dos que previ como atraso, quantos atrasaram), recall (dos atrasos reais, quantos eu peguei) e F1. Com classes desbalanceadas a acurácia engana: se 95% chega no prazo, um modelo que sempre diz 'no prazo' acerta 95% e é inútil.`,
+p:["Overfitting: ótimo no treino, ruim no teste","Validação cruzada dá avaliação mais robusta","Precisão: qualidade dos alertas","Recall: quantos casos reais foram detectados","Matriz de confusão mostra acertos e erros por classe"],
+ex:`Modelo de atraso: recall de 40% significa que ele só avisa 4 de cada 10 atrasos reais. Para o SAC, aumentar o recall é mais útil, mesmo com alguns alarmes falsos.`,
+q:{p:"Um modelo com 99% no treino e 60% no teste provavelmente tem:",o:["Underfitting","Overfitting","Dados perfeitos","Recall alto"],c:1,e:"A queda grande entre treino e teste indica que o modelo decorou o treino."}},
+
+"ia-1-3":{r:`Redes neurais são camadas de 'neurônios' que multiplicam entradas por pesos, somam e passam por uma função de ativação (ReLU é a mais comum). O treino ajusta os pesos para reduzir o erro, usando backpropagation e gradiente descendente, em várias passagens pelos dados (épocas).
+
+Tipos principais: redes densas (dados em tabela), CNNs (imagens), RNNs e LSTMs (sequências, hoje menos usadas) e Transformers (texto, e cada vez mais imagens e áudio). As bibliotecas mais usadas são PyTorch e TensorFlow/Keras. Para dados em tabela, uma rede neural nem sempre vence o gradient boosting.`,
+p:["Neurônio: soma ponderada + ativação","Backpropagation ajusta os pesos","Época = uma passada completa pelos dados","CNN para imagem; Transformer para texto","Precisa de muitos dados e de GPU"],
+ex:`Uma CNN treinada com fotos de cargas pode classificar se a amarração está correta, apoiando o checklist da expedição.`,
+q:{p:"Qual arquitetura é a base dos grandes modelos de linguagem atuais?",o:["CNN","Transformer","K-means","Árvore de decisão"],c:1,e:"Os LLMs são construídos sobre a arquitetura Transformer."}},
+
+"ia-2-0":{r:`LLMs (Large Language Models) são Transformers treinados com enormes volumes de texto para prever a próxima palavra (token). Daí surgem a capacidade de resumir, traduzir, escrever e raciocinar. Eles têm uma janela de contexto (quanto texto cabem por vez) e podem 'alucinar', inventando fatos com confiança.
+
+Engenharia de prompt é escrever instruções claras: papel, contexto, tarefa, formato de saída e exemplos. O RAG (Retrieval-Augmented Generation) reduz alucinação: antes de responder, o sistema busca trechos relevantes em seus documentos (ITs, PGs, contratos) e entrega ao modelo como contexto.`,
+p:["LLM prevê o próximo token","Prompt bom: contexto, tarefa, formato, exemplos","Alucinação: sempre confira fatos críticos","RAG = busca nos seus documentos + geração","Embeddings transformam texto em vetores para busca"],
+ex:`Um assistente RAG com todas as ITs e PGs da MIR responde 'qual o procedimento para avaria na descarga?' citando o documento e a revisão.`,
+q:{p:"Qual é o principal objetivo do RAG?",o:["Treinar um modelo do zero","Fundamentar respostas em documentos recuperados","Gerar imagens","Reduzir o custo da GPU"],c:1,e:"O RAG busca informação relevante e a usa como base da resposta, reduzindo alucinações."}},
+
+"ia-2-1":{r:`Um agente de IA é um LLM que pode usar ferramentas: consultar APIs, ler arquivos, buscar na web, executar código. Ele recebe um objetivo, decide os passos, chama as ferramentas, observa os resultados e continua até concluir. Protocolos como o MCP padronizam a conexão de agentes a sistemas.
+
+APIs (geralmente REST com JSON) são a porta de entrada dos sistemas. Você envia uma requisição (GET para ler, POST para criar), com autenticação (token), e recebe uma resposta estruturada. Automação com IA combina regras fixas para o que é previsível e o LLM para o que exige interpretação, como ler um e-mail de cliente e abrir uma ocorrência.`,
+p:["Agente = LLM + ferramentas + loop de decisão","API REST: GET, POST, PUT, DELETE","Guarde tokens em local seguro, nunca no código","Use regras fixas onde der; IA onde precisar interpretar","Registre logs de tudo que o agente faz"],
+ex:`Agente de coletas: lê os e-mails de pedido, extrai remetente, peso e volumes, consulta a disponibilidade na API e prepara o lançamento para conferência humana.`,
+q:{p:"O que diferencia um agente de um chatbot simples?",o:["Usa cores diferentes","Executa ações com ferramentas em várias etapas","Responde mais rápido","Não usa LLM"],c:1,e:"O agente planeja e executa ações usando ferramentas até cumprir o objetivo."}},
+
+"ia-2-2":{r:`Visão computacional permite que o sistema 'enxergue'. As tarefas principais são: classificação (o que tem na imagem), detecção de objetos (onde está cada objeto, como o YOLO faz), segmentação (contorno exato) e OCR (ler texto em imagens).
+
+Hoje muitos LLMs são multimodais e entendem imagens diretamente, o que facilita ler notas fiscais, canhotos e etiquetas sem treinar um modelo próprio. Em câmeras, a detecção pode contar veículos na doca, identificar uso de EPI ou ler placas. Atenção à LGPD quando houver pessoas nas imagens.`,
+p:["Classificação, detecção, segmentação e OCR","YOLO: detecção rápida em vídeo","LLMs multimodais leem documentos","Qualidade e ângulo da imagem importam","Imagens de pessoas: cuidado com LGPD"],
+ex:`OCR em fotos de canhotos assinados confirma automaticamente a baixa da entrega e marca para revisão os que estiverem ilegíveis.`,
+q:{p:"Qual tarefa de visão computacional extrai texto de uma imagem?",o:["Segmentação","OCR","Detecção","Clusterização"],c:1,e:"OCR (reconhecimento óptico de caracteres) converte texto em imagem para texto digital."}},
+
+"ia-2-3":{r:`A logística é um dos campos onde a IA dá retorno mais rápido. Previsão de demanda (séries temporais com Prophet, ARIMA ou boosting) ajuda a dimensionar frota e equipe. Roteirização resolve o problema do caixeiro viajante com restrições (janelas de entrega, capacidade), com ferramentas como OR-Tools.
+
+Outras aplicações: previsão de atraso, precificação de frete, detecção de anomalias em custos de combustível, manutenção preditiva de frota e torres de controle que juntam tudo num painel com alertas.`,
+p:["Previsão de demanda dimensiona recursos","Roteirização com restrições: OR-Tools","Previsão de atraso: classificação supervisionada","Manutenção preditiva usa dados de telemetria","Torre de controle integra dados e alertas"],
+ex:`Prever volume de coletas por unidade para a próxima semana com 3 anos de histórico do SSW permite escalar ajudantes antes do pico.`,
+q:{p:"Qual técnica é usada para prever volume futuro com base no histórico?",o:["Séries temporais","OCR","Clusterização","Segmentação"],c:0,e:"Modelos de séries temporais preveem valores futuros a partir da sequência histórica."}},
+
+"ia-3-0":{r:`IA responsável considera viés (o modelo reproduz discriminações dos dados), transparência (explicar decisões), privacidade, segurança e supervisão humana. A LGPD exige base legal para tratar dados pessoais, finalidade definida, minimização e direitos do titular, inclusive revisão de decisões automatizadas.
+
+A ISO/IEC 42001 é a norma de sistema de gestão de IA, com a mesma Estrutura Harmonizada da ISO 9001. Ela pede política de IA, avaliação de riscos e impactos, controles sobre o ciclo de vida dos sistemas e melhoria contínua. Quem já conhece ISO 9001 aprende a 42001 rápido.`,
+p:["Viés nos dados vira viés no modelo","LGPD: base legal, finalidade, minimização","Decisão automatizada pode ser revisada pelo titular","ISO/IEC 42001: sistema de gestão de IA","Mantenha humano no circuito em decisões críticas"],
+ex:`Um modelo de avaliação de motoristas deve ter critérios explicáveis, dados mínimos necessários e revisão humana antes de qualquer decisão sobre a pessoa.`,
+q:{p:"Qual norma trata de sistema de gestão de inteligência artificial?",o:["ISO 27001","ISO/IEC 42001","ISO 9004","ISO 14001"],c:1,e:"A ISO/IEC 42001 define requisitos para um sistema de gestão de IA."}},
+
+"ia-3-1":{r:`O projeto final deve resolver um problema real de ponta a ponta: definir o problema e a métrica de sucesso, coletar e preparar os dados, construir o modelo ou o agente, avaliar, colocar para uso (painel, API ou automação) e medir o resultado.
+
+Documente como um case: contexto, dados, abordagem, resultados em números e próximos passos. Publicar o código no GitHub e um resumo no LinkedIn transforma o trabalho em portfólio.`,
+p:["Comece pela métrica de sucesso","Versão simples funcionando antes da sofisticada","Coloque em uso real, mesmo que pequeno","Meça o resultado antes e depois","Documente e publique como portfólio"],
+ex:`Projeto: módulo de previsão de atraso na torre de controle. Métrica: recall acima de 70% e alerta ao SAC com 24h de antecedência.`,
+q:{p:"Qual deve ser o primeiro passo de um projeto de IA?",o:["Escolher a rede neural","Definir o problema e a métrica de sucesso","Comprar GPU","Publicar no GitHub"],c:1,e:"Sem problema e métrica claros não há como saber se o projeto deu certo."}}
+});
+
+</script>
+<script>
+window.AULAS=window.AULAS||{};
+Object.assign(window.AULAS,{
+"aud-0-0":{r:`Para auditar a ISO 9001 você precisa saber o que cada cláusula pede e que evidência a comprova. 4 Contexto: questões internas e externas, partes interessadas, escopo, processos. 5 Liderança: comprometimento da direção, política da qualidade, papéis e responsabilidades. 6 Planejamento: riscos e oportunidades, objetivos da qualidade, planejamento de mudanças.
+
+7 Apoio: recursos, competência, conscientização, comunicação, informação documentada. 8 Operação: requisitos do cliente, projeto, controle de fornecedores, prestação do serviço, liberação, saídas não conformes. 9 Avaliação: monitoramento, satisfação, auditoria interna, análise crítica. 10 Melhoria: não conformidade, ação corretiva, melhoria contínua.`,
+p:["Para cada cláusula, pergunte: qual evidência mostra isso?","5.2 Política: comunicada e entendida?","7.2 Competência: registro de formação e eficácia","8.4 Fornecedores: critérios de avaliação","10.2 Ação corretiva: causa raiz e eficácia verificada"],
+ex:`Evidência de 7.2: matriz de competências preenchida, certificados de treinamento e avaliação de eficácia. Na MIR, a planilha RG 22 é exatamente esse registro.`,
+q:{p:"O controle de prestadores de serviço externos (ex.: agregados) está em qual cláusula?",o:["7.1","8.4","9.1","10.2"],c:1,e:"A 8.4 trata do controle de processos, produtos e serviços providos externamente."}},
+
+"aud-0-1":{r:`A ISO 9001:2026 mantém a Estrutura Harmonizada e os requisitos centrais da versão 2015. Pelo que foi divulgado durante a revisão, os pontos de atenção para o auditor são: a liderança promovendo cultura da qualidade e comportamento ético; riscos e oportunidades tratados de forma mais clara e separada; a questão das mudanças climáticas no contexto (já incluída na emenda de 2024); e anexos com orientação mais completa.
+
+Organizações certificadas têm um período de transição para migrar, geralmente de três anos. Na auditoria de transição o auditor foca nas mudanças. Antes de auditar, leia o texto oficial publicado e a tabela de correspondência entre as versões.`,
+p:["Estrutura de cláusulas 4 a 10 mantida","Cultura da qualidade e ética da liderança","Riscos e oportunidades mais bem separados","Mudanças climáticas no contexto","Confirme tudo no texto oficial publicado"],
+ex:`Pergunta de auditoria: 'como a direção demonstra e promove a cultura da qualidade?' Evidências possíveis: reuniões de análise crítica, reconhecimento de boas práticas, comunicação interna.`,
+q:{p:"Desde a emenda de 2024 o contexto da organização deve considerar:",o:["Taxa de câmbio","Mudanças climáticas","Concorrência internacional","Salário mínimo"],c:1,e:"A emenda de 2024 incluiu a determinação se mudança climática é uma questão relevante."}},
+
+"aud-0-2":{r:`A ISO 9001 pede mentalidade de risco, não um método formal específico. A organização deve determinar riscos e oportunidades que podem afetar os resultados do SGQ, planejar ações proporcionais ao impacto e avaliar a eficácia dessas ações.
+
+O auditor não exige FMEA nem matriz complexa. Ele verifica se os riscos foram identificados de forma coerente com o contexto (cláusula 4), se as ações foram planejadas e integradas aos processos, e se há evidência de acompanhamento. Oportunidades também devem aparecer: novos clientes, tecnologia, parcerias.`,
+p:["Não há método obrigatório","Ações proporcionais ao impacto","Riscos devem conversar com o contexto","Oportunidades também são exigidas","Verificar eficácia das ações"],
+ex:`Risco: falta de motoristas na alta temporada. Ação: cadastro de agregados reserva. Evidência: lista atualizada e registro de uso no último pico.`,
+q:{p:"A ISO 9001 exige qual método para gestão de riscos?",o:["FMEA","ISO 31000","Nenhum método específico","Matriz 5x5"],c:2,e:"A norma exige considerar riscos e oportunidades, mas deixa o método a critério da organização."}},
+
+"aud-1-0":{r:`Na ISO 14001, aspecto ambiental é o elemento das atividades que interage com o meio ambiente (ex.: consumo de diesel, geração de óleo usado). Impacto é a mudança que isso causa (poluição do ar, contaminação do solo). A organização deve identificar aspectos e impactos considerando a perspectiva de ciclo de vida, e definir quais são significativos.
+
+A avaliação de significância costuma usar critérios como severidade, frequência, abrangência e requisitos legais. Aspectos significativos viram objetivos, controles operacionais e treinamento. A revisão da ISO 14001 de 2026 mantém essa lógica central.`,
+p:["Aspecto = causa; impacto = efeito","Considere condições normais, anormais e de emergência","Perspectiva de ciclo de vida","Significativos exigem controle e comunicação","Registre o método de avaliação"],
+ex:`Aspecto: troca de óleo na oficina. Impacto: contaminação do solo. Controle: área impermeável, caixa separadora, destinação com MTR para empresa licenciada.`,
+q:{p:"Em uma transportadora, 'emissão de gases pelo escapamento' é:",o:["Impacto","Aspecto","Requisito legal","Objetivo"],c:1,e:"A emissão é o aspecto. A poluição do ar resultante é o impacto."}},
+
+"aud-1-1":{r:`Os requisitos legais e outros requisitos (chamados de obrigações de conformidade) são centrais na ISO 14001. A organização deve identificar as leis aplicáveis aos seus aspectos, ter acesso a elas, avaliar periodicamente o atendimento e manter evidência dessa avaliação.
+
+Para transportadoras são comuns: licença ambiental das unidades, PGRS (plano de gerenciamento de resíduos), MTR para destinação de resíduos, controle de fumaça preta (PROCONVE e opacidade), transporte de produtos perigosos (ANTT) e outorga de água quando houver lavagem de veículos.`,
+p:["Liste as leis por aspecto","Avalie a conformidade periodicamente","Guarde evidências (licenças, laudos, MTR)","Monitore vencimento de licenças","Inclua compromissos voluntários (outros requisitos)"],
+ex:`Auditor pede: licença de operação vigente, último laudo de opacidade da frota e MTRs dos resíduos do semestre. Licença vencida = NC maior.`,
+q:{p:"Qual documento comprova a destinação correta de resíduos no Brasil?",o:["CT-e","MTR","ART","CNH"],c:1,e:"O MTR (Manifesto de Transporte de Resíduos) registra a destinação do resíduo."}},
+
+"aud-1-2":{r:`A organização deve identificar situações potenciais de emergência ambiental, planejar a resposta, testar periodicamente esse planejamento (simulados), revisar após ocorrências ou simulados e treinar as pessoas.
+
+No transporte, as emergências típicas são vazamento de combustível ou de carga química, incêndio no veículo ou no armazém e tombamento. A resposta envolve kit de emergência, ficha de emergência e envelope para produtos perigosos, contatos dos órgãos e procedimento de contenção.`,
+p:["Identificar cenários de emergência","Plano de resposta documentado","Simulados periódicos e registro","Revisar após cada simulado ou ocorrência","Kit de emergência e treinamento"],
+ex:`Simulado de vazamento de diesel no pátio: tempo de contenção 8 minutos. Melhoria: mover o kit de absorventes para perto da bomba.`,
+q:{p:"O que a ISO 14001 exige além de ter um plano de emergência?",o:["Apenas guardar o plano","Testar periodicamente com simulados","Contratar seguradora","Certificar fornecedores"],c:1,e:"A norma pede testes periódicos das ações de resposta, quando praticável."}},
+
+"aud-2-0":{r:`Na ISO 45001 (saúde e segurança ocupacional), perigo é a fonte com potencial de causar lesão ou doença (ex.: empilhadeira em movimento). Risco é a combinação da probabilidade com a gravidade. A organização deve identificar perigos de forma contínua e proativa, incluindo atividades rotineiras e não rotineiras, fatores humanos e psicossociais.
+
+O controle segue a hierarquia: 1 eliminar o perigo, 2 substituir, 3 controles de engenharia, 4 controles administrativos (procedimentos, sinalização, treinamento) e 5 EPI. O EPI é a última barreira, não a primeira.`,
+p:["Perigo = fonte; risco = probabilidade x gravidade","Considere fatores psicossociais (jornada, pressão)","Hierarquia: eliminar, substituir, engenharia, administrativo, EPI","EPI é a última opção","Inclua visitantes e terceiros"],
+ex:`Perigo: atropelamento por empilhadeira. Engenharia: faixas segregadas para pedestres. Administrativo: limite de velocidade e sinalização sonora. EPI: colete refletivo.`,
+q:{p:"Na hierarquia de controles, qual é a primeira opção?",o:["EPI","Treinamento","Eliminar o perigo","Sinalização"],c:2,e:"A prioridade é eliminar o perigo. EPI é a última barreira."}},
+
+"aud-2-1":{r:`Um diferencial forte da ISO 45001 é a consulta e participação dos trabalhadores (cláusula 5.4). Consulta é buscar a opinião antes de decidir. Participação é envolver os trabalhadores na decisão. A norma lista temas em que trabalhadores não gerenciais devem participar, como identificação de perigos, investigação de incidentes e definição de controles.
+
+A organização deve remover barreiras à participação: idioma, medo de represália, falta de tempo, falta de treinamento. CIPA, DDS (diálogo diário de segurança) e caixas de sugestão são mecanismos comuns no Brasil.`,
+p:["Consulta ≠ participação","Trabalhadores não gerenciais devem participar","Remover barreiras (medo, idioma, tempo)","CIPA e DDS como evidências","Liderança deve proteger quem reporta"],
+ex:`O auditor entrevista um ajudante: 'você já participou da análise de algum acidente ou sugeriu alguma melhoria de segurança?' A resposta revela se a participação é real.`,
+q:{p:"Qual afirmação está correta sobre a ISO 45001?",o:["Só a gerência decide sobre segurança","Trabalhadores não gerenciais devem ser consultados e participar","Participação é opcional","CIPA substitui a norma"],c:1,e:"A cláusula 5.4 exige consulta e participação dos trabalhadores não gerenciais."}},
+
+"aud-2-2":{r:`Incidente é o evento que resultou ou poderia resultar em lesão ou doença (inclui o quase acidente). A organização deve reagir em tempo hábil, investigar com participação dos trabalhadores, determinar as causas, aplicar ações corretivas seguindo a hierarquia de controles e verificar a eficácia.
+
+Investigação boa busca a causa raiz no sistema, não um culpado. Ferramentas: 5 porquês, árvore de causas e Ishikawa. Quase acidentes são valiosos, pois mostram falhas antes de alguém se machucar.`,
+p:["Incidente inclui quase acidente","Investigue causas, não culpados","Envolva os trabalhadores","Ações seguem a hierarquia de controles","Comunique as lições aprendidas"],
+ex:`Quase acidente: carga caiu do palete na doca. Causa raiz: paletes danificados sem critério de descarte. Ação: inspeção semanal e descarte padronizado.`,
+q:{p:"Um 'quase acidente' deve ser:",o:["Ignorado, pois ninguém se feriu","Registrado e investigado","Punido","Tratado só se repetir"],c:1,e:"Quase acidentes são incidentes e devem ser investigados para prevenir lesões."}},
+
+"aud-3-0":{r:`A ISO 19011 organiza a auditoria em princípios e etapas. Os 7 princípios são: integridade, apresentação justa, devido cuidado profissional, confidencialidade, independência, abordagem baseada em evidência e abordagem baseada em risco.
+
+O programa de auditoria define frequência, escopo e recursos para um período, considerando riscos e resultados anteriores. Cada auditoria segue: iniciar (contato com o auditado), preparar (análise de documentos, plano, listas), executar (abertura, coleta de evidências, constatações, encerramento), relatório, conclusão e acompanhamento.`,
+p:["7 princípios da auditoria","Programa = conjunto de auditorias no período","Plano = roteiro de uma auditoria","Reunião de abertura e de encerramento","Acompanhamento das ações corretivas"],
+ex:`Programa anual da MIR: todas as unidades auditadas no ano, unidades com mais reclamações auditadas duas vezes (abordagem baseada em risco).`,
+q:{p:"Qual NÃO é um princípio de auditoria da ISO 19011?",o:["Independência","Confidencialidade","Lucratividade","Abordagem baseada em evidência"],c:2,e:"Lucratividade não é princípio de auditoria."}},
+
+"aud-3-1":{r:`A lista de verificação (checklist) guia o auditor, mas não deve engessá-lo. Formule perguntas abertas ('como vocês…', 'me mostre…') e siga a trilha das evidências. Evidência objetiva é registro, declaração de fato ou informação verificável.
+
+Fontes de evidência: entrevistas, observação das atividades e análise de documentos e registros. Use amostragem, pois é impossível ver tudo. A amostra deve ser representativa: períodos, turnos e pessoas diferentes. Triangule: o que a pessoa diz, o que o documento manda e o que você observa precisam bater.`,
+p:["Perguntas abertas: 'me mostre como…'","Evidência deve ser verificável","Amostra representativa de períodos e turnos","Triangule entrevista, documento e observação","Anote tudo com referência (nº do registro, data)"],
+ex:`Em vez de 'vocês fazem checklist?', pergunte 'me mostre os checklists da expedição da semana passada'. Amostra: 5 dias, 2 turnos.`,
+q:{p:"Qual pergunta é mais adequada em uma auditoria?",o:["Vocês fazem a conferência?","Está tudo certo?","Me mostre os registros de conferência de ontem","Vocês seguem a norma?"],c:2,e:"Pedir para ver registros gera evidência objetiva. Perguntas fechadas geram só sim ou não."}},
+
+"aud-3-2":{r:`Não conformidade (NC) é o não atendimento de um requisito. Uma boa NC tem três partes: o requisito (cláusula da norma ou documento interno), a evidência objetiva encontrada e a declaração da não conformidade. Ela deve ser clara, factual e rastreável, sem opinião.
+
+NC maior: ausência ou falha total de um requisito, ou que compromete a capacidade do sistema. NC menor: falha pontual que não compromete o sistema. Oportunidade de melhoria: não é NC, é sugestão. O relatório reúne escopo, critérios, constatações e conclusão.`,
+p:["Requisito + evidência + declaração","Escreva fatos, não opiniões","NC maior: falha sistêmica ou ausência","NC menor: falha pontual","Oportunidade de melhoria não é NC"],
+ex:`Requisito: ISO 9001, 7.2 exige evidência de competência. Evidência: 2 de 6 conferentes da unidade X sem registro de treinamento na IT de conferência. NC menor.`,
+q:{p:"Quais são os três elementos de uma não conformidade bem escrita?",o:["Nome, cargo, data","Requisito, evidência, declaração","Causa, ação, prazo","Problema, culpado, multa"],c:1,e:"Requisito, evidência objetiva e declaração da não conformidade."}},
+
+"aud-3-3":{r:`Auditoria integrada avalia ISO 9001, 14001 e 45001 de uma vez, aproveitando a estrutura comum (cláusulas 4 a 10). O auditor cobre requisitos comuns (política, objetivos, auditoria interna, análise crítica) juntos e os específicos de cada norma separadamente.
+
+Auditoria de primeira parte é a interna. Segunda parte é feita pelo cliente no fornecedor. Terceira parte é feita por organismo certificador, que segue a ISO/IEC 17021-1: estágio 1 (análise de documentação e preparação), estágio 2 (avaliação da implementação), auditorias de manutenção anuais e recertificação a cada 3 anos.`,
+p:["Estrutura comum facilita integrar","1ª parte = interna; 2ª = cliente; 3ª = certificadora","ISO/IEC 17021-1 regula certificadoras","Estágio 1 e estágio 2 na certificação","Ciclo de 3 anos com manutenções anuais"],
+ex:`Auditoria integrada na doca: o auditor verifica a conferência (9001), o descarte de paletes e plástico (14001) e a segregação de pedestres e empilhadeiras (45001) na mesma visita.`,
+q:{p:"Auditoria feita pelo cliente no fornecedor é de:",o:["Primeira parte","Segunda parte","Terceira parte","Certificação"],c:1,e:"Segunda parte é a auditoria realizada por uma parte com interesse, como o cliente."}},
+
+"aud-4-0":{r:`Simulados treinam o raciocínio de prova: interpretar o requisito e classificar a situação. Estude estudos de caso no formato 'situação → é NC? → qual cláusula? → maior ou menor?'. Os erros mais comuns em prova são confundir cláusulas parecidas (7.5 informação documentada x 8.5 controle da produção) e classificar como NC o que é oportunidade de melhoria.
+
+Monte um banco de 100 questões a partir das aulas e refaça as erradas. Na semana da prova, revise a estrutura das cláusulas, os princípios da ISO 19011, a hierarquia de controles e as definições básicas.`,
+p:["Pratique o formato situação → cláusula → classificação","Revise definições (perigo, aspecto, NC)","Refaça as questões que errou","Cronometre os simulados","Durma bem antes da prova"],
+ex:`Caso: extintor da área de abastecimento vencido há 3 meses e sem registro de inspeção mensal. Resposta: NC à ISO 45001 (8.1/8.2) e 14001 (8.2), menor se pontual, maior se ocorrer em várias unidades.`,
+q:{p:"Uma sugestão do auditor que não decorre de requisito descumprido é:",o:["NC maior","NC menor","Oportunidade de melhoria","Observação legal"],c:2,e:"Sem requisito descumprido, não há NC. É oportunidade de melhoria."}},
+
+"aud-4-1":{r:`A certificação de auditor líder normalmente exige aprovação na prova do curso (geralmente 40 horas, com avaliação contínua e exame final) e, para registro em entidades como Exemplar Global ou IRCA, também comprovação de experiência em auditorias.
+
+Depois da prova, monte seu registro: certificado do curso, horas e auditorias realizadas como auditor em formação e depois como líder. Participar das auditorias internas da empresa conta como experiência. Atualize o registro de competências e o currículo.`,
+p:["Curso de auditor líder: cerca de 40 horas","Registro em entidade exige experiência","Auditorias internas contam como prática","Guarde registros de cada auditoria","Mantenha atualização (novas versões das normas)"],
+ex:`Após certificado, conduza a próxima auditoria interna da MIR como líder, com um auditor em formação, e registre como experiência.`,
+q:{p:"O que costuma ser exigido além da prova para registro como auditor em entidades internacionais?",o:["Diploma de engenharia","Comprovação de experiência em auditorias","Inglês fluente","Carta da empresa"],c:1,e:"Entidades de registro pedem evidência de auditorias realizadas."}}
+});
+
+</script>
+<script>
+window.AULAS=window.AULAS||{};
+Object.assign(window.AULAS,{
+"ing-0-0":{r:`Os três tempos que você mais vai usar são o Simple Present (rotinas e fatos), o Simple Past (o que aconteceu) e o Future com will ou going to (planos e previsões).
+
+<table><tr><th>Tempo</th><th>Afirmativa</th><th>Pergunta</th><th>Negativa</th></tr>
+<tr><td>Present</td><td>She works here.</td><td>Does she work here?</td><td>She doesn't work here.</td></tr>
+<tr><td>Past</td><td>The truck arrived.</td><td>Did the truck arrive?</td><td>It didn't arrive.</td></tr>
+<tr><td>Future</td><td>I will call you.</td><td>Will you call me?</td><td>I won't call.</td></tr>
+<tr><td>Going to</td><td>We are going to ship it.</td><td>Are you going to ship it?</td><td>We aren't going to ship it.</td></tr></table>
+
+No present, he/she/it ganha -s (works, goes). No past, verbos regulares ganham -ed (delivered); os irregulares precisam ser decorados (go → went, send → sent, take → took).`,
+p:["Do/Does para perguntas no presente","Did para perguntas no passado (verbo volta ao normal)","Will: decisão na hora; going to: plano já decidido","Decore 50 verbos irregulares mais usados","Leia frases em voz alta"],
+ex:`"The driver picked up the cargo yesterday. He is going to deliver it tomorrow." (O motorista coletou a carga ontem. Ele vai entregar amanhã.)`,
+q:{p:"Qual frase está correta?",o:["Did the truck arrived?","Did the truck arrive?","Does the truck arrived?","The truck didn't arrived."],c:1,e:"Depois de did o verbo volta à forma base: arrive."}},
+
+"ing-0-1":{r:`Aprenda vocabulário em blocos temáticos e sempre dentro de frases, não palavras soltas. Comece pelo que você usa no trabalho.
+
+<table><tr><th>Inglês</th><th>Português</th></tr>
+<tr><td>shipment / freight</td><td>embarque / frete</td></tr>
+<tr><td>pickup / delivery</td><td>coleta / entrega</td></tr>
+<tr><td>warehouse / dock</td><td>armazém / doca</td></tr>
+<tr><td>delay / on time</td><td>atraso / no prazo</td></tr>
+<tr><td>damage / claim</td><td>avaria / reclamação de indenização</td></tr>
+<tr><td>tracking</td><td>rastreamento</td></tr>
+<tr><td>invoice / bill of lading</td><td>nota fiscal / conhecimento de transporte</td></tr>
+<tr><td>schedule / deadline</td><td>agenda / prazo</td></tr></table>
+
+Use repetição espaçada (Anki): revise cada palavra em intervalos crescentes. 10 palavras novas por dia dão mais de 3.000 em um ano.`,
+p:["Vocabulário sempre dentro de frases","Blocos temáticos: trabalho, rotina, viagem","Anki: repetição espaçada","10 palavras por dia","Troque o idioma do celular para inglês"],
+ex:`"The shipment is delayed because the truck had a problem at the dock." (O embarque está atrasado porque o caminhão teve um problema na doca.)`,
+q:{p:"Como se diz 'avaria' no contexto de transporte?",o:["Delay","Damage","Delivery","Dock"],c:1,e:"Damage é avaria ou dano. Delay é atraso."}},
+
+"ing-0-2":{r:`Listening melhora com exposição diária e com o método certo. Use a técnica das três escutas: primeiro ouça sem legenda e tente entender a ideia geral; depois ouça com legenda em inglês; por fim ouça de novo sem legenda e repare no que agora entende.
+
+Comece com áudios lentos e feitos para estudantes: podcasts como 6 Minute English (BBC) e ESL Pod. Depois passe para séries que você já viu em português, com legenda em inglês. O shadowing (repetir logo atrás do áudio, imitando a entonação) treina ouvido e pronúncia ao mesmo tempo.`,
+p:["15 a 30 minutos por dia","Três escutas: sem legenda, com legenda em inglês, sem legenda","Shadowing: repetir imitando o áudio","Comece com conteúdo para estudantes","Séries que você já conhece facilitam"],
+ex:`Rotina de sexta: um episódio de 6 Minute English no caminho, anotando 3 expressões novas para revisar no Anki.`,
+q:{p:"O que é shadowing?",o:["Ler legendas em português","Repetir o áudio logo atrás, imitando a pronúncia","Traduzir palavra por palavra","Ouvir em velocidade 2x"],c:1,e:"Shadowing é repetir o áudio quase ao mesmo tempo, imitando ritmo e entonação."}},
+
+"ing-1-0":{r:`Conversação depende de frases prontas (chunks) para ganhar fluência. Em vez de montar cada frase do zero, tenha na ponta da língua estruturas como estas:
+
+<table><tr><th>Função</th><th>Frase</th></tr>
+<tr><td>Opinião</td><td>In my opinion… / I think that…</td></tr>
+<tr><td>Concordar</td><td>I agree with you. / That's a good point.</td></tr>
+<tr><td>Discordar com educação</td><td>I see your point, but…</td></tr>
+<tr><td>Pedir repetição</td><td>Sorry, could you say that again?</td></tr>
+<tr><td>Ganhar tempo</td><td>Let me think… / Well, actually…</td></tr>
+<tr><td>Explicar</td><td>What I mean is…</td></tr></table>
+
+Pratique uma vez por semana com um professor ou parceiro de conversação (Cambly, italki ou aula em grupo do curso). Grave-se falando por 2 minutos sobre um tema e ouça depois.`,
+p:["Chunks dão fluência mais rápido que gramática","Conversação semanal com pessoa real","Errar faz parte; foque em ser entendido","Grave-se e ouça","Pense em inglês em situações simples do dia"],
+ex:`"I see your point, but I think we should check the tracking data first." (Entendo seu ponto, mas acho que devemos checar os dados de rastreamento primeiro.)`,
+q:{p:"Qual frase é a forma educada de discordar?",o:["You are wrong.","I see your point, but…","No way.","That's stupid."],c:1,e:"'I see your point, but…' reconhece a ideia do outro antes de discordar."}},
+
+"ing-1-1":{r:`Phrasal verbs são verbo + partícula com significado próprio. São muito usados na fala e em e-mails de trabalho. Aprenda os mais comuns em contexto:
+
+<table><tr><th>Phrasal verb</th><th>Significado</th><th>Exemplo</th></tr>
+<tr><td>pick up</td><td>coletar, buscar</td><td>We'll pick up the cargo at 9.</td></tr>
+<tr><td>drop off</td><td>deixar, entregar</td><td>He dropped off the boxes.</td></tr>
+<tr><td>follow up</td><td>dar retorno, acompanhar</td><td>I'll follow up on this tomorrow.</td></tr>
+<tr><td>set up</td><td>configurar, montar</td><td>Let's set up a meeting.</td></tr>
+<tr><td>figure out</td><td>descobrir, resolver</td><td>We need to figure out the cause.</td></tr>
+<tr><td>run out of</td><td>ficar sem</td><td>We ran out of pallets.</td></tr>
+<tr><td>look into</td><td>investigar</td><td>I'll look into the complaint.</td></tr>
+<tr><td>carry out</td><td>realizar</td><td>We carried out the audit.</td></tr></table>`,
+p:["Aprenda sempre com exemplo","Comece pelos 30 mais comuns","Muitos têm sentido diferente do verbo sozinho","Use em e-mails para soar natural","Revise no Anki com a frase inteira"],
+ex:`"Could you look into the delay and follow up with the customer?" (Você pode investigar o atraso e dar retorno ao cliente?)`,
+q:{p:"'We ran out of pallets' significa:",o:["Corremos com os paletes","Ficamos sem paletes","Devolvemos os paletes","Organizamos os paletes"],c:1,e:"Run out of = ficar sem algo."}},
+
+"ing-1-2":{r:`E-mails de trabalho em inglês são curtos e diretos. Estrutura: saudação, propósito na primeira frase, detalhes, próximo passo e despedida.
+
+<table><tr><th>Parte</th><th>Exemplo</th></tr>
+<tr><td>Saudação</td><td>Hi John, / Dear Ms. Smith,</td></tr>
+<tr><td>Propósito</td><td>I'm writing to confirm the pickup on Friday.</td></tr>
+<tr><td>Anexo</td><td>Please find attached the invoice.</td></tr>
+<tr><td>Pedido</td><td>Could you please send me the tracking number?</td></tr>
+<tr><td>Próximo passo</td><td>I look forward to hearing from you.</td></tr>
+<tr><td>Despedida</td><td>Best regards, / Kind regards,</td></tr></table>
+
+Evite traduzir expressões do português ('venho por meio deste'). Prefira frases curtas e um assunto por e-mail.`,
+p:["Propósito na primeira linha","Could you please… para pedidos educados","Please find attached… para anexos","Best regards para fechar","Releia antes de enviar"],
+ex:`"Hi Anna, I'm writing to inform you that the shipment was delivered today. Please find attached the proof of delivery. Best regards."`,
+q:{p:"Qual frase é adequada para indicar um anexo?",o:["Follow the attachment.","Please find attached the report.","See in the attach.","Attached it goes."],c:1,e:"'Please find attached…' é a forma padrão em e-mails profissionais."}},
+
+"ing-2-0":{r:`As normas ISO são escritas em inglês originalmente. Ler o texto original ajuda em auditorias com certificadoras internacionais e em cursos. Os verbos têm significado preciso:
+
+<table><tr><th>Termo</th><th>Significado</th></tr>
+<tr><td>shall</td><td>requisito obrigatório (deve)</td></tr>
+<tr><td>should</td><td>recomendação (convém)</td></tr>
+<tr><td>may</td><td>permissão (pode)</td></tr>
+<tr><td>can</td><td>possibilidade ou capacidade</td></tr>
+<tr><td>documented information</td><td>informação documentada</td></tr>
+<tr><td>nonconformity</td><td>não conformidade</td></tr>
+<tr><td>corrective action</td><td>ação corretiva</td></tr>
+<tr><td>top management</td><td>alta direção</td></tr></table>
+
+Leia primeiro a cláusula em português, depois a mesma em inglês, e monte seu glossário.`,
+p:["shall = obrigatório","should = recomendação","Leia em paralelo português e inglês","Monte glossário próprio","Termos ISO estão na ISO 9000 (vocabulário)"],
+ex:`"The organization shall retain documented information as evidence of competence." Leitura: a organização deve reter informação documentada como evidência de competência (7.2).`,
+q:{p:"Em uma norma ISO, 'shall' indica:",o:["Recomendação","Requisito obrigatório","Permissão","Possibilidade"],c:1,e:"Shall marca o requisito. Should marca recomendação."}},
+
+"ing-2-1":{r:`Monte um vocabulário técnico das suas três áreas.
+
+<table><tr><th>Qualidade</th><th>Logística</th><th>IA</th></tr>
+<tr><td>root cause</td><td>lead time</td><td>dataset</td></tr>
+<tr><td>continuous improvement</td><td>last mile</td><td>training / inference</td></tr>
+<tr><td>audit finding</td><td>cross-docking</td><td>accuracy</td></tr>
+<tr><td>key performance indicator</td><td>fleet</td><td>prompt</td></tr>
+<tr><td>customer satisfaction</td><td>route planning</td><td>machine learning model</td></tr>
+<tr><td>risk assessment</td><td>freight rate</td><td>deployment</td></tr></table>
+
+Pratique explicando seu trabalho em inglês: 'I work at a freight company. I am responsible for the quality management system and I build dashboards with data from our transport system.'`,
+p:["Glossário por área de atuação","Descreva seu trabalho em 5 frases","Leia artigos curtos da área em inglês","Assista palestras com legenda em inglês","Use os termos em conversação"],
+ex:`"Our on-time delivery rate improved after we analyzed the root cause of delays." (Nossa taxa de entregas no prazo melhorou depois que analisamos a causa raiz dos atrasos.)`,
+q:{p:"'Lead time' em logística significa:",o:["Tempo total do pedido até a entrega","Tempo de almoço","Prazo de pagamento","Tempo do líder"],c:0,e:"Lead time é o tempo total entre o início do processo e a entrega."}},
+
+"ing-2-2":{r:`Apresentações curtas seguem uma estrutura simples: abertura, agenda, pontos principais, conclusão e perguntas.
+
+<table><tr><th>Momento</th><th>Frase</th></tr>
+<tr><td>Abertura</td><td>Good morning everyone. Today I'm going to talk about…</td></tr>
+<tr><td>Agenda</td><td>First…, then…, finally…</td></tr>
+<tr><td>Gráfico</td><td>As you can see in this chart…</td></tr>
+<tr><td>Tendência</td><td>Delays increased / decreased by 10%.</td></tr>
+<tr><td>Conclusão</td><td>To sum up…</td></tr>
+<tr><td>Perguntas</td><td>Do you have any questions?</td></tr></table>
+
+Ensaie em voz alta três vezes. Falar devagar e com pausas transmite segurança.`,
+p:["Estrutura: abrir, agenda, pontos, concluir","Frases de gráfico: increase, decrease, remain stable","Ensaie em voz alta","Fale devagar","Prepare respostas para 3 perguntas prováveis"],
+ex:`"As you can see in this chart, damages decreased by 30% after the new loading procedure."`,
+q:{p:"Qual frase introduz a conclusão de uma apresentação?",o:["First of all","To sum up","As you can see","Good morning"],c:1,e:"To sum up (em resumo) sinaliza a conclusão."}},
+
+"ing-3-0":{r:`Reuniões e calls exigem frases para participar e controlar a conversa.
+
+<table><tr><th>Função</th><th>Frase</th></tr>
+<tr><td>Abrir</td><td>Let's get started. / Thanks for joining.</td></tr>
+<tr><td>Interromper</td><td>Sorry to interrupt, but…</td></tr>
+<tr><td>Esclarecer</td><td>Just to clarify, do you mean…?</td></tr>
+<tr><td>Problema técnico</td><td>You're breaking up. / Can you hear me?</td></tr>
+<tr><td>Resumir</td><td>So, to recap, we agreed to…</td></tr>
+<tr><td>Ação</td><td>Who will take care of this? By when?</td></tr>
+<tr><td>Encerrar</td><td>Let's wrap up. I'll send the minutes.</td></tr></table>`,
+p:["Prepare a pauta antes","Use 'just to clarify' quando tiver dúvida","Resuma decisões no final","Defina responsável e prazo","Envie a ata (minutes) depois"],
+ex:`"Just to clarify, do you mean the pickup on Monday or Tuesday?" (Só para esclarecer, você quer dizer a coleta de segunda ou de terça?)`,
+q:{p:"Como dizer educadamente que vai interromper?",o:["Stop talking.","Sorry to interrupt, but…","Wait wait.","Listen to me."],c:1,e:"'Sorry to interrupt, but…' é a forma educada."}},
+
+"ing-3-1":{r:`Negociação e relatórios usam linguagem cuidadosa. Condicionais ajudam a negociar: 'If you increase the volume, we can offer a better rate.' Verbos modais suavizam: 'We would prefer…', 'Could we consider…?'.
+
+Em relatórios, use estrutura clara: Summary (resumo), Background (contexto), Findings (constatações), Recommendations (recomendações). Prefira voz ativa e números: 'Delays decreased by 15% in Q3' em vez de frases vagas.`,
+p:["Condicional: If…, we can…","Would e could suavizam pedidos","Relatório: summary, findings, recommendations","Números concretos dão credibilidade","Frases curtas e voz ativa"],
+ex:`"If you commit to 20 shipments per month, we can reduce the freight rate by 5%." (Se você se comprometer com 20 embarques por mês, podemos reduzir o frete em 5%.)`,
+q:{p:"Qual frase é a mais adequada para negociar?",o:["Give me a discount.","If you increase the volume, we can offer a better rate.","Your price is bad.","Discount now."],c:1,e:"A condicional propõe uma troca e mantém o tom profissional."}},
+
+"ing-3-2":{r:`Para comprovar o nível, as opções mais práticas são o TOEIC (focado em inglês profissional, aceito por empresas), o EF SET (gratuito e online, bom para medir o progresso) e, para fins acadêmicos ou internacionais, IELTS e TOEFL.
+
+O nível B2 do Quadro Europeu (CEFR) significa conseguir conversar com fluência sobre temas do trabalho, entender ideias principais de textos complexos e escrever textos claros. No TOEIC isso equivale aproximadamente a 785 pontos ou mais. Faça o EF SET a cada 6 meses para acompanhar sua evolução.`,
+p:["EF SET: gratuito, use a cada 6 meses","TOEIC: foco profissional","B2 = independente e fluente no trabalho","Faça simulados cronometrados","Coloque o resultado no currículo"],
+ex:`Meta: EF SET em mai/27 (esperado B1), nov/27 (B1+) e out/28 (B2). Prova oficial TOEIC em out/28.`,
+q:{p:"Qual teste é gratuito e bom para medir o progresso periodicamente?",o:["IELTS","TOEFL","EF SET","Cambridge C1"],c:2,e:"O EF SET é gratuito, online e alinhado ao CEFR."}}
+});
+
+</script>
+
+<script>
+window.CURSOS=window.CURSOS||[];
+window.CURSOS.push({
+id:"qual",nome:"Pós em Gestão da Qualidade",curto:"Qualidade",nivel:"Especialização · do básico ao Green Belt",
+sobre:"Formação completa em gestão da qualidade: dos fundamentos e da ISO 9001:2026 até estatística, Lean Six Sigma, indicadores e um TCC aplicado à transportadora.",
+horas:4,parcela:160,parcelas:14,
+mods:[
+{n:"Fundamentos da Qualidade",o:"Entender o que é qualidade, sua evolução e os princípios que sustentam a ISO 9001.",w:[
+["O que é qualidade e como ela evoluiu","A qualidade passou por quatro eras: <b>inspeção</b> (separar o defeito no fim), <b>controle estatístico</b> (medir o processo), <b>garantia da qualidade</b> (sistemas e procedimentos) e <b>gestão estratégica</b> (qualidade como diferencial competitivo). Hoje qualidade é atender requisitos do cliente de forma consistente e melhorar sempre.\n\nNo serviço de transporte, o cliente percebe qualidade em prazo cumprido, carga íntegra, informação correta e atendimento rápido.","Escreva em 5 linhas o que é qualidade para um cliente da MIR e guarde para comparar no fim do curso."],
+["Os 7 princípios da gestão da qualidade","","Para cada princípio, anote um exemplo real que você já viu na empresa.","qual-0-0"],
+["Deming e os 14 pontos","W. Edwards Deming mostrou que a maioria dos problemas vem do <b>sistema</b>, não das pessoas, e que é preciso entender a <b>variação</b>. Divulgou o ciclo PDCA no Japão e deixou 14 pontos para a gestão, como: constância de propósito, cessar a dependência da inspeção em massa, treinamento no trabalho, eliminar o medo e quebrar barreiras entre departamentos.","Escolha 3 dos 14 pontos e avalie de 1 a 5 como a empresa está em cada um."],
+["Juran, Crosby e Ishikawa","Joseph Juran definiu qualidade como <b>adequação ao uso</b> e criou a Trilogia: planejamento, controle e melhoria. Philip Crosby defendeu o <b>zero defeito</b> e mediu a qualidade pelo custo da não conformidade. Kaoru Ishikawa popularizou as 7 ferramentas e os círculos de controle da qualidade, envolvendo todos os níveis.","Monte uma tabela comparando os quatro gurus: ideia central e uma aplicação prática."]],
+q:[["Quem criou a Trilogia da Qualidade (planejamento, controle e melhoria)?",["Deming","Juran","Crosby","Ishikawa"],1,"A Trilogia é de Joseph Juran."],["Na era da inspeção, a qualidade era garantida principalmente por:",["Separar produtos defeituosos no final","Planejamento estratégico","Controle estatístico do processo","Engajamento das pessoas"],0,"A inspeção atuava no fim, separando o que estava ruim."]]},
+{n:"A Norma ISO 9001",o:"Dominar a estrutura da ISO 9001:2026 e os requisitos de contexto, liderança e documentação.",w:[
+["Estrutura da ISO 9001 e o PDCA","","Desenhe o PDCA e coloque cada cláusula de 4 a 10 no lugar certo.","qual-0-1"],
+["Contexto e partes interessadas","","Faça uma SWOT da sua unidade com 3 itens em cada quadrante.","qual-0-3"],
+["Liderança, política e objetivos","A alta direção deve assumir a responsabilidade pelo SGQ (5.1), estabelecer uma <b>política da qualidade</b> adequada ao propósito (5.2) e definir papéis e autoridades (5.3). Os <b>objetivos da qualidade</b> (6.2) precisam ser mensuráveis, coerentes com a política, monitorados e comunicados, com plano: o que, recursos, responsável, prazo e como avaliar.","Pegue a política da qualidade da MIR e verifique se cada objetivo tem meta, responsável e prazo."],
+["Informação documentada","A ISO 9001 fala em <b>manter</b> informação documentada (documentos vivos, como procedimentos) e <b>reter</b> (registros, evidências do que foi feito). O controle (7.5) inclui identificação, formato, revisão e aprovação, distribuição, acesso, proteção e retenção. Não existe mais exigência de manual da qualidade: a organização decide o que precisa documentar.","Confira a lista mestra de documentos: todos têm revisão, data e aprovador?"]],
+q:[["Registros, como checklists preenchidos, são informação documentada a ser:",["Mantida","Retida","Descartada","Publicada"],1,"Registros são evidências e devem ser retidos."],["Objetivos da qualidade devem ser:",["Apenas qualitativos","Mensuráveis e monitorados","Secretos","Definidos só pelo setor da qualidade"],1,"A cláusula 6.2 exige objetivos mensuráveis e monitorados."]]},
+{n:"Gestão por Processos",o:"Mapear, medir e melhorar processos com BPMN e SIPOC.",w:[
+["Mapeamento com BPMN","","Instale o Bizagi ou use o draw.io e desenhe o processo de coleta da sua unidade.","qual-0-2"],
+["SIPOC e cadeia de valor","O <b>SIPOC</b> resume um processo numa linha: Suppliers (fornecedores), Inputs (entradas), Process (5 a 7 etapas macro), Outputs (saídas) e Customers (clientes). É o primeiro passo antes de detalhar. A <b>cadeia de valor</b> mostra os macroprocessos: primários (coleta, transferência, entrega) e de apoio (RH, TI, manutenção, qualidade).","Monte o SIPOC do processo de entrega."],
+["Indicadores de processo","Todo processo precisa de dono e de indicadores. <b>Eficácia</b>: atingiu o resultado? <b>Eficiência</b>: usou bem os recursos? <b>Efetividade</b>: gerou o impacto esperado no cliente? Um bom conjunto tem indicador de resultado (atrasos) e de processo (tempo de doca).","Defina 1 indicador de eficácia e 1 de eficiência para a expedição."],
+["Do AS-IS ao TO-BE","Com o processo atual desenhado, procure: etapas que não agregam valor, retrabalho, esperas, aprovações demais, dados digitados duas vezes. No processo futuro (TO-BE), elimine, simplifique, automatize e só então padronize. Valide com quem executa.","Liste 3 melhorias no processo de coleta e estime o ganho de tempo."]],
+q:[["Na sigla SIPOC, a letra C representa:",["Custos","Clientes","Controles","Capacidade"],1,"C = Customers, os clientes do processo."],["Indicador que mede se o resultado foi atingido é de:",["Eficiência","Eficácia","Produtividade","Custo"],1,"Eficácia avalia se o resultado foi alcançado."]]},
+{n:"Ferramentas da Qualidade",o:"Aplicar as 7 ferramentas, priorização e 5S no dia a dia.",w:[
+["As 7 ferramentas da qualidade","","Faça um Pareto das ocorrências do último mês da sua unidade.","qual-1-0"],
+["Folha de verificação e estratificação","A folha de verificação é um formulário simples para coletar dados no momento em que acontecem: tipo de ocorrência, dia, turno, local. A <b>estratificação</b> separa os dados por grupo (unidade, cliente, motorista, turno) para descobrir onde o problema se concentra. Sem estratificar, a média esconde a causa.","Crie uma folha de verificação de avarias com 5 categorias e use por 1 semana."],
+["Brainstorming e matriz GUT","O brainstorming gera ideias sem crítica e depois agrupa. Para priorizar, use a <b>matriz GUT</b>: nota de 1 a 5 para Gravidade, Urgência e Tendência. O produto G x U x T ordena os problemas. Outra opção é a matriz esforço x impacto.","Priorize 5 problemas da sua área com a matriz GUT."],
+["5S e gestão visual","5S organiza o ambiente: <b>Seiri</b> (utilização: descartar o desnecessário), <b>Seiton</b> (ordenação), <b>Seisou</b> (limpeza), <b>Seiketsu</b> (padronização) e <b>Shitsuke</b> (disciplina). A gestão visual mostra o status sem precisar perguntar: quadros, cores no chão, etiquetas.","Faça uma auditoria 5S na doca com nota de 1 a 5 em cada senso."]],
+q:[["Na matriz GUT, a prioridade é dada por:",["G + U + T","G x U x T","Apenas a gravidade","Média das notas"],1,"Multiplica-se Gravidade, Urgência e Tendência."],["Qual senso do 5S trata de descartar o que não é necessário?",["Seiton","Seiri","Seisou","Shitsuke"],1,"Seiri é o senso de utilização."]]},
+{n:"Análise e Solução de Problemas",o:"Resolver problemas pela causa raiz com MASP, 5 porquês e A3.",w:[
+["PDCA, MASP e 5W2H","","Monte um plano 5W2H para um problema real da sua área.","qual-1-1"],
+["5 porquês e causa raiz","Pergunte 'por quê?' até chegar a uma causa que, se eliminada, impede a repetição. Normalmente são de 3 a 5 perguntas. Teste a causa: 'se eu eliminar isso, o problema some?'. Cuidado para não parar em 'falha humana': pergunte por que o sistema permitiu o erro.","Aplique os 5 porquês em uma reclamação de cliente recente."],
+["Ação corretiva na ISO 9001","A cláusula 10.2 pede: reagir à não conformidade (corrigir e lidar com consequências), avaliar a necessidade de ação para eliminar a causa, implementar, <b>analisar a eficácia</b>, atualizar riscos se preciso e reter registros. Correção apaga o incêndio; ação corretiva impede que volte.","Revise uma RNC antiga: houve verificação de eficácia? Ela funcionou?"],
+["Relatório A3","O A3 é uma folha (tamanho A3) que conta a história do problema: contexto, situação atual com dados, meta, análise de causas, contramedidas, plano de implementação e acompanhamento. Força o pensamento claro e facilita a comunicação com a direção.","Faça um A3 de um problema da sua unidade."]],
+q:[["Qual a diferença entre correção e ação corretiva?",["São iguais","Correção trata o efeito; ação corretiva elimina a causa","Correção é mais cara","Ação corretiva é opcional"],1,"Correção resolve o caso; ação corretiva impede a repetição."],["O que a ISO 9001 exige depois de implementar uma ação corretiva?",["Arquivar","Analisar a eficácia","Demitir o responsável","Abrir nova RNC"],1,"A eficácia deve ser analisada."]]},
+{n:"Gestão de Riscos",o:"Identificar, avaliar e tratar riscos com ISO 31000 e FMEA.",w:[
+["Mentalidade de risco e ISO 31000","","Liste 5 riscos do seu processo e classifique em probabilidade e impacto.","qual-1-2"],
+["Matriz de riscos e apetite a risco","A matriz cruza probabilidade (raro a quase certo) com impacto (insignificante a catastrófico), normalmente 5x5. Zonas verde, amarela e vermelha definem a resposta. <b>Apetite a risco</b> é o quanto a empresa aceita correr para atingir objetivos. Riscos acima do apetite precisam de tratamento.","Monte uma matriz 5x5 com os riscos da semana passada."],
+["FMEA passo a passo","1) Liste as etapas do processo. 2) Para cada uma, os modos de falha. 3) Efeito e severidade. 4) Causas e ocorrência. 5) Controles atuais e detecção. 6) RPN. 7) Ações para os maiores RPN. 8) Recalcule. Faça em equipe com quem executa o processo.","Faça um FMEA de 5 etapas do processo de emissão de CT-e."],
+["Mudanças e continuidade","A cláusula 6.3 pede que mudanças no SGQ sejam planejadas: propósito, consequências, recursos e responsabilidades. Planos de contingência e de continuidade (ISO 22301) preparam a empresa para falhas graves: queda de sistema, greve, enchente na unidade.","Escreva um plano de contingência de 1 página para queda do SSW."]],
+q:[["Riscos acima do apetite da empresa devem:",["Ser ignorados","Receber tratamento","Ser aceitos sempre","Ir para o arquivo"],1,"Riscos acima do apetite exigem tratamento."],["No FMEA, a ação é priorizada pelos maiores valores de:",["Custo","RPN","Detecção","Tempo"],1,"O RPN orienta a prioridade."]]},
+{n:"Estatística Aplicada e CEP",o:"Usar estatística para entender a variação e controlar processos.",w:[
+["Estatística descritiva e CEP","","Calcule média, mediana e desvio padrão do tempo de entrega de 30 CT-es.","qual-1-4"],
+["Gráficos de controle","Para dados contínuos (tempo, peso) use <b>X-barra e R</b>: média e amplitude de subgrupos. Para proporção de defeituosos use o gráfico <b>p</b>. Para contagem de defeitos use o gráfico <b>c</b> ou <b>u</b>. Primeiro estabilize o processo (só causas comuns), depois busque melhorar.","Faça um gráfico p do percentual diário de entregas atrasadas no Excel."],
+["Capacidade de processo","Capacidade compara a variação do processo com a especificação do cliente. <b>Cp</b> = (LSE − LIE) / 6σ mede o potencial. <b>Cpk</b> considera a centralização. Cpk ≥ 1,33 é considerado capaz. Um processo pode estar sob controle e ainda assim não ser capaz.","Calcule o Cpk do tempo de descarga com limite superior de 60 min."],
+["Amostragem e inspeção","Inspecionar 100% é caro e cansativo. A <b>amostragem</b> examina parte do lote com regras de aceitação (ex.: NBR 5426). A amostra precisa ser aleatória e representativa. Em serviços, use amostragem para auditar CT-es, checklists e cadastros.","Defina um plano de amostragem para conferir 5% dos CT-es emitidos por dia."]],
+q:[["Um Cpk de 1,5 indica um processo:",["Incapaz","Capaz","Fora de controle","Sem dados"],1,"Cpk acima de 1,33 indica processo capaz."],["Para proporção de itens defeituosos usa-se o gráfico:",["X-barra","p","R","Histograma"],1,"O gráfico p acompanha proporções."]]},
+{n:"Lean",o:"Eliminar desperdícios e criar fluxo com as ferramentas Lean.",w:[
+["Lean e os 8 desperdícios","","Caminhe pela unidade e anote um exemplo de cada desperdício.","qual-1-3"],
+["Mapeamento do fluxo de valor (VSM)","O VSM desenha o fluxo de material e de informação de ponta a ponta, com tempos de cada etapa e esperas entre elas. Compare o <b>tempo de agregação de valor</b> com o <b>lead time</b> total: em logística é comum o valor ser menos de 10% do tempo. Depois desenhe o estado futuro.","Faça o VSM de uma carga desde a coleta até a entrega."],
+["Kanban, fluxo puxado e kaizen","No <b>fluxo puxado</b> cada etapa só produz quando a seguinte pede. O <b>kanban</b> é o sinal visual que controla isso. O <b>kaizen</b> é a melhoria contínua em pequenos passos, muitas vezes em eventos de poucos dias com a equipe.","Organize um kaizen de 2 horas com a equipe para um problema simples."],
+["Lean na logística","Aplicações: <b>cross-docking</b> (carga entra e sai sem estocar), agendamento de docas, padronização de carregamento, milk run nas coletas, SMED para reduzir tempo de troca, gestão visual do pátio.","Proponha uma melhoria Lean para o tempo de doca e estime o ganho."]],
+q:[["No VSM, o que costuma ser muito menor que o lead time?",["Tempo de agregação de valor","Tempo de espera","Estoque","Distância"],0,"O tempo que agrega valor é uma pequena parte do lead time."],["Cross-docking significa:",["Estocar por muito tempo","Carga entra e sai sem armazenagem longa","Carregar dois caminhões juntos","Inspecionar 100%"],1,"A carga é transferida direto da entrada para a saída."]]},
+{n:"Six Sigma e Projeto Green Belt",o:"Conduzir um projeto DMAIC de ponta a ponta.",w:[
+["Define e Measure","Define: <b>project charter</b> com problema, meta, escopo, equipe e prazo; voz do cliente transformada em CTQ (crítico para a qualidade). Measure: plano de coleta, linha de base do indicador e <b>MSA</b> (o sistema de medição é confiável?).","Escreva o charter de um projeto para reduzir atrasos."],
+["Analyze: testes de hipótese","Na fase Analyze você confirma causas com dados. Teste de hipótese compara grupos: <b>H0</b> diz que não há diferença; se o <b>p-valor</b> for menor que 0,05, rejeita-se H0. Exemplos: teste t (duas médias), qui-quadrado (proporções), correlação e regressão.","Compare o tempo de entrega de duas rotas e veja se a diferença é significativa."],
+["Improve e Control","Improve: gere soluções, teste em piloto, use <b>poka-yoke</b> (à prova de erro) quando possível. Control: plano de controle, padronização, treinamento, gráfico de controle e passagem do processo ao dono.","Desenhe um poka-yoke para evitar digitação errada de peso."],
+["Projeto Green Belt na prática","Um bom projeto Green Belt dura de 3 a 6 meses, tem impacto financeiro mensurável e escopo controlável. Documente cada fase com evidências. Ele pode ser a base do seu TCC.","Escolha o tema do seu projeto e valide com seu gestor."]],
+q:[["Se o p-valor for 0,01, com nível de significância de 0,05:",["Aceita-se H0","Rejeita-se H0","O teste é inválido","Precisa de mais dados sempre"],1,"p menor que 0,05 leva a rejeitar H0."],["Poka-yoke é:",["Um gráfico","Um dispositivo à prova de erro","Um indicador","Uma auditoria"],1,"Poka-yoke impede ou sinaliza o erro na hora."]]},
+{n:"Indicadores e Estratégia",o:"Medir, acompanhar e decidir com indicadores e análise crítica.",w:[
+["KPIs e Balanced Scorecard","","Monte um BSC simples com 2 indicadores por perspectiva.","qual-2-0"],
+["Painéis e rotina de resultados","Indicador só gera resultado quando há <b>rotina</b>: reunião curta e periódica, olhando o painel, discutindo desvios e definindo ações com dono. Gestão à vista coloca os números onde a equipe vê. Um bom painel mostra meta, real e tendência.","Proponha uma reunião semanal de 15 minutos com os indicadores da unidade."],
+["Custos da qualidade","","Levante em reais as indenizações de avaria dos últimos 6 meses.","qual-2-1"],
+["Análise crítica pela direção","A cláusula 9.3 pede reuniões periódicas da direção com <b>entradas</b> definidas: ações anteriores, mudanças no contexto, satisfação, objetivos, desempenho de processos, NCs, auditorias, fornecedores, riscos e oportunidades. As <b>saídas</b> são decisões sobre melhorias, mudanças e recursos.","Confira a última ata de análise crítica: todas as entradas foram tratadas?"]],
+q:[["A análise crítica pela direção está em qual cláusula?",["7.5","8.4","9.3","10.2"],2,"Análise crítica pela direção é a 9.3."],["O que transforma indicadores em resultado?",["Mais indicadores","Rotina de análise e ação","Gráficos coloridos","Metas secretas"],1,"Sem rotina de análise e ação o indicador não muda nada."]]},
+{n:"Clientes, Fornecedores e Auditoria",o:"Gerir a percepção do cliente, a cadeia de fornecedores e o programa de auditorias.",w:[
+["Qualidade em serviços e logística","","Calcule o OTIF da sua unidade no último mês.","qual-2-2"],
+["Satisfação do cliente e NPS","O <b>NPS</b> pergunta: 'de 0 a 10, quanto você recomendaria?'. Promotores (9-10) menos detratores (0-6) em percentual. Acima de 50 é muito bom. Combine com uma pergunta aberta ('por quê?') e trate cada detrator.","Desenhe uma pesquisa NPS de 3 perguntas para clientes."],
+["Fornecedores e terceiros","A cláusula 8.4 exige critérios para avaliar, selecionar, monitorar e reavaliar fornecedores externos. Em transportadora isso inclui agregados, parceiros de redespacho, oficinas e seguradora. Use indicadores (pontualidade, avarias, documentação) e reavalie periodicamente.","Crie uma ficha de avaliação de agregados com 5 critérios."],
+["Auditoria interna","","Monte o programa anual de auditorias das unidades com base em riscos.","qual-2-3"]],
+q:[["No NPS, quem dá nota 7 ou 8 é:",["Promotor","Neutro","Detrator","Excluído"],1,"Notas 7 e 8 são neutros."],["O controle de agregados e parceiros está na cláusula:",["7.2","8.4","9.1","6.1"],1,"A 8.4 trata de provedores externos."]]},
+{n:"TCC e Conclusão",o:"Escrever, apresentar e concluir a especialização.",w:[
+["Projeto do TCC","","Escreva título, problema e objetivo do seu TCC.","qual-3-0"],
+["Escrita e normas ABNT","Escreva primeiro a metodologia e os resultados, depois introdução e conclusão. Use NBR 6023 para referências e NBR 10520 para citações. Cite fontes confiáveis: livros, artigos (Google Acadêmico, SciELO) e normas. Peça revisão ao orientador em cada etapa.","Escreva a seção de resultados com tabelas e gráficos antes e depois."],
+["Entrega e próximos passos","","Atualize currículo, LinkedIn e o controle de competências.","qual-3-1"]],
+q:[["Qual norma ABNT trata de referências bibliográficas?",["NBR 6023","NBR 9001","NBR 5426","NBR 14001"],0,"A NBR 6023 define as referências."],["A melhor fonte para artigos científicos gratuitos em português é:",["Redes sociais","SciELO","Blogs de opinião","Anúncios"],1,"SciELO reúne periódicos científicos gratuitos."]]}
+],
+livros:[
+["Gestão da Qualidade: conceitos e técnicas","Luiz Cesar Ribeiro Carpinetti","Livro-base brasileiro, cobre do básico às ferramentas."],
+["TQC: Controle da Qualidade Total no estilo japonês","Vicente Falconi Campos","Clássico nacional sobre gestão da qualidade e PDCA."],
+["Gerenciamento da Rotina do Trabalho do Dia a Dia","Vicente Falconi Campos","Como padronizar e manter resultados na operação."],
+["A Máquina que Mudou o Mundo","Womack, Jones e Roos","A origem do Lean contada a partir da Toyota."],
+["O Modelo Toyota","Jeffrey Liker","Os 14 princípios de gestão da Toyota."],
+["The Lean Six Sigma Pocket Toolbook","Michael George e outros","Guia de bolso das ferramentas do DMAIC."]],
+sites:[
+["ISO Online Browsing Platform","https://www.iso.org/obp","Termos e definições oficiais das normas."],
+["ABNT Catálogo","https://www.abntcatalogo.com.br","Compra e consulta das normas brasileiras."],
+["Escola Virtual Gov","https://www.escolavirtual.gov.br","Cursos gratuitos com certificado sobre processos e gestão."],
+["FM2S","https://www.fm2s.com.br","Conteúdo e cursos de Lean Six Sigma em português."],
+["ASQ","https://asq.org","Associação americana da qualidade, artigos e referências."],
+["SciELO","https://www.scielo.br","Artigos científicos para o TCC."]]
+});
+
+</script>
+<script>
+window.CURSOS=window.CURSOS||[];
+window.CURSOS.push({
+id:"ia",nome:"Pós em Inteligência Artificial",curto:"IA",nivel:"Especialização · de Python a agentes",
+sobre:"Do primeiro código em Python até machine learning, deep learning, LLMs e agentes, com projetos aplicados à logística e um projeto final em produção.",
+horas:4,parcela:200,parcelas:14,
+mods:[
+{n:"Introdução à IA",o:"Entender o que é IA, onde ela é usada e montar o ambiente de estudo.",w:[
+["O que é IA e sua história","","Liste 5 lugares onde você já usa IA no dia a dia sem perceber.","ia-0-0"],
+["Tipos de IA e aplicações","Divisões úteis: IA <b>preditiva</b> (prevê números ou classes), IA <b>generativa</b> (cria texto, imagem, código), IA de <b>otimização</b> (rotas, escalas) e IA de <b>percepção</b> (visão, voz). Em empresas, o maior retorno costuma vir de previsão e automação de tarefas repetitivas.","Mapeie 3 tarefas repetitivas da sua rotina que poderiam usar IA."],
+["Como uma máquina aprende","Todo projeto de ML tem: <b>dados</b> (exemplos), <b>modelo</b> (a função que aprende), <b>função de perda</b> (o quanto erra), <b>otimização</b> (ajuste para errar menos) e <b>avaliação</b> em dados nunca vistos. Se os dados forem ruins, nenhum modelo salva.","Descreva um problema da empresa nesses 5 elementos."],
+["Ambiente: Colab, Python e GitHub","O <b>Google Colab</b> roda Python no navegador com GPU grátis. O <b>GitHub</b> guarda seu código e vira portfólio. Crie conta nos dois, abra um notebook e rode <code>print('olá, IA')</code>. Use o VS Code quando for trabalhar no seu computador.","Crie as contas, um notebook e um repositório chamado estudos-ia."]],
+q:[["O que avalia se um modelo aprendeu de verdade?",["Erro nos dados de treino","Desempenho em dados nunca vistos","Tamanho do modelo","Velocidade"],1,"Avaliar em dados novos mostra se o modelo generaliza."],["Gerar texto e imagem é tarefa de IA:",["Preditiva","Generativa","De otimização","Estatística clássica"],1,"Criar conteúdo é IA generativa."]]},
+{n:"Python para Dados",o:"Programar em Python e manipular tabelas com pandas.",w:[
+["Python básico","Variáveis guardam valores (<code>peso = 120</code>). Tipos principais: int, float, str, bool. <b>Listas</b> guardam sequências (<code>unidades = ['RSL','BNU']</code>), <b>dicionários</b> guardam pares chave-valor. <code>for</code> repete e <code>if</code> decide.","Escreva um código que percorra uma lista de pesos e conte quantos passam de 500 kg."],
+["Funções e bibliotecas","Funções organizam o código: <code>def frete(peso, taxa): return peso * taxa</code>. Bibliotecas trazem funções prontas: <code>import pandas as pd</code>. Instale com <code>pip install</code>. Leia mensagens de erro de baixo para cima: a última linha diz o problema.","Crie uma função que calcule o frete-peso com peso mínimo."],
+["Pandas na prática","","Carregue uma planilha real e conte registros por unidade.","ia-0-1"],
+["Visualização de dados","Com <code>matplotlib</code> e <code>seaborn</code> você faz gráficos em poucas linhas. Use barras para comparar categorias, linhas para tempo, histograma para distribuição e dispersão para relação entre variáveis. Título, rótulos e unidades sempre.","Faça um gráfico de linha da quantidade de CT-es por dia no mês."]],
+q:[["Qual estrutura guarda pares chave-valor em Python?",["Lista","Dicionário","String","Tupla"],1,"O dicionário guarda chave: valor."],["Para mostrar evolução no tempo, o gráfico mais indicado é:",["Pizza","Linha","Dispersão","Histograma"],1,"Gráfico de linha mostra tendência ao longo do tempo."]]},
+{n:"Estatística para IA",o:"Dominar a estatística que está por trás dos modelos.",w:[
+["Estatística essencial","","Calcule média, mediana e desvio padrão do peso das cargas de uma semana.","ia-0-2"],
+["Probabilidade e Bayes","Probabilidade condicional P(A|B) é a chance de A sabendo que B ocorreu. O <b>teorema de Bayes</b> atualiza uma crença com novas evidências. É a base de filtros de spam e de modelos que estimam riscos.","Calcule: de 1.000 CT-es, 100 atrasaram e 60 desses eram de sexta. Qual P(atraso | sexta) se 200 CT-es foram de sexta?"],
+["Amostragem e testes A/B","Um teste A/B compara duas versões com grupos aleatórios. Defina a métrica antes, tenha amostra suficiente e veja se a diferença é estatisticamente significativa (p-valor). Correlação vista sem experimento não prova causa.","Planeje um teste A/B de mensagem de aviso de entrega aos clientes."],
+["Análise exploratória (EDA)","A EDA é o primeiro contato com os dados: tamanho, tipos, valores faltantes, distribuição de cada coluna, outliers e correlações. Use <code>df.describe()</code>, <code>df.isna().sum()</code>, histogramas e mapa de correlação.","Faça uma EDA completa de uma base de CT-es e escreva 5 descobertas."]],
+q:[["Teste A/B serve para:",["Comparar duas versões com grupos aleatórios","Limpar dados","Treinar redes neurais","Gerar texto"],0,"O teste A/B compara versões de forma controlada."],["df.isna().sum() mostra:",["A soma das colunas","Valores faltantes por coluna","O tamanho da tabela","Os tipos de dados"],1,"Conta valores ausentes em cada coluna."]]},
+{n:"Engenharia de Dados",o:"Buscar, limpar e preparar dados para modelagem.",w:[
+["SQL e preparação","","Escreva 3 consultas SQL sobre uma tabela de CT-es.","ia-0-3"],
+["Limpeza de dados","Tarefas: remover duplicados (<code>drop_duplicates</code>), tratar ausentes (remover, preencher com média ou 'desconhecido'), corrigir tipos (datas como data), padronizar textos (maiúsculas, siglas), e tratar outliers com critério. Documente cada decisão.","Limpe uma base real e registre cada decisão num caderno."],
+["Engenharia de variáveis","Criar boas variáveis vale mais que trocar de algoritmo. Exemplos: dia da semana e mês a partir da data, distância entre cidades, peso por volume, histórico de atrasos do cliente. Variáveis categóricas viram números com <b>one-hot encoding</b>.","Crie 5 variáveis novas para prever atraso de entrega."],
+["APIs e coleta de dados","Com a biblioteca <code>requests</code> você chama APIs: <code>requests.get(url, headers=...)</code> e lê <code>.json()</code>. Respeite limites de requisição e nunca deixe tokens no código (use variáveis de ambiente).","Consuma uma API pública (ex.: ViaCEP) e monte um DataFrame."]],
+q:[["One-hot encoding serve para:",["Normalizar números","Transformar categorias em colunas numéricas","Remover duplicados","Gerar gráficos"],1,"Cada categoria vira uma coluna 0/1."],["Onde guardar o token de uma API?",["No código","Em variável de ambiente ou cofre","No nome do arquivo","No GitHub público"],1,"Tokens ficam fora do código."]]},
+{n:"Machine Learning Supervisionado",o:"Treinar modelos de regressão e classificação.",w:[
+["Supervisionado: regressão e classificação","","Defina um problema de regressão e um de classificação na empresa.","ia-1-0"],
+["Regressão linear e logística","A <b>regressão linear</b> ajusta uma reta (ou plano) que prevê um número. A <b>logística</b> prevê a probabilidade de uma classe (0 a 1). Ambas são simples, rápidas e interpretáveis: os coeficientes mostram o peso de cada variável.","Treine uma regressão linear para prever prazo pela distância."],
+["Árvores, florestas e boosting","Uma <b>árvore de decisão</b> faz perguntas em sequência. A <b>random forest</b> combina centenas de árvores com amostras diferentes. O <b>boosting</b> (XGBoost, LightGBM) cria árvores que corrigem o erro das anteriores e costuma vencer em dados de tabela.","Compare árvore, random forest e XGBoost no mesmo problema."],
+["Pipeline no scikit-learn","Um <code>Pipeline</code> junta pré-processamento e modelo numa peça só, evitando vazamento de dados e facilitando o uso em produção. Use <code>ColumnTransformer</code> para tratar colunas numéricas e categóricas de formas diferentes.","Monte um pipeline completo com tratamento de dados e modelo."]],
+q:[["Qual modelo costuma ter melhor desempenho em dados de tabela?",["Regressão linear sempre","Gradient boosting","K-means","PCA"],1,"Boosting é muito forte em dados tabulares."],["O Pipeline do scikit-learn ajuda principalmente a:",["Desenhar gráficos","Evitar vazamento de dados e organizar o fluxo","Gerar texto","Baixar dados"],1,"Junta etapas e evita vazamento."]]},
+{n:"Avaliação e Aprendizado Não Supervisionado",o:"Avaliar bem os modelos e descobrir padrões sem rótulo.",w:[
+["Avaliação e overfitting","","Monte a matriz de confusão do seu modelo de atraso.","ia-1-2"],
+["Ajuste de hiperparâmetros","Hiperparâmetros são configurações escolhidas antes do treino (profundidade da árvore, taxa de aprendizado). <b>GridSearchCV</b> testa combinações com validação cruzada; <b>RandomizedSearchCV</b> sorteia combinações e é mais rápido.","Use GridSearchCV para ajustar a profundidade de uma random forest."],
+["Clusterização","","Agrupe clientes por volume e frequência com K-means.","ia-1-1"],
+["Detecção de anomalias","Anomalias são registros muito diferentes do normal: fraude, erro de digitação, consumo fora do padrão. Métodos: regras estatísticas (z-score), <b>Isolation Forest</b> e autoencoders. Sempre confirme com uma pessoa antes de agir.","Encontre fretes com valor por kg fora do padrão usando Isolation Forest."]],
+q:[["GridSearchCV serve para:",["Limpar dados","Testar combinações de hiperparâmetros","Desenhar gráficos","Coletar dados"],1,"Busca a melhor combinação com validação cruzada."],["Isolation Forest é usado para:",["Classificação de imagens","Detecção de anomalias","Tradução","Regressão linear"],1,"Isola pontos raros, típicos de anomalias."]]},
+{n:"Séries Temporais e Previsão",o:"Prever demanda e volumes ao longo do tempo.",w:[
+["Componentes de uma série","Uma série temporal tem <b>tendência</b> (sobe ou desce no longo prazo), <b>sazonalidade</b> (padrões que se repetem: dia da semana, fim de mês, dezembro) e <b>ruído</b>. Decompor a série ajuda a entender cada parte.","Decomponha a série de coletas diárias e identifique a sazonalidade semanal."],
+["Modelos de previsão","Comece pelo simples: média móvel e 'mesmo dia da semana passada'. Depois teste ARIMA, <b>Prophet</b> (lida bem com feriados) e modelos de boosting com variáveis de calendário. Compare sempre com o modelo simples.","Faça a previsão das próximas 4 semanas com Prophet."],
+["Previsão de demanda na logística","","Use a previsão para sugerir escala de ajudantes por dia.","ia-2-3"],
+["Avaliação de previsões","Métricas: <b>MAE</b> (erro médio em unidades), <b>MAPE</b> (erro percentual médio) e viés (erra mais para cima ou para baixo?). Avalie com validação temporal: treine no passado e teste no período seguinte, nunca embaralhe as datas.","Calcule o MAPE do seu modelo nas últimas 8 semanas."]],
+q:[["Em séries temporais, a validação correta é:",["Embaralhar as datas","Treinar no passado e testar no futuro","Usar só o último dia","Não validar"],1,"A ordem do tempo deve ser respeitada."],["MAPE mede:",["Erro percentual médio","Acurácia de classes","Correlação","Tamanho da amostra"],0,"Mean Absolute Percentage Error."]]},
+{n:"Deep Learning e Visão Computacional",o:"Treinar redes neurais e aplicar visão computacional.",w:[
+["Redes neurais","","Desenhe uma rede com 3 entradas, 1 camada oculta e 1 saída.","ia-1-3"],
+["Treinando uma rede","No Keras: defina camadas (<code>Dense</code>), compile com otimizador (Adam) e função de perda, e treine com <code>fit</code>. Acompanhe a perda de treino e de validação: se a de validação sobe, é overfitting. Use <b>early stopping</b> e dropout.","Treine uma rede para prever atraso e compare com o XGBoost."],
+["Visão computacional","","Teste OCR em 10 fotos de canhotos e meça a taxa de acerto.","ia-2-2"],
+["Transfer learning","Em vez de treinar do zero, use um modelo já treinado em milhões de imagens (ResNet, EfficientNet) e ajuste só as últimas camadas com poucas centenas de exemplos seus. Funciona também com texto.","Ajuste um modelo pronto para classificar fotos de carga bem ou mal amarrada."]],
+q:[["Early stopping serve para:",["Treinar mais rápido sempre","Parar o treino antes do overfitting","Aumentar dados","Trocar de modelo"],1,"Interrompe quando a validação para de melhorar."],["Transfer learning é:",["Treinar do zero","Aproveitar um modelo já treinado","Transferir arquivos","Um tipo de banco de dados"],1,"Reaproveita conhecimento de um modelo pré-treinado."]]},
+{n:"Linguagem Natural e LLMs",o:"Entender e usar modelos de linguagem com segurança.",w:[
+["Processamento de linguagem natural","Texto vira números em etapas: <b>tokenização</b> (quebrar em pedaços), <b>embeddings</b> (vetores que representam significado) e modelos que usam esses vetores. Textos parecidos ficam com vetores próximos, o que permite busca por significado.","Calcule embeddings de 10 frases de reclamação e veja quais são parecidas."],
+["LLMs e RAG","","Escreva um prompt com papel, contexto, tarefa e formato para resumir ocorrências.","ia-2-0"],
+["Engenharia de prompt avançada","Técnicas: dar exemplos (few-shot), pedir passo a passo, definir formato de saída (JSON), separar instruções de dados com marcadores, pedir que o modelo diga quando não sabe. Teste o prompt com vários casos, incluindo casos difíceis.","Crie um prompt que extraia remetente, destino e peso de um e-mail em JSON."],
+["Construindo um RAG","Etapas: dividir documentos em trechos, gerar embeddings, guardar num banco vetorial (Chroma, FAISS), buscar os trechos mais próximos da pergunta e enviar junto ao LLM pedindo resposta com citação da fonte.","Monte um RAG simples com 5 ITs da empresa."]],
+q:[["Embeddings são:",["Imagens","Vetores que representam significado","Tabelas SQL","Senhas"],1,"Transformam texto em vetores numéricos."],["Pedir saída em JSON ajuda a:",["Deixar o texto bonito","Integrar a resposta a outros sistemas","Reduzir custo de GPU","Treinar o modelo"],1,"JSON é fácil de processar por código."]]},
+{n:"Agentes e Automação",o:"Criar agentes que usam ferramentas e automatizam processos.",w:[
+["Agentes e APIs","","Desenhe o fluxo de um agente que abre ocorrências a partir de e-mails.","ia-2-1"],
+["Ferramentas e MCP","Ferramentas são funções que o agente pode chamar, descritas por nome, descrição e parâmetros. O <b>MCP</b> (Model Context Protocol) padroniza a conexão entre agentes e sistemas, para que uma integração sirva a vários modelos.","Descreva 3 ferramentas que um agente de coletas precisaria."],
+["Automação de processos","Combine automação clássica (agendamentos, scripts, RPA) com IA onde há texto ou decisão. Regra prática: o que é fixo vira regra; o que é variável vai para a IA; o que é crítico passa por uma pessoa.","Automatize um relatório que você faz manualmente toda semana."],
+["Avaliação de sistemas com LLM","Monte um conjunto de casos de teste com a resposta esperada e meça acertos a cada mudança de prompt ou modelo. Monitore em produção: custo, tempo, erros e satisfação. Guarde exemplos de falhas para melhorar.","Crie 20 casos de teste para seu prompt de extração de e-mails."]],
+q:[["MCP é:",["Um modelo de imagem","Um protocolo para conectar agentes a sistemas","Uma linguagem de programação","Uma métrica"],1,"Model Context Protocol padroniza conexões."],["Em uma automação, decisões críticas devem:",["Ser totalmente automáticas","Passar por revisão humana","Ser aleatórias","Ser ignoradas"],1,"Mantenha uma pessoa no circuito nas decisões críticas."]]},
+{n:"Produção, Segurança e Governança",o:"Colocar soluções em uso com segurança e responsabilidade.",w:[
+["Deploy de modelos","Para usar um modelo no dia a dia: salve-o (<code>joblib</code>), exponha por uma API (FastAPI) ou rode em lotes agendados. Versione modelo e dados, registre previsões e monitore o <b>drift</b> (quando os dados mudam e o modelo piora).","Salve seu modelo e crie uma função que faça previsões de um arquivo novo."],
+["Painéis e apps","Streamlit transforma um script Python num app web em minutos: filtros, gráficos, upload de arquivo e resultado do modelo. Ótimo para mostrar valor rápido para a operação.","Crie um app Streamlit que mostre a previsão de atrasos."],
+["Ética, LGPD e ISO/IEC 42001","","Liste os dados pessoais que seu projeto usa e a base legal de cada um.","ia-3-0"],
+["Segurança em sistemas de IA","Riscos: <b>prompt injection</b> (texto malicioso que tenta mudar as instruções), vazamento de dados sensíveis, ações indevidas de agentes. Defesas: tratar conteúdo externo como dado, limitar permissões, confirmar ações importantes e registrar logs.","Revise seu agente: que ações ele pode fazer sem confirmação?"]],
+q:[["Drift de dados significa:",["O modelo ficou mais rápido","Os dados mudaram e o modelo piora","Backup de dados","Novo algoritmo"],1,"Mudança nos dados reduz o desempenho."],["Prompt injection é:",["Um tipo de embedding","Texto malicioso que tenta alterar as instruções","Uma técnica de treino","Um banco vetorial"],1,"Conteúdo externo tentando manipular o modelo."]]},
+{n:"Projeto Final",o:"Entregar uma solução de IA real, medida e documentada.",w:[
+["Definição do projeto","","Escreva problema, métrica de sucesso e dados disponíveis.","ia-3-1"],
+["Desenvolvimento e testes","Construa a versão mínima funcionando, teste com dados reais, colete feedback de quem vai usar e só então refine. Registre resultados de cada versão numa tabela.","Entregue a primeira versão para um usuário testar."],
+["Apresentação e portfólio","Apresente em 10 minutos: problema, solução, resultado em números, aprendizados. Publique o código no GitHub com README claro e um post no LinkedIn.","Grave a apresentação e publique o projeto."]],
+q:[["A primeira versão de um projeto deve ser:",["Completa e perfeita","Mínima e funcionando","Só documentação","Secreta"],1,"Uma versão mínima permite aprender rápido."],["Um bom README deve explicar:",["Apenas o nome","O problema, como usar e os resultados","Só a licença","Nada"],1,"O README guia quem chega ao projeto."]]}
+],
+livros:[
+["Mãos à Obra: Aprendizado de Máquina com Scikit-Learn, Keras e TensorFlow","Aurélien Géron","O livro prático mais completo de ML."],
+["Python para Análise de Dados","Wes McKinney","Escrito pelo criador do pandas."],
+["Estatística Prática para Cientistas de Dados","Peter Bruce e Andrew Bruce","A estatística que realmente se usa em dados."],
+["Data Science do Zero","Joel Grus","Fundamentos implementados do zero em Python."],
+["Inteligência Artificial: Uma Abordagem Moderna","Stuart Russell e Peter Norvig","A referência acadêmica de IA."],
+["Hands-On Large Language Models","Jay Alammar e Maarten Grootendorst","LLMs, embeddings e RAG com exemplos visuais."]],
+sites:[
+["Kaggle Learn","https://www.kaggle.com/learn","Microcursos gratuitos de Python, pandas e ML."],
+["Machine Learning Crash Course","https://developers.google.com/machine-learning/crash-course","Curso gratuito do Google."],
+["scikit-learn","https://scikit-learn.org","Documentação com exemplos de todos os modelos."],
+["Hugging Face Learn","https://huggingface.co/learn","Cursos gratuitos de NLP e LLMs."],
+["fast.ai","https://www.fast.ai","Deep learning prático e gratuito."],
+["Google Colab","https://colab.research.google.com","Python no navegador com GPU grátis."]]
+});
+
+</script>
+<script>
+window.CURSOS=window.CURSOS||[];
+window.CURSOS.push({
+id:"aud",nome:"Preparatório Auditor ISO 9001 · 14001 · 45001",curto:"Auditor SGI",nivel:"Auditor interno e líder · Sistema Integrado",
+sobre:"Preparação completa para auditar sistemas integrados de qualidade, meio ambiente e segurança, com técnicas da ISO 19011, simulados e preparação para a prova de auditor líder.",
+horas:4,parcela:200,parcelas:8,
+mods:[
+{n:"Fundamentos de Auditoria e SGI",o:"Entender sistemas de gestão integrados e o papel do auditor.",w:[
+["Sistemas de gestão e Estrutura Harmonizada","Um sistema de gestão é o conjunto de políticas, processos e recursos para atingir objetivos. As normas ISO de sistemas de gestão usam a mesma <b>Estrutura Harmonizada</b> (cláusulas 4 a 10), com textos e termos em comum. Por isso 9001, 14001 e 45001 se integram bem num SGI.","Faça uma tabela das cláusulas 4 a 10 e marque o que é comum às três normas."],
+["Tipos de auditoria","","Classifique as auditorias que a MIR recebe ou faz em 1ª, 2ª ou 3ª parte.","aud-3-3"],
+["Princípios e programa de auditoria","","Escreva os 7 princípios de auditoria com um exemplo de cada.","aud-3-0"],
+["Competências do auditor","A ISO 19011 lista comportamentos esperados: ético, mente aberta, diplomático, observador, perceptivo, versátil, persistente, decidido, autoconfiante. Conhecimentos: princípios de auditoria, normas, contexto da organização e requisitos legais. A competência é desenvolvida com formação e prática.","Faça uma autoavaliação de 1 a 5 em cada comportamento."]],
+q:[["A Estrutura Harmonizada facilita:",["Certificar sem auditoria","Integrar normas de sistemas de gestão","Eliminar documentos","Dispensar a liderança"],1,"A estrutura comum permite integrar as normas."],["Qual comportamento é esperado de um auditor?",["Impaciente","Mente aberta","Parcial","Agressivo"],1,"Mente aberta é um dos comportamentos citados."]]},
+{n:"ISO 9001 para Auditores",o:"Interpretar os requisitos da ISO 9001:2026 com foco em evidências.",w:[
+["Requisitos das cláusulas 4 a 10","","Monte uma lista de verificação com 2 perguntas por cláusula.","aud-0-0"],
+["Mudanças da ISO 9001:2026","","Liste o que mudaria numa auditoria de transição da MIR.","aud-0-1"],
+["Riscos e oportunidades","","Analise a matriz de riscos da empresa como auditor: está coerente com o contexto?","aud-0-2"],
+["Operação em transportadora","A cláusula 8 na prática: requisitos do cliente (8.2: cotação, contrato, prazos), controle de terceiros (8.4: agregados, redespacho), prestação do serviço (8.5: rastreabilidade, preservação da carga, propriedade do cliente), liberação (8.6) e saídas não conformes (8.7: avarias, extravios).","Escolha 3 requisitos da cláusula 8 e descreva a evidência que pediria."]],
+q:[["A carga do cliente sob guarda da transportadora é tratada em:",["8.5 (propriedade do cliente)","7.1","9.2","5.2"],0,"8.5.3 trata da propriedade pertencente a clientes."],["Na auditoria, a pergunta-chave para cada requisito é:",["Quem é o culpado?","Qual evidência mostra que isso é feito?","Quanto custa?","Quando acaba?"],1,"Auditoria se baseia em evidências."]]},
+{n:"ISO 14001 para Auditores",o:"Auditar o sistema de gestão ambiental.",w:[
+["Visão geral e política ambiental","A ISO 14001 tem a mesma estrutura da 9001, com foco em proteger o meio ambiente, cumprir obrigações de conformidade e melhorar o desempenho ambiental. A política deve incluir compromisso com proteção ambiental, prevenção da poluição e atendimento às obrigações legais. A perspectiva de ciclo de vida é central.","Compare a política ambiental de uma empresa de transporte com os requisitos."],
+["Aspectos e impactos","","Monte a planilha de aspectos e impactos de uma unidade.","aud-1-0"],
+["Requisitos legais","","Liste as 5 principais obrigações legais ambientais de uma transportadora.","aud-1-1"],
+["Emergências ambientais","","Avalie o último simulado de emergência: houve registro e melhoria?","aud-1-2"]],
+q:[["A política ambiental deve incluir compromisso com:",["Lucro máximo","Prevenção da poluição","Redução de salários","Expansão internacional"],1,"Prevenção da poluição é obrigatória na política."],["Licença ambiental vencida em auditoria é normalmente:",["Oportunidade de melhoria","NC maior","Conformidade","Observação sem importância"],1,"Falha em obrigação legal é grave."]]},
+{n:"ISO 45001 para Auditores",o:"Auditar o sistema de saúde e segurança ocupacional.",w:[
+["Visão geral e NRs","A ISO 45001 busca locais de trabalho seguros e saudáveis, prevenindo lesões e doenças. No Brasil, ela convive com as <b>Normas Regulamentadoras</b> (NRs), que são obrigação legal: NR-1 (gerenciamento de riscos/PGR), NR-6 (EPI), NR-11 (transporte e movimentação de materiais), NR-17 (ergonomia), NR-35 (trabalho em altura).","Liste as NRs aplicáveis a um armazém de carga fracionada."],
+["Perigos e riscos","","Faça o levantamento de perigos de uma doca com a hierarquia de controles.","aud-2-0"],
+["Consulta e participação","","Prepare 3 perguntas para entrevistar um trabalhador sobre participação.","aud-2-1"],
+["Incidentes","","Analise um quase acidente com os 5 porquês.","aud-2-2"]],
+q:[["Qual NR trata do gerenciamento de riscos ocupacionais (PGR)?",["NR-1","NR-6","NR-11","NR-35"],0,"A NR-1 estabelece o GRO e o PGR."],["A NR-11 trata de:",["Trabalho em altura","Transporte e movimentação de materiais","Ergonomia","EPI"],1,"NR-11: transporte, movimentação, armazenagem e manuseio de materiais."]]},
+{n:"Técnicas de Auditoria",o:"Planejar, conduzir e relatar auditorias.",w:[
+["Planejamento e plano de auditoria","O plano define objetivos, escopo, critérios, locais, datas, horários, equipe e processos a auditar. Envie ao auditado com antecedência. Prepare-se analisando documentos, resultados anteriores e riscos do processo.","Escreva o plano de auditoria de 1 dia em uma unidade."],
+["Checklist, evidências e amostragem","","Monte um checklist da expedição com amostragem definida.","aud-3-1"],
+["Entrevista e postura","Apresente-se e explique o objetivo. Faça perguntas abertas, escute mais do que fala, peça para ver. Evite discutir ou dar consultoria durante a auditoria. Confirme o entendimento e agradeça. Registre fatos, não impressões.","Faça uma entrevista simulada com um colega e peça feedback."],
+["Não conformidades e relatório","","Redija 3 NCs com requisito, evidência e declaração.","aud-3-2"]],
+q:[["O plano de auditoria deve ser enviado ao auditado:",["Depois da auditoria","Com antecedência","Nunca","Só se ele pedir"],1,"O auditado precisa se preparar."],["Durante a auditoria o auditor deve evitar:",["Pedir evidências","Dar consultoria","Fazer perguntas abertas","Registrar fatos"],1,"Consultoria compromete a imparcialidade."]]},
+{n:"Auditoria Integrada e Liderança",o:"Conduzir e liderar auditorias de sistemas integrados.",w:[
+["Conduzindo auditoria integrada","Organize por processo, não por norma: ao auditar a expedição, verifique qualidade, meio ambiente e segurança juntos. Use um checklist com colunas para cada norma. Atenção para não deixar requisitos específicos sem cobertura.","Monte um checklist integrado de um processo."],
+["Liderando a equipe","O auditor líder planeja, distribui tarefas, conduz as reuniões de abertura e encerramento, resolve conflitos, consolida constatações e decide a conclusão. Na reunião de encerramento, apresente as constatações com clareza e confirme o entendimento.","Escreva o roteiro da reunião de encerramento."],
+["Acompanhamento e eficácia","Após o relatório, o auditado define correções e ações corretivas. O auditor avalia se o plano trata a causa e, depois, se a ação foi eficaz. NC maior normalmente exige evidência antes da recomendação para certificação.","Avalie um plano de ação real: ele trata a causa raiz?"]],
+q:[["Numa auditoria integrada, é recomendado organizar por:",["Norma","Processo","Ordem alfabética","Departamento financeiro"],1,"Auditar por processo cobre as normas de forma natural."],["Quem conduz a reunião de encerramento?",["O auditado","O auditor líder","O consultor","A certificadora sempre"],1,"É papel do auditor líder."]]},
+{n:"Preparação Final",o:"Revisar, simular e conquistar a certificação.",w:[
+["Simulados e estudos de caso","","Resolva 30 questões e anote os temas que errou.","aud-4-0"],
+["Simulado geral","Faça um simulado cronometrado com questões das três normas e da ISO 19011. Revise especialmente: definições, classificação de NCs, hierarquia de controles, aspectos x impactos, princípios de auditoria e etapas da auditoria.","Faça o simulado completo em tempo real."],
+["Prova e certificação","","Agende a prova e organize seus registros de auditoria.","aud-4-1"]],
+q:[["Na hierarquia de controles, depois de eliminar vem:",["EPI","Substituir","Treinar","Sinalizar"],1,"Ordem: eliminar, substituir, engenharia, administrativo, EPI."],["O ciclo de certificação de terceira parte dura:",["1 ano","3 anos","5 anos","10 anos"],1,"Certificação de 3 anos com manutenções anuais."]]}
+],
+livros:[
+["ABNT NBR ISO 19011","ABNT","Diretrizes para auditoria de sistemas de gestão."],
+["ABNT NBR ISO 9001, 14001 e 45001","ABNT","As normas que você vai auditar. Leia com marcações."],
+["ISO 9001:2015 Explained","Cianfrani e West (ASQ)","Interpretação detalhada de cada requisito."],
+["The ISO 14001:2015 Implementation Handbook","Milton Dentch (ASQ)","Guia prático da gestão ambiental."],
+["Normas Regulamentadoras comentadas","Diversos autores","As NRs com explicações para aplicar com a ISO 45001."]],
+sites:[
+["ISO Online Browsing Platform","https://www.iso.org/obp","Definições oficiais e prévias das normas."],
+["Normas Regulamentadoras","https://www.gov.br/trabalho-e-emprego/pt-br","Texto oficial das NRs."],
+["Exemplar Global","https://exemplarglobal.org","Registro internacional de auditores."],
+["CQI e IRCA","https://www.quality.org","Formação e registro de auditores."],
+["Escola Virtual Gov","https://www.escolavirtual.gov.br","Cursos gratuitos de gestão e segurança."]]
+});
+
+</script>
+<script>
+window.CURSOS=window.CURSOS||[];
+window.CURSOS.push({
+id:"ing",nome:"Curso de Inglês",curto:"Inglês",nivel:"Do básico (A1) ao avançado (B2) · até dez/2028",
+sobre:"Inglês do zero à fluência profissional em 4 níveis: base, intermediário, técnico e negócios, com rotina diária curta e prova de proficiência no fim.",
+horas:3,parcela:250,parcelas:26,
+rotina:"Rotina diária de 25 minutos: 10 min de Anki (vocabulário), 10 min de áudio (podcast ou série) e 5 min falando em voz alta.",
+mods:[
+{n:"Nível 1 · Primeiros passos",o:"Apresentar-se e entender frases básicas.",w:[
+["Verb to be","O verbo to be (ser/estar) é a base de tudo: <i>I am, you are, he/she/it is, we/they are</i>. Pergunta: inverta (<i>Are you ready?</i>). Negativa: acrescente not (<i>She isn't here</i>).\n\n<i>I am a quality analyst. The truck is late. Are they at the dock?</i>","Escreva 10 frases sobre você e seu trabalho usando to be."],
+["Pronomes e possessivos","Sujeito: <i>I, you, he, she, it, we, they</i>. Possessivos: <i>my, your, his, her, its, our, their</i>. O 's indica posse: <i>the driver's phone</i> (o telefone do motorista).","Descreva sua família ou equipe usando possessivos."],
+["There is / there are e artigos","<i>There is</i> (singular) e <i>there are</i> (plural) significam 'há/tem'. <b>A/an</b> = um/uma (an antes de som de vogal: <i>an invoice</i>). <b>The</b> = o/a/os/as, algo específico.\n\n<i>There are three trucks at the dock. There is an error in the invoice.</i>","Descreva sua unidade de trabalho com 8 frases usando there is/are."],
+["Números, datas e horas","Números 1-100, ordinais (<i>first, second, third</i>), datas (<i>November 10th</i>), horas (<i>It's half past nine</i> = 9h30; <i>quarter to five</i> = 16h45). Em inglês americano a data é mês/dia: 11/10 = 10 de novembro.","Diga em voz alta 10 horários e 10 datas do seu calendário."]],
+q:[["Qual frase está correta?",["She are here.","She is here.","She am here.","She be here."],1,"He/she/it usa is."],["Como se diz 'Há dois caminhões'?",["There is two trucks.","There are two trucks.","It has two trucks.","Have two trucks."],1,"Plural usa there are."]]},
+{n:"Nível 1 · Presente",o:"Falar de rotinas e do que está acontecendo agora.",w:[
+["Simple present","Usado para rotinas e fatos. Com he/she/it acrescente -s: <i>He works at night. The office opens at 8.</i> Verbos terminados em -o, -sh, -ch ganham -es: <i>goes, finishes, watches</i>.","Escreva sua rotina de um dia de trabalho em 8 frases."],
+["Perguntas e negativas com do/does","Pergunta: <i>Do you work on Saturdays? Does she speak English?</i> Negativa: <i>I don't drive. He doesn't work here.</i> Com does o verbo perde o -s.","Faça 5 perguntas a um colega imaginário sobre a rotina dele."],
+["Advérbios de frequência","<i>always</i> (sempre), <i>usually</i> (geralmente), <i>often</i> (frequentemente), <i>sometimes</i> (às vezes), <i>rarely</i> (raramente), <i>never</i> (nunca). Ficam antes do verbo principal e depois do to be: <i>I usually check the reports. He is always on time.</i>","Diga com que frequência você faz 8 atividades."],
+["Present continuous","Para ações acontecendo agora ou planos próximos: to be + verbo com -ing. <i>I am working now. The driver is loading the truck. We are meeting tomorrow.</i>","Descreva o que 6 pessoas estão fazendo agora na sua empresa."]],
+q:[["Complete: She ___ in the warehouse.",["work","works","working","is work"],1,"He/she/it no presente simples recebe -s."],["Complete: ___ he speak English?",["Do","Does","Is","Are"],1,"Pergunta com he usa does."]]},
+{n:"Nível 1 · Passado e futuro",o:"Contar o que aconteceu e falar de planos.",w:[
+["Simple past: regulares","Verbos regulares ganham -ed: <i>work → worked, deliver → delivered, stop → stopped</i>. A pronúncia do -ed tem 3 sons: /t/ (worked), /d/ (delivered), /id/ (started, só depois de t ou d).","Escreva 8 coisas que você fez ontem com verbos regulares."],
+["Simple past: irregulares","Os mais usados: <i>go/went, have/had, get/got, make/made, take/took, send/sent, come/came, see/saw, say/said, buy/bought, think/thought, leave/left</i>. Pergunta e negativa usam did: <i>Did you send it? I didn't see it.</i>","Coloque os 12 verbos no Anki e escreva uma frase com cada um."],
+["Futuro: will e going to","<b>Will</b>: decisões na hora, promessas e previsões (<i>I'll call you back</i>). <b>Going to</b>: planos já decididos e previsões com evidência (<i>We're going to open a new unit</i>).","Escreva 5 planos para 2027 com going to."],
+["Os três tempos lado a lado","","Conte uma história curta usando presente, passado e futuro.","ing-0-0"]],
+q:[["Qual é o passado de 'send'?",["sended","sent","send","sant"],1,"Send é irregular: sent."],["Decisão tomada na hora: 'The phone is ringing. I ___ answer it.'",["am going to","will","did","am"],1,"Decisão espontânea usa will."]]},
+{n:"Nível 1 · Vocabulário de trabalho",o:"Dominar as palavras do seu dia a dia profissional.",w:[
+["Logística e transporte","","Cadastre 30 palavras de logística no Anki.","ing-0-1"],
+["Profissões e setores","<i>manager</i> (gerente), <i>supervisor</i>, <i>analyst</i>, <i>driver</i> (motorista), <i>clerk</i> (auxiliar administrativo), <i>sales representative</i>, <i>IT department</i>, <i>HR</i> (RH), <i>finance</i>, <i>customer service</i> (SAC), <i>operations</i>.","Descreva o organograma da sua empresa em inglês."],
+["Descrevendo sua empresa","<i>We are a freight company based in Santa Catarina. We have X branches. We provide LTL (less than truckload) services. Our main customers are…</i> LTL é a carga fracionada.","Escreva um parágrafo apresentando a empresa."],
+["Sua rotina de trabalho","Use verbos de trabalho: <i>check, update, send, review, schedule, solve, report, attend (a meeting), deal with</i>.\n\n<i>Every morning I check the reports and update the dashboards.</i>","Grave um áudio de 1 minuto contando sua rotina."]],
+q:[["Carga fracionada em inglês é:",["Full truckload","LTL (less than truckload)","Bulk cargo","Container"],1,"LTL = less than truckload."],["'Customer service' corresponde a:",["Financeiro","SAC/atendimento","Logística","RH"],1,"Atendimento ao cliente."]]},
+{n:"Nível 1 · Listening e pronúncia",o:"Treinar o ouvido e a fala.",w:[
+["Como treinar o listening","","Faça a técnica das 3 escutas com um episódio de 6 Minute English.","ing-0-2"],
+["Sons difíceis para brasileiros","<b>TH</b>: ponta da língua entre os dentes (<i>think, three, the</i>). Não acrescente 'i' no fim (<i>stop</i>, não 'stópi'). Diferencie <i>ship/sheep</i> e <i>live/leave</i>. H aspirado: <i>house, hotel</i>.","Grave-se lendo 10 palavras com TH e compare com o Cambridge Dictionary."],
+["Soletrar e números ao telefone","Alfabeto com atenção a <i>A (ei), E (í), I (ai), G (dji), J (djei), R (ar), W (dâbliu), Y (uai)</i>. Diferencie <i>thirteen</i> (13) e <i>thirty</i> (30): a sílaba forte muda.","Soletre seu nome, e-mail e o nome da empresa em voz alta."],
+["Telefonemas simples","<i>Hello, this is ___ from ___. Could I speak to ___? Could you hold on a second? I'll put you through. Can I take a message?</i>","Simule uma ligação de confirmação de coleta."]],
+q:[["Qual par se distingue pela sílaba tônica?",["Thirteen / thirty","Ship / sheep","Think / sink","Live / leave"],0,"thirTEEN tem tônica no fim; THIRty no começo."],["'I'll put you through' em uma ligação significa:",["Vou desligar","Vou transferir a ligação","Vou anotar","Vou repetir"],1,"Transferir para a pessoa desejada."]]},
+{n:"Nível 1 · Estruturas básicas",o:"Completar a base gramatical do nível A2.",w:[
+["Can e could","<i>Can</i> = poder/conseguir (<i>I can drive</i>). <i>Could</i> = passado de can ou pedido educado (<i>Could you help me?</i>). Negativa: <i>can't, couldn't</i>.","Escreva 5 coisas que você sabe fazer e 5 pedidos com could."],
+["Comparativos e superlativos","Palavras curtas: <i>-er / the -est</i> (<i>faster, the fastest</i>). Longas: <i>more / the most</i> (<i>more efficient, the most efficient</i>). Irregulares: <i>good/better/best, bad/worse/worst</i>.","Compare 3 rotas da empresa (distância, tempo, custo)."],
+["Preposições de tempo e lugar","Tempo: <i>at</i> (horas: at 9), <i>on</i> (dias: on Monday), <i>in</i> (meses, anos: in November). Lugar: <i>at</i> (ponto: at the dock), <i>on</i> (superfície), <i>in</i> (dentro: in the warehouse).","Escreva 10 frases sobre a agenda da semana com as preposições certas."],
+["Contáveis e incontáveis","Contáveis: <i>boxes, trucks</i> (many, a few). Incontáveis: <i>information, equipment, freight, advice</i> (much, a little) e nunca levam -s. <i>Some</i> em afirmativas, <i>any</i> em perguntas e negativas.","Faça 8 frases com much, many, some e any."]],
+q:[["Complete: The meeting is ___ Monday.",["in","on","at","to"],1,"Dias da semana usam on."],["Qual palavra é incontável?",["truck","information","box","driver"],1,"Information não tem plural em inglês."]]},
+{n:"Nível 2 · Present perfect",o:"Falar de experiências e de ações com ligação ao presente.",w:[
+["Forma e uso","have/has + particípio: <i>I have worked here for five years. She has sent the report.</i> Usado para experiências, ações recentes com efeito agora e situações que continuam.","Escreva 6 frases sobre sua experiência profissional."],
+["For, since, already, yet, just","<i>for</i> + período (for 3 years), <i>since</i> + ponto inicial (since 2020). <i>already</i> (já), <i>yet</i> (ainda/já, em perguntas e negativas), <i>just</i> (acabou de).\n\n<i>Have you sent it yet? I've just finished.</i>","Responda 6 perguntas sobre tarefas da semana com already, yet e just."],
+["Present perfect x simple past","Simple past = momento definido (<i>I sent it yesterday</i>). Present perfect = sem momento definido ou ainda em aberto (<i>I have sent it</i>). Com yesterday, last week, in 2020 use sempre o simple past.","Corrija 10 frases misturando os dois tempos."],
+["Contando sua experiência","Estrutura: <i>I have been working in ___ for ___. I have worked on projects such as ___. Last year I ___.</i>","Escreva seu perfil profissional em 6 linhas para o LinkedIn."]],
+q:[["Complete: I have lived here ___ 2019.",["for","since","ago","yet"],1,"Since + ponto inicial."],["Qual frase está correta?",["I have sent it yesterday.","I sent it yesterday.","I have send it yesterday.","I did sent it yesterday."],1,"Com yesterday usa-se o simple past."]]},
+{n:"Nível 2 · Conversação",o:"Manter uma conversa com naturalidade.",w:[
+["Frases prontas para conversar","","Grave 2 minutos falando sobre seu fim de semana.","ing-1-0"],
+["Small talk","Conversa leve antes de reuniões: <i>How was your weekend? How's the weather there? Busy week?</i> Responda e devolva a pergunta: <i>Pretty good, thanks. And you?</i> Evite temas polêmicos.","Prepare 5 perguntas de small talk e suas respostas."],
+["Pedir e dar opinião","<i>What do you think about…? How do you feel about…? In my view… From my point of view… I'm not sure about that.</i>","Dê sua opinião sobre trabalho remoto em 5 frases."],
+["Contando histórias (past continuous)","Past continuous (was/were + -ing) descreve a ação em andamento quando outra aconteceu: <i>I was driving when the customer called.</i> Use <i>first, then, after that, finally</i>.","Conte um problema que aconteceu no trabalho e como foi resolvido."]],
+q:[["Complete: I ___ working when he called.",["am","was","were","did"],1,"I com past continuous usa was."],["Resposta natural para 'How was your weekend?':",["Yes.","Pretty good, thanks. And you?","I am weekend.","No problem."],1,"Responda e devolva a pergunta."]]},
+{n:"Nível 2 · Modais e instruções",o:"Dar conselhos, expressar obrigação e possibilidade.",w:[
+["Should, must e have to","<i>should</i> = conselho (<i>You should check the invoice</i>). <i>must</i> = obrigação forte, muitas vezes interna ou regra escrita. <i>have to</i> = obrigação externa. <i>don't have to</i> = não precisa; <i>mustn't</i> = é proibido.","Escreva 5 regras de segurança do armazém com must e mustn't."],
+["May e might","Possibilidade: <i>The truck might be late. It may rain tomorrow.</i> May também é usado para pedir permissão de forma formal: <i>May I come in?</i>","Escreva 5 riscos para a próxima semana com might."],
+["Pedidos educados","Do mais direto ao mais educado: <i>Can you…? Could you…? Would you mind + -ing…? I was wondering if you could…</i>","Reescreva 5 pedidos diretos de forma educada."],
+["Instruções e sequências","Imperativo: <i>Check the seal. Sign the form.</i> Sequência: <i>First, … Next, … Then, … Finally, …</i> Negativa: <i>Don't stack the boxes.</i>","Escreva em inglês o passo a passo de um processo da empresa."]],
+q:[["'You mustn't smoke here' significa:",["Não precisa fumar","É proibido fumar aqui","Você deveria fumar","Talvez fume"],1,"Mustn't indica proibição."],["O pedido mais educado é:",["Give me the file.","Can you give me the file?","Would you mind sending me the file?","File, please."],2,"Would you mind + -ing é o mais polido."]]},
+{n:"Nível 2 · Phrasal verbs e expressões",o:"Soar natural com as combinações mais usadas.",w:[
+["Phrasal verbs de trabalho","","Use 8 phrasal verbs em frases sobre sua semana.","ing-1-1"],
+["Mais phrasal verbs","<i>get back to</i> (retornar), <i>put off</i> (adiar), <i>call off</i> (cancelar), <i>come up with</i> (criar ideia), <i>deal with</i> (lidar), <i>sort out</i> (resolver), <i>fill in</i> (preencher), <i>check in/out</i>.","Escreva um e-mail curto usando 4 deles."],
+["Collocations: make e do","<b>Make</b>: a decision, a mistake, a call, progress, an effort. <b>Do</b>: business, a job, research, homework, your best. Não traduza do português: é <i>make a decision</i>, não 'take a decision' no inglês americano.","Faça 10 frases com make e do."],
+["Expressões comuns","<i>It's up to you</i> (você decide), <i>on the same page</i> (alinhados), <i>keep me posted</i> (me mantenha informado), <i>ASAP</i>, <i>by the way</i>, <i>no worries</i>.","Use 4 expressões numa conversa simulada."]],
+q:[["'Call off the meeting' significa:",["Ligar para a reunião","Cancelar a reunião","Adiar a reunião","Começar a reunião"],1,"Call off = cancelar."],["Complete: I ___ a mistake.",["did","made","took","got"],1,"Make a mistake."]]},
+{n:"Nível 2 · Escrita profissional",o:"Escrever e-mails e mensagens claras.",w:[
+["E-mails de trabalho","","Escreva um e-mail confirmando uma coleta.","ing-1-2"],
+["Conectivos","Adição: <i>also, in addition, moreover</i>. Contraste: <i>but, however, although</i>. Causa: <i>because, since, due to</i>. Consequência: <i>so, therefore, as a result</i>.","Reescreva um parágrafo seu usando 5 conectivos."],
+["Mensagens rápidas","Em chats o tom é curto: <i>Quick question: … / Any update on…? / Thanks, will do. / On it.</i> Ainda assim, cumprimente e seja claro.","Escreva 5 mensagens de chat para situações do trabalho."],
+["Reclamações e respostas","Responder reclamação: agradecer o contato, pedir desculpas pelo problema, explicar o que aconteceu, dizer o que será feito e quando. <i>We apologize for the delay. We are looking into it and will update you by 3 p.m.</i>","Responda em inglês a uma reclamação de atraso."]],
+q:[["Qual conectivo expressa contraste?",["Therefore","However","Moreover","Because"],1,"However indica contraste."],["Ao responder uma reclamação deve-se:",["Culpar o cliente","Explicar e dizer o que será feito","Ignorar","Responder só sim"],1,"Mostre a solução e o prazo."]]},
+{n:"Nível 2 · Condicionais e passiva",o:"Construir frases mais complexas.",w:[
+["Zero e first conditional","Zero: verdades gerais (<i>If you heat ice, it melts</i>). First: situação real futura (<i>If the truck arrives late, we will reschedule</i>).","Escreva 6 frases sobre consequências de atrasos."],
+["Second conditional","Situação hipotética no presente: <i>If I had more time, I would study more. If we had another truck, we could deliver today.</i>","Escreva 6 frases sobre o que você faria se mudasse algo na empresa."],
+["Voz passiva","to be + particípio. Foco no que aconteceu, não em quem fez: <i>The cargo was delivered. Invoices are issued daily. The report will be sent tomorrow.</i>","Reescreva 8 frases na passiva."],
+["Orações relativas","<i>who</i> para pessoas, <i>which</i> para coisas, <i>that</i> para ambos, <i>where</i> para lugares: <i>The driver who delivered it… The unit where I work…</i>","Una 6 pares de frases com who, which ou where."]],
+q:[["Complete: If I ___ more time, I would study more.",["have","had","will have","has"],1,"Second conditional usa passado na condição."],["Voz passiva de 'They deliver the cargo':",["The cargo delivers","The cargo is delivered","The cargo delivered","The cargo was deliver"],1,"Presente passivo: is + particípio."]]},
+{n:"Nível 3 · Inglês técnico: Qualidade",o:"Ler e falar sobre normas e qualidade em inglês.",w:[
+["Normas ISO em inglês","","Leia a cláusula 7.2 em inglês e monte o glossário.","ing-2-0"],
+["Vocabulário de qualidade","<i>requirement, compliance, nonconformity, root cause analysis, corrective action, preventive measure, audit trail, internal audit, management review, objective evidence, continual improvement</i>.","Cadastre 25 termos no Anki com frase de exemplo."],
+["Lendo procedimentos","Procedimentos usam imperativo e passiva: <i>Records shall be retained for two years. The supervisor approves the plan.</i> Identifique quem faz, o que, quando e qual registro.","Traduza um procedimento curto da empresa para o inglês."],
+["Descrevendo processos","Use passiva e sequências: <i>First, the order is received. Then, the pickup is scheduled. After that, the cargo is loaded and transferred.</i>","Descreva em inglês o processo de entrega com 8 etapas."]],
+q:[["'Corrective action' significa:",["Ação preventiva","Ação corretiva","Correção imediata","Auditoria"],1,"Ação para eliminar a causa."],["'Objective evidence' é:",["Opinião","Evidência objetiva","Objetivo","Meta"],1,"Fato verificável usado na auditoria."]]},
+{n:"Nível 3 · Inglês técnico: Logística e dados",o:"Falar de logística, tecnologia e números.",w:[
+["Vocabulário técnico das suas áreas","","Explique em inglês o que você faz no trabalho em 5 frases.","ing-2-1"],
+["Supply chain","<i>supply chain, inbound/outbound, carrier, shipper, consignee, freight forwarder, proof of delivery (POD), tracking number, transit time, backhaul</i>.","Descreva a cadeia de uma carga do embarcador ao destinatário."],
+["Dados e tecnologia","<i>dashboard, database, query, spreadsheet, automation, machine learning model, accuracy, deploy, bug, update, feature</i>.","Explique em inglês um painel que você criou."],
+["Descrevendo números e gráficos","<i>increase, rise, go up / decrease, fall, drop / remain stable / peak / a slight/sharp increase / by 10% / from X to Y</i>.\n\n<i>On-time deliveries rose from 88% to 94% in Q3.</i>","Descreva um gráfico de indicadores da empresa em 6 frases."]],
+q:[["'Consignee' é:",["Remetente","Destinatário","Transportador","Seguradora"],1,"Consignee é quem recebe a carga."],["'A sharp increase' significa:",["Queda leve","Aumento forte","Estabilidade","Pico"],1,"Sharp = acentuado."]]},
+{n:"Nível 3 · Apresentações",o:"Apresentar resultados e projetos em inglês.",w:[
+["Estrutura de apresentação","","Monte 5 slides de um indicador da empresa.","ing-2-2"],
+["Transições","<i>Let's move on to… / This brings me to… / Going back to… / Let me give you an example… / To put it simply…</i>","Pratique as transições numa apresentação de 3 minutos."],
+["Perguntas da plateia","<i>That's a good question. / Let me get back to you on that. / If I understood correctly, you're asking… / As I mentioned…</i>","Prepare respostas para 5 perguntas difíceis."],
+["Apresentando um projeto","Estrutura: problema, solução, resultado, próximos passos. Fale devagar, use números e uma história real.","Grave a apresentação de um projeto seu de 5 minutos."]],
+q:[["'Let me get back to you on that' significa:",["Repita a pergunta","Vou te responder depois","Não sei e não vou saber","Próxima pergunta"],1,"Promessa de retornar com a resposta."],["Para mudar de tópico usa-se:",["Let's move on to…","Thank you.","Any questions?","Good morning."],0,"Move on = passar para o próximo."]]},
+{n:"Nível 3 · Gramática intermediária+",o:"Refinar a gramática para textos mais longos.",w:[
+["Past perfect","had + particípio: ação anterior a outra no passado. <i>When we arrived, the truck had already left.</i>","Conte uma situação usando past perfect."],
+["Reported speech","Relatar o que alguém disse: <i>He said (that) the cargo was ready. She asked if we had the invoice.</i> Os tempos recuam um passo.","Relate uma reunião recente em 6 frases."],
+["Gerúndio x infinitivo","Depois de <i>enjoy, avoid, finish, consider</i> use -ing. Depois de <i>want, need, decide, plan, agree</i> use to + verbo. <i>We avoid working late. We decided to hire.</i>","Faça 10 frases com cada grupo de verbos."],
+["Used to e be used to","<i>used to</i> = hábito no passado (<i>I used to work at night</i>). <i>be used to + -ing</i> = estar acostumado (<i>I'm used to working with data</i>).","Escreva 4 frases com cada estrutura."]],
+q:[["Complete: We decided ___ a new truck.",["buying","to buy","buy","bought"],1,"Decide + to + verbo."],["'I'm used to working at night' significa:",["Eu trabalhava à noite","Estou acostumado a trabalhar à noite","Vou trabalhar à noite","Uso a noite"],1,"Be used to + -ing = estar acostumado."]]},
+{n:"Nível 3 · Compreensão",o:"Entender textos e áudios autênticos.",w:[
+["Skimming e scanning","<b>Skimming</b>: ler rápido para pegar a ideia geral (título, primeiras frases). <b>Scanning</b>: procurar uma informação específica (número, nome). Não traduza palavra por palavra.","Leia 2 artigos da BBC em 10 minutos e resuma cada um em 2 frases."],
+["Podcasts e TED","Escolha falas de 10 a 15 minutos sobre seus temas. Primeiro ouça inteiro, depois com transcrição, anote 5 expressões e repita trechos (shadowing).","Assista a uma TED talk sobre IA ou liderança e anote 5 expressões."],
+["Vídeos técnicos","Tutoriais em inglês sobre Python, Excel ou ISO ensinam o idioma e o conteúdo ao mesmo tempo. Use legenda em inglês e velocidade 0,75x no começo.","Siga um tutorial técnico em inglês do começo ao fim."],
+["Resumir em inglês","Resumo: ideia principal em 1 frase, 2 a 3 pontos de apoio, conclusão. Use suas palavras.","Escreva um resumo em inglês de 100 palavras de um artigo."]],
+q:[["Procurar uma data específica num texto é:",["Skimming","Scanning","Shadowing","Speaking"],1,"Scanning busca informação pontual."],["Ao ler em inglês, o ideal é:",["Traduzir palavra por palavra","Buscar o sentido geral pelo contexto","Ler só o título","Usar só tradutor"],1,"Contexto antes de tradução."]]},
+{n:"Nível 4 · Reuniões",o:"Participar e conduzir reuniões e calls.",w:[
+["Frases de reunião","","Participe de uma conversa em inglês usando 5 frases da tabela.","ing-3-0"],
+["Conduzindo uma reunião","<i>The purpose of today's meeting is… / Let's look at the first item. / What are your thoughts? / Let's keep to the agenda. / We're running out of time.</i>","Conduza uma reunião simulada de 10 minutos."],
+["Videochamadas","<i>You're on mute. / Can you share your screen? / I'll drop the link in the chat. / Sorry, my connection is unstable.</i>","Faça uma chamada de 15 minutos em inglês (Cambly ou colega)."],
+["Atas e follow-up","Ata em inglês: <i>Attendees, Agenda, Decisions, Action items (owner, due date)</i>. Follow-up: <i>As discussed in today's meeting, here are the next steps…</i>","Escreva a ata de uma reunião real em inglês."]],
+q:[["'You're on mute' significa:",["Você está atrasado","Seu microfone está desligado","Você saiu","Fale mais alto"],1,"Microfone mudo."],["'Action items' numa ata são:",["Os participantes","As tarefas com dono e prazo","A pauta","Os anexos"],1,"Tarefas definidas na reunião."]]},
+{n:"Nível 4 · Negociação",o:"Negociar com clareza e diplomacia.",w:[
+["Negociação e relatórios","","Escreva 5 propostas condicionais para um cliente.","ing-3-1"],
+["Linguagem diplomática","Suavize com <i>I'm afraid…, It seems that…, Perhaps we could…, I'd suggest…, It might be better to…</i> em vez de afirmações duras.","Reescreva 6 frases diretas de forma diplomática."],
+["Lidando com objeções","Reconheça, pergunte, responda: <i>I understand your concern. Could you tell me more about…? What if we…?</i>","Responda a 4 objeções de preço."],
+["Fechando acordos","<i>So we agree on… / Let me summarize the terms. / I'll send you the proposal in writing. / Shall we move forward?</i>","Simule uma negociação completa de tabela de frete."]],
+q:[["Forma diplomática de dizer 'Your price is too high':",["Your price is bad.","I'm afraid the price is a bit higher than we expected.","No.","Change it."],1,"I'm afraid suaviza a mensagem."],["'Shall we move forward?' significa:",["Vamos voltar?","Vamos seguir em frente com o acordo?","Vamos cancelar?","Vamos almoçar?"],1,"Convite para avançar."]]},
+{n:"Nível 4 · Escrita avançada",o:"Escrever relatórios e textos sem erros comuns.",w:[
+["Estrutura de relatório","<i>Executive summary</i> (resumo para quem não vai ler tudo), <i>Background</i>, <i>Findings</i>, <i>Recommendations</i>, <i>Next steps</i>. Frases curtas e números.","Escreva um relatório de 1 página sobre um indicador."],
+["Third e mixed conditional","Third: passado hipotético (<i>If we had checked, we wouldn't have lost the cargo</i>). Mixed: passado com efeito presente (<i>If we had hired earlier, we would be ready now</i>).","Escreva 5 lições aprendidas usando third conditional."],
+["Conectivos avançados","<i>Nevertheless, whereas, provided that, in spite of, as long as, on the other hand, consequently</i>.","Reescreva seu relatório com 5 conectivos avançados."],
+["Erros comuns de brasileiros","Evite: <i>'I have 30 years'</i> (é <i>I'm 30</i>), <i>'make a question'</i> (é <i>ask</i>), <i>'explain me'</i> (é <i>explain to me</i>), <i>'informations'</i>, <i>'actually'</i> como 'atualmente' (é <i>currently</i>).","Revise 3 textos seus procurando esses erros."]],
+q:[["'Atualmente' em inglês é:",["Actually","Currently","Actual","Now actually"],1,"Actually significa 'na verdade'."],["Correto:",["Explain me the process.","Explain the process to me.","Explain to me me.","Me explain."],1,"Explain + algo + to + pessoa."]]},
+{n:"Nível 4 · Fluência B2",o:"Argumentar e se posicionar com confiança.",w:[
+["Debates e argumentação","Estrutura: posição, argumento, exemplo, conclusão. <i>I strongly believe that… For instance… That's why…</i> Concordar em parte: <i>I agree up to a point, but…</i>","Defenda uma opinião sobre IA no trabalho por 3 minutos."],
+["Entrevista de emprego","Perguntas comuns: <i>Tell me about yourself. What are your strengths? Tell me about a challenge you faced.</i> Use o método STAR: Situação, Tarefa, Ação, Resultado.","Responda 5 perguntas com o método STAR e grave."],
+["Networking e LinkedIn","Perfil em inglês: headline com área e especialidade, resumo em 4 linhas, experiências com resultados em números. Ao conectar: <i>Hi, I enjoyed your post on… I'd like to connect.</i>","Escreva seu perfil do LinkedIn em inglês."],
+["Cultura de negócios","Pontualidade, e-mails diretos, small talk curto, uso de primeiro nome, cuidado com humor. Em reuniões internacionais, confirme entendimentos por escrito.","Pesquise e anote 5 diferenças culturais com americanos e europeus."]],
+q:[["O método STAR serve para:",["Avaliar fornecedores","Estruturar respostas em entrevistas","Calcular frete","Escrever atas"],1,"Situação, Tarefa, Ação, Resultado."],["'I agree up to a point' significa:",["Concordo totalmente","Concordo em parte","Discordo totalmente","Não sei"],1,"Concordância parcial."]]},
+{n:"Nível 4 · Prova de proficiência",o:"Comprovar o nível B2 e manter o inglês vivo.",w:[
+["Conhecendo as provas","","Faça o EF SET e registre o resultado.","ing-3-2"],
+["TOEIC Listening","4 partes: fotos, pergunta e resposta, conversas e palestras curtas. Leia as perguntas antes do áudio e preste atenção em palavras-chave. Não fique preso numa questão.","Faça um simulado de listening e analise os erros."],
+["TOEIC Reading","3 partes: completar frases, completar textos e leitura de textos simples e múltiplos. Gerencie o tempo: cerca de 75 minutos para 100 questões.","Faça um simulado de reading cronometrado."],
+["Simulado completo","Faça a prova inteira em condições reais: sem pausa, sem dicionário. Compare com o EF SET anterior e revise os pontos fracos.","Faça o simulado completo e calcule sua pontuação."],
+["Plano de continuidade","Depois da prova, mantenha: 1 série ou podcast por semana, leitura técnica em inglês, 1 conversa por semana e uso real no trabalho. Idioma parado volta a cair.","Escreva seu plano de manutenção do inglês para 2029."]],
+q:[["No TOEIC Listening é recomendado:",["Ler as perguntas antes do áudio","Fechar os olhos","Ignorar as opções","Escrever tudo"],0,"Ler antes direciona a atenção."],["Para manter o inglês depois da prova:",["Parar de estudar","Manter contato semanal com o idioma","Estudar só gramática","Esquecer"],1,"Prática contínua mantém o nível."]]}
+],
+livros:[
+["English Grammar in Use","Raymond Murphy (Cambridge)","A melhor gramática para estudar sozinho. Edição azul até B1+."],
+["Business Vocabulary in Use","Bill Mascull (Cambridge)","Vocabulário de negócios com exercícios."],
+["English Collocations in Use","McCarthy e O'Dell","Combinações naturais de palavras."],
+["Official TOEIC Prep","ETS","Material oficial de preparação para o TOEIC."],
+["Graded readers Oxford ou Penguin","Vários","Livros adaptados por nível, ótimos para leitura."]],
+sites:[
+["BBC Learning English","https://www.bbc.co.uk/learningenglish","6 Minute English e cursos gratuitos por nível."],
+["EF SET","https://www.efset.org","Teste gratuito de nível alinhado ao CEFR."],
+["Anki","https://apps.ankiweb.net","Flashcards com repetição espaçada."],
+["Cambridge Dictionary","https://dictionary.cambridge.org","Significado e pronúncia com áudio."],
+["YouGlish","https://youglish.com","Ouça qualquer palavra em vídeos reais."],
+["TED","https://www.ted.com","Palestras com transcrição e legenda."]]
+});
+
+</script>
+
 <script>
 const C=window.CURSOS, A=window.AULAS||{};
 const INICIO=new Date(2026,10,16), DIA=864e5, HOJE=new Date(); HOJE.setHours(0,0,0,0);

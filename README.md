@@ -4,11 +4,7 @@ Painel pessoal com 4 trilhas de estudo (Pós em Gestão da Qualidade, Pós em IA
 
 ## Estrutura
 
-```
-index.html        painel (abre direto no navegador)
-js/aulas-*.js     aulas completas com exercícios
-js/curso-*.js     módulos, semanas, livros e sites de cada curso
-```
+Tudo fica em um único arquivo: `index.html` (painel, aulas e cursos).
 
 ## Publicar no GitHub Pages
 
@@ -28,5 +24,5 @@ js/curso-*.js     módulos, semanas, livros e sites de cada curso
 ## Observações
 
 - O progresso (aulas concluídas, parcelas pagas e nome do certificado) fica salvo no navegador (localStorage). Usar outro navegador ou limpar os dados do site zera o progresso.
-- Para editar conteúdo, altere os arquivos em `js/`. Cada semana é uma linha `[título, texto, atividade, aula-completa-opcional]`.
+- Para editar conteúdo, procure o curso dentro do `index.html` (busque por `id:"qual"`, `id:"ia"`, `id:"aud"` ou `id:"ing"`). Cada semana é uma linha `[título, texto, atividade, aula-completa-opcional]`.
 - O calendário começa em 16/11/2026, definido em `INICIO` no `index.html`.
