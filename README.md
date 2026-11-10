@@ -25,4 +25,4 @@ Tudo fica em um único arquivo: `index.html` (painel, aulas e cursos).
 
 - O progresso (aulas concluídas, parcelas pagas e nome do certificado) fica salvo no navegador (localStorage). Usar outro navegador ou limpar os dados do site zera o progresso.
 - Para editar conteúdo, procure o curso dentro do `index.html` (busque por `id:"qual"`, `id:"ia"`, `id:"aud"` ou `id:"ing"`). Cada semana é uma linha `[título, texto, atividade, aula-completa-opcional]`.
-- O calendário começa em 16/11/2026, definido em `INICIO` no `index.html`.
+- O calendário começa em 16/11/2026 (`INICIO`) e pula as férias definidas em `FERIAS` no `index.html`: fim de ano (dez–jan) e recesso de julho.
