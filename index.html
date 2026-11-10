@@ -227,6 +227,7 @@ table.fin input{accent-color:var(--c);width:16px;height:16px}
 .cal{display:flex;flex-wrap:wrap;gap:8px}
 .cal span{font-size:.8rem;border-radius:8px;padding:6px 10px;background:var(--raise);border:1px dashed var(--line);color:var(--muted);white-space:nowrap}
 .cal b{color:var(--fg)}
+.sair{text-decoration:underline;cursor:pointer;color:var(--navy);font-weight:600}
 </style>
 
 </head>
@@ -235,13 +236,20 @@ table.fin input{accent-color:var(--c);width:16px;height:16px}
   <header class="top">
     <button class="brand" id="home" aria-label="Ir para o menu principal">
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="var(--navy)"/><path d="M8 22 17 11l9 11" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="11" r="2.6" fill="var(--bg)"/></svg>
-      <h1>Central de Estudos</h1>
+      <div><h1>Central de Estudos</h1><div class="sync" id="sync"></div></div>
     </button>
     <button class="menu" id="menu" hidden><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Menu principal</button>
   </header>
   <main id="view"></main>
 </div>
 <div class="reader" id="reader" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="lTitle"></div></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* Cole aqui a configuração do seu app web do Firebase */
+window.FIREBASE_CONFIG = {apiKey:"AIzaSyAxb42hyC1xK4Kjd3nAnZzq8OXqD5KgAp4",authDomain:"central-de-estudos-b4e37.firebaseapp.com",projectId:"central-de-estudos-b4e37",storageBucket:"central-de-estudos-b4e37.firebasestorage.app",messagingSenderId:"310809547422",appId:"1:310809547422:web:0ff83863a3501dbc84218f"};
+</script>
 <script>
 window.CURSOS=[];function L(t,c,k,ex,at,q){return {t:t,c:c,k:k,ex:ex,at:at,q:q};}
 CURSOS.push({id:"qual",nome:"Pós em Gestão da Qualidade",curto:"Qualidade",nivel:"Especialização · do básico ao Green Belt",
@@ -1892,9 +1900,28 @@ const passou=c=>c.L.filter(x=>x.aula<=HOJE).length;
 /* estado */
 let st={feito:{},pagas:{},nome:"",conc:{}};
 try{const s=JSON.parse(localStorage.getItem("centralEstudos4")||"null");if(s)st=Object.assign(st,s);}catch(e){}
-let docRef=null,dbTimer=null;
-function save(){try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}
- if(docRef){clearTimeout(dbTimer);dbTimer=setTimeout(()=>docRef.set(JSON.parse(JSON.stringify(st))).catch(()=>{}),1200);}}
+let docRef=null,dbTimer=null,fbTimer=null,fbRef=null,fbUser=null;
+function syncMsg(h){const e=document.getElementById("sync");if(e)e.innerHTML=h;}
+function save(){st.ts=Date.now();try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}
+ if(docRef){clearTimeout(dbTimer);dbTimer=setTimeout(()=>docRef.set(JSON.parse(JSON.stringify(st))).catch(()=>{}),1200);}
+ if(fbRef){clearTimeout(fbTimer);syncMsg("Salvando…");fbTimer=setTimeout(fbPush,800);}}
+function fbPush(){fbRef.set({ts:st.ts,st:JSON.parse(JSON.stringify(st))}).then(()=>syncMsg(fbOk())).catch(()=>syncMsg("Sem conexão: salvo só neste aparelho"));}
+const fbOk=()=>`☁ Salvo na nuvem · <span class="sair" id="fbSair">sair</span>`;
+function fbLogin(){const p=new firebase.auth.GoogleAuthProvider();firebase.auth().signInWithPopup(p).catch(()=>firebase.auth().signInWithRedirect(p));}
+(function(){const cfg=window.FIREBASE_CONFIG;if(!cfg||!cfg.apiKey||!window.firebase)return;
+ try{firebase.initializeApp(cfg);}catch(e){return;}
+ const fs=firebase.firestore();
+ document.addEventListener("click",e=>{if(e.target.id==="fbEntrar"){e.stopPropagation();fbLogin();}if(e.target.id==="fbSair"){e.stopPropagation();firebase.auth().signOut();}},true);
+ syncMsg("Conectando…");
+ firebase.auth().onAuthStateChanged(u=>{fbUser=u;
+  if(!u){fbRef=null;syncMsg(`<span class="sair" id="fbEntrar">Entrar com Google</span> para salvar em qualquer aparelho`);return;}
+  fbRef=fs.collection("centralEstudos").doc(u.uid);
+  fbRef.onSnapshot(snap=>{const r=snap.exists?snap.data():null;
+   if(r&&r.st&&(r.ts||0)>(st.ts||0)){st=Object.assign({feito:{},pagas:{},nome:"",conc:{}},r.st);st.ts=r.ts;try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}if(reader.hidden)render();}
+   else if(!r||(st.ts||0)>(r.ts||0)){if(st.ts)fbPush();}
+   syncMsg(fbOk());},()=>syncMsg("Sem permissão no Firestore: confira as regras"));
+ });
+})();
 (async()=>{try{if(!window.claude||!claude.use)return;const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d||!u)return;
  const id=await u.id();if(!id)return;docRef=d.doc("data/users/"+id+"/progresso4");
  const snap=await docRef.get();if(snap.exists){const r=snap.data()||{};["feito","pagas","conc"].forEach(k=>st[k]=Object.assign({},r[k]||{},st[k]));if(!st.nome&&r.nome)st.nome=r.nome;}
