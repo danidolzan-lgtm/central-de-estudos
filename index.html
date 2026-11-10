@@ -246,7 +246,7 @@ table.fin input{accent-color:var(--c);width:16px;height:16px}
 window.CURSOS=[];function L(t,c,k,ex,at,q){return {t:t,c:c,k:k,ex:ex,at:at,q:q};}
 CURSOS.push({id:"qual",nome:"Pós em Gestão da Qualidade",curto:"Qualidade",nivel:"Especialização · do básico ao Green Belt",
 sobre:"Formação completa em gestão da qualidade: dos fundamentos e da ISO 9001:2026 até estatística, Lean Six Sigma, indicadores e um TCC aplicado à transportadora.",
-horas:5,parcela:160,parcelas:14,fim:"2027-12-05",
+horas:5,parcela:240,parcelas:14,fim:"2027-12-05",
 mods:[
 {n:"Fundamentos da Qualidade",o:"Entender o que é qualidade, como ela evoluiu e quais princípios sustentam a gestão moderna.",a:[
 L("O que é qualidade e como ela evoluiu",`<h4>Definições que você precisa conhecer</h4>
@@ -700,7 +700,7 @@ sites:[["ISO Online Browsing Platform","https://www.iso.org/obp","Termos e defin
 
 CURSOS.push({id:"ia",nome:"Pós em Inteligência Artificial",curto:"IA",nivel:"Especialização · de Python a agentes",
 sobre:"Do primeiro código em Python até machine learning, deep learning, LLMs e agentes, com exemplos de logística e um projeto final em produção.",
-horas:5,parcela:200,parcelas:14,fim:"2027-12-05",
+horas:5,parcela:210,parcelas:14,fim:"2027-12-05",
 mods:[
 {n:"Introdução à Inteligência Artificial",o:"Entender o que é IA, como uma máquina aprende e preparar o ambiente.",a:[
 L("O que é IA: conceitos, história e tipos",`<h4>Definições</h4><p><b>Inteligência Artificial</b> é o campo que cria sistemas capazes de realizar tarefas que normalmente exigiriam inteligência humana: reconhecer padrões, prever, decidir, entender e gerar linguagem. <b>Machine Learning</b> é a parte da IA em que o sistema aprende com exemplos em vez de seguir regras escritas à mão. <b>Deep Learning</b> é o machine learning com redes neurais de muitas camadas. <b>IA generativa</b> cria conteúdo novo: texto, imagem, código, áudio.</p>
@@ -1173,7 +1173,7 @@ sites:[["Kaggle Learn","https://www.kaggle.com/learn","Microcursos gratuitos de 
 
 CURSOS.push({id:"aud",nome:"Preparatório Auditor ISO 9001 · 14001 · 45001",curto:"Auditor SGI",nivel:"Auditor interno e líder · Sistema Integrado",
 sobre:"Preparação completa para auditar sistemas integrados de qualidade, meio ambiente e saúde e segurança, com técnicas da ISO 19011, estudos de caso e preparação para a prova de auditor líder.",
-horas:5,parcela:200,parcelas:8,fim:"2027-06-27",
+horas:5,parcela:190,parcelas:8,fim:"2027-06-27",
 mods:[
 {n:"Fundamentos de Auditoria e SGI",o:"Entender sistemas integrados, tipos de auditoria e os princípios da ISO 19011.",a:[
 L("Sistemas de gestão e Estrutura Harmonizada",`<h4>Sistema de gestão</h4><p>Conjunto de elementos inter-relacionados (políticas, objetivos, processos, recursos) para alcançar objetivos. Cada norma foca uma disciplina: <b>ISO 9001</b> qualidade, <b>ISO 14001</b> meio ambiente, <b>ISO 45001</b> saúde e segurança ocupacional, ISO 27001 segurança da informação, ISO 50001 energia.</p>
@@ -1363,7 +1363,7 @@ sites:[["ISO Online Browsing Platform","https://www.iso.org/obp","Definições o
 
 CURSOS.push({id:"ing",nome:"Curso de Inglês",curto:"Inglês",nivel:"Do básico (A1) ao avançado (B2) · até dez/2028",
 sobre:"Inglês do zero à fluência profissional em 21 módulos: base, intermediário, inglês técnico e de negócios, com prova de proficiência no final. Rotina diária recomendada de 25 minutos: 10 de Anki, 10 de áudio e 5 falando em voz alta.",
-horas:3,parcela:250,parcelas:26,fim:"2028-12-03",
+horas:3,parcela:170,parcelas:26,fim:"2028-12-03",
 mods:[
 {n:"First Steps",o:"Apresentar-se, falar de pessoas e descrever lugares com frases simples.",a:[
 L("Verb to be",`<h4>Formas</h4><table><tr><th>Afirmativa</th><th>Negativa</th><th>Pergunta</th></tr><tr><td>I am (I'm)</td><td>I'm not</td><td>Am I?</td></tr><tr><td>You are (you're)</td><td>you aren't</td><td>Are you?</td></tr><tr><td>He/She/It is (he's)</td><td>he isn't</td><td>Is he?</td></tr><tr><td>We/They are (we're)</td><td>we aren't</td><td>Are they?</td></tr></table>
@@ -2013,7 +2013,7 @@ function tabFin(tv,c){
   <div class="kpis" style="grid-template-columns:1fr 1fr"><div class="kpi"><span>Total do curso</span><b class="num">${brl(total)}</b></div><div class="kpi"><span>Já pago</span><b class="num">${brl(pagas*c.parcela)}</b></div>
   <div class="kpi"><span>Falta pagar</span><b class="num">${brl(total-pagas*c.parcela)}</b></div><div class="kpi"><span>Custo por hora</span><b class="num">${brl(Math.round(total/c.carga))}</b></div></div>
   <p class="note">As parcelas seguem normalmente nos meses de férias, como nas instituições de ensino.</p>
-  <p class="note">${{qual:"Mercado: pós EAD em Gestão da Qualidade vai de R$ 50 a R$ 560 por mês, com média perto de R$ 120. R$ 160 cobre uma instituição de boa reputação.",ia:"Mercado: pós EAD em IA vai de R$ 40 a R$ 1.180 por mês, com média perto de R$ 110. R$ 200 permite curso com aulas ao vivo e projetos.",aud:"Estimativa: formação de auditor líder SGI costuma custar entre R$ 1.500 e R$ 4.000 no total. R$ 1.600 em 8x cobre um preparatório EAD com certificado.",ing:"Estimativa: escolas online cobram de R$ 150 a R$ 450 por mês. R$ 250 cobre aulas ao vivo em grupo. Plano até dez/2028 (26 parcelas)."}[c.id]}</p></section></div>`;
+  <p class="note">${{qual:"Mercado: pós EAD em Gestão da Qualidade vai de R$ 50 a R$ 560 por mês, com média perto de R$ 120. R$ 240 cobre uma instituição de boa reputação, com aulas ao vivo e mais suporte.",ia:"Mercado: pós EAD em IA vai de R$ 40 a R$ 1.180 por mês, com média perto de R$ 110. R$ 210 permite curso com aulas ao vivo e projetos.",aud:"Estimativa: formação de auditor líder SGI costuma custar entre R$ 1.500 e R$ 4.000 no total. R$ 1.520 em 8x cobre um preparatório EAD com certificado.",ing:"Estimativa: escolas online cobram de R$ 150 a R$ 450 por mês. R$ 170 cobre plataforma online com aulas em grupo. Plano até dez/2028 (26 parcelas)."}[c.id]}</p></section></div>`;
  tv.querySelectorAll("[data-p]").forEach(i=>i.onchange=()=>{st.pagas[i.dataset.p]=i.checked;save();tabFin(tv,c);});
 }
 function tabLeit(tv,c){
