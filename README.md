@@ -26,3 +26,11 @@ Tudo fica em um único arquivo: `index.html` (painel, aulas e cursos).
 - O progresso (aulas concluídas, parcelas pagas e nome do certificado) fica salvo no Firebase (Firestore, coleção `centralEstudos`), na conta Google usada no "Entrar com Google". Aparece igual em qualquer aparelho. Sem login, fica só no navegador.
 - Para editar conteúdo, procure o curso dentro do `index.html` (busque por `id:"ing"`, `id:"aud"`, `id:"sgi"` ou `id:"ia"`). Cada módulo é um `MOD(id, nome, objetivo, [aulas])` e cada aula um `L(título, conteúdo, pontos-chave, na prática, atividade, quiz)`. A pasta `js/` é de uma versão antiga e não é usada.
 - O calendário começa em 16/11/2026 (`INICIO`) e pula as férias definidas em `FERIAS` no `index.html`: fim de ano (dez–jan) e recesso de julho. Dias de aula: segunda Inglês, terça Auditor Líder, quarta SGI, quinta IA.
+
+## Instalar no celular (app)
+
+O site é um app instalável (PWA). Depois de publicado no GitHub Pages (precisa ser https):
+- **Android (Chrome):** toque no botão **Instalar app** no topo do site, ou menu ⋮ → Instalar app.
+- **iPhone (Safari):** Compartilhar → Adicionar à Tela de Início.
+
+Arquivos do app: `manifest.webmanifest`, `sw.js` (funciona offline) e os ícones `icon-*.png` e `apple-touch-icon.png`. Envie todos junto com o `index.html`. Ao mudar o conteúdo, troque `central-estudos-v1` em `sw.js` para `v2`, `v3`... para os celulares baixarem a versão nova mais rápido.
