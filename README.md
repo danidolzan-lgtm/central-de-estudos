@@ -1,6 +1,6 @@
 # Central de Estudos
 
-Painel pessoal com 4 trilhas de estudo (Pós em Gestão da Qualidade, Pós em IA, Preparatório Auditor ISO 9001/14001/45001 e Inglês), com aulas semanais, trilha de progresso, financeiro, leituras e certificado de conclusão.
+Painel pessoal com 4 trilhas de estudo (Inglês do zero ao C2, Preparatório Auditor Líder ISO 9001/14001/45001, Pós em Gestão de Sistemas Integrados (SGI) e Pós em IA), com aulas semanais, trilha de progresso, financeiro, leituras e certificado de conclusão.
 
 ## Estrutura
 
@@ -24,5 +24,5 @@ Tudo fica em um único arquivo: `index.html` (painel, aulas e cursos).
 ## Observações
 
 - O progresso (aulas concluídas, parcelas pagas e nome do certificado) fica salvo no Firebase (Firestore, coleção `centralEstudos`), na conta Google usada no "Entrar com Google". Aparece igual em qualquer aparelho. Sem login, fica só no navegador.
-- Para editar conteúdo, procure o curso dentro do `index.html` (busque por `id:"qual"`, `id:"ia"`, `id:"aud"` ou `id:"ing"`). Cada semana é uma linha `[título, texto, atividade, aula-completa-opcional]`.
-- O calendário começa em 16/11/2026 (`INICIO`) e pula as férias definidas em `FERIAS` no `index.html`: fim de ano (dez–jan) e recesso de julho. Dias de aula: segunda Inglês, terça Qualidade, quarta Auditor, quinta IA.
+- Para editar conteúdo, procure o curso dentro do `index.html` (busque por `id:"ing"`, `id:"aud"`, `id:"sgi"` ou `id:"ia"`). Cada módulo é um `MOD(id, nome, objetivo, [aulas])` e cada aula um `L(título, conteúdo, pontos-chave, na prática, atividade, quiz)`. A pasta `js/` é de uma versão antiga e não é usada.
+- O calendário começa em 16/11/2026 (`INICIO`) e pula as férias definidas em `FERIAS` no `index.html`: fim de ano (dez–jan) e recesso de julho. Dias de aula: segunda Inglês, terça Auditor Líder, quarta SGI, quinta IA.
