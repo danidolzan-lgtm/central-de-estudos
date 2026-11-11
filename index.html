@@ -171,8 +171,6 @@ html,body{overflow-x:hidden;max-width:100%}
  .lesson{font-size:.95rem}
  .lesson table{font-size:.82rem}
  .lesson th,.lesson td{padding:5px 6px}
- .tbl>table{min-width:min(520px,100%)}
- .tbl>table:has(tr>*:nth-child(4)){min-width:560px}
  .sheet h2{font-size:1.25rem}
  .lesson pre{font-size:.78rem}
 }
@@ -305,6 +303,63 @@ html,body{overflow-x:hidden;max-width:100%}
 @keyframes gira{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.spin{animation:none}}
 .pc-top .ini{color:var(--bg);font-size:1.1rem}
+/* ===== celular: tabelas largas rolam para o lado, leituras e financeiro ===== */
+.tblx{position:relative;margin:.4em 0 1em}
+.tblx>.tbl{margin:0;border-radius:10px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--c) 45%,transparent) transparent}
+.tblx>.tbl::-webkit-scrollbar{height:6px}
+.tblx>.tbl::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--c) 45%,transparent);border-radius:99px}
+.tblx::before,.tblx::after{content:"";position:absolute;top:0;bottom:6px;width:28px;pointer-events:none;opacity:0;transition:opacity .25s;z-index:3}
+.tblx::before{left:0;border-radius:10px 0 0 10px;background:linear-gradient(90deg,color-mix(in srgb,var(--fg) 16%,transparent),transparent)}
+.tblx::after{right:0;border-radius:0 10px 10px 0;background:linear-gradient(270deg,color-mix(in srgb,var(--fg) 16%,transparent),transparent)}
+.tblx.l::before,.tblx.r::after{opacity:1}
+.tblhint{display:none;justify-content:space-between;align-items:center;gap:8px;margin:0 0 6px;font-size:.74rem;font-weight:700;color:var(--c)}
+.tblx.sc .tblhint{display:flex}
+.tblhint .sw{display:inline-flex;gap:6px;align-items:center;background:var(--cs);border-radius:999px;padding:3px 10px}
+.tblhint .sw svg{animation:swipe 1.6s ease-in-out infinite}
+@keyframes swipe{50%{transform:translateX(5px)}}
+.tblhint .dots{display:flex;gap:4px}
+.tblhint .dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
+.tblhint .dots i.on{background:var(--c);width:16px;border-radius:99px}
+.tblx.mexeu .tblhint .sw svg{animation:none}
+@media (prefers-reduced-motion:reduce){.tblhint .sw svg{animation:none}}
+@media (max-width:640px){
+ .tblx .tbl>table{min-width:var(--tw,100%)}
+ .tblx.stk .tbl>table tr>*:first-child{position:sticky;left:0;z-index:2;background:var(--surface);box-shadow:1px 0 0 var(--line),6px 0 8px -6px color-mix(in srgb,var(--fg) 22%,transparent)}
+ .tblx.stk .tbl>table tr>th:first-child{background:var(--cs)}
+ .lesson td{line-height:1.5}
+}
+/* parcelas em cartões no celular */
+.parc{display:none}
+.pgbar{height:8px;border-radius:99px;background:var(--cs);overflow:hidden;margin:2px 0 12px}
+.pgbar i{display:block;height:100%;background:var(--c);border-radius:99px;transition:width .3s}
+.parc label{position:relative;display:grid;gap:1px;padding:10px 10px 9px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;min-width:0;-webkit-tap-highlight-color:transparent;transition:background .15s,border-color .15s}
+.parc label input{position:absolute;opacity:0;pointer-events:none}
+.parc .pn{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.parc .pm{font-family:var(--display);font-weight:700;font-size:1rem;white-space:nowrap}
+.parc .pv{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.parc .ck{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:.7rem;color:transparent;font-weight:800}
+.parc label:has(input:checked){background:var(--cs);border-color:var(--c)}
+.parc label:has(input:checked) .ck{background:var(--c);border-color:var(--c);color:#fff}
+.parc label:has(input:checked) .pv{color:var(--c);font-weight:600}
+.parc label:has(input:focus-visible){outline:2px solid var(--c);outline-offset:2px}
+/* seletor Livros | Sites no celular */
+.seg{display:none}
+@media (max-width:640px){
+ .finwrap .fin-resumo{order:-1}
+ .finwrap .tw.parc-t{display:none}
+ .parc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .kpi b{font-size:1.25rem}
+ .seg{display:flex;position:relative;background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+ .seg button{flex:1;border:0;background:none;border-radius:9px;padding:9px 8px;font-weight:700;font-size:.88rem;color:var(--muted);cursor:pointer;display:inline-flex;gap:6px;justify-content:center;align-items:center;white-space:nowrap;transition:background .2s,color .2s}
+ .seg button span{font-size:.72rem;background:var(--line);color:var(--muted);border-radius:99px;padding:0 7px;min-width:20px}
+ .seg button[aria-selected="true"]{background:var(--surface);color:var(--c);box-shadow:0 1px 4px rgba(10,25,50,.12)}
+ .seg button[aria-selected="true"] span{background:var(--c);color:#fff}
+ .leitwrap{gap:10px}
+ .leitwrap[data-v="livros"] .lt-sites,.leitwrap[data-v="sites"] .lt-livros{display:none}
+ .lt-pane{animation:entra .25s ease}
+}
+@keyframes entra{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.lt-pane{animation:none}}
 </style>
 
 </head>
@@ -5589,22 +5644,28 @@ function tabTrilha(tv,c){
 }
 function tabFin(tv,c){
  const total=c.parcela*c.parcelas,pagas=[...Array(c.parcelas)].filter((_,i)=>st.pagas[c.id+"-"+i]).length;
- tv.innerHTML=`<div class="grid2" style="align-items:start">
+ tv.innerHTML=`<div class="grid2 finwrap" style="align-items:start">
  <section class="panel"><div class="panel-head"><h3>Parcelas</h3><span class="note num">${pagas} de ${c.parcelas} pagas</span></div>
-  <div class="tw"><table class="fin num"><thead><tr><th>Nº</th><th>Mês</th><th>Valor</th><th>Paga</th></tr></thead><tbody>
+  <div class="pgbar"><i style="width:${Math.round(pagas/c.parcelas*100)}%"></i></div>
+  <div class="parc num">${[...Array(c.parcelas)].map((_,i)=>`<label><input type="checkbox" data-p="${c.id}-${i}" aria-label="Parcela ${i+1} (${mesLbl(i)}) paga" ${st.pagas[c.id+"-"+i]?"checked":""}><span class="ck">✓</span><span class="pn">${i+1}ª</span><span class="pm">${mesLbl(i)}</span><span class="pv">${st.pagas[c.id+"-"+i]?"Paga":brl(c.parcela)}</span></label>`).join("")}</div>
+  <div class="tw parc-t"><table class="fin num"><thead><tr><th>Nº</th><th>Mês</th><th>Valor</th><th>Paga</th></tr></thead><tbody>
   ${[...Array(c.parcelas)].map((_,i)=>`<tr><td>${i+1}</td><td>${mesLbl(i)}</td><td>${brl(c.parcela)}</td><td><input type="checkbox" data-p="${c.id}-${i}" aria-label="Parcela ${i+1} paga" ${st.pagas[c.id+"-"+i]?"checked":""}></td></tr>`).join("")}
   </tbody></table></div></section>
- <section class="panel" style="display:grid;gap:12px"><h3>Resumo</h3>
+ <section class="panel fin-resumo" style="display:grid;gap:12px"><h3>Resumo</h3>
   <div class="kpis" style="grid-template-columns:1fr 1fr"><div class="kpi"><span>Total do curso</span><b class="num">${brl(total)}</b></div><div class="kpi"><span>Já pago</span><b class="num">${brl(pagas*c.parcela)}</b></div>
   <div class="kpi"><span>Falta pagar</span><b class="num">${brl(total-pagas*c.parcela)}</b></div><div class="kpi"><span>Custo por hora</span><b class="num">${brl(Math.round(total/c.carga))}</b></div></div>
   <p class="note">As parcelas seguem normalmente nos meses de férias, como nas instituições de ensino.</p>
   <p class="note">${{sgi:"Mercado: pós EAD em Gestão Integrada (SGI) ou em Qualidade, Meio Ambiente e Segurança costuma ir de R$ 80 a R$ 500 por mês. R$ 240 cobre uma instituição de boa reputação, com aulas ao vivo e suporte.",ia:"Mercado: pós EAD em IA vai de R$ 40 a R$ 1.180 por mês, com média perto de R$ 110. R$ 210 permite curso com aulas ao vivo e projetos.",aud:"Estimativa: formação de auditor líder SGI costuma custar entre R$ 1.500 e R$ 4.000 no total. R$ 1.520 em 8x cobre um preparatório EAD com certificado.",ing:"Estimativa: escolas online cobram de R$ 150 a R$ 450 por mês. R$ 170 cobre plataforma online com aulas em grupo. Plano até dez/2028 (26 parcelas)."}[c.id]}</p></section></div>`;
  tv.querySelectorAll("[data-p]").forEach(i=>i.onchange=()=>{st.pagas[i.dataset.p]=i.checked;save();tabFin(tv,c);});
 }
+let leitVis="livros";
 function tabLeit(tv,c){
- tv.innerHTML=`<div class="grid2" style="align-items:start">
- <section class="panel"><div class="panel-head"><h3>Livros recomendados</h3></div>${c.livros.map(b=>`<div class="book"><span class="spine"></span><div><b>${b[0]}</b><small>${b[1]}</small><small>${b[2]}</small></div></div>`).join("")}</section>
- <section class="panel"><div class="panel-head"><h3>Sites e cursos gratuitos</h3></div>${c.sites.map(s=>`<a class="site" href="${s[1]}" target="_blank" rel="noopener"><div><b>${s[0]}</b><br><span>${s[2]}</span></div><em>↗</em></a>`).join("")}</section></div>`;
+ tv.innerHTML=`<div class="grid2 leitwrap" style="align-items:start" data-v="${leitVis}">
+ <div class="seg" role="tablist" aria-label="Leituras" style="grid-column:1/-1"><button role="tab" data-lv="livros" aria-selected="${leitVis==="livros"}">Livros <span class="num">${c.livros.length}</span></button><button role="tab" data-lv="sites" aria-selected="${leitVis==="sites"}">Sites e cursos <span class="num">${c.sites.length}</span></button></div>
+ <section class="panel lt-pane lt-livros"><div class="panel-head"><h3>Livros recomendados</h3></div>${c.livros.map(b=>`<div class="book"><span class="spine"></span><div><b>${b[0]}</b><small>${b[1]}</small><small>${b[2]}</small></div></div>`).join("")}</section>
+ <section class="panel lt-pane lt-sites"><div class="panel-head"><h3>Sites e cursos gratuitos</h3></div>${c.sites.map(s=>`<a class="site" href="${s[1]}" target="_blank" rel="noopener"><div><b>${s[0]}</b><br><span>${s[2]}</span></div><em>↗</em></a>`).join("")}</section></div>`;
+ const w=tv.querySelector(".leitwrap");
+ tv.querySelectorAll("[data-lv]").forEach(b=>b.onclick=()=>{leitVis=b.dataset.lv;w.dataset.v=leitVis;tv.querySelectorAll("[data-lv]").forEach(o=>o.setAttribute("aria-selected",o===b));});
 }
 /* certificados personalizados por curso */
 const CERT={
@@ -5784,8 +5845,39 @@ function showW(c,i){
  sheet.querySelector("#lPrev").onclick=()=>openW(c,i-1);
  sheet.querySelector("#lNext").onclick=()=>{setDone(x.k,true);render();if(i<c.L.length-1)openW(c,i+1);else{tab="cert";closeW();}};
  if(reader.hidden){lastFocus=document.activeElement;reader.hidden=false;document.body.style.overflow="hidden";}
- sheet.querySelectorAll(".lesson table").forEach(t=>{if(t.parentElement.classList.contains("tbl"))return;const d=document.createElement("div");d.className="tbl";t.before(d);d.append(t);t.querySelectorAll("td,th").forEach(x=>{if(x.textContent.trim().length<=12)x.classList.add("nw");});});
+ prepTabelas(sheet);
  sheet.scrollTop=0;sheet.querySelector("#lClose").focus();
+}
+
+/* tabelas das aulas: no celular cada coluna ganha largura pelo tamanho do texto e a tabela rola para o lado */
+const swSvg='<svg width="14" height="10" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function prepTabelas(root){
+ root.querySelectorAll(".lesson table").forEach(t=>{
+  if(t.closest(".tblx"))return;
+  let d=t.parentElement.classList.contains("tbl")?t.parentElement:null;
+  if(!d){d=document.createElement("div");d.className="tbl";t.before(d);d.append(t);}
+  const x=document.createElement("div");x.className="tblx";d.before(x);
+  x.innerHTML=`<div class="tblhint"><span class="sw">${swSvg} Arraste para o lado</span><span class="dots"></span></div>`;x.append(d);
+  const col=[];
+  [...t.rows].forEach(r=>{let ci=0;[...r.cells].forEach(cel=>{const L=cel.textContent.trim().replace(/\s+/g," ").length;if(L<=12)cel.classList.add("nw");
+   const span=cel.colSpan||1;if(span===1)col[ci]=Math.max(col[ci]||0,L);ci+=span;});});
+  const larg=L=>L<=12?Math.max(48,L*8.6+20):L<=30?130:L<=70?165:L<=140?205:245;
+  const ncol=col.length;
+  if(ncol>=3||col.some(L=>L>70)){const tw=Math.round(col.reduce((s,L)=>s+larg(L),0));t.style.setProperty("--tw",tw+"px");}
+  if(ncol>=3&&(col[0]||0)<=28)x.classList.add("stk");
+  const dots=x.querySelector(".dots");
+  const upd=()=>{const max=d.scrollWidth-d.clientWidth,sc=max>4;x.classList.toggle("sc",sc);
+   x.classList.toggle("l",sc&&d.scrollLeft>4);x.classList.toggle("r",sc&&d.scrollLeft<max-4);
+   if(!sc){dots.innerHTML="";return;}
+   const pg=Math.min(6,Math.max(2,Math.ceil(d.scrollWidth/d.clientWidth))),at=Math.round(d.scrollLeft/max*(pg-1));
+   if(dots.children.length!==pg)dots.innerHTML="<i></i>".repeat(pg);
+   [...dots.children].forEach((e,k)=>e.classList.toggle("on",k===at));};
+  d.addEventListener("scroll",()=>{x.classList.add("mexeu");upd();},{passive:true});
+  x.querySelector(".sw").onclick=()=>d.scrollBy({left:d.clientWidth*.8});
+  x.querySelector(".sw").style.cursor="pointer";
+  upd();requestAnimationFrame(upd);
+  if(window.ResizeObserver)new ResizeObserver(upd).observe(d);
+ });
 }
 function closeW(){if(lvAtual()===2&&!reader.hidden){history.back();return;}hideW();}
 function hideW(){reader.hidden=true;document.body.style.overflow="";if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
