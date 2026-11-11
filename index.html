@@ -199,7 +199,19 @@ html,body{overflow-x:hidden;max-width:100%}
 .cert .cn{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--cc)}
 .cert .foot{display:flex;justify-content:space-between;width:80%;margin-top:18px;font-size:.78rem;color:#5b6478}
 .cert .seal{position:absolute;right:9%;bottom:12%;width:88px;height:88px;border-radius:50%;background:var(--cc);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.72rem;line-height:1.1;box-shadow:0 0 0 5px #fffdf8,0 0 0 7px var(--cc)}
-.locked .cert{filter:grayscale(1) blur(1.5px);opacity:.45}
+.certprev{position:relative;border-radius:10px;overflow:hidden;box-shadow:0 2px 14px rgba(20,30,60,.14);background:#fffdf7}
+.certprev canvas{display:block;width:100%;height:auto}
+.certprev.modelo canvas{opacity:.6;filter:saturate(.75)}
+.selo-modelo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-12deg);border:3px solid var(--late);color:var(--late);background:rgba(255,253,247,.85);font-family:var(--display);font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding:6px 22px;border-radius:8px;font-size:clamp(.9rem,3vw,1.6rem)}
+.certacts{flex-wrap:wrap;gap:12px}
+.certbtns{display:flex;gap:8px;flex-wrap:wrap}
+/* aula em tela cheia (PC) */
+.sheet.full{width:100%;border-left-width:0}
+.sheet.full>*{width:100%;max-width:1040px;justify-self:center}
+.sheet.full>.lesson{max-width:1040px}
+.st-r{display:flex;gap:4px;align-items:center}
+.x.fs{font-size:1rem;display:grid;place-items:center}
+@media (max-width:800px){.x.fs{display:none}}
 .lockmsg{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .field{display:grid;gap:4px;font-size:.84rem;font-weight:600}
 .field input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg);width:min(360px,100%)}
@@ -436,7 +448,7 @@ L("Pronomes, possessivos e o 's",`<h4>Pronomes sujeito, objeto e possessivos</h4
 <p><i>its</i> = dele/dela (coisa, animal): <i>The dog wagged its tail.</i> <i>it's</i> = it is: <i>It's late.</i> É um dos erros mais comuns, até entre nativos.</p>
 <h4>O genitivo 's (posse)</h4>
 <table><tr><th>Caso</th><th>Regra</th><th>Exemplo</th></tr>
-<tr><td>singular</td><td>+ 's</td><td>my sister's car (o carro da minha irmã)</td></tr>
+<tr><td>Singular</td><td>+ 's</td><td>my sister's car (o carro da minha irmã)</td></tr>
 <tr><td>Plural com s</td><td>Só o apóstrofo</td><td>my parents' house</td></tr>
 <tr><td>plural irregular</td><td>+ 's</td><td>the children's room</td></tr>
 <tr><td>Dois donos juntos</td><td>'s no último</td><td>John and Mary's wedding</td></tr></table>
@@ -467,8 +479,8 @@ L("Artigos, plurais e this / that / these / those",`<h4>A / an / the</h4>
 <tr><td>Sem mudança</td><td>fish, sheep, series</td></tr></table>
 <h4>Demonstrativos</h4>
 <table><tr><th></th><th>Perto</th><th>Longe</th></tr>
-<tr><td>singular</td><td>this (este/esta/isto)</td><td>that (aquele/aquilo, esse)</td></tr>
-<tr><td>plural</td><td>these (estes)</td><td>those (aqueles)</td></tr></table>
+<tr><td>Singular</td><td>this (este/esta/isto)</td><td>that (aquele/aquilo, esse)</td></tr>
+<tr><td>Plural</td><td>these (estes)</td><td>those (aqueles)</td></tr></table>
 <p><i>This is my phone. That's your bag over there. These shoes are new. Those people are my neighbors.</i> No telefone: <i>Hi, this is Marcos.</i></p>
 <h4>Adjetivos</h4>
 <p>Vêm <b>antes</b> do substantivo e não vão para o plural: <i>a big house, two big houses</i> (nunca "bigs"). Básicos: <i>big/small, new/old, good/bad, hot/cold, cheap/expensive, easy/difficult, happy/sad, long/short, beautiful/ugly, fast/slow, clean/dirty, full/empty</i>.</p>`,
@@ -5594,48 +5606,145 @@ function tabLeit(tv,c){
  <section class="panel"><div class="panel-head"><h3>Livros recomendados</h3></div>${c.livros.map(b=>`<div class="book"><span class="spine"></span><div><b>${b[0]}</b><small>${b[1]}</small><small>${b[2]}</small></div></div>`).join("")}</section>
  <section class="panel"><div class="panel-head"><h3>Sites e cursos gratuitos</h3></div>${c.sites.map(s=>`<a class="site" href="${s[1]}" target="_blank" rel="noopener"><div><b>${s[0]}</b><br><span>${s[2]}</span></div><em>↗</em></a>`).join("")}</section></div>`;
 }
+/* certificados personalizados por curso */
+const CERT={
+ ing:{cor:"#cf6a0c",cor2:"#8a3f00",ouro:"#c9a24a",titulo:"Certificado de Conclusão",sub:"Certificate of Completion",
+  frase:"concluiu com aproveitamento o curso",
+  desc:"Formação completa em língua inglesa, do nível A1 ao C2 do Quadro Europeu Comum de Referência (CEFR), abrangendo gramática, vocabulário, pronúncia, compreensão oral e escrita, conversação, produção de textos e preparação para certificações internacionais.",
+  tags:["A1 → C2 · CEFR","Listening","Speaking","Reading","Writing"],motivo:"ing"},
+ aud:{cor:"#6b3fc0",cor2:"#3e1f85",ouro:"#c9a24a",titulo:"Certificado de Formação",sub:"Auditor Líder de Sistemas de Gestão Integrados",
+  frase:"concluiu com aproveitamento o",
+  desc:"Preparação para auditoria e liderança de auditorias de sistemas de gestão da qualidade, ambiental e de saúde e segurança ocupacional, com base nas diretrizes da ISO 19011 e nos requisitos das normas ISO 9001, ISO 14001 e ISO 45001.",
+  tags:["ISO 19011","ISO 9001","ISO 14001","ISO 45001"],motivo:"aud"},
+ sgi:{cor:"#1559b8",cor2:"#0b3a75",ouro:"#c9a24a",titulo:"Certificado de Especialização",sub:"Gestão de Sistemas Integrados",
+  frase:"concluiu com aproveitamento a",
+  desc:"Especialização em Sistemas de Gestão Integrados: qualidade, meio ambiente e saúde e segurança ocupacional, gestão de riscos, ferramentas da qualidade, Lean Seis Sigma, indicadores, auditoria, ESG, compliance e trabalho de conclusão aplicado.",
+  tags:["Qualidade","Meio Ambiente","Saúde e Segurança","Gestão de Riscos"],motivo:"sgi"},
+ ia:{cor:"#0e8a78",cor2:"#075548",ouro:"#c9a24a",titulo:"Certificado de Especialização",sub:"Inteligência Artificial Aplicada",
+  frase:"concluiu com aproveitamento a",
+  desc:"Especialização em uso prático de inteligência artificial: engenharia de prompt, assistentes como Claude, ChatGPT, Gemini e Copilot, programação em Python, automação, desenvolvimento web, APIs, RAG, agentes, ética e segurança.",
+  tags:["Prompts","Python","Automação","APIs e RAG","Agentes"],motivo:"ia"}
+};
+function certCodigo(c){return (c.id+"-"+(st.conc[c.id]||"")+"-"+(st.nome||"")).split("").reduce((h,ch)=>(h*31+ch.charCodeAt(0))>>>0,7).toString(36).toUpperCase().padStart(8,"0").slice(0,8);}
 function tabCert(tv,c){
- const ok=doneCount(c)===c.L.length,cod=(c.id+"-"+(st.conc[c.id]||"")+"-"+(st.nome||"")).split("").reduce((h,ch)=>(h*31+ch.charCodeAt(0))>>>0,7).toString(36).toUpperCase().slice(0,8);
- tv.innerHTML=`<div style="display:grid;gap:14px" class="${ok?"":"locked"}">
- ${ok?"":`<div class="panel lockmsg"><span class="pill late">Bloqueado</span><span>Conclua as ${c.L.length-doneCount(c)} semanas restantes para liberar o certificado.</span></div>`}
+ const ok=doneCount(c)===c.L.length;
+ tv.innerHTML=`<div style="display:grid;gap:14px">
+ ${ok?"":`<div class="panel lockmsg"><span class="pill late">Bloqueado</span><span>Conclua as ${c.L.length-doneCount(c)} semanas restantes para liberar o certificado. Abaixo está o modelo de como ele vai ficar.</span></div>`}
  <label class="field" for="certNome">Nome no certificado<input id="certNome" value="${esc(st.nome)}" placeholder="Seu nome completo" maxlength="60"></label>
- <div class="certwrap"><div class="cert" style="--cc:var(--${c.id})">
-  <div class="k">CERTIFICADO DE CONCLUSÃO</div><h3>Central de Estudos</h3><p>Certificamos que</p>
-  <div class="nm" id="certNm">${esc(st.nome||"Seu nome")}</div>
-  <p>concluiu a trilha de estudos</p><div class="cn">${c.nome}</div>
-  <p>com ${c.L.length} semanas de estudo, ${c.mods.length} módulos e ${c.mods.length} avaliações, carga horária de ${c.carga} horas, no período de ${dmy(c.L[0].ini)} a ${ok?st.conc[c.id]:dmy(c.fimData)}.</p>
-  <div class="foot"><span>Concluído em ${ok?st.conc[c.id]:"—"}</span><span>Código ${ok?cod:"—"}</span></div>
-  <div class="seal">${c.carga} h<br>${c.curto}</div></div></div>
- <div class="nav"><p class="note">Certificado do seu plano pessoal de estudos. O diploma oficial vem da instituição em que você se matricular.</p>
-  <button class="btn main" id="dl" ${ok?"":"disabled"}>Baixar certificado (PNG)</button></div></div>`;
- const inp=tv.querySelector("#certNome");inp.oninput=()=>{st.nome=inp.value.trim();save();tv.querySelector("#certNm").textContent=st.nome||"Seu nome";};
- const dl=tv.querySelector("#dl");
- dl.onclick=async()=>{dl.disabled=true;dl.textContent="Gerando…";try{const blob=await certPng(c,cod);
-  let d=null;try{d=window.claude&&claude.use?await claude.use("downloads"):null;}catch(e){}
-  if(d)await d.save({filename:`certificado-${c.id}.png`,data:blob});
-  else{const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=`certificado-${c.id}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);}
-  dl.textContent="Certificado baixado";}catch(e){dl.textContent=e&&e.code==="declined"?"Download cancelado":"Não foi possível baixar";}
-  setTimeout(()=>{dl.disabled=false;dl.textContent="Baixar certificado (PNG)";},2500);};
+ <div class="certprev ${ok?"":"modelo"}"><canvas id="certCv" width="2400" height="1697" aria-label="Certificado de ${esc(c.nome)}"></canvas>${ok?"":'<span class="selo-modelo">Modelo</span>'}</div>
+ <div class="nav certacts"><p class="note">Certificado do seu plano pessoal de estudos. O diploma oficial vem da instituição em que você se matricular.</p>
+  <div class="certbtns"><button class="btn" id="dlPng" ${ok?"":"disabled"}>Baixar imagem (PNG)</button><button class="btn main" id="dlPdf" ${ok?"":"disabled"}>Baixar PDF</button></div></div></div>`;
+ const cv=tv.querySelector("#certCv");
+ const desenhar=()=>drawCert(cv,c,ok);desenhar();
+ try{document.fonts.ready.then(desenhar);}catch(e){}
+ const inp=tv.querySelector("#certNome");inp.oninput=()=>{st.nome=inp.value.trim();save();desenhar();};
+ const acao=async(btn,tipo)=>{const txt=btn.textContent;btn.disabled=true;btn.textContent="Gerando…";
+  try{try{await document.fonts.ready;}catch(e){}
+   const out=document.createElement("canvas");out.width=3508;out.height=2480;drawCert(out,c,true);
+   const blob=tipo==="pdf"?certPdf(out):await new Promise(r=>out.toBlob(r,"image/png"));
+   await baixar(blob,`certificado-${c.id}.${tipo}`);btn.textContent="Baixado";}
+  catch(e){btn.textContent=e&&e.code==="declined"?"Cancelado":"Não foi possível baixar";}
+  setTimeout(()=>{btn.disabled=false;btn.textContent=txt;},2500);};
+ tv.querySelector("#dlPng").onclick=e=>acao(e.currentTarget,"png");
+ tv.querySelector("#dlPdf").onclick=e=>acao(e.currentTarget,"pdf");
 }
-async function certPng(c,cod){
- try{await document.fonts.ready;}catch(e){}
- const W=2000,H=1414,cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");
- const cc=getComputedStyle(document.documentElement).getPropertyValue("--"+c.id).trim();
- g.fillStyle="#fffdf8";g.fillRect(0,0,W,H);g.strokeStyle=cc;g.lineWidth=8;g.strokeRect(40,40,W-80,H-80);g.lineWidth=2;g.globalAlpha=.5;g.strokeRect(62,62,W-124,H-124);g.globalAlpha=1;
- g.textAlign="center";const t=(s,f,col,y)=>{g.font=f;g.fillStyle=col;g.fillText(s,W/2,y);};
- t("CERTIFICADO DE CONCLUSÃO","700 34px 'Space Grotesk',sans-serif",cc,260);
- t("Central de Estudos","600 84px 'Cormorant Garamond',Georgia,serif","#1c2333",370);
- t("Certificamos que","400 32px Inter,sans-serif","#3b4459",460);
- t(st.nome||"Seu nome","italic 500 96px 'Cormorant Garamond',Georgia,serif","#1c2333",580);
- g.strokeStyle="#c9ccd6";g.lineWidth=2;g.beginPath();g.moveTo(560,610);g.lineTo(1440,610);g.stroke();
- t("concluiu a trilha de estudos","400 32px Inter,sans-serif","#3b4459",690);
- t(c.nome,"700 50px 'Space Grotesk',sans-serif",cc,770);
- t(`com ${c.L.length} semanas de estudo, ${c.mods.length} módulos e ${c.mods.length} avaliações,`,"400 30px Inter,sans-serif","#3b4459",860);
- t(`carga horária de ${c.carga} horas, de ${dmy(c.L[0].ini)} a ${st.conc[c.id]}.`,"400 30px Inter,sans-serif","#3b4459",905);
- g.font="400 26px Inter,sans-serif";g.fillStyle="#5b6478";g.textAlign="left";g.fillText("Concluído em "+st.conc[c.id],200,1180);g.fillText("Código "+cod,200,1220);
- g.beginPath();g.arc(1700,1130,105,0,7);g.fillStyle=cc;g.fill();g.lineWidth=6;g.strokeStyle="#fffdf8";g.beginPath();g.arc(1700,1130,92,0,7);g.stroke();
- g.fillStyle="#fff";g.textAlign="center";g.font="700 40px 'Space Grotesk',sans-serif";g.fillText(c.carga+" h",1700,1125);g.font="600 24px 'Space Grotesk',sans-serif";g.fillText(c.curto,1700,1162);
- return await new Promise(r=>cv.toBlob(r,"image/png"));
+async function baixar(blob,nome){
+ let d=null;try{d=window.claude&&claude.use?await claude.use("downloads"):null;}catch(e){}
+ if(d){await d.save({filename:nome,data:blob});return;}
+ const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=nome;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+}
+/* PDF A4 paisagem com a imagem do certificado (sem bibliotecas externas) */
+function certPdf(cv){
+ const b64=cv.toDataURL("image/jpeg",0.94).split(",")[1],bin=atob(b64),img=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)img[i]=bin.charCodeAt(i);
+ const enc=new TextEncoder(),parts=[],offs=[];let len=0;
+ const add=x=>{const u=typeof x==="string"?enc.encode(x):x;parts.push(u);len+=u.length;};
+ const obj=(n,body)=>{offs[n]=len;add(`${n} 0 obj\n`);body();add("\nendobj\n");};
+ const PW=841.89,PH=595.28,cont=`q ${PW} 0 0 ${PH} 0 0 cm /Im0 Do Q`;
+ add("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n");
+ obj(1,()=>add("<< /Type /Catalog /Pages 2 0 R >>"));
+ obj(2,()=>add("<< /Type /Pages /Kids [3 0 R] /Count 1 >>"));
+ obj(3,()=>add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PW} ${PH}] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>`));
+ obj(4,()=>add(`<< /Length ${cont.length} >>\nstream\n${cont}\nendstream`));
+ obj(5,()=>{add(`<< /Type /XObject /Subtype /Image /Width ${cv.width} /Height ${cv.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${img.length} >>\nstream\n`);add(img);add("\nendstream");});
+ obj(6,()=>add("<< /Title (Certificado - Central de Estudos) /Producer (Central de Estudos) >>"));
+ const x=len;let t=`xref\n0 7\n0000000000 65535 f \n`;for(let n=1;n<=6;n++)t+=String(offs[n]).padStart(10,"0")+" 00000 n \n";
+ add(t+`trailer\n<< /Size 7 /Root 1 0 R /Info 6 0 R >>\nstartxref\n${x}\n%%EOF`);
+ return new Blob(parts,{type:"application/pdf"});
+}
+function drawCert(cv,c,liberado){
+ const g=cv.getContext("2d"),W=cv.width,H=cv.height,u=W/2400,T=CERT[c.id],cor=T.cor,cor2=T.cor2,ouro=T.ouro;
+ const F=(peso,px,fam)=>`${peso} ${Math.round(px*u)}px ${fam}`;
+ const SERIF="'Cormorant Garamond',Georgia,serif",DISP="'Space Grotesk',Inter,sans-serif",SANS="Inter,Arial,sans-serif";
+ g.save();g.clearRect(0,0,W,H);
+ /* fundo */
+ const fundo=g.createLinearGradient(0,0,W,H);fundo.addColorStop(0,"#fffdf7");fundo.addColorStop(1,"#f8f3e6");g.fillStyle=fundo;g.fillRect(0,0,W,H);
+ /* faixa lateral com motivo */
+ const fx=380*u;const fg=g.createLinearGradient(0,0,0,H);fg.addColorStop(0,cor);fg.addColorStop(1,cor2);g.fillStyle=fg;g.fillRect(0,0,fx,H);
+ g.save();g.beginPath();g.rect(0,0,fx,H);g.clip();g.globalAlpha=.16;g.strokeStyle="#fff";g.fillStyle="#fff";g.lineWidth=5*u;motivo(g,T.motivo,fx/2,H*.5,u,fx);g.restore();
+ g.fillStyle=ouro;g.fillRect(fx,0,10*u,H);
+ /* molduras */
+ g.strokeStyle=cor;g.lineWidth=6*u;g.strokeRect(fx+60*u,60*u,W-fx-120*u,H-120*u);
+ g.strokeStyle=ouro;g.lineWidth=2*u;g.strokeRect(fx+78*u,78*u,W-fx-156*u,H-156*u);
+ cantos(g,fx+78*u,78*u,W-78*u,H-78*u,ouro,u);
+ /* marca d'água */
+ g.save();g.globalAlpha=.05;g.strokeStyle=cor;g.fillStyle=cor;g.lineWidth=10*u;g.beginPath();g.rect(fx+80*u,80*u,W-fx-160*u,H-160*u);g.clip();motivo(g,T.motivo,W-560*u,H*.47,u*(T.motivo==='ia'?1.3:2.2),T.motivo==='ia'?380*u:900*u);g.restore();
+ /* logo na faixa */
+ const lx=fx/2,ly=210*u;g.fillStyle="#fff";rr(g,lx-70*u,ly-70*u,140*u,140*u,34*u);g.fill();
+ g.strokeStyle=cor2;g.lineWidth=13*u;g.lineCap="round";g.lineJoin="round";g.beginPath();g.moveTo(lx-37*u,ly+22*u);g.lineTo(lx,ly-22*u);g.lineTo(lx+37*u,ly+22*u);g.stroke();
+ g.beginPath();g.arc(lx,ly-24*u,13*u,0,7);g.fillStyle=cor2;g.fill();
+ g.fillStyle="#fff";g.textAlign="center";g.font=F(700,34,DISP);g.fillText("CENTRAL DE",lx,ly+130*u);g.fillText("ESTUDOS",lx,ly+172*u);
+ g.font=F(500,24,SANS);g.globalAlpha=.85;g.fillText("Plano pessoal de formação",lx,ly+216*u);g.globalAlpha=1;
+ /* selo */
+ const sx=lx,sy=H-330*u;roseta(g,sx,sy,150*u,ouro,cor2,u);
+ g.fillStyle="#fff";g.font=F(700,64,DISP);g.fillText(c.carga+" h",sx,sy+6*u);g.font=F(600,19,SANS);g.fillText("CARGA HORÁRIA",sx,sy+44*u);
+ /* conteúdo */
+ const cx=fx+(W-fx)/2,mw=W-fx-360*u;
+ g.textAlign="center";
+ g.fillStyle=cor;g.font=F(700,30,DISP);espacado(g,T.titulo.toUpperCase(),cx,250*u,9*u);
+ g.fillStyle="#6b5a2e";g.font=F("italic 500",44,SERIF);g.fillText(T.sub,cx,318*u);
+ linha(g,cx-150*u,350*u,cx+150*u,ouro,3*u);
+ g.fillStyle="#4a5266";g.font=F(400,34,SANS);g.fillText("Certificamos que",cx,452*u);
+ const nome=st.nome||"Seu nome completo";let np=118;g.font=F("italic 600",np,SERIF);while(g.measureText(nome).width>mw&&np>60){np-=4;g.font=F("italic 600",np,SERIF);}
+ g.fillStyle="#1c2333";g.fillText(nome,cx,590*u);linha(g,cx-mw/2*0.8,625*u,cx+mw/2*0.8,"#c8c0a8",2*u);
+ g.fillStyle="#4a5266";g.font=F(400,34,SANS);g.fillText(T.frase,cx,705*u);
+ let cp=62;g.font=F(700,cp,DISP);while(g.measureText(c.nome).width>mw&&cp>36){cp-=2;g.font=F(700,cp,DISP);}
+ g.fillStyle=cor2;g.fillText(c.nome,cx,790*u);
+ g.fillStyle="#4a5266";g.font=F(400,29,SANS);const yl=quebra(g,T.desc,cx,870*u,mw*0.92,44*u);
+ /* etiquetas */
+ g.font=F(600,27,SANS);const pad=28*u,gap=18*u,hh=58*u;const ws=T.tags.map(t=>g.measureText(t).width+pad*2);let tot=ws.reduce((a,b)=>a+b,0)+gap*(ws.length-1);let tx=cx-tot/2;const ty=yl+40*u;
+ T.tags.forEach((t,i)=>{g.fillStyle=cor;g.globalAlpha=.1;rr(g,tx,ty,ws[i],hh,hh/2);g.fill();g.globalAlpha=1;g.strokeStyle=cor;g.lineWidth=2*u;rr(g,tx,ty,ws[i],hh,hh/2);g.stroke();g.fillStyle=cor2;g.fillText(t,tx+ws[i]/2,ty+hh/2+10*u);tx+=ws[i]+gap;});
+ /* rodapé */
+ const fy=H-440*u,cols=[["MÓDULOS",String(c.mods.length)],["SEMANAS DE ESTUDO",String(c.L.length)],["PERÍODO",dmy(c.L[0].ini)+" a "+(liberado&&st.conc[c.id]?st.conc[c.id]:dmy(c.fimData))],["CONCLUÍDO EM",liberado&&st.conc[c.id]?st.conc[c.id]:"—"]];
+ const cw=mw/cols.length;cols.forEach((k,i)=>{const x=cx-mw/2+cw*i+cw/2;g.fillStyle="#8a7f62";g.font=F(600,22,SANS);espacado(g,k[0],x,fy,3*u);g.fillStyle="#1c2333";g.font=F(600,34,DISP);g.fillText(k[1],x,fy+50*u);});
+ linha(g,cx-mw/2,fy-60*u,cx+mw/2,"#e3dcc6",2*u);
+ const ay=H-165*u;linha(g,cx-260*u,ay-38*u,cx+260*u,"#9a8f73",2*u);
+ g.fillStyle="#1c2333";g.font=F("italic 600",40,SERIF);g.fillText("Central de Estudos",cx,ay-50*u);
+ g.fillStyle="#6b7385";g.font=F(500,22,SANS);g.fillText("Coordenação do plano de estudos",cx,ay-4*u);
+ g.textAlign="right";g.fillStyle="#8a7f62";g.font=F(500,22,SANS);g.fillText("Código de verificação: "+(liberado&&st.conc[c.id]?certCodigo(c):"————————"),W-120*u,H-112*u);
+ g.restore();
+}
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function linha(g,x1,y,x2,cor,lw){g.strokeStyle=cor;g.lineWidth=lw;g.beginPath();g.moveTo(x1,y);g.lineTo(x2,y);g.stroke();}
+function espacado(g,t,x,y,sp){const ch=[...t],ws=ch.map(c=>g.measureText(c).width),tot=ws.reduce((a,b)=>a+b,0)+sp*(ch.length-1);const al=g.textAlign;g.textAlign="left";let px=x-tot/2;ch.forEach((c,i)=>{g.fillText(c,px,y);px+=ws[i]+sp;});g.textAlign=al;}
+function quebra(g,t,x,y,mw,lh){const ws=t.split(" ");let l="",yy=y;for(const w of ws){const tt=l?l+" "+w:w;if(g.measureText(tt).width>mw&&l){g.fillText(l,x,yy);l=w;yy+=lh;}else l=tt;}if(l)g.fillText(l,x,yy);return yy;}
+function cantos(g,x1,y1,x2,y2,cor,u){g.strokeStyle=cor;g.lineWidth=3*u;const s=60*u;[[x1,y1,1,1],[x2,y1,-1,1],[x1,y2,1,-1],[x2,y2,-1,-1]].forEach(([x,y,a,b])=>{g.beginPath();g.moveTo(x+a*s,y+b*14*u);g.lineTo(x+a*14*u,y+b*14*u);g.lineTo(x+a*14*u,y+b*s);g.stroke();g.beginPath();g.arc(x+a*30*u,y+b*30*u,5*u,0,7);g.fillStyle=cor;g.fill();});}
+function roseta(g,x,y,r,ouro,cor,u){g.save();g.fillStyle=ouro;g.beginPath();const n=24;for(let i=0;i<=n*2;i++){const a=i*Math.PI/n,rr2=i%2?r:r*0.9;g.lineTo(x+Math.cos(a)*rr2,y+Math.sin(a)*rr2);}g.fill();
+ g.beginPath();g.arc(x,y,r*0.8,0,7);g.fillStyle=cor;g.fill();g.strokeStyle="rgba(255,255,255,.7)";g.lineWidth=3*u;g.beginPath();g.arc(x,y,r*0.72,0,7);g.stroke();g.restore();}
+function motivo(g,tipo,x,y,u,larg){
+ const s=u;
+ if(tipo==="ing"){ // balões de conversa e letras
+  for(let i=-3;i<=3;i++){const yy=y+i*230*s,xx=x+(i%2?-40:40)*s;rr(g,xx-110*s,yy-60*s,220*s,120*s,40*s);g.stroke();g.beginPath();g.moveTo(xx-40*s,yy+60*s);g.lineTo(xx-60*s,yy+100*s);g.lineTo(xx-5*s,yy+60*s);g.stroke();
+   g.font=`700 ${Math.round(60*s)}px 'Space Grotesk',sans-serif`;g.textAlign="center";g.fillText(["Hi!","A–Z","EN","C2","ABC","Yes","Go!"][i+3],xx,yy+22*s);}
+ }else if(tipo==="aud"){ // lupas e checklists
+  for(let i=-3;i<=3;i++){const yy=y+i*230*s,xx=x+(i%2?-30:30)*s;
+   if(i%2){rr(g,xx-70*s,yy-90*s,140*s,180*s,14*s);g.stroke();for(let k=0;k<3;k++){g.beginPath();g.moveTo(xx-40*s,yy-40*s+k*45*s);g.lineTo(xx-25*s,yy-25*s+k*45*s);g.lineTo(xx-5*s,yy-55*s+k*45*s);g.stroke();g.beginPath();g.moveTo(xx+10*s,yy-40*s+k*45*s);g.lineTo(xx+45*s,yy-40*s+k*45*s);g.stroke();}}
+   else{g.beginPath();g.arc(xx-15*s,yy-15*s,60*s,0,7);g.stroke();g.beginPath();g.moveTo(xx+28*s,yy+28*s);g.lineTo(xx+85*s,yy+85*s);g.stroke();}}
+ }else if(tipo==="sgi"){ // três anéis integrados
+  for(let i=-2;i<=2;i++){const yy=y+i*320*s;[[0,-50],[-50,35],[50,35]].forEach(([a,b])=>{g.beginPath();g.arc(x+a*s,yy+b*s,75*s,0,7);g.stroke();});}
+ }else{ // rede neural
+  const pts=[];for(let i=0;i<26;i++){const a=i*2.39996,r=Math.sqrt(i+0.5)*Math.min(larg,900*s)*0.17;pts.push([x+Math.cos(a)*r*0.9,y+Math.sin(a)*r*2.4]);}
+  pts.forEach((p,i)=>{pts.slice(i+1,i+4).forEach(q=>{g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(q[0],q[1]);g.stroke();});g.beginPath();g.arc(p[0],p[1],14*s,0,7);g.fill();});
+ }
 }
 
 /* leitor */
@@ -5659,7 +5768,7 @@ function showW(c,i){
   <div class="box"><h4>Na prática</h4><div class="lesson"><p>${a.ex}</p></div></div>
   <div class="box task"><h4>Atividade da semana</h4><div class="lesson"><p>${a.at}</p></div></div>
   ${qs.map((q,qi)=>quizHtml(q,qi,false)).join("")}`;}
- sheet.innerHTML=`<div class="sheet-top"><span class="k nowrap">${c.curto} · Módulo ${x.mi+1} · Semana ${x.i+1} de ${c.L.length}</span><button class="x" id="lClose" aria-label="Fechar aula">×</button></div>
+ sheet.innerHTML=`<div class="sheet-top"><span class="k nowrap">${c.curto} · Módulo ${x.mi+1} · Semana ${x.i+1} de ${c.L.length}</span><div class="st-r"><button class="x fs" id="lFull" aria-label="Tela cheia" title="Tela cheia"></button><button class="x" id="lClose" aria-label="Fechar aula">×</button></div></div>
   <div><h2 id="lTitle">${esc(x.t)}</h2><div class="when num">Aula de ${DSEM[c.dia]}, ${dmy(x.aula)} · semana ${x.i+1} · ${c.horas} h de estudo</div></div>${body}
   <label class="donechk"><input type="checkbox" id="lDone" ${st.feito[x.k]?"checked":""}> Semana concluída</label>
   <div class="nav"><button class="btn" id="lPrev" ${i===0?"disabled":""}>← Anterior</button><button class="btn main" id="lNext">${i===c.L.length-1?"Concluir curso":"Concluir e avançar →"}</button></div>`;
@@ -5667,6 +5776,10 @@ function showW(c,i){
   qz.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));b.classList.add(ok?"right":"wrong");
   const fb=qz.querySelector(".fb");fb.hidden=false;fb.innerHTML=ok?"<b>Certo.</b> "+q[3]:"<b>Ainda não.</b> Releia a aula e tente outra opção.";}));
  sheet.querySelector("#lClose").onclick=closeW;
+ const fsIco=f=>f?'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 2v5H2M11 2v5h5M7 16v-5H2M11 16v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 7V2h5M16 7V2h-5M2 11v5h5M16 11v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ const telaCheia=()=>{try{return localStorage.getItem("ceTela")==="full";}catch(e){return false;}};
+ const aplicaTela=()=>{const f=telaCheia();sheet.classList.toggle("full",f);const b=sheet.querySelector("#lFull");b.innerHTML=fsIco(f);b.title=b.ariaLabel=f?"Sair da tela cheia":"Tela cheia";};
+ aplicaTela();sheet.querySelector("#lFull").onclick=()=>{try{localStorage.setItem("ceTela",telaCheia()?"meia":"full");}catch(e){}aplicaTela();};
  sheet.querySelector("#lDone").onchange=e=>{setDone(x.k,e.target.checked);render();};
  sheet.querySelector("#lPrev").onclick=()=>openW(c,i-1);
  sheet.querySelector("#lNext").onclick=()=>{setDone(x.k,true);render();if(i<c.L.length-1)openW(c,i+1);else{tab="cert";closeW();}};
