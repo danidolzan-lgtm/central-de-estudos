@@ -359,6 +359,9 @@ html,body{overflow-x:hidden;max-width:100%}
  .lt-pane{animation:entra .25s ease}
 }
 @keyframes entra{from{opacity:0;transform:translateY(6px)}}
+.menu[aria-expanded="true"]{border-color:var(--navy);background:color-mix(in srgb,var(--navy) 8%,var(--surface))}
+@media (max-width:520px){body.emcurso .brand h1{display:none}}
+@media (max-width:340px){.menu .lbl{display:none}}
 /* ===== revisão geral nov/2026: abas, textos longos, topo e menu da conta ===== */
 .tabs{scrollbar-width:none;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar{display:none}
@@ -392,8 +395,8 @@ table.fin td.nowrap{white-space:normal;max-width:none!important;min-width:180px}
  .wk .t{white-space:normal;overflow:visible;line-height:1.35;overflow-wrap:anywhere}
  .wk{align-items:flex-start}
  .wk input{margin-top:2px}
- .menu .lbl{display:none}
- .menu{padding:9px 11px}
+ .menu{padding:8px 11px;gap:6px}
+ .hdr-r{gap:6px}
  .brand h1{font-size:1.2rem}
  .painel{position:fixed;left:12px;right:12px;top:calc(68px + env(safe-area-inset-top,0px));width:auto}
 }
@@ -410,8 +413,8 @@ table.fin td.nowrap{white-space:normal;max-width:none!important;min-width:180px}
       <h1>Central de Estudos</h1>
     </button>
     <div class="hdr-r">
-    <button class="menu" id="menu" hidden aria-label="Menu principal"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="lbl">Menu principal</span></button>
-    <button class="conta" id="conta" hidden aria-label="Minha conta" aria-haspopup="true" aria-expanded="false"></button>
+    <button class="menu" id="menu" hidden aria-label="Menu principal"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 7.5 8 3l5.5 4.5M4 6.5V13h3V9.5h2V13h3V6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Menu principal</span></button>
+    <button class="menu" id="conta" hidden aria-label="Menu" aria-haspopup="true" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1.6" fill="currentColor"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/><circle cx="8" cy="13" r="1.6" fill="currentColor"/></svg>Menu</button>
     <div class="painel" id="painel" hidden role="dialog" aria-label="Minha conta"></div>
     </div>
   </header>
@@ -5468,6 +5471,8 @@ L("Projeto final: seu sistema pessoal com IA",`<h4>Objetivo</h4>
 <script>
 const C=window.CURSOS,DIA=864e5,HOJE=new Date();HOJE.setHours(0,0,0,0);
 const INICIO=new Date(2026,10,16);
+/* SGI começou qua 11/11 e IA qui 12/11 (semana de 09/11); Inglês e Auditor começam na semana de 16/11 */
+const INICIO_C={sgi:new Date(2026,10,9),ia:new Date(2026,10,9)};
 const FERIAS=[["2026-12-07","2027-01-31","Férias de fim de ano"],["2027-07-05","2027-07-25","Recesso de julho"],["2027-12-06","2028-01-30","Férias de fim de ano"],["2028-07-03","2028-07-23","Recesso de julho"]].map(([a,b,n])=>({a:new Date(a+"T00:00"),b:new Date(b+"T00:00"),n}));
 const DIA_AULA={ing:0,aud:1,sgi:2,ia:3},DSEM=["segunda","terça","quarta","quinta"],DABR=["Seg","Ter","Qua","Qui"];
 const MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
@@ -5489,7 +5494,7 @@ const emFerias=d=>FERIAS.find(f=>d>=f.a&&d<=f.b);
 /* semanas letivas de cada curso (pula férias) */
 C.forEach(c=>{
  const fim=new Date(c.fim+"T00:00"),sem=[];
- for(let d=new Date(INICIO);d<=fim;d=new Date(d.getTime()+7*DIA))if(!emFerias(d))sem.push(d);
+ for(let d=new Date(INICIO_C[c.id]||INICIO);d<=fim;d=new Date(d.getTime()+7*DIA))if(!emFerias(d))sem.push(d);
  c.L=[];c.mods.forEach((m,mi)=>{m.a.forEach((a,ai)=>c.L.push({mi,k:`${c.id}-${mi}-${ai}`,t:a.t,a}));c.L.push({mi,k:`${c.id}-${mi}-r`,t:"Revisão e avaliação: "+m.n,rev:true});});
  c.L.forEach((x,i)=>{x.i=i;x.ini=sem[i]||new Date(sem[sem.length-1].getTime()+(i-sem.length+1)*7*DIA);x.fim=new Date(x.ini.getTime()+6*DIA);x.aula=new Date(x.ini.getTime()+DIA_AULA[c.id]*DIA);});
  c.dia=DIA_AULA[c.id];
@@ -5546,7 +5551,7 @@ function fecharLogin(){elLogin.hidden=true;if(reader.hidden)document.body.style.
   if(!u){fbRef=null;elConta.hidden=true;fecharPainel();
    st={feito:{},pagas:{},nome:"",conc:{}};try{localStorage.removeItem("centralEstudos4");}catch(e){}render();
    telaLogin("entrar");return;}
-  elConta.hidden=false;elConta.innerHTML=avatar(u,34);elConta.title=u.email||"Conta";
+  elConta.hidden=false;elConta.title=u.email||"Conta";
   fecharLogin();setStatus("Carregando seu progresso…");
   fbRef=fs.collection("centralEstudos").doc(u.uid);
   fbUnsub=fbRef.onSnapshot(snap=>{const r=snap.exists?snap.data():null;
@@ -5598,7 +5603,7 @@ document.getElementById("home").onclick=()=>go("inicio");
 document.getElementById("menu").onclick=()=>go("inicio");
 
 function render(){
- document.getElementById("menu").hidden=route==="inicio";
+ document.getElementById("menu").hidden=route==="inicio";document.body.classList.toggle("emcurso",route!=="inicio");
  const v=document.getElementById("view");v.className="";
  if(route==="inicio")return renderHome(v);
  renderCourse(v,C.find(c=>c.id===route));
@@ -5609,7 +5614,7 @@ function renderHome(v){
  const mensal=[...Array(26)].map((_,m)=>C.reduce((s,c)=>s+(m<c.parcelas?c.parcela:0),0));
  v.innerHTML=`<div style="display:grid;gap:20px">
  <section class="hero"><div class="eyebrow">nov/2026 → dez/2028 · 4 formações</div><h2>Sua trilha do básico ao avançado</h2>
-  <p class="note">Segunda: Inglês · Terça: Auditor Líder · Quarta: SGI · Quinta: IA. Uma aula por semana em cada curso, com revisão a cada módulo e certificado no final. Aulas até o começo de dezembro, férias em dezembro e janeiro e recesso em julho.</p></section>
+  <p class="note">Segunda: Inglês · Terça: Auditor Líder · Quarta: SGI · Quinta: IA. Uma aula por semana em cada curso, com revisão a cada módulo e certificado no final.</p></section>
  <section class="cards">${C.map(c=>{const n=nextW(c),p=pct(c);return `<article class="ccard c-${c.id}">
   <div class="band">${icon(c.id,36)}<div class="nowrap"><h3 class="nowrap">${c.curto}</h3><small class="nowrap" style="display:block">${c.mods.length} módulos · até ${mesData(c.fimData)}</small></div></div>
   <div class="body"><div class="row"><div class="ring" style="--p:${p}"><span class="num">${p}%</span></div>
