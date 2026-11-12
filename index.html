@@ -362,6 +362,8 @@ html,body{overflow-x:hidden;max-width:100%}
 .menu[aria-expanded="true"]{border-color:var(--navy);background:color-mix(in srgb,var(--navy) 8%,var(--surface))}
 @media (max-width:520px){body.emcurso .brand h1{display:none}}
 @media (max-width:340px){.menu .lbl{display:none}}
+/* PC: usa a tela inteira, como na Central de Controles Pessoais */
+@media (min-width:900px){.wrap{max-width:none;padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
 /* ===== revisão geral nov/2026: abas, textos longos, topo e menu da conta ===== */
 .tabs{scrollbar-width:none;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar{display:none}
