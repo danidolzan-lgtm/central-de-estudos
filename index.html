@@ -359,6 +359,45 @@ html,body{overflow-x:hidden;max-width:100%}
  .lt-pane{animation:entra .25s ease}
 }
 @keyframes entra{from{opacity:0;transform:translateY(6px)}}
+/* ===== revisão geral nov/2026: abas, textos longos, topo e menu da conta ===== */
+.tabs{scrollbar-width:none;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none}
+.menu{flex:none}
+.top{flex-wrap:nowrap}
+.brand{min-width:0}
+.brand h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-r{flex:none}
+.prox{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.sinfo h4.nowrap{white-space:normal;overflow:visible}
+table.fin td.nowrap{white-space:normal;max-width:none!important;min-width:180px}
+.mod summary .mh>.nowrap,.mod summary h4.nowrap{white-space:normal;overflow:visible}
+.mod summary{align-items:center}
+.wk .open{align-items:flex-start}
+.wk .d{padding-top:2px}
+.instcard{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:1px solid color-mix(in srgb,var(--navy) 30%,var(--line));background:color-mix(in srgb,var(--navy) 7%,var(--surface));border-radius:12px;padding:10px 12px;cursor:pointer;transition:background .15s,border-color .15s}
+.instcard:hover{border-color:var(--navy);background:color-mix(in srgb,var(--navy) 12%,var(--surface))}
+.instcard .ii{width:38px;height:38px;border-radius:10px;background:var(--navy);color:var(--bg);display:grid;place-items:center;flex:none}
+.instcard .it{display:grid;gap:1px;min-width:0;flex:1}
+.instcard .it b{font-size:.9rem;color:var(--fg)}
+.instcard .it span{font-size:.78rem;color:var(--muted)}
+.instcard .ia{font-size:1.4rem;line-height:1;color:var(--navy);flex:none}
+@media (max-width:640px){
+ .tabs{gap:0}
+ .tab{flex:1 0 auto;padding:10px 6px;font-size:.84rem;text-align:center}
+ .chero .row>.nowrap,.chero h2.nowrap{white-space:normal;overflow:visible}
+ .chero .eyebrow{white-space:normal;line-height:1.35}
+ .chero h2{font-size:1.3rem;line-height:1.2}
+ .mod .minibar{width:40px}
+ .wk .t{white-space:normal;overflow:visible;line-height:1.35;overflow-wrap:anywhere}
+ .wk{align-items:flex-start}
+ .wk input{margin-top:2px}
+ .menu .lbl{display:none}
+ .menu{padding:9px 11px}
+ .brand h1{font-size:1.2rem}
+ .painel{position:fixed;left:12px;right:12px;top:calc(68px + env(safe-area-inset-top,0px));width:auto}
+}
+
 @media (prefers-reduced-motion:reduce){.lt-pane{animation:none}}
 </style>
 
@@ -371,8 +410,7 @@ html,body{overflow-x:hidden;max-width:100%}
       <h1>Central de Estudos</h1>
     </button>
     <div class="hdr-r">
-    <button class="menu inst" id="instalar" hidden><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0-3-3m3 3 3-3M3 13h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Instalar app</button>
-    <button class="menu" id="menu" hidden><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Menu principal</button>
+    <button class="menu" id="menu" hidden aria-label="Menu principal"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="lbl">Menu principal</span></button>
     <button class="conta" id="conta" hidden aria-label="Minha conta" aria-haspopup="true" aria-expanded="false"></button>
     <div class="painel" id="painel" hidden role="dialog" aria-label="Minha conta"></div>
     </div>
@@ -5479,7 +5517,9 @@ function painelConta(){if(!fbUser||elPainel.hidden)return;const u=fbUser;
   <div class="pc-row"><span class="dot ${/Sem conexão/.test(fbStatus)?"off":"on"}"></span><div><b>${/Sem conexão/.test(fbStatus)?"Offline":"Conectado"}</b><span>${esc(fbStatus||"Progresso salvo")}${fbUltima?" às "+hhmm(fbUltima):""}</span></div></div>
   <div class="pc-row"><span class="pc-ico">↻</span><div><b>Sincronização automática</b><span>Tudo que você marca aparece igual em qualquer aparelho com esta conta.</span></div></div>
   <div class="pc-row"><span class="pc-ico">✓</span><div><b>${C.reduce((s,c)=>s+doneCount(c),0)} de ${C.reduce((s,c)=>s+c.L.length,0)} aulas concluídas</b><span>${C.map(c=>c.curto+" "+pct(c)+"%").join(" · ")}</span></div></div>
+  ${window.PWA&&PWA.pode()?`<button class="instcard" id="btnInst"><span class="ii"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="1.5" width="10" height="17" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 5.5v6m0 0-2.5-2.5M10 11.5l2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 15.5h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="it"><b>Instalar o app</b><span>${PWA.texto()}</span></span><span class="ia" aria-hidden="true">›</span></button>`:""}
   <button class="btn sairbtn" id="btnSair">Sair da conta</button>`;
+ const bi=document.getElementById("btnInst");if(bi)bi.onclick=()=>{fecharPainel();PWA.instalar();};
  document.getElementById("btnSair").onclick=()=>{fecharPainel();firebase.auth().signOut();};}
 function abrirPainel(){elPainel.hidden=false;elConta.setAttribute("aria-expanded","true");painelConta();}
 function fecharPainel(){elPainel.hidden=true;elConta.setAttribute("aria-expanded","false");}
@@ -5574,7 +5614,7 @@ function renderHome(v){
   <div class="band">${icon(c.id,36)}<div class="nowrap"><h3 class="nowrap">${c.curto}</h3><small class="nowrap" style="display:block">${c.mods.length} módulos · até ${mesData(c.fimData)}</small></div></div>
   <div class="body"><div class="row"><div class="ring" style="--p:${p}"><span class="num">${p}%</span></div>
    <div><div class="nowrap" style="font-weight:600">${doneCount(c)} de ${c.L.length} aulas</div><div class="note nowrap">${DABR[c.dia]} · ${brl(c.parcela)}/mês</div><div style="margin-top:4px">${ritmo(c)}</div></div></div>
-   <div class="note nowrap">Próxima: <b style="color:var(--fg)">${esc(n.t)}</b></div>
+   <div class="note prox">Próxima: <b style="color:var(--fg)">${esc(n.t)}</b></div>
    <div class="nav"><button class="btn" data-open-c="${c.id}">Ver curso</button><button class="btn main" data-cont="${c.id}">Continuar →</button></div></div></article>`}).join("")}</section>
 </div>`;
  v.querySelectorAll("[data-open-c]").forEach(b=>b.onclick=()=>go(b.dataset.openC,"curso"));
@@ -5607,6 +5647,7 @@ function renderCourse(v,c){
  v.querySelector("#cont").onclick=()=>openW(c,n.i);
  v.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render();});
  ({curso:tabCurso,trilha:tabTrilha,fin:tabFin,leituras:tabLeit,cert:tabCert})[tab](v.querySelector("#tabview"),c);
+ const ta=v.querySelector('.tab[aria-selected="true"]'),tb=v.querySelector('.tabs');if(ta&&tb&&tb.scrollWidth>tb.clientWidth)tb.scrollLeft=ta.offsetLeft-(tb.clientWidth-ta.offsetWidth)/2;
 }
 function modStats(c,mi){const ws=c.L.filter(x=>x.mi===mi),d=ws.filter(x=>st.feito[x.k]).length;return {ws,d,n:ws.length,p:Math.round(d/ws.length*100)};}
 const feriasEntre=(c,a,b)=>c.ferias.filter(f=>f.a>a&&f.a<b);
@@ -5894,24 +5935,26 @@ if(lessonInicial){const c=C.find(x=>x.id===lessonInicial.c);if(c)showW(c,lessonI
 (function(){
  if("serviceWorker" in navigator && location.protocol.startsWith("http"))
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
- const btn=document.getElementById("instalar"),modal=document.getElementById("instModal"),box=document.getElementById("instBox");
+ const modal=document.getElementById("instModal"),box=document.getElementById("instBox");
  const instalado=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
  const ua=navigator.userAgent,ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
  const android=/android/i.test(ua);
- let pedido=null;
+ let pedido=null,feito=false;
  const shareIc='<svg class="ic" width="18" height="18" viewBox="0 0 18 18"><path d="M9 2v9M6 5l3-3 3 3M4 8v7h10V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  function abrir(html){box.innerHTML=html+'<div class="nav" style="justify-content:flex-end"><button class="btn" id="instOk" style="background:var(--navy);color:#fff;border-color:var(--navy)">Entendi</button></div>';modal.hidden=false;document.getElementById("instOk").onclick=()=>modal.hidden=true;}
  modal.addEventListener("click",e=>{if(e.target===modal)modal.hidden=true;});
- if(instalado())return;
- if(ios||android)btn.hidden=false;
- window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();pedido=e;btn.hidden=false;});
- window.addEventListener("appinstalled",()=>{btn.hidden=true;pedido=null;});
- btn.onclick=async()=>{
-  if(pedido){pedido.prompt();const r=await pedido.userChoice;pedido=null;if(r.outcome==="accepted")btn.hidden=true;return;}
-  if(ios)abrir(`<h3>Instalar no iPhone</h3><ol><li>Abra este site no <b>Safari</b>.</li><li>Toque em <b>Compartilhar</b> ${shareIc} na barra de baixo.</li><li>Toque em <b>Adicionar à Tela de Início</b> e depois em <b>Adicionar</b>.</li></ol><p class="note">O ícone "Estudos" aparece na tela inicial e abre em tela cheia, como um app.</p>`);
-  else if(android)abrir(`<h3>Instalar no Android</h3><ol><li>Abra este site no <b>Chrome</b>.</li><li>Toque no menu <b>⋮</b> no canto de cima.</li><li>Toque em <b>Instalar app</b> (ou <b>Adicionar à tela inicial</b>).</li></ol><p class="note">O ícone "Estudos" aparece junto com os outros apps.</p>`);
-  else abrir(`<h3>Instalar no computador</h3><ol><li>No Chrome ou Edge, clique no ícone de instalar na barra de endereço (à direita).</li><li>Confirme em <b>Instalar</b>.</li></ol>`);
- };
+ const atualiza=()=>{if(typeof painelConta==="function")painelConta();};
+ window.PWA={
+  pode:()=>!feito&&!instalado()&&!!(pedido||ios||android),
+  texto:()=>ios?"Adicione à Tela de Início do iPhone":android?"Ícone na tela do celular, abre em tela cheia":"Abre em janela própria, como um programa",
+  instalar:async()=>{
+   if(pedido){pedido.prompt();const r=await pedido.userChoice;pedido=null;if(r.outcome==="accepted")feito=true;atualiza();return;}
+   if(ios)abrir(`<h3>Instalar no iPhone</h3><ol><li>Abra este site no <b>Safari</b>.</li><li>Toque em <b>Compartilhar</b> ${shareIc} na barra de baixo.</li><li>Toque em <b>Adicionar à Tela de Início</b> e depois em <b>Adicionar</b>.</li></ol><p class="note">O ícone "Estudos" aparece na tela inicial e abre em tela cheia, como um app.</p>`);
+   else if(android)abrir(`<h3>Instalar no Android</h3><ol><li>Abra este site no <b>Chrome</b>.</li><li>Toque no menu <b>⋮</b> no canto de cima.</li><li>Toque em <b>Instalar app</b> (ou <b>Adicionar à tela inicial</b>).</li></ol><p class="note">O ícone "Estudos" aparece junto com os outros apps.</p>`);
+   else abrir(`<h3>Instalar no computador</h3><ol><li>No Chrome ou Edge, clique no ícone de instalar na barra de endereço (à direita).</li><li>Confirme em <b>Instalar</b>.</li></ol>`);
+  }};
+ window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();pedido=e;atualiza();});
+ window.addEventListener("appinstalled",()=>{feito=true;pedido=null;atualiza();});
 })();
 </script>
 </body>
