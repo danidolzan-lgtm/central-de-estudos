@@ -129,6 +129,8 @@ details[open] > summary::after{content:"–"}
 /* trilha */
 .trail{list-style:none;margin:0;padding:8px 0;display:grid}
 .stop{display:grid;grid-template-columns:72px 1fr;gap:12px;min-height:84px}
+/* 16/11/2026: no PC a trilha fica mais compacta e o quadro ao lado acompanha a rolagem */
+@media (min-width:900px){.stop{min-height:64px}.grid2:has(>section>.trail)>section:last-child{position:sticky;top:76px}}
 .road{position:relative;display:flex;justify-content:center}
 .road::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:10px;margin-left:-5px;background:var(--line);border-radius:6px}
 .road .fill{position:absolute;top:0;left:50%;width:10px;margin-left:-5px;background:var(--c);border-radius:6px}
@@ -342,6 +344,8 @@ html,body{overflow-x:hidden;max-width:100%}
 .parc label:has(input:checked) .ck{background:var(--c);border-color:var(--c);color:#fff}
 .parc label:has(input:checked) .pv{color:var(--c);font-weight:600}
 .parc label:has(input:focus-visible){outline:2px solid var(--c);outline-offset:2px}
+/* 16/11/2026: no PC as parcelas também viram cartões (lista mais baixa, alinhada com o Resumo) */
+@media (min-width:641px){.finwrap .tw.parc-t{display:none}.parc{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}}
 /* seletor Livros | Sites no celular */
 .seg{display:none}
 @media (max-width:640px){
