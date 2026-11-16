@@ -5560,7 +5560,7 @@ function fecharLogin(){elLogin.hidden=true;if(reader.hidden)document.body.style.
   fecharLogin();setStatus("Carregando seu progresso…");
   fbRef=fs.collection("centralEstudos").doc(u.uid);
   fbUnsub=fbRef.onSnapshot(snap=>{const r=snap.exists?snap.data():null;
-   if(r&&r.st&&(r.ts||0)>=(st.ts||0)){st=Object.assign({feito:{},pagas:{},nome:"",conc:{}},r.st);st.ts=r.ts;migr();try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}if(reader.hidden)render();}
+   if(r&&r.st&&(r.ts||0)>=(st.ts||0)){/* 16/11/2026: junta o que foi marcado offline em outro aparelho */const loc=st,rf=r.st.feito||{},rp=r.st.pagas||{};const novo=k=>Object.keys(loc[k]||{}).some(x=>!(x in (k==="feito"?rf:rp)));const juntar=novo("feito")||novo("pagas");st=Object.assign({feito:{},pagas:{},nome:"",conc:{}},r.st);st.feito=Object.assign({},loc.feito,rf);st.pagas=Object.assign({},loc.pagas,rp);st.ts=r.ts;migr();if(juntar){st.ts=Date.now();setTimeout(fbPush,300);}try{localStorage.setItem("centralEstudos4",JSON.stringify(st));}catch(e){}if(reader.hidden)render();}
    else if(st.ts&&(!r||(st.ts||0)>(r.ts||0)))fbPush();
    setStatus(snap.metadata.hasPendingWrites?"Salvando…":"Progresso salvo",!snap.metadata.hasPendingWrites);},
    err=>setStatus(err&&err.code==="permission-denied"?"Sem permissão: confira as regras do Firestore":"Sem conexão: guardado neste aparelho"));
@@ -5579,7 +5579,10 @@ function ritmo(c){const esp=passou(c),d=doneCount(c);
  if(d>=c.L.length)return '<span class="pill ok">Concluído</span>';
  const f=emFerias(HOJE);
  if(d>=esp)return `<span class="pill ok">${f?"Férias · ":""}${d>esp?"Adiantado "+(d-esp)+" sem.":"No ritmo"}</span>`;
- return `<span class="pill late">${esp-d} sem. atrasado</span>`;}
+ /* a aula de hoje ainda não conta como atraso */
+ const hoje=c.L.some(x=>x.aula.getTime()===HOJE.getTime()),atr=esp-d-(hoje?1:0);
+ if(atr<=0)return `<span class="pill wait">Aula hoje</span>`;
+ return `<span class="pill late">${atr} sem. atrasado${hoje?" · aula hoje":""}</span>`;}
 function setDone(k,v){st.feito[k]=v;const c=C.find(x=>k.startsWith(x.id+"-"));
  if(c&&doneCount(c)===c.L.length&&!st.conc[c.id])st.conc[c.id]=dmy(HOJE);
  if(c&&doneCount(c)<c.L.length)delete st.conc[c.id];save();}
