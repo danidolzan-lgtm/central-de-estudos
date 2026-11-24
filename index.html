@@ -2458,8 +2458,9 @@ Congratulations, and keep going. The world is waiting to hear what you have to s
 window.CURSOS=[];function L(t,c,k,ex,at,q){return {t:t,c:c,k:k,ex:ex,at:at,q:q};}
 function MOD(id,n,o,a){CURSOS.find(c=>c.id===id).mods.push({n:n,o:o,a:a});}
 CURSOS.push({id:"ing",nome:"Inglês do Zero à Fluência",curto:"Inglês",nivel:"Do zero (A1) ao domínio (C2) · até dez/2028",
-sobre:"Curso completo de inglês em 12 módulos, do alfabeto ao nível C2 do Quadro Europeu (CEFR): gramática completa, vocabulário, pronúncia, listening, conversação, escrita formal e informal, apresentações, debates, idioms, literatura e preparação para certificações. Exemplos sempre do dia a dia. Método \"jeito bebê\": toda aula começa com um texto em inglês com a tradução linha a linha. Você ouve no Google Tradutor (ouvir para aprender a falar) e lê (ler para aprender a escrever); no fim vêm as explicações do texto e as perguntas sobre ele. A gramática completa fica guardada para consulta.",
+sobre:"Curso completo de inglês em 12 módulos, do alfabeto ao nível C2 do Quadro Europeu (CEFR): gramática completa, vocabulário, pronúncia, listening, conversação, escrita formal e informal, apresentações, debates, idioms, literatura e preparação para certificações. Exemplos sempre do dia a dia. Método \"jeito bebê\": toda aula começa com um texto em inglês com a tradução linha a linha. Você ouve no Google Tradutor (ouvir para aprender a falar) e lê (ler para aprender a escrever); no fim vêm as explicações do texto e as perguntas sobre ele. A gramática completa fica guardada para consulta. Nas revisões dos módulos 3, 6, 9 e 12 você faz o teste de nível gratuito EF SET (efset.org) para medir sua evolução.",
 horas:3,parcela:110,parcelas:26,fim:"2028-12-03",mods:[],
+efset:{2:{tipo:"rapido",nivel:"A1 completo e o começo do A2",meta:"Primeiro teste: só para ter um ponto de partida."},5:{tipo:"rapido",nivel:"A1, A2 e B1",meta:"Compare com a nota de junho: o importante é ter subido."},8:{tipo:"rapido",nivel:"até o B2 e o começo do C1",meta:"Se a nota estiver parada, aumente o tempo de exposição diária (séries, podcasts)."},11:{tipo:"completo",nivel:"o curso inteiro (A1 ao C2)",meta:"Teste final, com certificado para o currículo e o LinkedIn."}},
 livros:[["English Grammar in Use (níveis Essential, Intermediate e Advanced)","Raymond Murphy e Martin Hewings (Cambridge)","A gramática mais usada para estudar sozinho, do A1 ao C1."],["English Vocabulary in Use","McCarthy e O'Dell (Cambridge)","Vocabulário por tema e nível, com exercícios."],["English Collocations in Use","McCarthy e O'Dell (Cambridge)","Combinações naturais de palavras (B2-C1)."],["English Idioms in Use","McCarthy e O'Dell (Cambridge)","Idioms explicados com exemplos."],["English Pronunciation in Use","Mark Hancock e Martin Hewings (Cambridge)","Sons, acento e entonação com áudio."],["Graded readers Oxford Bookworms ou Penguin Readers","Vários","Livros adaptados por nível para ler por prazer."]],
 sites:[["BBC Learning English","https://www.bbc.co.uk/learningenglish","6 Minute English, gramática e cursos por nível."],["EF SET","https://www.efset.org","Teste gratuito de nível, alinhado ao CEFR."],["Anki","https://apps.ankiweb.net","Flashcards com repetição espaçada."],["Cambridge Dictionary","https://dictionary.cambridge.org","Significado, exemplos e pronúncia britânica e americana."],["YouGlish","https://youglish.com","Ouça qualquer palavra em vídeos reais."],["TED","https://www.ted.com","Palestras com transcrição interativa."],["Cambridge English","https://www.cambridgeenglish.org","Exames C1 Advanced e C2 Proficiency, com amostras oficiais."]]
 });
@@ -7515,6 +7516,7 @@ C.forEach(c=>{
  const fim=new Date(c.fim+"T00:00"),sem=[];
  for(let d=new Date(INICIO_C[c.id]||INICIO);d<=fim;d=new Date(d.getTime()+7*DIA))if(!emFerias(d))sem.push(d);
  c.L=[];c.mods.forEach((m,mi)=>{m.a.forEach((a,ai)=>c.L.push({mi,k:`${c.id}-${mi}-${ai}`,t:a.t,a}));c.L.push({mi,k:`${c.id}-${mi}-r`,t:"Revisão e avaliação: "+m.n,rev:true});});
+ if(c.efset)c.L.forEach(x=>{if(x.rev&&c.efset[x.mi])x.t+=" · Teste EF SET";});
  c.L.forEach((x,i)=>{x.i=i;x.ini=sem[i]||new Date(sem[sem.length-1].getTime()+(i-sem.length+1)*7*DIA);x.fim=new Date(x.ini.getTime()+6*DIA);x.aula=new Date(x.ini.getTime()+DIA_AULA[c.id]*DIA);});
  c.dia=DIA_AULA[c.id];
  c.fimData=c.L[c.L.length-1].fim;c.carga=c.L.length*c.horas;
@@ -7679,13 +7681,19 @@ function renderCourse(v,c){
 function modStats(c,mi){const ws=c.L.filter(x=>x.mi===mi),d=ws.filter(x=>st.feito[x.k]).length;return {ws,d,n:ws.length,p:Math.round(d/ws.length*100)};}
 const feriasEntre=(c,a,b)=>c.ferias.filter(f=>f.a>a&&f.a<b);
 const ferHtml=f=>`<li class="ferias">☀ <b>${f.n}</b> · ${ddmm(f.a)}/${String(f.a.getFullYear()).slice(2)} a ${ddmm(f.b)}/${String(f.b.getFullYear()).slice(2)} · sem aulas</li>`;
+/* 24/11/2026: quadro com as datas dos testes EF SET na página do curso de inglês */
+function efPainel(c){if(!c.efset)return "";st.efset=st.efset||{};
+ const rows=c.L.filter(x=>x.rev&&c.efset[x.mi]).map(x=>{const E=c.efset[x.mi],nota=st.efset[x.mi];
+  return `<li class="wk ${nota?"done":""}"><button class="open" data-w="${x.i}"><span class="d num">${dmy(x.aula)}</span><span class="t">Módulo ${x.mi+1} · teste ${E.tipo==="completo"?"completo (50 min, certificado)":"rápido (15 min)"}${nota?" · nota: "+esc(nota):""}</span></button></li>`;}).join("");
+ return `<div class="box task"><h4>Testes de nível EF SET (gratuito)</h4><div class="lesson"><p>Para medir sua evolução, faça o teste nestas semanas de revisão. Clique na data para abrir a semana e anotar sua nota.</p></div><ul class="weeks">${rows}</ul><div class="ingbtns"><a class="btn" href="https://www.efset.org/" target="_blank" rel="noopener">Abrir o efset.org ↗</a></div></div>`;}
 function tabCurso(tv,c){
  const n=nextW(c),cw=c.L.findIndex(x=>HOJE>=x.ini&&HOJE<=x.fim);
  tv.innerHTML=`<div style="display:grid;gap:10px">
  <details class="about"><summary>Sobre o curso</summary><p>${c.sobre}</p><p><b>Calendário:</b> ${c.ferias.map(f=>`${f.n.toLowerCase()} de ${dmy(f.a)} a ${dmy(f.b)}`).join("; ")||"sem pausas no período"}.</p></details>
+ ${efPainel(c)}
  ${c.mods.map((m,mi)=>{const s=modStats(c,mi),ini=s.ws[0].ini,fim=s.ws[s.n-1].fim;
   let li="";s.ws.forEach((x,j)=>{if(j>0)feriasEntre(c,s.ws[j-1].ini,x.ini).forEach(f=>li+=ferHtml(f));
-   li+=`<li class="wk ${st.feito[x.k]?"done":""} ${x.i===cw?"now":""}"><input type="checkbox" data-k="${x.k}" aria-label="Concluída" ${st.feito[x.k]?"checked":""}><button class="open" data-w="${x.i}"><span class="d num">${DABR[c.dia]} ${ddmm(x.aula)}</span><span class="t">${esc(x.t)}</span></button>${x.rev?'<span class="tag">Avaliação</span>':""}</li>`;});
+   li+=`<li class="wk ${st.feito[x.k]?"done":""} ${x.i===cw?"now":""}"><input type="checkbox" data-k="${x.k}" aria-label="Concluída" ${st.feito[x.k]?"checked":""}><button class="open" data-w="${x.i}"><span class="d num">${DABR[c.dia]} ${ddmm(x.aula)}</span><span class="t">${esc(x.t)}</span></button>${x.rev?'<span class="tag">Avaliação</span>':""}${x.rev&&c.efset&&c.efset[x.mi]?'<span class="tag">EF SET</span>':""}</li>`;});
   const antes=mi>0?feriasEntre(c,c.L.filter(x=>x.mi===mi-1).slice(-1)[0].ini,ini).map(f=>`<div class="ferias">☀ <b>${f.n}</b> · ${dmy(f.a)} a ${dmy(f.b)} · sem aulas</div>`).join(""):"";
   return `${antes}<details class="mod ${s.d===s.n?"done":""}" ${n.mi===mi?"open":""}>
   <summary><div class="mh"><span class="mnum">${mi+1}</span><div class="nowrap"><h4 class="nowrap">${m.n}</h4><div class="sub num">${ddmm(ini)}/${String(ini.getFullYear()).slice(2)} a ${ddmm(fim)}/${String(fim.getFullYear()).slice(2)} · ${s.d}/${s.n} semanas · ${s.n*c.horas} h</div></div></div><span class="minibar"><i style="width:${s.p}%"></i></span></summary>
@@ -7878,6 +7886,10 @@ function motivo(g,tipo,x,y,u,larg){
 
 /* leitor */
 const reader=document.getElementById("reader"),sheet=document.getElementById("sheet");let lastFocus=null;
+/* 24/11/2026: teste de nível EF SET nas revisões dos módulos 3, 6, 9 e 12 do inglês */
+function efBox(c,x){const E=c.efset&&c.efset[x.mi];if(!x.rev||!E)return "";const comp=E.tipo==="completo";st.efset=st.efset||{};
+ const hist=Object.keys(c.efset).filter(k=>st.efset[k]!=null&&st.efset[k]!=="").map(k=>`Módulo ${+k+1}: <b>${esc(st.efset[k])}</b>`).join(" · ");
+ return `<div class="box task"><h4>Teste de nível EF SET (gratuito)</h4><div class="lesson"><p>Nesta semana, faça o <b>${comp?"teste completo (50 min, com certificado)":"teste rápido (15 min)"}</b> no site da EF. Conteúdo visto até aqui: <b>${E.nivel}</b>. ${E.meta}</p><p>${comp?"No site, escolha o teste de 50 minutos (EF SET Certificate). No fim, ele gera o certificado com sua nota e o botão para adicionar ao LinkedIn.":"No site, escolha a versão rápida de 15 minutos (Quick check). O resultado sai na hora."}</p><p>Use fone de ouvido, um lugar silencioso e não use dicionário. O teste mede só leitura e compreensão auditiva (não mede fala nem escrita). Não se assuste se a nota ficar abaixo do conteúdo visto: ele mede o que você já usa com facilidade.</p></div><div class="ingbtns"><a class="btn main" href="https://www.efset.org/" target="_blank" rel="noopener">Fazer o teste no efset.org ↗</a></div><label class="field" for="efNota">Sua nota ou nível (ex.: 42 · B1)<input id="efNota" data-mi="${x.mi}" value="${esc(st.efset[x.mi]||"")}" maxlength="20" placeholder="Anote o resultado aqui"></label>${hist?`<p class="note" style="margin:8px 0 0">Suas notas: ${hist}</p>`:""}</div>`;}
 const quizHtml=(q,qi,rev)=>`<div class="quiz"><h4>${rev?"Questão "+(qi+1):"Exercício "+(qi+1)}: ${q[0]}</h4>${q[1].map((t,i)=>`<button class="opt" data-i="${i}">${t}</button>`).join("")}<p class="fb" hidden></p></div>`;
 function openW(c,i){const lv=lvAtual(),cur=history.state||{};
  if(lv===0){history.pushState({lv:1,c:c.id},"",BASEURL+"#"+c.id);history.pushState({lv:2,c:c.id,i},"",BASEURL+"#"+c.id);}
@@ -7889,7 +7901,7 @@ function showW(c,i){
  const x=c.L[i],m=c.mods[x.mi];sheet.className="sheet c-"+c.id;let body="",qs=[];
  const ITX=a=>c.id==="ing"&&window.ING_TX&&ING_TX[a.t];
  if(x.rev){qs=m.a.flatMap(a=>ITX(a)?ITX(a).q:a.q);
-  body=`<div class="lesson"><p>Semana de revisão do módulo <b>${m.n}</b>. Releia os pontos-chave, refaça as atividades pendentes e responda as ${qs.length} questões. Objetivo do módulo: ${m.o}</p></div>
+  body=efBox(c,x)+`<div class="lesson"><p>Semana de revisão do módulo <b>${m.n}</b>. Releia os pontos-chave, refaça as atividades pendentes e responda as ${qs.length} questões. Objetivo do módulo: ${m.o}</p></div>
   ${m.a.map(a=>`<div class="box"><h4>${esc(a.t)}</h4><ul>${a.k.map(p=>`<li>${p}</li>`).join("")}</ul></div>`).join("")}
   <div class="box task"><h4>Atividade de revisão</h4><div class="lesson"><p>Faça um resumo de uma página do módulo com suas palavras e um mapa mental ligando os temas.</p></div></div>
   ${qs.map((q,qi)=>quizHtml(q,qi,true)).join("")}`;}
@@ -7915,6 +7927,7 @@ function showW(c,i){
   qz.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));b.classList.add(ok?"right":"wrong");
   const fb=qz.querySelector(".fb");fb.hidden=false;fb.innerHTML=ok?"<b>Certo.</b> "+q[3]:"<b>Ainda não.</b> Releia a aula e tente outra opção.";}));
  sheet.querySelector("#lClose").onclick=closeW;
+ const eN=sheet.querySelector("#efNota");if(eN)eN.onchange=()=>{st.efset=st.efset||{};st.efset[eN.dataset.mi]=eN.value.trim();save();showW(c,i);};
  const iC=sheet.querySelector("#ingCopy");if(iC)iC.onclick=()=>{const t=[...sheet.querySelectorAll(".ingl .en")].map(p=>p.textContent).join("\n");(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{iC.textContent="Copiado ✓";setTimeout(()=>iC.textContent="Copiar inglês",1500)}).catch(()=>{});};
  const iP=sheet.querySelector("#ingPt");if(iP){const ap=h=>{sheet.querySelector(".ingpar").classList.toggle("sempt",h);iP.textContent=h?"Mostrar tradução":"Esconder tradução";iP.setAttribute("aria-pressed",h)};iP.onclick=()=>ap(!sheet.querySelector(".ingpar").classList.contains("sempt"));}
  const fsIco=f=>f?'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 2v5H2M11 2v5h5M7 16v-5H2M11 16v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 7V2h5M16 7V2h-5M2 11v5h5M16 11v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
