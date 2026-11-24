@@ -238,6 +238,8 @@ html,body{overflow-x:hidden;max-width:100%}
 .lesson pre code{background:none;padding:0;font-size:1em}
 .lesson code{background:var(--raise);padding:1px 5px;border-radius:4px;font-size:.88em}
 .box{border-radius:10px;padding:12px 14px;background:var(--cs)}
+.ingbtns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}.ingbtns .btn{text-decoration:none}.ingpar{display:grid;gap:8px}.ingl{background:var(--surface);border-radius:8px;padding:8px 10px}.ingl p{margin:0}.ingl .en{font-size:1.05rem;font-weight:600}.ingl .pt{color:var(--muted);font-size:.9rem;margin-top:2px}.ingpar.sempt .pt{display:none}
+
 .box h4{margin:0 0 6px;font-size:.9rem;color:var(--c)}
 .box ul{margin:0;padding-left:18px;display:grid;gap:3px}
 .box.task{background:var(--raise);border-left:4px solid var(--c)}
@@ -445,29 +447,752 @@ table.fin td.nowrap{white-space:normal;max-width:none!important;min-width:180px}
 window.FIREBASE_CONFIG = {apiKey:"AIzaSyAxb42hyC1xK4Kjd3nAnZzq8OXqD5KgAp4",authDomain:"central-de-estudos-b4e37.firebaseapp.com",projectId:"central-de-estudos-b4e37",storageBucket:"central-de-estudos-b4e37.firebasestorage.app",messagingSenderId:"310809547422",appId:"1:310809547422:web:0ff83863a3501dbc84218f"};
 </script>
 <script>
+/* 24/11/2026: inglês no "jeito bebê": texto em inglês com tradução linha a linha (ouvir no Google Tradutor), explicações do texto e perguntas do texto */
+window.ING_TX={};function INGTX(t,txt,ex,q){ING_TX[t]={tx:txt.split("\n").map(l=>l.split("|")),ex:ex,q:q};}
+INGTX("Alfabeto, sons e como estudar inglês",`Hello! My name is Ana.|Olá! Meu nome é Ana.
+A-N-A. Ana.|A-N-A. Ana.
+I am from Brazil.|Eu sou do Brasil.
+I study English every day.|Eu estudo inglês todos os dias.
+I listen, I read and I speak.|Eu escuto, eu leio e eu falo.
+My email is ana at mail dot com.|Meu e-mail é ana arroba mail ponto com.
+How do you spell your name?|Como você soletra o seu nome?
+Nice to meet you!|Prazer em conhecer você!`,
+["<b>Hello</b> é \"olá\" e <b>Nice to meet you</b> é o \"prazer em conhecer\" de quando você conhece alguém.","Para soletrar, use o nome das letras em inglês: A (êi), N (én). No e-mail, @ é <b>at</b> e o ponto é <b>dot</b>.","<b>How do you spell...?</b> = \"Como se soletra...?\". Muito útil ao telefone."],
+[["What is her name? (Qual é o nome dela?)",["Anna","Ana","Ann"],1,"No texto: My name is Ana, A-N-A."],["Where is she from? (De onde ela é?)",["Brazil","Portugal","USA"],0,"I am from Brazil."],["How do you say @ in English?",["dot","at","and"],1,"@ = at; o ponto = dot."]]);
+INGTX("Verb to be: ser e estar",`This is my friend Paulo.|Este é meu amigo Paulo.
+He is a driver.|Ele é motorista.
+He is 30 years old.|Ele tem 30 anos.
+Paulo is tall and happy.|Paulo é alto e feliz.
+Today he is tired.|Hoje ele está cansado.
+We are at work.|Nós estamos no trabalho.
+Are you at work too?|Você está no trabalho também?
+No, I am not. I am at home.|Não, eu não estou. Eu estou em casa.`,
+["<b>Be</b> é ser e estar ao mesmo tempo: I am, you are, he/she/it is, we/they are.","Idade em inglês usa be: <b>He is 30</b> (ele \"é\" 30), não \"has 30\".","Negativa: coloque <b>not</b> depois: I am not. Pergunta: inverta: <b>Are you...?</b>"],
+[["What is Paulo's job? (Qual é o trabalho do Paulo?)",["teacher","driver","doctor"],1,"He is a driver."],["How old is Paulo?",["13","30","33"],1,"He is 30 years old."],["How is Paulo today?",["happy","tired","sad"],1,"Today he is tired."]]);
+INGTX("Pronomes, possessivos e o 's",`This is my family.|Esta é a minha família.
+My mother's name is Rosa.|O nome da minha mãe é Rosa.
+Her car is red.|O carro dela é vermelho.
+My father is Carlos. His dog is Max.|Meu pai é o Carlos. O cachorro dele é o Max.
+My sister and I have a cat.|Minha irmã e eu temos um gato.
+Our cat is small and white.|Nosso gato é pequeno e branco.
+Its name is Snow.|O nome dele é Snow.
+Is this your phone? No, it's Rosa's.|Este é o seu telefone? Não, é da Rosa.`,
+["<b>my, your, his, her, its, our, their</b> = meu, seu, dele, dela, dele (coisa/animal), nosso, deles.","<b>Rosa's car</b> = o carro da Rosa. O <b>'s</b> mostra o dono.","<b>His</b> é de homem e <b>her</b> é de mulher, não importa a coisa: her car, his dog."],
+[["What is the mother's name?",["Rosa","Carla","Max"],0,"My mother's name is Rosa."],["Who is Max?",["the father","the cat","the dog"],2,"His dog is Max."],["Whose phone is it? (De quem é o telefone?)",["Rosa's","Carlos's","Snow's"],0,"It's Rosa's."]]);
+INGTX("Artigos, plurais e this / that / these / those",`This is my office.|Este é o meu escritório.
+There is a desk and a computer.|Há uma mesa e um computador.
+These are my books.|Estes são os meus livros.
+That is an old printer.|Aquilo é uma impressora velha.
+Those are boxes for the trucks.|Aquelas são caixas para os caminhões.
+The boxes are heavy.|As caixas são pesadas.
+I have two pens and three cups.|Eu tenho duas canetas e três xícaras.
+The coffee is hot!|O café está quente!`,
+["<b>a</b> antes de som de consoante (a desk) e <b>an</b> antes de som de vogal (an old printer). <b>The</b> = o, a, os, as.","<b>this/these</b> = perto (este/estes); <b>that/those</b> = longe (aquele/aqueles).","Plural normal com <b>s</b>: books, pens. Com <b>es</b> depois de x, s, ch: boxes."],
+[["What is old?",["the computer","the printer","the desk"],1,"That is an old printer."],["The boxes are...",["heavy","small","red"],0,"The boxes are heavy."],["How many cups? (Quantas xícaras?)",["two","three","four"],1,"three cups."]]);
+INGTX("Números, datas, horas e dinheiro",`Today is Monday, November 24th.|Hoje é segunda-feira, 24 de novembro.
+It is seven thirty in the morning.|São sete e meia da manhã.
+I start work at eight o'clock.|Eu começo a trabalhar às oito horas.
+My lunch is at twelve.|Meu almoço é ao meio-dia.
+The sandwich costs fifteen reais.|O sanduíche custa quinze reais.
+My birthday is on March 3rd.|Meu aniversário é em 3 de março.
+I was born in 1995.|Eu nasci em 1995.
+What time is it now?|Que horas são agora?`,
+["Datas usam números ordinais: <b>first (1st), second (2nd), third (3rd), fourth (4th)</b>... November 24th.","Horas: <b>eight o'clock</b> = oito em ponto; <b>seven thirty</b> = sete e meia.","Anos se leem em pares: 1995 = <b>nineteen ninety-five</b>. Preço: <b>It costs...</b>"],
+[["What day is today?",["Sunday","Monday","Friday"],1,"Today is Monday."],["When does work start?",["7:30","8:00","12:00"],1,"at eight o'clock."],["How much is the sandwich?",["R$ 15","R$ 50","R$ 5"],0,"fifteen reais."]]);
+INGTX("There is / there are, preposições de lugar e a casa",`I live in a small house.|Eu moro numa casa pequena.
+There is a kitchen and a living room.|Há uma cozinha e uma sala.
+There are two bedrooms.|Há dois quartos.
+The TV is on the table.|A TV está em cima da mesa.
+My shoes are under the bed.|Meus sapatos estão embaixo da cama.
+The bathroom is next to my bedroom.|O banheiro fica ao lado do meu quarto.
+There isn't a garage.|Não há garagem.
+My car is in front of the house.|Meu carro fica na frente da casa.`,
+["<b>There is</b> (singular) e <b>there are</b> (plural) = \"há / tem\". Negativa: there isn't / there aren't.","Preposições: <b>on</b> (em cima), <b>under</b> (embaixo), <b>next to</b> (ao lado), <b>in front of</b> (na frente), <b>in</b> (dentro).","Cuidado: \"tem\" no sentido de existir é <b>there is</b>, não \"have\"."],
+[["How many bedrooms are there?",["one","two","three"],1,"There are two bedrooms."],["Where are the shoes?",["on the table","under the bed","in the kitchen"],1,"under the bed."],["Is there a garage?",["Yes, there is.","No, there isn't.","Yes, two."],1,"There isn't a garage."]]);
+INGTX("Simple present: rotinas e fatos",`I wake up at six every day.|Eu acordo às seis todos os dias.
+I take a shower and drink coffee.|Eu tomo banho e bebo café.
+I go to work by bus.|Eu vou ao trabalho de ônibus.
+My brother works at night.|Meu irmão trabalha à noite.
+He sleeps in the morning.|Ele dorme de manhã.
+We eat dinner together on Sundays.|Nós jantamos juntos aos domingos.
+My mother watches TV after dinner.|Minha mãe assiste TV depois do jantar.
+The sun rises in the east.|O sol nasce no leste.`,
+["O simple present fala de rotina e de fatos: I <b>work</b>, she <b>works</b>.","Com <b>he, she, it</b> o verbo ganha <b>s</b>: works, sleeps. Depois de ch, sh, o, ss: <b>es</b> (watches, goes).","<b>by bus / by car</b> = de ônibus / de carro."],
+[["What time does the person wake up?",["5","6","7"],1,"at six."],["How does the person go to work?",["by car","by bus","on foot"],1,"by bus."],["When does the brother work?",["at night","in the morning","on Sundays"],0,"He works at night."]]);
+INGTX("Perguntas e negativas com do / does",`Do you like your job?|Você gosta do seu trabalho?
+Yes, I do. I like it a lot.|Sim, gosto. Eu gosto muito.
+Does your boss work on Saturdays?|Seu chefe trabalha aos sábados?
+No, he doesn't.|Não, ele não trabalha.
+I don't drink coffee at night.|Eu não bebo café à noite.
+My friend doesn't eat meat.|Minha amiga não come carne.
+Where do you live?|Onde você mora?
+What does she do?|O que ela faz (de profissão)?`,
+["Pergunta: <b>Do</b> (I, you, we, they) ou <b>Does</b> (he, she, it) + verbo sem s: Does he work?","Negativa: <b>don't</b> / <b>doesn't</b> + verbo normal: she doesn't eat (não \"eats\").","Resposta curta: Yes, I do. / No, he doesn't. <b>What does she do?</b> pergunta a profissão."],
+[["Does the person like the job?",["Yes","No","Not sure"],0,"Yes, I do."],["Does the boss work on Saturdays?",["Yes, he does.","No, he doesn't.","Sometimes"],1,"No, he doesn't."],["What doesn't the friend eat?",["fish","meat","bread"],1,"doesn't eat meat."]]);
+INGTX("Frequência, tempo livre e hobbies",`I always play soccer on Saturdays.|Eu sempre jogo futebol aos sábados.
+I usually go to the beach in summer.|Eu geralmente vou à praia no verão.
+I sometimes read books at night.|Às vezes eu leio livros à noite.
+I never go to the gym.|Eu nunca vou à academia.
+My girlfriend often cooks on Sundays.|Minha namorada frequentemente cozinha aos domingos.
+She loves music.|Ela ama música.
+How often do you go out?|Com que frequência você sai?
+Once a week.|Uma vez por semana.`,
+["Advérbios de frequência: <b>always</b> (sempre), <b>usually</b> (geralmente), <b>often</b> (frequentemente), <b>sometimes</b> (às vezes), <b>never</b> (nunca).","Eles vêm <b>antes do verbo</b>: I never go. Mas depois do be: I am always tired.","<b>How often...?</b> = com que frequência. <b>once / twice a week</b> = uma / duas vezes por semana."],
+[["When does the person play soccer?",["Sundays","Saturdays","every day"],1,"always on Saturdays."],["Does the person go to the gym?",["always","sometimes","never"],2,"I never go to the gym."],["Who cooks on Sundays?",["the girlfriend","the mother","the person"],0,"My girlfriend often cooks."]]);
+INGTX("Can e can't: habilidade, permissão e pedidos",`I can drive a truck.|Eu sei dirigir um caminhão.
+I can't speak Spanish, but I can understand it.|Eu não sei falar espanhol, mas consigo entender.
+My son can swim very well.|Meu filho sabe nadar muito bem.
+Can I use your pen?|Posso usar sua caneta?
+Sure, you can.|Claro, pode.
+Can you help me, please?|Você pode me ajudar, por favor?
+Sorry, I can't now.|Desculpe, não posso agora.
+Can you call me later?|Você pode me ligar mais tarde?`,
+["<b>Can</b> = saber/conseguir/poder. Não muda com he/she: he can (sem s).","Depois de can o verbo vem puro: can drive, can swim (sem \"to\").","Pedidos: <b>Can I...?</b> (posso?) e <b>Can you...?</b> (você pode?). Mais educado: <b>Could you...?</b>"],
+[["What can the person drive?",["a bus","a truck","a bike"],1,"I can drive a truck."],["Can the person speak Spanish?",["Yes","No, only understand","Very well"],1,"can't speak, but can understand."],["Who can swim very well?",["the son","the daughter","the person"],0,"My son can swim."]]);
+INGTX("Comida, compras, contáveis e incontáveis",`I'm at the supermarket.|Estou no supermercado.
+I need some rice and some milk.|Preciso de um pouco de arroz e de leite.
+I want six eggs and two apples.|Quero seis ovos e duas maçãs.
+We don't have any bread at home.|Não temos nenhum pão em casa.
+How much is the cheese?|Quanto é o queijo?
+How many bananas do you want?|Quantas bananas você quer?
+There is a lot of sugar in this cake.|Tem muito açúcar neste bolo.
+Can I pay by card?|Posso pagar no cartão?`,
+["Contáveis têm plural (eggs, apples). Incontáveis não (rice, milk, bread, sugar).","<b>some</b> em frases positivas, <b>any</b> em negativas e perguntas.","<b>How many</b> para contáveis, <b>How much</b> para incontáveis e preço. <b>a lot of</b> serve para os dois."],
+[["Where is the person?",["at home","at the supermarket","at work"],1,"I'm at the supermarket."],["How many eggs?",["two","six","ten"],1,"six eggs."],["What don't they have at home?",["milk","bread","rice"],1,"We don't have any bread."]]);
+INGTX("Present continuous: o que está acontecendo agora",`It's Saturday afternoon.|É sábado à tarde.
+I am sitting in the living room.|Estou sentado na sala.
+My wife is cooking dinner.|Minha esposa está fazendo o jantar.
+The kids are playing video games.|As crianças estão jogando videogame.
+It is raining outside.|Está chovendo lá fora.
+What are you doing?|O que você está fazendo?
+I'm studying English.|Estou estudando inglês.
+I'm not working today.|Não estou trabalhando hoje.`,
+["Present continuous = <b>am/is/are + verbo com -ing</b>: I am sitting, she is cooking.","Usa para o que está acontecendo <b>agora</b>. Rotina continua no simple present.","Verbos curtos dobram a consoante: sit → sitting, run → running."],
+[["What is the wife doing?",["sleeping","cooking","working"],1,"My wife is cooking dinner."],["What is the weather like?",["sunny","raining","snowing"],1,"It is raining outside."],["Is the person working today?",["Yes","No","In the morning"],1,"I'm not working today."]]);
+INGTX("Simple past dos verbos regulares",`Last weekend I visited my parents.|No fim de semana passado eu visitei meus pais.
+We talked a lot.|Nós conversamos muito.
+My mother cooked fish.|Minha mãe cozinhou peixe.
+In the afternoon we watched a movie.|À tarde nós assistimos a um filme.
+My father played cards with my son.|Meu pai jogou cartas com meu filho.
+We didn't stay for dinner.|Nós não ficamos para o jantar.
+I arrived home at nine.|Cheguei em casa às nove.
+Did you enjoy your weekend?|Você aproveitou seu fim de semana?`,
+["Passado regular = verbo + <b>ed</b>: visit → visited, cook → cooked. É igual para todas as pessoas.","Negativa e pergunta usam <b>did</b> e o verbo volta ao normal: didn't stay, Did you enjoy?","O -ed tem 3 sons: /t/ (cooked), /d/ (played), /id/ (visited)."],
+[["Who did the person visit?",["friends","parents","the boss"],1,"I visited my parents."],["What did the mother cook?",["meat","fish","pasta"],1,"cooked fish."],["Did they stay for dinner?",["Yes","No","Only the son"],1,"We didn't stay for dinner."]]);
+INGTX("Verbos irregulares mais usados",`Yesterday I went to the city.|Ontem eu fui à cidade.
+I took the bus at eight.|Peguei o ônibus às oito.
+I bought a new phone.|Comprei um telefone novo.
+I saw an old friend.|Vi um velho amigo.
+We had lunch together.|Almoçamos juntos.
+He told me a funny story.|Ele me contou uma história engraçada.
+I came back home at five.|Voltei para casa às cinco.
+I was very happy.|Eu fiquei muito feliz.`,
+["Irregulares não usam -ed: go → <b>went</b>, take → <b>took</b>, buy → <b>bought</b>, see → <b>saw</b>, have → <b>had</b>, tell → <b>told</b>, come → <b>came</b>.","Na negativa e pergunta eles voltam ao normal: I didn't go, Did you buy?","Decore aos poucos: 5 por semana no Anki."],
+[["Where did the person go?",["to the beach","to the city","to work"],1,"I went to the city."],["What did the person buy?",["a phone","a car","a book"],0,"I bought a new phone."],["Who did the person see?",["a teacher","an old friend","the boss"],1,"I saw an old friend."]]);
+INGTX("Was / were e past continuous",`Last night I was at home.|Ontem à noite eu estava em casa.
+My kids were tired.|Meus filhos estavam cansados.
+At eight o'clock I was watching TV.|Às oito eu estava assistindo TV.
+My wife was reading a book.|Minha esposa estava lendo um livro.
+Suddenly the lights went out.|De repente as luzes apagaram.
+It was raining a lot.|Estava chovendo muito.
+We weren't scared.|Nós não estávamos com medo.
+Where were you last night?|Onde você estava ontem à noite?`,
+["<b>was</b> (I, he, she, it) e <b>were</b> (you, we, they) = passado do be.","Past continuous = <b>was/were + -ing</b>: ação em andamento no passado (I was watching).","Muito usado com uma ação curta que interrompe: I was watching TV when the lights went out."],
+[["Where was the person last night?",["at work","at home","at a bar"],1,"I was at home."],["What was the wife doing?",["cooking","reading","sleeping"],1,"was reading a book."],["What happened suddenly?",["the lights went out","it started to snow","the kids cried"],0,"the lights went out."]]);
+INGTX("Used to e a vida antes",`When I was a child, I lived on a farm.|Quando eu era criança, morava numa fazenda.
+I used to wake up very early.|Eu costumava acordar muito cedo.
+My grandfather used to milk the cows.|Meu avô costumava tirar leite das vacas.
+We didn't use to have a TV.|Nós não tínhamos TV (antigamente).
+We used to play outside all day.|A gente costumava brincar lá fora o dia todo.
+Now I live in the city.|Agora eu moro na cidade.
+I don't wake up early anymore.|Não acordo mais cedo.
+Did you use to play soccer?|Você costumava jogar futebol?`,
+["<b>used to + verbo</b> = costumava, um hábito do passado que não existe mais.","Negativa e pergunta: <b>didn't use to</b> / <b>Did you use to...?</b> (sem d).","<b>not ... anymore</b> = não ... mais."],
+[["Where did the person live as a child?",["in the city","on a farm","near the beach"],1,"I lived on a farm."],["Who used to milk the cows?",["the father","the grandfather","the person"],1,"My grandfather."],["Did they have a TV?",["Yes","No","Two"],1,"We didn't use to have a TV."]]);
+INGTX("Contando histórias: sequência e conectores",`Last Friday was a crazy day.|Sexta passada foi um dia maluco.
+First, my alarm didn't ring.|Primeiro, meu despertador não tocou.
+Then I missed the bus.|Depois eu perdi o ônibus.
+After that, it started to rain.|Depois disso, começou a chover.
+When I arrived at work, the meeting was over.|Quando cheguei no trabalho, a reunião tinha acabado.
+But my boss was nice about it.|Mas meu chefe foi compreensivo.
+Finally, at night, I slept very well.|Finalmente, à noite, eu dormi muito bem.
+So, in the end, it was OK.|Então, no fim, deu tudo certo.`,
+["Sequência: <b>first, then, after that, when, finally, in the end</b>.","<b>but</b> (mas) mostra contraste; <b>so</b> (então) mostra resultado.","<b>miss the bus</b> = perder o ônibus. <b>be over</b> = acabar."],
+[["What happened first?",["the alarm didn't ring","it rained","the bus came"],0,"First, my alarm didn't ring."],["How was the boss?",["angry","nice","absent"],1,"my boss was nice about it."],["How did the person sleep?",["badly","very well","not at all"],1,"I slept very well."]]);
+INGTX("Perguntas no passado e conversas reais",`A: Hi! How was your vacation?|A: Oi! Como foram suas férias?
+B: It was great, thanks.|B: Foram ótimas, obrigado.
+A: Where did you go?|A: Para onde você foi?
+B: I went to Florianópolis.|B: Fui para Florianópolis.
+A: Who did you go with?|A: Com quem você foi?
+B: With my girlfriend. We stayed five days.|B: Com minha namorada. Ficamos cinco dias.
+A: What did you do there?|A: O que vocês fizeram lá?
+B: We swam, ate seafood and walked a lot.|B: Nadamos, comemos frutos do mar e andamos muito.`,
+["Pergunta no passado: <b>Wh- + did + pessoa + verbo normal</b>: Where did you go?","Com o be não usa did: <b>How was</b> your vacation?","Passados irregulares do texto: go → went, swim → swam, eat → ate."],
+[["Where did B go?",["Curitiba","Florianópolis","Rio"],1,"I went to Florianópolis."],["How many days did they stay?",["three","five","seven"],1,"We stayed five days."],["What did they eat?",["pizza","seafood","barbecue"],1,"ate seafood."]]);
+INGTX("Going to e present continuous para planos",`Next week I'm going to start a new course.|Semana que vem vou começar um curso novo.
+I'm going to study every night.|Vou estudar todas as noites.
+On Friday I'm meeting my cousin.|Na sexta vou me encontrar com meu primo.
+We're having dinner at a restaurant.|Vamos jantar num restaurante.
+Look at the sky! It's going to rain.|Olha o céu! Vai chover.
+My sister isn't going to travel this year.|Minha irmã não vai viajar este ano.
+What are you going to do on Sunday?|O que você vai fazer no domingo?
+I'm going to rest.|Vou descansar.`,
+["<b>be going to + verbo</b> = plano ou intenção (I'm going to study).","Também é previsão com evidência: o céu está escuro → It's going to rain.","Compromisso marcado com data: present continuous (I'm meeting my cousin on Friday)."],
+[["What is the person going to start?",["a job","a course","a diet"],1,"start a new course."],["Who is the person meeting on Friday?",["a cousin","a friend","the boss"],0,"I'm meeting my cousin."],["What is the plan for Sunday?",["to work","to rest","to travel"],1,"I'm going to rest."]]);
+INGTX("Will: decisões, promessas e previsões",`A: The phone is ringing.|A: O telefone está tocando.
+B: I'll answer it.|B: Eu atendo.
+A: Thanks. I'm so hungry.|A: Obrigado. Estou com tanta fome.
+B: I'll make you a sandwich.|B: Vou fazer um sanduíche para você.
+A: Do you think it will rain tomorrow?|A: Você acha que vai chover amanhã?
+B: No, I think it will be sunny.|B: Não, acho que vai fazer sol.
+A: Will you come to my party?|A: Você vem na minha festa?
+B: Of course! I promise I won't be late.|B: Claro! Prometo que não vou me atrasar.`,
+["<b>will</b> (ou 'll) para decisões na hora: I'll answer it.","Também para promessas (I won't be late) e opiniões sobre o futuro (I think it will be sunny).","Negativa: <b>won't</b> = will not."],
+[["Who will answer the phone?",["A","B","nobody"],1,"B: I'll answer it."],["What will the weather be like?",["rainy","sunny","cold"],1,"I think it will be sunny."],["What does B promise?",["to bring a gift","not to be late","to cook"],1,"I promise I won't be late."]]);
+INGTX("Comparativos e superlativos",`I have two cars.|Eu tenho dois carros.
+The blue car is older than the red car.|O carro azul é mais velho que o vermelho.
+The red car is faster and more comfortable.|O carro vermelho é mais rápido e mais confortável.
+But the blue car is cheaper to maintain.|Mas o carro azul é mais barato de manter.
+My brother's truck is the biggest in the family.|O caminhão do meu irmão é o maior da família.
+It is also the most expensive.|Também é o mais caro.
+My bike is the best for short trips.|Minha bicicleta é a melhor para trajetos curtos.
+Walking is better than driving in traffic.|Andar a pé é melhor que dirigir no trânsito.`,
+["Palavras curtas: <b>-er than</b> (older than) e <b>the -est</b> (the biggest).","Palavras longas: <b>more ... than</b> (more comfortable) e <b>the most</b> (the most expensive).","Irregulares: good → <b>better</b> → <b>the best</b>; bad → worse → the worst."],
+[["Which car is older?",["the red","the blue","the same"],1,"The blue car is older."],["Which is the biggest in the family?",["the red car","the brother's truck","the bike"],1,"My brother's truck is the biggest."],["What is better than driving in traffic?",["walking","taking a taxi","flying"],0,"Walking is better."]]);
+INGTX("Should, must, have to: conselhos e obrigações",`I have a headache every day.|Tenho dor de cabeça todo dia.
+My doctor says I should drink more water.|Meu médico diz que eu deveria beber mais água.
+I shouldn't drink so much coffee.|Eu não deveria beber tanto café.
+At work I have to wear a uniform.|No trabalho eu tenho que usar uniforme.
+Drivers must stop at red lights.|Motoristas devem parar no sinal vermelho.
+You mustn't use your phone while driving.|Você não pode usar o celular dirigindo.
+On Sundays I don't have to wake up early.|Aos domingos eu não preciso acordar cedo.
+You should try it!|Você deveria experimentar!`,
+["<b>should</b> = deveria (conselho). <b>shouldn't</b> = não deveria.","<b>have to</b> e <b>must</b> = ter que (obrigação). <b>mustn't</b> = proibido.","Atenção: <b>don't have to</b> = não precisa (é opcional), não é proibido."],
+[["What should the person drink more?",["coffee","water","juice"],1,"drink more water."],["What does the person have to wear at work?",["a suit","a uniform","a hat"],1,"wear a uniform."],["What is true on Sundays?",["must wake up early","doesn't have to wake up early","works"],1,"I don't have to wake up early."]]);
+INGTX("Viagens: aeroporto, hotel e direções",`Good morning. I have a reservation.|Bom dia. Tenho uma reserva.
+My name is Carlos Silva.|Meu nome é Carlos Silva.
+Here is your key. Room 305.|Aqui está sua chave. Quarto 305.
+Is breakfast included?|O café da manhã está incluso?
+Yes, from six to ten.|Sim, das seis às dez.
+Excuse me, how can I get to the train station?|Com licença, como chego à estação de trem?
+Go straight and turn left at the bank.|Siga reto e vire à esquerda no banco.
+It's about five minutes on foot.|São uns cinco minutos a pé.`,
+["No hotel: <b>I have a reservation</b>, <b>check in / check out</b>, <b>Is breakfast included?</b>","Direções: <b>go straight</b> (siga reto), <b>turn left/right</b> (vire à esquerda/direita), <b>on foot</b> (a pé).","<b>How can I get to...?</b> = Como chego a...?"],
+[["What is the room number?",["503","305","350"],1,"Room 305."],["When is breakfast?",["6 to 10","7 to 11","all day"],0,"from six to ten."],["Where should he turn left?",["at the bank","at the school","at the hotel"],0,"turn left at the bank."]]);
+INGTX("Telefone, serviços e situações do dia a dia",`Hello, Mirindo Transport, how can I help you?|Alô, Mirindo Transportes, como posso ajudar?
+Hi, I'd like to check my delivery.|Oi, eu gostaria de verificar minha entrega.
+Sure. Can I have the invoice number?|Claro. Pode me passar o número da nota?
+It's 4-5-8-2-1.|É 4-5-8-2-1.
+One moment, please. ... Your package will arrive tomorrow.|Um momento, por favor. ... Seu pacote chega amanhã.
+Great! Can you send me an email?|Ótimo! Pode me mandar um e-mail?
+Of course. Anything else?|Claro. Mais alguma coisa?
+No, that's all. Thank you!|Não, é só isso. Obrigado!`,
+["Ao telefone: <b>How can I help you?</b>, <b>One moment, please</b>, <b>Anything else?</b>","<b>I'd like to...</b> = eu gostaria de... (educado).","Números de telefone e códigos se falam um por um: 4-5-8-2-1."],
+[["What does the customer want?",["to cancel","to check a delivery","to complain"],1,"I'd like to check my delivery."],["When will the package arrive?",["today","tomorrow","next week"],1,"will arrive tomorrow."],["What does the customer ask for?",["a call","an email","a discount"],1,"Can you send me an email?"]]);
+INGTX("Present perfect: experiências de vida",`I have traveled to five countries.|Eu já viajei para cinco países.
+I have been to Argentina twice.|Já estive na Argentina duas vezes.
+I have never seen snow.|Eu nunca vi neve.
+My wife has eaten sushi many times, but I haven't.|Minha esposa já comeu sushi muitas vezes, mas eu não.
+Have you ever driven a truck?|Você já dirigiu um caminhão?
+Yes, I have. I drove one last year.|Sim, já. Dirigi um no ano passado.
+It was hard, but it was fun.|Foi difícil, mas foi divertido.
+I have learned a lot in my life.|Eu aprendi muito na minha vida.`,
+["Present perfect = <b>have/has + particípio</b>: I have traveled, she has eaten. Fala de experiência sem dizer quando.","<b>Have you ever...?</b> = Você já...? <b>never</b> = nunca.","Se disser quando (last year), volta para o passado simples: I drove one last year."],
+[["How many countries has the person traveled to?",["two","five","ten"],1,"I have traveled to five countries."],["What has the person never seen?",["the sea","snow","a truck"],1,"I have never seen snow."],["When did the person drive a truck?",["last year","yesterday","never"],0,"I drove one last year."]]);
+INGTX("For, since, already, yet, just e still",`I have worked at this company for six years.|Trabalho nesta empresa há seis anos.
+I have lived in Rio do Sul since 2015.|Moro em Rio do Sul desde 2015.
+I have just finished my report.|Acabei de terminar meu relatório.
+I have already sent it to my boss.|Já mandei para o meu chefe.
+He hasn't read it yet.|Ele ainda não leu.
+I'm still waiting for his answer.|Ainda estou esperando a resposta dele.
+Have you had lunch yet?|Você já almoçou?
+Not yet. Let's go!|Ainda não. Vamos!`,
+["<b>for</b> + tempo (for six years) e <b>since</b> + ponto de início (since 2015).","<b>just</b> = acabou de; <b>already</b> = já (afirmativa); <b>yet</b> = já (pergunta) ou ainda (negativa).","<b>still</b> = ainda (algo que continua): I'm still waiting."],
+[["How long has the person worked at the company?",["six years","since 2015","two years"],0,"for six years."],["What has the person just finished?",["lunch","the report","the course"],1,"I have just finished my report."],["Has the boss read it?",["Yes","Not yet","He refused"],1,"He hasn't read it yet."]]);
+INGTX("Present perfect continuous e escolha de tempos",`I'm tired because I have been working all day.|Estou cansado porque passei o dia todo trabalhando.
+It has been raining since this morning.|Está chovendo desde hoje de manhã.
+My neighbor has been building a house for a year.|Meu vizinho está construindo uma casa há um ano.
+He has built two rooms so far.|Ele construiu dois cômodos até agora.
+How long have you been studying English?|Há quanto tempo você estuda inglês?
+I have been studying for two months.|Estou estudando há dois meses.
+I have learned many new words.|Aprendi muitas palavras novas.
+And I'm still learning every day.|E continuo aprendendo todo dia.`,
+["<b>have been + -ing</b> = ação que começou no passado e continua (ou acabou de parar e deixou efeito).","Foco na duração: has been building. Foco no resultado: has built two rooms.","<b>How long have you been...?</b> = Há quanto tempo você está...?"],
+[["Why is the person tired?",["working all day","no sleep","sick"],0,"I have been working all day."],["Since when has it been raining?",["yesterday","this morning","last week"],1,"since this morning."],["How long has the person studied English?",["two weeks","two months","two years"],1,"for two months."]]);
+INGTX("Gerúndio ou infinitivo",`I enjoy cooking on weekends.|Eu gosto de cozinhar nos fins de semana.
+I want to learn new recipes.|Quero aprender receitas novas.
+I decided to take a course.|Decidi fazer um curso.
+I don't mind washing the dishes.|Não me importo de lavar a louça.
+My wife suggested inviting our friends.|Minha esposa sugeriu convidar nossos amigos.
+We hope to have a big dinner next month.|Esperamos fazer um grande jantar no mês que vem.
+I'm good at making pasta.|Sou bom em fazer massa.
+I need to practice desserts.|Preciso praticar sobremesas.`,
+["Alguns verbos pedem <b>-ing</b>: enjoy, mind, suggest, finish, avoid.","Outros pedem <b>to + verbo</b>: want, decide, hope, need, plan.","Depois de preposição sempre <b>-ing</b>: good at making, interested in learning."],
+[["What does the person enjoy?",["cleaning","cooking","driving"],1,"I enjoy cooking."],["What did the wife suggest?",["going out","inviting friends","ordering pizza"],1,"suggested inviting our friends."],["What is the person good at?",["desserts","making pasta","grilling"],1,"I'm good at making pasta."]]);
+INGTX("Phrasal verbs essenciais do dia a dia",`I wake up at six and get up at six fifteen.|Acordo às seis e levanto às seis e quinze.
+I put on my uniform and turn on the radio.|Coloco o uniforme e ligo o rádio.
+I pick up my colleague on the way to work.|Pego meu colega no caminho do trabalho.
+At work I fill out the delivery forms.|No trabalho preencho os formulários de entrega.
+Sometimes the system breaks down.|Às vezes o sistema dá pane.
+Then I have to call back the customers.|Aí tenho que retornar a ligação dos clientes.
+I never give up.|Eu nunca desisto.
+At night I take off my shoes and relax.|À noite tiro os sapatos e relaxo.`,
+["Phrasal verb = verbo + partícula com sentido novo: <b>give up</b> (desistir), <b>break down</b> (quebrar/dar pane).","<b>put on / take off</b> = vestir / tirar; <b>turn on / turn off</b> = ligar / desligar.","<b>pick up</b> = buscar alguém; <b>fill out</b> = preencher; <b>call back</b> = retornar ligação."],
+[["Who does the person pick up?",["a child","a colleague","a customer"],1,"I pick up my colleague."],["What sometimes breaks down?",["the truck","the system","the radio"],1,"the system breaks down."],["What does 'give up' mean?",["desistir","levantar","ligar"],0,"give up = desistir."]]);
+INGTX("Vocabulário B1: sentimentos, personalidade e opinião",`My new boss is very friendly and patient.|Meu novo chefe é muito simpático e paciente.
+He is never rude to anyone.|Ele nunca é grosseiro com ninguém.
+My old boss was bossy and moody.|Meu chefe antigo era mandão e de humor instável.
+I felt stressed and nervous every day.|Eu me sentia estressado e nervoso todo dia.
+Now I feel relaxed and confident.|Agora me sinto tranquilo e confiante.
+In my opinion, a good leader listens to people.|Na minha opinião, um bom líder escuta as pessoas.
+I think respect is more important than fear.|Acho que respeito é mais importante que medo.
+I agree with you, but it isn't always easy.|Concordo com você, mas nem sempre é fácil.`,
+["Personalidade: <b>friendly</b> (simpático), <b>patient</b>, <b>rude</b> (grosseiro), <b>bossy</b> (mandão), <b>moody</b> (de lua).","Sentimentos: <b>stressed, nervous, relaxed, confident</b>. Use <b>feel</b>: I feel relaxed.","Opinião: <b>In my opinion, I think, I agree / I disagree</b>."],
+[["How is the new boss?",["rude","friendly and patient","moody"],1,"very friendly and patient."],["How did the person feel with the old boss?",["relaxed","stressed","confident"],1,"I felt stressed and nervous."],["What is more important than fear?",["money","respect","rules"],1,"respect is more important than fear."]]);
+INGTX("Zero e first conditional",`If you heat ice, it melts.|Se você aquece o gelo, ele derrete.
+If I drink coffee at night, I can't sleep.|Se bebo café à noite, não consigo dormir.
+If it rains tomorrow, we will stay home.|Se chover amanhã, vamos ficar em casa.
+If we stay home, I'll cook lasagna.|Se ficarmos em casa, vou fazer lasanha.
+If you study every day, you will improve fast.|Se você estudar todo dia, vai melhorar rápido.
+Unless you practice, you won't speak well.|A menos que pratique, você não vai falar bem.
+I'll call you when I get home.|Te ligo quando chegar em casa.
+If you need help, let me know.|Se precisar de ajuda, me avise.`,
+["Zero conditional (sempre verdade): <b>If + presente, presente</b>. If you heat ice, it melts.","First conditional (possível no futuro): <b>If + presente, will + verbo</b>. If it rains, we will stay.","<b>unless</b> = a menos que. Depois de <b>when/if</b> não use will: when I get home."],
+[["What happens if you heat ice?",["it freezes","it melts","nothing"],1,"it melts."],["What will they do if it rains?",["go to the beach","stay home","go to a restaurant"],1,"we will stay home."],["What will the person cook?",["pizza","lasagna","soup"],1,"I'll cook lasagna."]]);
+INGTX("Second conditional: situações imaginárias",`If I won the lottery, I would buy a house by the sea.|Se eu ganhasse na loteria, compraria uma casa na praia.
+I would help my family.|Eu ajudaria minha família.
+I wouldn't stop working, but I would work less.|Eu não pararia de trabalhar, mas trabalharia menos.
+If I had more time, I would learn to play guitar.|Se eu tivesse mais tempo, aprenderia a tocar violão.
+If I were you, I would take that job.|Se eu fosse você, aceitaria aquele emprego.
+What would you do if you lost your phone?|O que você faria se perdesse o celular?
+I would go crazy!|Eu ficaria louco!
+But I would survive.|Mas eu sobreviveria.`,
+["Second conditional = situação imaginária: <b>If + passado, would + verbo</b>.","Com be use <b>were</b> para todos: If I were you (conselho).","<b>would</b> = o \"-ia\" do português: compraria, ajudaria."],
+[["What would the person buy?",["a car","a house by the sea","a truck"],1,"a house by the sea."],["Would the person stop working?",["Yes","No, but work less","Only on Fridays"],1,"I wouldn't stop working, but I would work less."],["What would the person learn with more time?",["guitar","piano","Spanish"],0,"learn to play guitar."]]);
+INGTX("Voz passiva",`Our company was founded in 1990.|Nossa empresa foi fundada em 1990.
+Today, thousands of packages are delivered every day.|Hoje, milhares de pacotes são entregues todos os dias.
+The trucks are checked every morning.|Os caminhões são verificados toda manhã.
+All the invoices are issued in the system.|Todas as notas são emitidas no sistema.
+Last year a new warehouse was built.|No ano passado um novo armazém foi construído.
+The drivers were trained by experts.|Os motoristas foram treinados por especialistas.
+Our quality is recognized by our customers.|Nossa qualidade é reconhecida pelos nossos clientes.
+A new office will be opened next year.|Um novo escritório será aberto no ano que vem.`,
+["Passiva = <b>be + particípio</b>: are delivered, was founded, will be opened.","Usa quando o importante é a ação, não quem fez. Quem fez vem com <b>by</b>: by experts.","Muito comum em textos de empresa, notícias e procedimentos."],
+[["When was the company founded?",["1980","1990","2000"],1,"was founded in 1990."],["When are the trucks checked?",["every night","every morning","once a week"],1,"every morning."],["What was built last year?",["an office","a warehouse","a garage"],1,"a new warehouse was built."]]);
+INGTX("Orações relativas: who, which, that, where, whose",`João is the driver who delivered your order.|João é o motorista que entregou seu pedido.
+This is the truck that he drives.|Este é o caminhão que ele dirige.
+It's the city where I was born.|É a cidade onde eu nasci.
+Maria is the colleague whose son plays soccer.|Maria é a colega cujo filho joga futebol.
+The report, which I wrote yesterday, is on your desk.|O relatório, que escrevi ontem, está na sua mesa.
+I need someone who speaks English.|Preciso de alguém que fale inglês.
+That's the restaurant where we had lunch.|Aquele é o restaurante onde almoçamos.
+Do you know the man who is talking to the boss?|Você conhece o homem que está falando com o chefe?`,
+["<b>who</b> = pessoas; <b>which</b> = coisas; <b>that</b> = pessoas ou coisas (informal).","<b>where</b> = onde (lugares); <b>whose</b> = cujo/cuja (posse).","Entre vírgulas é informação extra e usa <b>which</b>, nunca that."],
+[["Who delivered the order?",["Maria","João","the boss"],1,"João is the driver who delivered your order."],["What is special about Maria?",["her son plays soccer","she drives","she speaks English"],0,"whose son plays soccer."],["When did the person write the report?",["today","yesterday","last week"],1,"which I wrote yesterday."]]);
+INGTX("Reported speech: contando o que alguém disse",`Yesterday my boss talked to me.|Ontem meu chefe falou comigo.
+He said that I was doing a great job.|Ele disse que eu estava fazendo um ótimo trabalho.
+He told me that the company would open a new branch.|Ele me disse que a empresa abriria uma nova filial.
+He asked me if I wanted to work there.|Ele me perguntou se eu queria trabalhar lá.
+I said that I needed to talk to my wife.|Eu disse que precisava conversar com minha esposa.
+My wife said she was proud of me.|Minha esposa disse que estava orgulhosa de mim.
+She asked when I would start.|Ela perguntou quando eu começaria.
+I told her I didn't know yet.|Eu disse a ela que ainda não sabia.`,
+["Ao contar o que alguém disse, o tempo verbal \"volta\" um passo: am → <b>was</b>, will → <b>would</b>, want → <b>wanted</b>.","<b>said</b> (sem pessoa) e <b>told me</b> (com pessoa).","Pergunta indireta: <b>asked if...</b> / <b>asked when...</b>, sem inverter."],
+[["What did the boss say?",["he was doing a great job","he was late","he was fired"],0,"I was doing a great job."],["What will the company open?",["a new branch","a store","a school"],0,"would open a new branch."],["How did the wife feel?",["worried","proud","angry"],1,"she was proud of me."]]);
+INGTX("Conversação: manter conversas e soar natural",`A: Hey, how's it going?|A: E aí, tudo bem?
+B: Pretty good, thanks. You?|B: Tudo certo, valeu. E você?
+A: Not bad. So, did you watch the game?|A: Nada mal. Então, você viu o jogo?
+B: Yeah! It was amazing, wasn't it?|B: Vi! Foi incrível, né?
+A: Totally. By the way, are you free on Saturday?|A: Demais. Aliás, você está livre no sábado?
+B: I think so. Why?|B: Acho que sim. Por quê?
+A: We're having a barbecue. Wanna come?|A: Vamos fazer um churrasco. Quer vir?
+B: Sounds great! Count me in.|B: Parece ótimo! Pode contar comigo.`,
+["Cumprimentos naturais: <b>How's it going?</b> – <b>Pretty good / Not bad</b>.","<b>wasn't it?</b> no fim = \"né?\" (question tag). <b>By the way</b> = aliás.","<b>Wanna</b> = want to (fala informal). <b>Count me in</b> = pode contar comigo."],
+[["What did they watch?",["a movie","a game","a show"],1,"did you watch the game?"],["What is happening on Saturday?",["a barbecue","a meeting","a trip"],0,"We're having a barbecue."],["What does 'Count me in' mean?",["Não posso","Pode contar comigo","Vou pensar"],1,"Count me in = pode contar comigo."]]);
+INGTX("Third conditional e mixed conditionals",`Last month I missed an important flight.|Mês passado perdi um voo importante.
+If I had left home earlier, I would have caught it.|Se eu tivesse saído de casa mais cedo, teria pegado o voo.
+If I had caught it, I would have closed the deal.|Se tivesse pegado, teria fechado o negócio.
+I wouldn't have lost the client if I had planned better.|Eu não teria perdido o cliente se tivesse planejado melhor.
+If I had listened to my wife, I wouldn't be so stressed now.|Se tivesse escutado minha esposa, não estaria tão estressado agora.
+But mistakes teach us.|Mas os erros nos ensinam.
+If I hadn't made that mistake, I wouldn't know what I know today.|Se eu não tivesse cometido aquele erro, não saberia o que sei hoje.
+Now I always leave two hours early.|Agora sempre saio duas horas antes.`,
+["Third conditional (passado que não aconteceu): <b>If + had + particípio, would have + particípio</b>.","Mixed: passado → efeito no presente: If I had listened, I <b>wouldn't be</b> stressed now.","Traduz como \"se eu tivesse..., eu teria...\"."],
+[["What did the person miss?",["a meeting","a flight","a bus"],1,"I missed an important flight."],["What would have happened with the flight?",["closed the deal","lost the job","met a friend"],0,"I would have closed the deal."],["What does the person do now?",["leaves two hours early","never flies","travels by bus"],0,"I always leave two hours early."]]);
+INGTX("Modais de dedução e de passado",`The lights are off in Pedro's house.|As luzes estão apagadas na casa do Pedro.
+He must be sleeping.|Ele deve estar dormindo.
+He can't be at work. It's Sunday.|Ele não pode estar no trabalho. É domingo.
+He might be at his mother's house.|Ele pode estar na casa da mãe dele.
+His car isn't here. He must have gone out.|O carro dele não está aqui. Ele deve ter saído.
+He may have forgotten our meeting.|Ele pode ter esquecido nosso encontro.
+He should have called me!|Ele deveria ter me ligado!
+I could have waited at home.|Eu poderia ter esperado em casa.`,
+["Dedução no presente: <b>must be</b> (certeza que sim), <b>can't be</b> (certeza que não), <b>might/may be</b> (talvez).","No passado: <b>must have gone</b>, <b>may have forgotten</b>, <b>can't have done</b>.","<b>should have</b> = deveria ter (crítica); <b>could have</b> = poderia ter."],
+[["Why can't Pedro be at work?",["it's Sunday","he's sick","he's on vacation"],0,"It's Sunday."],["What is the evidence that he went out?",["the lights","his car isn't here","his phone"],1,"His car isn't here."],["What should Pedro have done?",["called","waited","slept"],0,"He should have called me!"]]);
+INGTX("Past perfect e narrativa avançada",`When I got to the station, the train had already left.|Quando cheguei à estação, o trem já tinha partido.
+I had checked the time twice that morning.|Eu tinha conferido o horário duas vezes naquela manhã.
+But I hadn't noticed that the schedule had changed.|Mas eu não tinha percebido que o horário tinha mudado.
+I sat down, feeling frustrated.|Sentei, me sentindo frustrado.
+An old man, who had also missed the train, smiled at me.|Um senhor, que também tinha perdido o trem, sorriu para mim.
+We started talking, and the hours flew by.|Começamos a conversar e as horas voaram.
+By the time the next train arrived, we had become friends.|Quando o próximo trem chegou, já tínhamos virado amigos.
+Sometimes missing a train is the best thing that can happen.|Às vezes perder um trem é a melhor coisa que pode acontecer.`,
+["Past perfect = <b>had + particípio</b>: a ação que aconteceu <b>antes</b> de outra no passado.","<b>By the time</b> = quando / até o momento em que. <b>already</b> reforça que foi antes.","Na narrativa, misture: past simple (ações), past continuous (cenário) e past perfect (o que veio antes)."],
+[["What had happened when the person got to the station?",["the train had left","the train was late","the station was closed"],0,"the train had already left."],["Why did the person miss the train?",["slept late","the schedule had changed","the car broke"],1,"the schedule had changed."],["What happened with the old man?",["they argued","they became friends","he left"],1,"we had become friends."]]);
+INGTX("Wish, if only, it's time e I'd rather",`I wish I had more free time.|Queria ter mais tempo livre.
+I wish I spoke English fluently.|Queria falar inglês fluentemente.
+If only I had started earlier!|Se ao menos eu tivesse começado antes!
+I wish my neighbor would stop playing loud music.|Queria que meu vizinho parasse de tocar música alta.
+It's time I took my studies seriously.|Está na hora de eu levar meus estudos a sério.
+I'd rather study in the morning than at night.|Prefiro estudar de manhã do que à noite.
+I'd rather you didn't call me after ten.|Prefiro que você não me ligue depois das dez.
+Step by step, I will get there.|Passo a passo, vou chegar lá.`,
+["<b>I wish + passado</b> = queria que fosse diferente agora. <b>I wish + had + particípio</b> = arrependimento do passado.","<b>wish ... would</b> = queria que alguém mudasse um comportamento.","<b>It's time I + passado</b> = já está na hora. <b>I'd rather</b> = eu prefiro."],
+[["What does the person wish to have?",["more money","more free time","a car"],1,"I wish I had more free time."],["What does the neighbor do?",["plays loud music","shouts","has a dog"],0,"stop playing loud music."],["When does the person prefer to study?",["at night","in the morning","on weekends"],1,"in the morning than at night."]]);
+INGTX("Passiva avançada e causativa",`I had my car repaired last week.|Mandei consertar meu carro semana passada.
+The brakes needed to be changed.|Os freios precisavam ser trocados.
+While it was being fixed, I took the bus.|Enquanto ele estava sendo consertado, peguei ônibus.
+I'm getting my hair cut tomorrow.|Vou cortar o cabelo amanhã (com alguém).
+It is said that this mechanic is the best in town.|Dizem que este mecânico é o melhor da cidade.
+He is believed to have fixed over a thousand cars.|Acredita-se que ele consertou mais de mil carros.
+The car has been washed too.|O carro também foi lavado.
+It looks brand new!|Parece novinho!`,
+["Causativa: <b>have/get + coisa + particípio</b> = mandar fazer: I had my car repaired.","Passiva em outros tempos: <b>was being fixed</b>, <b>has been washed</b>, <b>needs to be changed</b>.","<b>It is said that... / He is believed to...</b> = dizem que / acredita-se que."],
+[["Who repaired the car?",["the person","a mechanic","a friend"],1,"I had my car repaired (by someone)."],["How did the person travel while the car was fixed?",["by bus","on foot","by bike"],0,"I took the bus."],["What else was done to the car?",["painted","washed","sold"],1,"The car has been washed too."]]);
+INGTX("Artigos, quantificadores e precisão",`Most people in my city work in industry.|A maioria das pessoas da minha cidade trabalha na indústria.
+Few of them speak English.|Poucas delas falam inglês.
+A few of my colleagues are studying it now.|Alguns dos meus colegas estão estudando agora.
+There is little time to study during the week.|Há pouco tempo para estudar durante a semana.
+But a little practice every day makes a difference.|Mas um pouco de prática todo dia faz diferença.
+Each lesson has a text, and every text has questions.|Cada aula tem um texto, e todo texto tem perguntas.
+Neither of my brothers speaks English.|Nenhum dos meus irmãos fala inglês.
+Both of my kids want to learn.|Meus dois filhos querem aprender.`,
+["<b>few / little</b> = poucos (sentido negativo). <b>a few / a little</b> = alguns, um pouco (sentido positivo).","<b>few / a few</b> com contáveis; <b>little / a little</b> com incontáveis.","<b>most</b> (a maioria), <b>each/every</b> (cada/todo), <b>both</b> (ambos), <b>neither</b> (nenhum dos dois)."],
+[["Where do most people in the city work?",["in industry","in shops","at home"],0,"work in industry."],["What makes a difference?",["a lot of money","a little practice every day","a teacher"],1,"a little practice every day."],["How many of the kids want to learn?",["none","one","both"],2,"Both of my kids want to learn."]]);
+INGTX("Phrasal verbs intermediários e avançados",`Last year our team ran into a big problem.|No ano passado nosso time deu de cara com um grande problema.
+A major client called off a contract.|Um cliente grande cancelou um contrato.
+We had to figure out what went wrong.|Tivemos que descobrir o que deu errado.
+We looked into every delivery and came up with a plan.|Analisamos cada entrega e bolamos um plano.
+We couldn't put off the decision any longer.|Não podíamos mais adiar a decisão.
+So we set up a new tracking system.|Então montamos um novo sistema de rastreamento.
+It took a while, but things turned out well.|Levou um tempo, mas as coisas deram certo.
+The client even came back to us.|O cliente até voltou para nós.`,
+["<b>run into</b> = dar de cara; <b>call off</b> = cancelar; <b>figure out</b> = descobrir/entender.","<b>look into</b> = investigar; <b>come up with</b> = bolar; <b>put off</b> = adiar.","<b>set up</b> = montar/configurar; <b>turn out</b> = acabar sendo; <b>come back</b> = voltar."],
+[["What did the client do?",["called off a contract","signed a contract","complained"],0,"called off a contract."],["What did they set up?",["a new office","a tracking system","a meeting"],1,"set up a new tracking system."],["What does 'put off' mean?",["adiar","cancelar","descobrir"],0,"put off = adiar."]]);
+INGTX("Collocations: as combinações que soam nativas",`I make a lot of mistakes when I speak English.|Cometo muitos erros quando falo inglês.
+But I'm making progress.|Mas estou progredindo.
+I do my homework every night.|Faço minha lição toda noite.
+Yesterday I had a long conversation with a customer.|Ontem tive uma longa conversa com um cliente.
+I paid attention to every word.|Prestei atenção em cada palavra.
+I took notes and asked a few questions.|Fiz anotações e algumas perguntas.
+It was a heavy rain day, so traffic was terrible.|Era dia de chuva forte, então o trânsito estava horrível.
+But I kept calm and did my best.|Mas mantive a calma e fiz o meu melhor.`,
+["Collocations são combinações fixas: <b>make a mistake</b> (não \"do\"), <b>do homework</b> (não \"make\").","<b>pay attention</b> (prestar atenção), <b>take notes</b> (fazer anotações), <b>ask a question</b>.","<b>heavy rain</b> (chuva forte, não \"strong rain\"), <b>keep calm</b>, <b>do your best</b>."],
+[["What does the person do every night?",["homework","exercise","shopping"],0,"I do my homework every night."],["How was the traffic?",["light","terrible","normal"],1,"traffic was terrible."],["Which is correct?",["do a mistake","make a mistake","take a mistake"],1,"make a mistake."]]);
+INGTX("Conectores e marcadores do discurso",`Working from home has advantages.|Trabalhar de casa tem vantagens.
+First of all, you save time on transport.|Antes de tudo, você economiza tempo de transporte.
+Moreover, you can organize your own schedule.|Além disso, você pode organizar seus horários.
+However, it is easy to feel isolated.|No entanto, é fácil se sentir isolado.
+Although I like my home office, I miss my colleagues.|Embora eu goste do meu escritório em casa, sinto falta dos colegas.
+As a result, I go to the office twice a week.|Como resultado, vou ao escritório duas vezes por semana.
+In other words, I prefer a mix of both.|Em outras palavras, prefiro uma mistura dos dois.
+To sum up, balance is the key.|Resumindo, equilíbrio é a chave.`,
+["Adicionar: <b>moreover, in addition, also</b>. Contrastar: <b>however, although, on the other hand</b>.","Resultado: <b>as a result, therefore, so</b>. Explicar: <b>in other words</b>.","Organizar: <b>first of all</b> no começo e <b>to sum up / in conclusion</b> no fim."],
+[["What is the first advantage?",["saving time on transport","more money","more friends"],0,"you save time on transport."],["What does the person miss?",["the boss","colleagues","the car"],1,"I miss my colleagues."],["How often does the person go to the office?",["every day","twice a week","never"],1,"twice a week."]]);
+INGTX("Pronúncia real: connected speech, acento e entonação",`Whatcha doing tonight?|O que você vai fazer hoje à noite?
+I'm gonna watch a movie.|Vou assistir um filme.
+Wanna come over?|Quer vir aqui?
+I'd love to, but I gotta work early.|Adoraria, mas tenho que trabalhar cedo.
+Lemme check my schedule.|Deixa eu ver minha agenda.
+Did you eat yet? Didja eat?|Você já comeu?
+Not yet. I'm kinda hungry.|Ainda não. Estou meio com fome.
+OK, see ya later!|Beleza, até mais!`,
+["Na fala rápida as palavras se juntam: <b>gonna</b> (going to), <b>wanna</b> (want to), <b>gotta</b> (got to), <b>lemme</b> (let me).","<b>Whatcha</b> = what are you; <b>didja</b> = did you; <b>kinda</b> = kind of; <b>ya</b> = you.","Entenda essas formas ao ouvir; para escrever formal, use a forma completa. Ouça o texto no tradutor e repita junto (shadowing)."],
+[["What is the person going to do tonight?",["work","watch a movie","sleep"],1,"I'm gonna watch a movie."],["Why can't the friend come?",["has to work early","is sick","has no car"],0,"I gotta work early."],["What does 'gonna' mean?",["going to","got to","want to"],0,"gonna = going to."]]);
+INGTX("Escrita: e-mails, mensagens e registro",`Subject: Delivery schedule for next week|Assunto: Cronograma de entregas da próxima semana
+Dear Mr. Johnson,|Prezado Sr. Johnson,
+I am writing to confirm the delivery schedule for next week.|Escrevo para confirmar o cronograma de entregas da próxima semana.
+Please find attached the updated list of orders.|Segue em anexo a lista atualizada de pedidos.
+Should you have any questions, do not hesitate to contact me.|Caso tenha alguma dúvida, não hesite em me contatar.
+I look forward to hearing from you.|Aguardo seu retorno.
+Kind regards,|Atenciosamente,
+Paulo Souza, Quality Department|Paulo Souza, Departamento da Qualidade`,
+["Formal: <b>Dear Mr./Ms.</b>, <b>I am writing to...</b>, <b>Kind regards</b>. Informal: <b>Hi John</b>, <b>Cheers</b>.","<b>Please find attached</b> = segue em anexo. <b>I look forward to hearing from you</b> = aguardo retorno.","No formal evite contrações (I am, do not) e gírias."],
+[["What is the email about?",["a complaint","the delivery schedule","a job offer"],1,"confirm the delivery schedule."],["What is attached?",["an invoice","the list of orders","a contract"],1,"the updated list of orders."],["Which is a formal closing?",["Cheers","Kind regards","See ya"],1,"Kind regards."]]);
+INGTX("Listening autêntico: séries, podcasts e notícias",`Good evening. Here are tonight's top stories.|Boa noite. Aqui estão as principais notícias de hoje.
+Heavy rain has caused flooding in the south of the country.|A chuva forte causou enchentes no sul do país.
+Several roads have been closed, and trucks are facing long delays.|Várias estradas foram fechadas e os caminhões enfrentam longos atrasos.
+Authorities are advising drivers to avoid the area.|As autoridades recomendam que os motoristas evitem a região.
+In other news, fuel prices dropped for the third week in a row.|Em outras notícias, o preço do combustível caiu pela terceira semana seguida.
+Experts say the trend may continue until the end of the year.|Especialistas dizem que a tendência pode continuar até o fim do ano.
+And finally, the weather.|E por fim, a previsão do tempo.
+Tomorrow will be sunny and warm.|Amanhã vai fazer sol e calor.`,
+["Notícias usam muito <b>present perfect</b> (has caused) e <b>passiva</b> (have been closed).","<b>in a row</b> = seguido(a); <b>advise</b> = recomendar; <b>delay</b> = atraso.","Dica: ouça o texto no tradutor primeiro sem ler, depois lendo, depois repetindo."],
+[["What caused flooding?",["heavy rain","snow","a storm at sea"],0,"Heavy rain has caused flooding."],["What happened to fuel prices?",["went up","dropped","stayed the same"],1,"fuel prices dropped."],["How will the weather be tomorrow?",["rainy","sunny and warm","cold"],1,"sunny and warm."]]);
+INGTX("Inversão para ênfase",`Never have I seen such a busy week.|Nunca vi uma semana tão cheia.
+Not only did we deliver every order, but we also opened a new route.|Não só entregamos todos os pedidos, como também abrimos uma nova rota.
+Rarely do our drivers complain, but this time they did.|Raramente nossos motoristas reclamam, mas desta vez reclamaram.
+Only after the meeting did we understand the problem.|Só depois da reunião entendemos o problema.
+Hardly had we solved it when another one appeared.|Mal tínhamos resolvido quando apareceu outro.
+Under no circumstances should safety be ignored.|Em hipótese alguma a segurança deve ser ignorada.
+Had we planned better, we would have avoided stress.|Se tivéssemos planejado melhor, teríamos evitado estresse.
+Little did we know the best was yet to come.|Mal sabíamos que o melhor ainda estava por vir.`,
+["Depois de palavras negativas no início (<b>never, rarely, not only, only after, hardly</b>) inverte-se o auxiliar: <b>have I seen, did we deliver</b>.","É um recurso formal ou dramático, para dar ênfase.","<b>Had we planned</b> = If we had planned (condicional invertida)."],
+[["What did they open?",["a new office","a new route","a store"],1,"we also opened a new route."],["When did they understand the problem?",["before the meeting","after the meeting","never"],1,"Only after the meeting."],["What should never be ignored?",["costs","safety","customers"],1,"Under no circumstances should safety be ignored."]]);
+INGTX("Cleft sentences e outras estruturas de ênfase",`It was my grandmother who taught me to cook.|Foi minha avó quem me ensinou a cozinhar.
+What I loved most was her bean soup.|O que eu mais amava era a sopa de feijão dela.
+What she always said was: cook with patience.|O que ela sempre dizia era: cozinhe com paciência.
+It wasn't the recipe that made it special, it was her love.|Não era a receita que a tornava especial, era o amor dela.
+All I want now is to cook like her.|Tudo o que quero agora é cozinhar como ela.
+The thing is, I never wrote her recipes down.|O problema é que nunca anotei as receitas dela.
+What I did do was watch her carefully.|O que eu de fato fiz foi observá-la com atenção.
+That's why I still remember the taste.|É por isso que ainda lembro do sabor.`,
+["Cleft sentence divide a frase para destacar uma parte: <b>It was ... who/that...</b>, <b>What I ... was...</b>","<b>All I want is...</b> = tudo o que quero é. <b>The thing is...</b> = o problema/a questão é.","<b>did do</b>: o did dá ênfase (\"de fato fiz\")."],
+[["Who taught the person to cook?",["the mother","the grandmother","a chef"],1,"It was my grandmother."],["What did the person love most?",["her cake","her bean soup","her bread"],1,"her bean soup."],["Why does the person remember the taste?",["wrote the recipes","watched her carefully","has a book"],1,"watch her carefully."]]);
+INGTX("Participle clauses e orações reduzidas",`Having finished the audit, the team went home.|Tendo terminado a auditoria, a equipe foi para casa.
+Walking through the warehouse, I noticed a problem.|Caminhando pelo armazém, notei um problema.
+Some boxes, stored near the door, were wet.|Algumas caixas, guardadas perto da porta, estavam molhadas.
+Not knowing what had happened, I called the supervisor.|Sem saber o que tinha acontecido, liguei para o supervisor.
+Built twenty years ago, the roof needed repairs.|Construído há vinte anos, o telhado precisava de reparos.
+Once fixed, it stopped leaking.|Depois de consertado, parou de vazar.
+The products affected were replaced the next day.|Os produtos afetados foram substituídos no dia seguinte.
+Lesson learned: inspect before it rains.|Lição aprendida: inspecione antes de chover.`,
+["Participle clauses encurtam frases: <b>Having finished</b> = depois de terem terminado; <b>Walking</b> = enquanto caminhava.","Particípio passado com sentido passivo: <b>stored near the door</b> = que estavam guardadas.","<b>Not knowing</b> = como não sabia. Muito usado em textos escritos."],
+[["What did the person notice?",["a problem","a new truck","a visitor"],0,"I noticed a problem."],["Why were the boxes wet?",["a leaking roof","a spilled drink","cleaning"],0,"the roof needed repairs... stopped leaking."],["When were the products replaced?",["the same day","the next day","a week later"],1,"replaced the next day."]]);
+INGTX("Registro formal, subjuntivo e linguagem impessoal",`It is essential that every employee follow the safety rules.|É essencial que todo funcionário siga as regras de segurança.
+The board recommends that the new procedure be adopted immediately.|A diretoria recomenda que o novo procedimento seja adotado imediatamente.
+It has been decided that audits will take place every quarter.|Foi decidido que as auditorias ocorrerão a cada trimestre.
+Employees are requested to report any incident.|Solicita-se aos funcionários que relatem qualquer incidente.
+It should be noted that failures may result in penalties.|Cabe ressaltar que falhas podem resultar em penalidades.
+Further information can be obtained from the Quality Department.|Mais informações podem ser obtidas no Departamento da Qualidade.
+Should you require assistance, please contact us.|Caso necessite de assistência, por favor entre em contato.
+Thank you for your cooperation.|Agradecemos a sua cooperação.`,
+["Subjuntivo formal: <b>It is essential that he follow</b> (verbo sem s), <b>recommend that it be adopted</b>.","Linguagem impessoal: <b>It has been decided, It should be noted, Employees are requested</b>.","<b>Should you require</b> = caso necessite (bem formal)."],
+[["What must every employee follow?",["the schedule","the safety rules","the boss"],1,"follow the safety rules."],["How often will audits take place?",["every month","every quarter","every year"],1,"every quarter."],["Where can you get more information?",["HR","the Quality Department","the website"],1,"from the Quality Department."]]);
+INGTX("Elipse, substituição e coesão",`A: Are you coming to the meeting?|A: Você vem para a reunião?
+B: I'd like to, but I can't.|B: Gostaria, mas não posso.
+A: Pity. Is Marta coming?|A: Que pena. A Marta vem?
+B: I think so. And John hopes to as well.|B: Acho que sim. E o John espera vir também.
+A: Did you finish the report?|A: Você terminou o relatório?
+B: Not the full one, just a short one.|B: O completo não, só um curto.
+A: That's fine. I need the numbers, not the details.|A: Tudo bem. Preciso dos números, não dos detalhes.
+B: Then I'll send them today. So will Marta.|B: Então mando hoje. A Marta também.`,
+["Elipse = cortar o que já se sabe: <b>I'd like to (come)</b>, <b>I can't (come)</b>.","Substituição: <b>so</b> (I think so), <b>one</b> (a short one), <b>so will Marta</b> (Marta também vai).","Isso deixa a fala natural e evita repetição."],
+[["Is B coming to the meeting?",["Yes","No","Maybe later"],1,"I'd like to, but I can't."],["What kind of report did B finish?",["the full one","a short one","none"],1,"just a short one."],["What does A need?",["the details","the numbers","the slides"],1,"I need the numbers."]]);
+INGTX("Hedging e diplomacia: suavizar sem perder clareza",`I was wondering if we could discuss the deadline.|Eu estava pensando se poderíamos conversar sobre o prazo.
+It seems that the schedule is a bit tight.|Parece que o cronograma está um pouco apertado.
+Perhaps we could move the delivery to Friday?|Talvez pudéssemos mudar a entrega para sexta?
+I'm not entirely sure the team can finish by Wednesday.|Não tenho certeza absoluta de que a equipe consegue terminar até quarta.
+With all due respect, the numbers suggest otherwise.|Com todo o respeito, os números sugerem o contrário.
+Would it be possible to add one more driver?|Seria possível adicionar mais um motorista?
+I understand your point, but I tend to disagree.|Entendo seu ponto, mas tendo a discordar.
+Shall we meet halfway?|Que tal chegarmos a um meio-termo?`,
+["Hedging suaviza: <b>it seems, perhaps, a bit, I'm not entirely sure, I tend to</b>.","Pedidos diplomáticos: <b>I was wondering if...</b>, <b>Would it be possible to...?</b>","Discordar com educação: <b>With all due respect</b>, <b>I understand your point, but...</b>"],
+[["What do they want to discuss?",["the price","the deadline","the contract"],1,"discuss the deadline."],["What day is suggested for delivery?",["Wednesday","Friday","Monday"],1,"move the delivery to Friday."],["What does 'meet halfway' mean?",["encontrar no caminho","chegar a um meio-termo","desistir"],1,"chegar a um meio-termo."]]);
+INGTX("Escrevendo ensaios argumentativos",`Should companies allow employees to work from home?|As empresas deveriam permitir que funcionários trabalhem de casa?
+Supporters argue that remote work increases productivity.|Os defensores argumentam que o trabalho remoto aumenta a produtividade.
+Furthermore, it reduces traffic and pollution.|Além disso, reduz o trânsito e a poluição.
+Critics, on the other hand, claim that teamwork suffers.|Os críticos, por outro lado, afirmam que o trabalho em equipe é prejudicado.
+They also point out that not every job can be done remotely.|Eles também apontam que nem todo trabalho pode ser feito remotamente.
+In my view, the answer depends on the type of work.|Na minha visão, a resposta depende do tipo de trabalho.
+A hybrid model seems to offer the best of both worlds.|Um modelo híbrido parece oferecer o melhor dos dois mundos.
+In conclusion, flexibility, not a single rule, is the solution.|Em conclusão, flexibilidade, e não uma regra única, é a solução.`,
+["Estrutura: <b>pergunta/tema</b> → argumentos a favor → argumentos contra → <b>sua opinião</b> → conclusão.","Verbos para relatar opiniões: <b>argue, claim, point out</b>.","<b>the best of both worlds</b> = o melhor dos dois mundos."],
+[["What do supporters say?",["productivity increases","costs increase","teamwork improves"],0,"remote work increases productivity."],["What do critics say suffers?",["salary","teamwork","health"],1,"teamwork suffers."],["What is the writer's solution?",["only remote","only office","flexibility / hybrid"],2,"flexibility... hybrid model."]]);
+INGTX("Apresentações e falar em público",`Good morning, everyone, and thank you for coming.|Bom dia a todos, e obrigado por virem.
+Today I'd like to talk about our quality results.|Hoje gostaria de falar sobre os nossos resultados de qualidade.
+I've divided my presentation into three parts.|Dividi minha apresentação em três partes.
+First, I'll show you last year's numbers.|Primeiro, vou mostrar os números do ano passado.
+As you can see on this slide, complaints fell by thirty percent.|Como vocês podem ver neste slide, as reclamações caíram trinta por cento.
+Moving on to my second point, our delivery time.|Passando para o meu segundo ponto, o nosso prazo de entrega.
+To wrap up, we are on the right track.|Para fechar, estamos no caminho certo.
+I'd be happy to answer any questions.|Terei prazer em responder qualquer pergunta.`,
+["Abrir: <b>Thank you for coming</b>, <b>Today I'd like to talk about...</b>","Organizar: <b>I've divided my presentation into...</b>, <b>Moving on to...</b>, <b>As you can see...</b>","Fechar: <b>To wrap up / To sum up</b>, <b>I'd be happy to answer any questions</b>."],
+[["What is the presentation about?",["sales","quality results","new trucks"],1,"talk about our quality results."],["How much did complaints fall?",["13%","30%","50%"],1,"fell by thirty percent."],["How many parts does the presentation have?",["two","three","four"],1,"three parts."]]);
+INGTX("Debates, argumentação e pensamento crítico",`A: I believe artificial intelligence will create more jobs than it destroys.|A: Acredito que a inteligência artificial vai criar mais empregos do que destruir.
+B: That's an interesting point, but where's the evidence?|B: É um ponto interessante, mas onde está a evidência?
+A: Historically, new technologies have always created new jobs.|A: Historicamente, novas tecnologias sempre criaram novos empregos.
+B: True, but this time the change is much faster.|B: Verdade, mas desta vez a mudança é muito mais rápida.
+A: Fair enough. Still, people can learn new skills.|A: Justo. Mesmo assim, as pessoas podem aprender novas habilidades.
+B: Only if they have access to training.|B: Só se tiverem acesso a treinamento.
+A: So we agree that education is the key.|A: Então concordamos que a educação é a chave.
+B: Absolutely, on that we agree.|B: Com certeza, nisso concordamos.`,
+["Pedir evidência: <b>Where's the evidence?</b> Conceder: <b>True, but... / Fair enough. Still,...</b>","Pensamento crítico: separar opinião de fato e procurar o ponto em comum.","<b>Absolutely</b> = com certeza; <b>on that we agree</b> = nisso concordamos."],
+[["What does A believe?",["AI will destroy jobs","AI will create more jobs","AI is dangerous"],1,"create more jobs than it destroys."],["What is B's concern?",["the change is faster","AI is expensive","nobody uses it"],0,"the change is much faster."],["What do they agree on?",["education is the key","AI is bad","jobs will disappear"],0,"education is the key."]]);
+INGTX("Vocabulário acadêmico e formação de palavras",`The research analyzed the performance of fifty companies.|A pesquisa analisou o desempenho de cinquenta empresas.
+The analysis revealed a significant improvement in efficiency.|A análise revelou uma melhoria significativa de eficiência.
+Companies that were more organized achieved better results.|Empresas mais organizadas alcançaram resultados melhores.
+Their organization depended on clear procedures.|A organização delas dependia de procedimentos claros.
+However, the dependence on technology was also evident.|No entanto, a dependência da tecnologia também era evidente.
+The evidence suggests that training is essential.|As evidências sugerem que o treinamento é essencial.
+It is unlikely that results will improve without it.|É improvável que os resultados melhorem sem ele.
+These findings are relevant for the whole industry.|Estas descobertas são relevantes para toda a indústria.`,
+["Famílias de palavras: analyze → <b>analysis</b>; organize → <b>organization</b>; depend → <b>dependence</b>; evident → <b>evidence</b>.","Sufixos: <b>-tion</b> e <b>-ment</b> (substantivos), <b>-al, -ent, -ive</b> (adjetivos). Prefixo <b>un-</b> = negação (unlikely).","Palavras acadêmicas do texto: <b>significant, achieve, reveal, findings, relevant</b>."],
+[["How many companies were analyzed?",["15","50","500"],1,"fifty companies."],["What does the evidence suggest?",["training is essential","technology is bad","costs are high"],0,"training is essential."],["What is the noun of 'analyze'?",["analyst","analysis","analytical"],1,"analyze → analysis."]]);
+INGTX("Leitura de textos complexos",`Despite considerable investment in automation, many logistics firms continue to struggle with last-mile delivery.|Apesar de investimentos consideráveis em automação, muitas empresas de logística continuam com dificuldades na entrega de última milha.
+This final stage, though short in distance, accounts for a disproportionate share of total costs.|Esta etapa final, embora curta em distância, responde por uma parcela desproporcional dos custos totais.
+Urban congestion, failed delivery attempts and rising customer expectations all compound the problem.|O congestionamento urbano, as tentativas de entrega frustradas e as expectativas crescentes dos clientes agravam o problema.
+Some companies have turned to pickup points, which allow customers to collect parcels at their convenience.|Algumas empresas recorreram a pontos de retirada, que permitem aos clientes buscar as encomendas quando lhes convém.
+Others are experimenting with data-driven route planning.|Outras estão experimentando o planejamento de rotas baseado em dados.
+Whether these solutions will prove sustainable remains to be seen.|Se essas soluções vão se mostrar sustentáveis ainda está por se ver.`,
+["Para textos difíceis: leia primeiro só a 1ª frase de cada parágrafo, depois o resto.","<b>Despite</b> = apesar de; <b>though</b> = embora; <b>account for</b> = responder por; <b>compound</b> = agravar.","<b>remains to be seen</b> = ainda está por se ver (incerteza)."],
+[["What is the main problem?",["last-mile delivery","fuel prices","lack of drivers"],0,"struggle with last-mile delivery."],["Why is the last mile a problem?",["it is long","it has a high share of costs","it is automated"],1,"a disproportionate share of total costs."],["Is it certain the solutions will work?",["Yes","No, it remains to be seen","They failed"],1,"remains to be seen."]]);
+INGTX("Entrevistas e conversas formais em inglês",`Interviewer: Could you tell me a little about yourself?|Entrevistador: Poderia me falar um pouco sobre você?
+Candidate: Sure. I've worked in quality management for several years.|Candidato: Claro. Trabalho com gestão da qualidade há vários anos.
+I'm responsible for audits and process improvement.|Sou responsável por auditorias e melhoria de processos.
+Interviewer: What would you say is your greatest strength?|Entrevistador: Qual você diria que é seu maior ponto forte?
+Candidate: I'm very organized and I enjoy solving problems.|Candidato: Sou muito organizado e gosto de resolver problemas.
+Interviewer: And a weakness?|Entrevistador: E um ponto fraco?
+Candidate: I used to take on too much, but I've learned to delegate.|Candidato: Eu costumava assumir coisas demais, mas aprendi a delegar.
+Interviewer: Great. Do you have any questions for us?|Entrevistador: Ótimo. Você tem alguma pergunta para nós?`,
+["Perguntas clássicas: <b>Tell me about yourself</b>, <b>greatest strength</b>, <b>weakness</b>, <b>Do you have any questions?</b>","Fale de ponto fraco mostrando o que melhorou: <b>I used to..., but I've learned to...</b>","<b>be responsible for</b> = ser responsável por; <b>take on</b> = assumir; <b>delegate</b> = delegar."],
+[["What area does the candidate work in?",["sales","quality management","IT"],1,"I've worked in quality management."],["What is the candidate's strength?",["very organized","very fast","very funny"],0,"I'm very organized."],["What has the candidate learned?",["to delegate","to code","to drive"],0,"I've learned to delegate."]]);
+INGTX("Idioms essenciais e como usá-los",`Monday was a piece of cake.|Segunda foi moleza.
+But on Tuesday, everything went wrong. I was feeling under the weather.|Mas na terça deu tudo errado. Eu estava meio doente.
+My boss asked me to cut corners on a report, but I said no.|Meu chefe pediu para eu fazer o relatório de qualquer jeito, mas eu disse não.
+We were on the same page by the end of the day.|No fim do dia estávamos alinhados.
+On Wednesday, I hit the nail on the head with a new idea.|Na quarta, acertei em cheio com uma ideia nova.
+My colleague said it cost an arm and a leg, but it didn't.|Meu colega disse que custaria os olhos da cara, mas não custou.
+By Friday, I was ready to call it a day.|Na sexta, eu estava pronto para encerrar.
+Better late than never!|Antes tarde do que nunca!`,
+["Idioms não se traduzem palavra por palavra: <b>a piece of cake</b> = moleza; <b>under the weather</b> = meio doente.","<b>cut corners</b> = fazer de qualquer jeito; <b>on the same page</b> = alinhados; <b>hit the nail on the head</b> = acertar em cheio.","<b>cost an arm and a leg</b> = custar os olhos da cara; <b>call it a day</b> = encerrar o expediente."],
+[["How was Monday?",["very easy","very hard","boring"],0,"a piece of cake = moleza."],["How was the person feeling on Tuesday?",["happy","a bit sick","angry"],1,"under the weather."],["What does 'call it a day' mean?",["encerrar","ligar para alguém","começar"],0,"call it a day = encerrar."]]);
+INGTX("Linguagem coloquial, gírias e o inglês da internet",`Dude, that party last night was lit!|Cara, aquela festa ontem foi demais!
+Yeah, no cap, best party ever.|É, sem mentira, melhor festa de todas.
+Did you see Mike? He was totally chill.|Viu o Mike? Ele estava super tranquilo.
+LOL, he was dancing all night.|Kkk, ele dançou a noite toda.
+BTW, are you down for pizza later?|Aliás, topa uma pizza mais tarde?
+Sure, I'm starving. IDK where, though.|Claro, estou morrendo de fome. Mas não sei onde.
+No worries, I'll DM you the place.|Tranquilo, te mando o lugar por mensagem.
+Cool, catch you later!|Beleza, te vejo depois!`,
+["Gírias: <b>dude</b> (cara), <b>lit</b> (demais), <b>no cap</b> (sem mentira), <b>chill</b> (tranquilo), <b>down for</b> (topar).","Internet: <b>LOL</b> (rindo), <b>BTW</b> (by the way), <b>IDK</b> (I don't know), <b>DM</b> (mensagem direta).","Use só com amigos e em mensagens; nunca em e-mail de trabalho."],
+[["How was the party?",["boring","great","too long"],1,"lit = great."],["What will they eat later?",["burgers","pizza","sushi"],1,"down for pizza later?"],["What does IDK mean?",["I don't know","I do know","I'll decide"],0,"IDK = I don't know."]]);
+INGTX("Variedades do inglês: americano, britânico e mais",`In the US, I live in an apartment. In the UK, it's a flat.|Nos EUA eu moro num apartment. No Reino Unido, é um flat.
+Americans take the elevator; the British take the lift.|Americanos pegam o elevator; britânicos pegam o lift.
+An American truck is a British lorry.|O truck americano é o lorry britânico.
+Americans say vacation; the British say holiday.|Americanos dizem vacation; britânicos dizem holiday.
+Color, center and organize are American spellings.|Color, center e organize são grafias americanas.
+Colour, centre and organise are British.|Colour, centre e organise são britânicas.
+In Australia, people say \"G'day, mate!\"|Na Austrália, as pessoas dizem \"G'day, mate!\" (Bom dia, amigo!)
+All of them are correct. Just be consistent.|Todos estão corretos. Só seja consistente.`,
+["Vocabulário: apartment/<b>flat</b>, elevator/<b>lift</b>, truck/<b>lorry</b>, vacation/<b>holiday</b>, cell phone/<b>mobile</b>.","Grafia: -or/<b>-our</b>, -er/<b>-re</b>, -ize/<b>-ise</b>.","Escolha um padrão (americano ou britânico) e mantenha no mesmo texto."],
+[["What is a 'flat' in American English?",["an apartment","a car","a floor"],0,"flat = apartment."],["What is a 'lorry'?",["a bus","a truck","a train"],1,"An American truck is a British lorry."],["Which spelling is British?",["color","colour","colur"],1,"Colour is British."]]);
+INGTX("Humor, ironia, sarcasmo e registro",`It was raining heavily, and my car broke down.|Estava chovendo forte e meu carro quebrou.
+\"Oh, great. Just what I needed,\" I said.|\"Ah, ótimo. Era tudo o que eu precisava\", eu disse.
+Of course, I didn't really think it was great.|Claro que eu não achava realmente que era ótimo.
+My friend arrived two hours later.|Meu amigo chegou duas horas depois.
+\"Wow, you're so fast,\" I joked.|\"Nossa, você é tão rápido\", brinquei.
+He laughed and said, \"Traffic was a nightmare.\"|Ele riu e disse: \"O trânsito estava um pesadelo.\"
+On the way home, we couldn't stop laughing.|No caminho de casa, não conseguíamos parar de rir.
+Sometimes humor is the best way to deal with a bad day.|Às vezes o humor é a melhor forma de lidar com um dia ruim.`,
+["Sarcasmo = dizer o contrário do que se pensa: <b>Oh, great</b> quando algo dá errado.","O tom de voz mostra o sarcasmo; por escrito, cuidado, pode ser mal entendido.","<b>a nightmare</b> = um pesadelo; <b>deal with</b> = lidar com."],
+[["What happened to the car?",["it was stolen","it broke down","it crashed"],1,"my car broke down."],["Was the friend really fast?",["Yes","No, it was sarcasm","He came by plane"],1,"He arrived two hours later; 'so fast' was a joke."],["Why was the friend late?",["traffic","he forgot","rain"],0,"Traffic was a nightmare."]]);
+INGTX("Nuances de vocabulário e sinônimos",`The old warehouse was big, but the new one is huge.|O armazém velho era grande, mas o novo é enorme.
+The manager was not just happy, he was thrilled.|O gerente não estava só feliz, estava empolgadíssimo.
+The workers were tired; after the move, they were exhausted.|Os trabalhadores estavam cansados; depois da mudança, estavam exaustos.
+The project was difficult, even challenging at times.|O projeto foi difícil, às vezes até desafiador.
+He glanced at the plan, then stared at the empty space.|Ele deu uma olhada rápida no plano e depois ficou encarando o espaço vazio.
+Some called the change brave; others called it reckless.|Alguns chamaram a mudança de corajosa; outros de imprudente.
+In the end, the results were remarkable.|No fim, os resultados foram notáveis.
+Choosing the right word makes your English precise.|Escolher a palavra certa deixa seu inglês preciso.`,
+["Intensidade: big → <b>huge</b>; happy → <b>thrilled</b>; tired → <b>exhausted</b>.","Olhar: <b>glance</b> (olhar rápido) × <b>stare</b> (encarar).","Conotação: <b>brave</b> (positivo) × <b>reckless</b> (negativo) para a mesma atitude."],
+[["How is the new warehouse?",["small","huge","old"],1,"the new one is huge."],["How did the workers feel after the move?",["exhausted","thrilled","bored"],0,"they were exhausted."],["What is the difference between glance and stare?",["quick look vs long look","same thing","listen vs look"],0,"glance = olhar rápido; stare = encarar."]]);
+INGTX("Falsos cognatos e erros típicos de brasileiros",`I pretend to travel next year. No! I intend to travel next year.|\"Pretend\" é fingir. Pretender é <i>intend</i>.
+Actually, I live in Rio do Sul.|Na verdade, eu moro em Rio do Sul. (Actually não é \"atualmente\".)
+Currently, I work in quality.|Atualmente, trabalho com qualidade.
+I pushed the door. It says \"push\", not \"pull\".|Empurrei a porta. Está escrito empurre, não puxe.
+My parents are coming. Not my relatives, my mother and father.|Meus pais vão vir. Não meus parentes, minha mãe e meu pai.
+I have 30 years. No! I am 30 years old.|\"Tenho 30 anos\" em inglês usa be: I am 30.
+I'm agree. No! I agree.|\"Concordo\" é só I agree, sem am.
+Explain me. No! Explain it to me.|\"Me explica\" é explain it to me.`,
+["Falsos cognatos: <b>pretend</b> (fingir), <b>actually</b> (na verdade), <b>push</b> (empurrar), <b>parents</b> (pais), <b>exquisite</b> (refinado).","Atualmente = <b>currently / nowadays</b>. Parentes = <b>relatives</b>.","Erros clássicos: <b>I have 30 years</b> → I am 30; <b>I'm agree</b> → I agree; <b>explain me</b> → explain to me."],
+[["What does 'pretend' mean?",["pretender","fingir","pedir"],1,"pretend = fingir."],["How do you say 'atualmente'?",["actually","currently","nowadays only in UK"],1,"currently."],["Which is correct?",["I have 30 years","I am 30 years old","I'm 30 years"],1,"I am 30 years old."]]);
+INGTX("Literatura, cultura e leitura por prazer",`The old man sat by the window, watching the rain fall on the empty street.|O velho estava sentado à janela, olhando a chuva cair sobre a rua vazia.
+He had lived in that house for sixty years, and every stone held a memory.|Morava naquela casa havia sessenta anos, e cada pedra guardava uma lembrança.
+His children had moved away long ago, chasing dreams in distant cities.|Os filhos tinham se mudado havia muito tempo, perseguindo sonhos em cidades distantes.
+Yet he never felt alone; the house was full of voices from the past.|Ainda assim, ele nunca se sentia sozinho; a casa estava cheia de vozes do passado.
+That evening, the phone rang for the first time in weeks.|Naquela noite, o telefone tocou pela primeira vez em semanas.
+\"Dad,\" said a familiar voice, \"we're coming home for Christmas.\"|\"Pai\", disse uma voz conhecida, \"vamos para casa no Natal.\"
+For a long moment, he could not speak.|Por um longo momento, ele não conseguiu falar.
+Outside, the rain had stopped.|Lá fora, a chuva tinha parado.`,
+["Literatura usa imagens: <b>every stone held a memory</b> (cada pedra guardava uma lembrança).","<b>Yet</b> no início = ainda assim. <b>chase dreams</b> = perseguir sonhos.","O fim (a chuva parou) é símbolo: a tristeza passou. Leia graded readers e depois livros originais."],
+[["How long had the man lived in the house?",["sixteen years","sixty years","six years"],1,"for sixty years."],["Who called?",["a neighbor","one of his children","a doctor"],1,"\"Dad,\" said a familiar voice."],["What does the stopping rain symbolize?",["the end of sadness","a storm coming","winter"],0,"A chuva parar simboliza a tristeza passando."]]);
+INGTX("Notícias, política, economia e ciência",`The central bank has kept interest rates unchanged for the third consecutive meeting.|O banco central manteve os juros inalterados pela terceira reunião consecutiva.
+Analysts expect inflation to ease gradually over the coming months.|Analistas esperam que a inflação diminua gradualmente nos próximos meses.
+Meanwhile, parliament is debating a controversial tax reform.|Enquanto isso, o parlamento debate uma reforma tributária polêmica.
+Supporters say it will simplify the system; opponents fear higher costs for small businesses.|Os defensores dizem que vai simplificar o sistema; os opositores temem custos maiores para pequenas empresas.
+In science, researchers have developed a battery that charges in five minutes.|Na ciência, pesquisadores desenvolveram uma bateria que carrega em cinco minutos.
+The breakthrough could transform electric trucks.|A descoberta pode transformar os caminhões elétricos.
+However, mass production is still years away.|No entanto, a produção em massa ainda está a anos de distância.
+We'll keep you updated.|Vamos mantê-lo informado.`,
+["Economia: <b>interest rates</b> (juros), <b>inflation</b>, <b>ease</b> (diminuir), <b>tax reform</b>.","Política: <b>supporters / opponents</b>, <b>debate</b>, <b>controversial</b> (polêmico).","Ciência: <b>breakthrough</b> (grande descoberta), <b>years away</b> (ainda vai demorar anos)."],
+[["What did the central bank do?",["raised rates","kept rates unchanged","cut rates"],1,"kept interest rates unchanged."],["What do opponents of the reform fear?",["lower taxes","higher costs for small businesses","inflation"],1,"higher costs for small businesses."],["How fast does the new battery charge?",["five minutes","five hours","fifty minutes"],0,"charges in five minutes."]]);
+INGTX("Escrita avançada: estilo, concisão e revisão",`First draft: In my personal opinion, I think that we should maybe consider the possibility of changing the process.|Primeiro rascunho: Na minha opinião pessoal, eu acho que talvez devêssemos considerar a possibilidade de mudar o processo.
+Revised: We should change the process.|Revisado: Devemos mudar o processo.
+First draft: Due to the fact that the trucks were late, there were a lot of complaints made by customers.|Primeiro rascunho: Devido ao fato de que os caminhões atrasaram, houve muitas reclamações feitas por clientes.
+Revised: Because the trucks were late, customers complained.|Revisado: Como os caminhões atrasaram, os clientes reclamaram.
+Good writing is clear, short and active.|Boa escrita é clara, curta e ativa.
+Cut words that add nothing.|Corte palavras que não acrescentam nada.
+Read your text aloud before sending it.|Leia seu texto em voz alta antes de enviar.
+Then cut it again.|Depois corte de novo.`,
+["Concisão: <b>due to the fact that</b> → because; <b>in my personal opinion, I think</b> → (corte).","Prefira a voz ativa: <b>customers complained</b> em vez de \"complaints were made by customers\".","Revisão: leia em voz alta, corte repetições, uma ideia por frase."],
+[["What is the revised version of the first sentence?",["We should change the process.","Maybe change.","I think so."],0,"We should change the process."],["How should good writing be?",["long and formal","clear, short and active","full of details"],1,"clear, short and active."],["What should you do before sending?",["read it aloud","add more words","translate it"],0,"Read your text aloud."]]);
+INGTX("Fala espontânea e pensar em inglês",`Right now I'm walking to work, and I'm thinking in English.|Agora estou indo a pé para o trabalho e pensando em inglês.
+I see a red truck. It's delivering boxes to a store.|Vejo um caminhão vermelho. Está entregando caixas numa loja.
+The driver looks tired. Maybe he started very early.|O motorista parece cansado. Talvez tenha começado muito cedo.
+I'm describing everything around me, in my head.|Estou descrevendo tudo ao meu redor, na minha cabeça.
+When I don't know a word, I explain it with other words.|Quando não sei uma palavra, explico com outras palavras.
+I don't translate from Portuguese anymore.|Não traduzo mais do português.
+Mistakes are fine. Fluency comes from practice, not perfection.|Erros são normais. Fluência vem da prática, não da perfeição.
+Let me think... Well, you know what I mean.|Deixa eu pensar... Bem, você entende o que quero dizer.`,
+["Técnica: descreva em inglês o que você vê e faz (<b>I see..., I'm doing...</b>).","Se faltar palavra, contorne: <b>it's a thing you use to...</b>, <b>it's like a...</b>","Expressões para ganhar tempo: <b>Let me think, Well, You know what I mean, How can I put it</b>."],
+[["What does the person see?",["a red truck","a blue bus","a train"],0,"I see a red truck."],["What does the person do when a word is missing?",["stops talking","explains with other words","uses Portuguese"],1,"I explain it with other words."],["Where does fluency come from?",["perfection","practice","books only"],1,"Fluency comes from practice."]]);
+INGTX("Certificações: Cambridge C2, IELTS, TOEFL e outras",`I've decided to take an English certification next year.|Decidi fazer uma certificação de inglês no ano que vem.
+Cambridge C2 Proficiency never expires, which I really like.|O Cambridge C2 Proficiency não expira, o que eu gosto muito.
+IELTS and TOEFL are valid for two years and are popular for studying abroad.|IELTS e TOEFL valem por dois anos e são populares para estudar fora.
+All of them test reading, writing, listening and speaking.|Todos testam leitura, escrita, escuta e fala.
+I'll take a few practice tests to check my level first.|Vou fazer alguns simulados para conferir meu nível primeiro.
+The speaking part makes me nervous, but I'll prepare.|A parte de fala me deixa nervoso, mas vou me preparar.
+My goal is to pass with a good score.|Minha meta é passar com uma boa nota.
+Wish me luck!|Me deseje sorte!`,
+["<b>Cambridge C2</b>: sem validade; <b>IELTS/TOEFL</b>: 2 anos, para estudo e imigração.","As 4 habilidades: <b>reading, writing, listening, speaking</b>.","<b>practice test</b> = simulado; <b>score</b> = nota; <b>pass</b> = passar."],
+[["Which certificate never expires?",["IELTS","TOEFL","Cambridge C2"],2,"Cambridge C2 Proficiency never expires."],["How long are IELTS and TOEFL valid?",["one year","two years","forever"],1,"valid for two years."],["What part makes the person nervous?",["reading","speaking","writing"],1,"The speaking part."]]);
+INGTX("Plano de manutenção: inglês para a vida toda",`Learning English is not a race; it's a lifestyle.|Aprender inglês não é uma corrida; é um estilo de vida.
+Every morning, I listen to a podcast while I drive.|Toda manhã, ouço um podcast enquanto dirijo.
+At lunch, I read one news article in English.|No almoço, leio uma notícia em inglês.
+At night, I watch series without subtitles.|À noite, assisto séries sem legenda.
+Once a week, I talk to someone in English online.|Uma vez por semana, converso com alguém em inglês online.
+I keep a small notebook of new words and expressions.|Mantenho um caderninho de palavras e expressões novas.
+If I stop for a while, I don't feel guilty; I just start again.|Se paro por um tempo, não me sinto culpado; só recomeço.
+English has become part of who I am.|O inglês virou parte de quem eu sou.`,
+["Manutenção = pequenos hábitos todo dia: <b>podcast, notícia, série, conversa</b>.","<b>without subtitles</b> = sem legenda; <b>keep a notebook</b> = manter um caderno.","Constância vale mais que intensidade. Se parar, recomece sem culpa."],
+[["When does the person listen to a podcast?",["at night","while driving in the morning","at lunch"],1,"Every morning... while I drive."],["How does the person watch series?",["with subtitles in Portuguese","without subtitles","dubbed"],1,"without subtitles."],["What does the person do after a break?",["feels guilty","just starts again","gives up"],1,"I just start again."]]);
+
+</script>
+<script>
 window.CURSOS=[];function L(t,c,k,ex,at,q){return {t:t,c:c,k:k,ex:ex,at:at,q:q};}
 function MOD(id,n,o,a){CURSOS.find(c=>c.id===id).mods.push({n:n,o:o,a:a});}
 CURSOS.push({id:"ing",nome:"Inglês do Zero à Fluência",curto:"Inglês",nivel:"Do zero (A1) ao domínio (C2) · até dez/2028",
-sobre:"Curso completo de inglês em 12 módulos, do alfabeto ao nível C2 do Quadro Europeu (CEFR): gramática completa, vocabulário, pronúncia, listening, conversação, escrita formal e informal, apresentações, debates, idioms, literatura e preparação para certificações. Exemplos sempre do dia a dia. Rotina diária recomendada de 25 minutos: 10 de Anki, 10 de áudio e 5 falando em voz alta.",
-horas:3,parcela:170,parcelas:26,fim:"2028-12-03",mods:[],
+sobre:"Curso completo de inglês em 12 módulos, do alfabeto ao nível C2 do Quadro Europeu (CEFR): gramática completa, vocabulário, pronúncia, listening, conversação, escrita formal e informal, apresentações, debates, idioms, literatura e preparação para certificações. Exemplos sempre do dia a dia. Método \"jeito bebê\": toda aula começa com um texto em inglês com a tradução linha a linha. Você ouve no Google Tradutor (ouvir para aprender a falar) e lê (ler para aprender a escrever); no fim vêm as explicações do texto e as perguntas sobre ele. A gramática completa fica guardada para consulta.",
+horas:3,parcela:110,parcelas:26,fim:"2028-12-03",mods:[],
 livros:[["English Grammar in Use (níveis Essential, Intermediate e Advanced)","Raymond Murphy e Martin Hewings (Cambridge)","A gramática mais usada para estudar sozinho, do A1 ao C1."],["English Vocabulary in Use","McCarthy e O'Dell (Cambridge)","Vocabulário por tema e nível, com exercícios."],["English Collocations in Use","McCarthy e O'Dell (Cambridge)","Combinações naturais de palavras (B2-C1)."],["English Idioms in Use","McCarthy e O'Dell (Cambridge)","Idioms explicados com exemplos."],["English Pronunciation in Use","Mark Hancock e Martin Hewings (Cambridge)","Sons, acento e entonação com áudio."],["Graded readers Oxford Bookworms ou Penguin Readers","Vários","Livros adaptados por nível para ler por prazer."]],
 sites:[["BBC Learning English","https://www.bbc.co.uk/learningenglish","6 Minute English, gramática e cursos por nível."],["EF SET","https://www.efset.org","Teste gratuito de nível, alinhado ao CEFR."],["Anki","https://apps.ankiweb.net","Flashcards com repetição espaçada."],["Cambridge Dictionary","https://dictionary.cambridge.org","Significado, exemplos e pronúncia britânica e americana."],["YouGlish","https://youglish.com","Ouça qualquer palavra em vídeos reais."],["TED","https://www.ted.com","Palestras com transcrição interativa."],["Cambridge English","https://www.cambridgeenglish.org","Exames C1 Advanced e C2 Proficiency, com amostras oficiais."]]
 });
 CURSOS.push({id:"aud",nome:"Preparatório Auditor Líder ISO 9001 · 14001 · 45001",curto:"Auditor Líder",nivel:"Auditor interno e líder · Sistema Integrado",
 sobre:"Preparação completa para auditar e liderar auditorias de sistemas integrados de qualidade, meio ambiente e saúde e segurança: ISO 19011, certificação (ISO/IEC 17021-1), técnicas de planejamento, condução, constatações e relatório, interpretação das três normas pelo olhar do auditor, legislação brasileira aplicável, auditoria integrada e preparação para a prova de auditor líder.",
-horas:5,parcela:190,parcelas:8,fim:"2027-06-27",mods:[],
+horas:5,parcela:210,parcelas:8,fim:"2027-06-27",mods:[],
 livros:[["ABNT NBR ISO 19011","ABNT","Diretrizes para auditoria de sistemas de gestão."],["ABNT NBR ISO 9001, 14001 e 45001","ABNT","As normas que você vai auditar, na edição vigente."],["ABNT NBR ISO/IEC 17021-1","ABNT","Requisitos para organismos de certificação."],["ISO 9001 Explained","Cianfrani e West (ASQ)","Interpretação detalhada dos requisitos da qualidade."],["The ISO 14001 Implementation Handbook","Milton Dentch (ASQ)","Guia prático de gestão ambiental."],["Normas Regulamentadoras comentadas","Diversos autores","NRs explicadas para aplicar com a ISO 45001."]],
 sites:[["ISO Online Browsing Platform","https://www.iso.org/obp","Definições oficiais das normas."],["Normas Regulamentadoras","https://www.gov.br/trabalho-e-emprego/pt-br","Texto oficial e atualizado das NRs."],["SINIR (MTR)","https://sinir.gov.br","Sistema nacional de resíduos e MTR."],["IAF CertSearch","https://www.iafcertsearch.org","Consulta de certificados acreditados."],["Exemplar Global","https://exemplarglobal.org","Formação e registro internacional de auditores."],["CQI e IRCA","https://www.quality.org","Cursos aprovados e registro de auditores."]]
 });
 CURSOS.push({id:"sgi",nome:"Pós em Gestão de Sistemas Integrados (SGI)",curto:"SGI",nivel:"Especialização · Qualidade, Meio Ambiente e SSO",
 sobre:"Especialização completa em Sistema de Gestão Integrado: fundamentos e história, ISO 9001, ISO 14001 e ISO 45001 em profundidade, legislação ambiental e de SSO brasileira, integração do sistema (documentação, política, objetivos e riscos com ISO 31000), ferramentas da qualidade e de análise de riscos, Lean e Seis Sigma, indicadores e estatística, auditoria interna e análise crítica, normas complementares (ESG, ISO 27001 e LGPD, ISO 22301, ISO 50001, compliance e antissuborno) e TCC aplicado.",
-horas:5,parcela:240,parcelas:14,fim:"2027-12-05",mods:[],
+horas:5,parcela:260,parcelas:14,fim:"2027-12-05",mods:[],
 livros:[["Gestão da Qualidade: teoria e casos","Carvalho e Paladini (orgs.)","Base sólida de gestão da qualidade em português."],["Gestão Ambiental Empresarial","José Carlos Barbieri","Conceitos, modelos e instrumentos de gestão ambiental."],["ABNT NBR ISO 9000, 9001, 14001, 45001 e 31000","ABNT","As normas na edição vigente: leitura obrigatória."],["Juran's Quality Handbook","Joseph Juran e Joseph De Feo","Referência clássica de qualidade."],["Lean Thinking","James Womack e Daniel Jones","Os princípios do pensamento enxuto."],["Liderando Mudanças","John P. Kotter","Os 8 passos da gestão da mudança."]],
 sites:[["ISO Online Browsing Platform","https://www.iso.org/obp","Termos e definições oficiais."],["ABNT Catálogo","https://www.abntcatalogo.com.br","Consulta e compra das normas brasileiras."],["Normas Regulamentadoras","https://www.gov.br/trabalho-e-emprego/pt-br","NRs atualizadas."],["GHG Protocol","https://ghgprotocol.org","Padrões para inventário de emissões."],["Escola Virtual Gov","https://www.escolavirtual.gov.br","Cursos gratuitos com certificado."],["SciELO","https://www.scielo.br","Artigos científicos para o TCC."]]
 });
 CURSOS.push({id:"ia",nome:"Pós em Inteligência Artificial",curto:"IA",nivel:"Especialização · do prompt aos agentes",
 sobre:"Especialização prática para usar IA em tudo no dia a dia: como funcionam os modelos, engenharia de prompt do básico ao avançado, domínio de Claude, ChatGPT, Gemini e Copilot, produtividade, estudos, vida prática e criatividade (imagem, vídeo, áudio e música), Python do zero, scripts, terminal, páginas web, automação com e sem código, APIs, RAG, ferramentas e MCP, agentes, modelos locais, avaliação de modelos, ética, segurança e um projeto final que melhora a sua vida.",
-horas:5,parcela:210,parcelas:14,fim:"2027-12-05",mods:[],
+horas:5,parcela:230,parcelas:14,fim:"2027-12-05",mods:[],
 livros:[["Co-Intelligence: Living and Working with AI","Ethan Mollick","Como conviver e trabalhar com IA de forma inteligente."],["Automate the Boring Stuff with Python","Al Sweigart (grátis on-line)","Python para automatizar tarefas do dia a dia."],["Python Crash Course","Eric Matthes","Introdução prática a Python com projetos."],["AI Engineering","Chip Huyen","Como construir aplicações com modelos de base."],["A Brief History of Intelligence","Max Bennett","A evolução da inteligência, do cérebro às máquinas."]],
 sites:[["Documentação Claude","https://docs.claude.com","Guias de prompt, API, ferramentas e MCP."],["Ajuda do Claude","https://support.claude.com","Recursos e planos do app."],["Ajuda da OpenAI","https://help.openai.com","Recursos do ChatGPT."],["Google AI Studio","https://aistudio.google.com","Teste os modelos Gemini e gere chaves."],["NotebookLM","https://notebooklm.google","Estude com suas fontes."],["Google Colab","https://colab.research.google.com","Python no navegador, grátis."],["Model Context Protocol","https://modelcontextprotocol.io","Especificação e servidores MCP."],["Hugging Face","https://huggingface.co","Modelos abertos e demonstrações."]]
 });
@@ -5713,7 +6438,7 @@ function tabFin(tv,c){
   <div class="kpis" style="grid-template-columns:1fr 1fr"><div class="kpi"><span>Total do curso</span><b class="num">${brl(total)}</b></div><div class="kpi"><span>Já pago</span><b class="num">${brl(pagas*c.parcela)}</b></div>
   <div class="kpi"><span>Falta pagar</span><b class="num">${brl(total-pagas*c.parcela)}</b></div><div class="kpi"><span>Custo por hora</span><b class="num">${brl(Math.round(total/c.carga))}</b></div></div>
   <p class="note">As parcelas seguem normalmente nos meses de férias, como nas instituições de ensino.</p>
-  <p class="note">${{sgi:"Mercado: pós EAD em Gestão Integrada (SGI) ou em Qualidade, Meio Ambiente e Segurança costuma ir de R$ 80 a R$ 500 por mês. R$ 240 cobre uma instituição de boa reputação, com aulas ao vivo e suporte.",ia:"Mercado: pós EAD em IA vai de R$ 40 a R$ 1.180 por mês, com média perto de R$ 110. R$ 210 permite curso com aulas ao vivo e projetos.",aud:"Estimativa: formação de auditor líder SGI costuma custar entre R$ 1.500 e R$ 4.000 no total. R$ 1.520 em 8x cobre um preparatório EAD com certificado.",ing:"Estimativa: escolas online cobram de R$ 150 a R$ 450 por mês. R$ 170 cobre plataforma online com aulas em grupo. Plano até dez/2028 (26 parcelas)."}[c.id]}</p></section></div>`;
+  <p class="note">${{sgi:"Mercado: pós EAD em Gestão Integrada (SGI) ou em Qualidade, Meio Ambiente e Segurança costuma ir de R$ 80 a R$ 500 por mês. R$ 260 cobre uma instituição de boa reputação, com aulas ao vivo e suporte.",ia:"Mercado: pós EAD em IA vai de R$ 40 a R$ 1.180 por mês, com média perto de R$ 110. R$ 230 permite curso com aulas ao vivo e projetos.",aud:"Estimativa: formação de auditor líder SGI costuma custar entre R$ 1.500 e R$ 4.000 no total. R$ 1.680 em 8x cobre um preparatório EAD com certificado.",ing:"Estimativa: apps e plataformas online custam de R$ 30 a R$ 450 por mês. R$ 110 cobre um app ou plataforma de estudo sozinho (o método aqui é texto + tradução + áudio). Plano até dez/2028 (26 parcelas)."}[c.id]}</p></section></div>`;
  tv.querySelectorAll("[data-p]").forEach(i=>i.onchange=()=>{st.pagas[i.dataset.p]=i.checked;save();tabFin(tv,c);});
 }
 let leitVis="livros";
@@ -5877,11 +6602,21 @@ function openW(c,i){const lv=lvAtual(),cur=history.state||{};
  showW(c,i);}
 function showW(c,i){
  const x=c.L[i],m=c.mods[x.mi];sheet.className="sheet c-"+c.id;let body="",qs=[];
- if(x.rev){qs=m.a.flatMap(a=>a.q);
+ const ITX=a=>c.id==="ing"&&window.ING_TX&&ING_TX[a.t];
+ if(x.rev){qs=m.a.flatMap(a=>ITX(a)?ITX(a).q:a.q);
   body=`<div class="lesson"><p>Semana de revisão do módulo <b>${m.n}</b>. Releia os pontos-chave, refaça as atividades pendentes e responda as ${qs.length} questões. Objetivo do módulo: ${m.o}</p></div>
   ${m.a.map(a=>`<div class="box"><h4>${esc(a.t)}</h4><ul>${a.k.map(p=>`<li>${p}</li>`).join("")}</ul></div>`).join("")}
   <div class="box task"><h4>Atividade de revisão</h4><div class="lesson"><p>Faça um resumo de uma página do módulo com suas palavras e um mapa mental ligando os temas.</p></div></div>
   ${qs.map((q,qi)=>quizHtml(q,qi,true)).join("")}`;}
+ else if(ITX(x.a)){const a=x.a,T=ITX(a);qs=T.q;
+  const en=T.tx.map(r=>r[0]).join("\n");
+  body=`<div class="box ingtx"><h4>Texto da aula</h4><p class="note" style="margin:0 0 8px">1) Ouça no Google Tradutor. 2) Leia junto com a tradução. 3) Esconda a tradução, leia de novo e repita em voz alta.</p>
+  <div class="ingbtns"><a class="btn main" href="https://translate.google.com/?sl=en&tl=pt&op=translate&text=${encodeURIComponent(en)}" target="_blank" rel="noopener">🔊 Ouvir no Google Tradutor</a><button class="btn" type="button" id="ingCopy">Copiar inglês</button><button class="btn" type="button" id="ingPt" aria-pressed="false">Esconder tradução</button></div>
+  <div class="ingpar">${T.tx.map(r=>`<div class="ingl"><p class="en" lang="en">${r[0]}</p><p class="pt">${r[1]}</p></div>`).join("")}</div></div>
+  <div class="box"><h4>Explicações do texto</h4><ul>${T.ex.map(p=>`<li>${p}</li>`).join("")}</ul></div>
+  <details class="about"><summary>Gramática completa da aula (para consultar)</summary><div style="padding:0 14px 12px"><div class="lesson">${a.c}</div><div class="box"><h4>Pontos-chave</h4><ul>${a.k.map(p=>`<li>${p}</li>`).join("")}</ul></div></div></details>
+  <h3 style="margin:6px 0 0">Perguntas do texto</h3>
+  ${qs.map((q,qi)=>quizHtml(q,qi,false)).join("")}`;}
  else{const a=x.a;qs=a.q;
   body=`<div class="lesson">${a.c}</div><div class="box"><h4>Pontos-chave</h4><ul>${a.k.map(p=>`<li>${p}</li>`).join("")}</ul></div>
   <div class="box"><h4>Na prática</h4><div class="lesson"><p>${a.ex}</p></div></div>
@@ -5895,6 +6630,8 @@ function showW(c,i){
   qz.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));b.classList.add(ok?"right":"wrong");
   const fb=qz.querySelector(".fb");fb.hidden=false;fb.innerHTML=ok?"<b>Certo.</b> "+q[3]:"<b>Ainda não.</b> Releia a aula e tente outra opção.";}));
  sheet.querySelector("#lClose").onclick=closeW;
+ const iC=sheet.querySelector("#ingCopy");if(iC)iC.onclick=()=>{const t=[...sheet.querySelectorAll(".ingl .en")].map(p=>p.textContent).join("\n");(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{iC.textContent="Copiado ✓";setTimeout(()=>iC.textContent="Copiar inglês",1500)}).catch(()=>{});};
+ const iP=sheet.querySelector("#ingPt");if(iP){const ap=h=>{sheet.querySelector(".ingpar").classList.toggle("sempt",h);iP.textContent=h?"Mostrar tradução":"Esconder tradução";iP.setAttribute("aria-pressed",h)};iP.onclick=()=>ap(!sheet.querySelector(".ingpar").classList.contains("sempt"));}
  const fsIco=f=>f?'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 2v5H2M11 2v5h5M7 16v-5H2M11 16v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 7V2h5M16 7V2h-5M2 11v5h5M16 11v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  const telaCheia=()=>{try{return localStorage.getItem("ceTela")==="full";}catch(e){return false;}};
  const aplicaTela=()=>{const f=telaCheia();sheet.classList.toggle("full",f);const b=sheet.querySelector("#lFull");b.innerHTML=fsIco(f);b.title=b.ariaLabel=f?"Sair da tela cheia":"Tela cheia";};
